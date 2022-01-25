@@ -5,6 +5,7 @@ import java.security.Principal;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,6 +18,7 @@ import com.skilldistillery.honeytrails.entities.User;
 import com.skilldistillery.honeytrails.services.AuthService;
 
 @RestController
+@CrossOrigin({"*", "http://locoalhots:4300"})
 public class AuthController {
 
 	@Autowired
