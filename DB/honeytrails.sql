@@ -127,7 +127,7 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `honeytrailsdb`;
-INSERT INTO `user` (`id`, `username`, `password`, `profile_picture`, `completed_hikes`, `favorite_trails`, `planned_hikes`, `role`, `enabled`) VALUES (1, 'admin', 'admin', NULL, NULL, NULL, NULL, 'ROLE_ADMIN', 1);
+INSERT INTO `user` (`id`, `username`, `password`, `profile_picture`, `completed_hikes`, `favorite_trails`, `planned_hikes`, `role`, `enabled`) VALUES (1, 'admin', '$2a$10$KJh/cJ4YO.f8zwcjN7HLHOzRC/Rn/Xf3BJwGjdqLlVR7ZYNdoWV/y', NULL, NULL, NULL, NULL, 'ROLE_ADMIN', 1);
 
 COMMIT;
 
