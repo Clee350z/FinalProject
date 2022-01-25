@@ -9,9 +9,9 @@
   
 
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/FIXMEdb?useSSL=false&amp;useLegacyDatetimeCode=false&amp;serverTimezone=US/Mountain" />
-      <property name="javax.persistence.jdbc.user" value="FIXME"/>
-      <property name="javax.persistence.jdbc.password" value="FIXME" />
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/honeytrailsdb?useSSL=false&amp;useLegacyDatetimeCode=false&amp;serverTimezone=US/Mountain" />
+      <property name="javax.persistence.jdbc.user" value="honeytrails"/>
+      <property name="javax.persistence.jdbc.password" value="honeytrails" />
       <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
 
       <property name="hibernate.show_sql" value="false" />
