@@ -14,8 +14,11 @@ public class AuthServiceImpl implements AuthService {
 	
 	@Override
 	public User register(User user) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
+	@Override
+	public User findUserByName(String username) {
+		return userRepo.findByUsername(username);
+	}
 }
