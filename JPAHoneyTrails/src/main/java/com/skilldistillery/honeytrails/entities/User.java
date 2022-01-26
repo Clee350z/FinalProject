@@ -5,15 +5,10 @@ import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 @Entity
 public class User {
@@ -63,6 +58,10 @@ public class User {
 //	joinColumns=@JoinColumn(name="user_id"),
 //	inverseJoinColumns=@JoinColumn(name="group_hike_id"))
 //	private List<GroupHike> groupHikes;
+	
+//	@OneToMany(mappedBy = "createdByUser")
+//	private List <GroupHike> groupHikesCreated;
+	
 	
 
 	/*-----------------------------------------------------------------------------------------------------
@@ -184,6 +183,14 @@ public class User {
 //		this.groupHikes = groupHikes;
 //	}
 	
+//	public List<GroupHike> getGroupHikesCreated() {
+//		return groupHikesCreated;
+//	}
+//
+//	public void setGroupHikesCreated(List<GroupHike> groupHikesCreated) {
+//		this.groupHikesCreated = groupHikesCreated;
+//	}
+
 	/*-----------------------------------------------------------------------------------------------------
 	 * 
 	 *       Constructor
