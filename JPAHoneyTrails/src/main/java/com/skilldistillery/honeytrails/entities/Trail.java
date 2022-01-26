@@ -1,5 +1,6 @@
 package com.skilldistillery.honeytrails.entities;
 
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -7,6 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Trail{
@@ -32,20 +36,19 @@ public class Trail{
 	
 	private double longitude;
 	
-//	
-//	@ManyToOne
-//	@JoinColumn(name = "difficulty_id")
-//	private Difficulty difficulty;
+	@ManyToOne
+	@JoinColumn(name = "difficulty_id")
+	private Difficulty difficulty;
 	
 //	@ManyToMany(mappedBy = "favoriteTrails")
 //	private List<User> usersFavorite;
 //	
 //	@ManyToMany(mappedBy = "plannedHikes")
 //	private List<User> usersPlanned;
-//	
-//	@OneToMany(mappedBy = "trail")
-//	private List<TrailComment> comments;
-//	
+	
+	@OneToMany(mappedBy = "trail")
+	private List<TrailComment> comments;
+	
 //	@OneToMany(mappedBy = "trail")
 //	private List<GroupHike> groupHikes;
 	
@@ -119,13 +122,13 @@ public class Trail{
 		this.longitude = longitude;
 	}
 
-//	public Difficulty getDifficulty() {
-//		return difficulty;
-//	}
-//
-//	public void setDifficulty(Difficulty difficulty) {
-//		this.difficulty = difficulty;
-//	}
+	public Difficulty getDifficulty() {
+		return difficulty;
+	}
+
+	public void setDifficulty(Difficulty difficulty) {
+		this.difficulty = difficulty;
+	}
 //	
 //	public List<User> getUsersFavorite() {
 //		return usersFavorite;
@@ -143,13 +146,13 @@ public class Trail{
 //		this.usersPlanned = usersPlanned;
 //	}
 //
-//	public List<TrailComment> getComments() {
-//		return comments;
-//	}
-//
-//	public void setComments(List<TrailComment> comments) {
-//		this.comments = comments;
-//	}
+	public List<TrailComment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<TrailComment> comments) {
+		this.comments = comments;
+	}
 //
 //	public List<GroupHike> getGroupHikes() {
 //		return groupHikes;

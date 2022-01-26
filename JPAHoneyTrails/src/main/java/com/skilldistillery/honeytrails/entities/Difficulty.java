@@ -11,6 +11,7 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Difficulty {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
@@ -19,8 +20,8 @@ public class Difficulty {
 	
 	private String description;
 	
-//	@OneToMany(mappedBy = "difficulty")
-//	private List<Trail> trails;
+	@OneToMany(mappedBy = "difficulty")
+	private List<Trail> trails;
 	
 	/*-----------------------------------------------------------------------------------------------------
 	 * 
@@ -52,13 +53,13 @@ public class Difficulty {
 		this.description = description;
 	}
 
-//	public List<Trail> getTrails() {
-//		return trails;
-//	}
-//
-//	public void setTrails(List<Trail> trails) {
-//		this.trails = trails;
-//	}
+	public List<Trail> getTrails() {
+		return trails;
+	}
+
+	public void setTrails(List<Trail> trails) {
+		this.trails = trails;
+	}
 	
 	/*-----------------------------------------------------------------------------------------------------
 	 * 

@@ -2,6 +2,7 @@ package com.skilldistillery.honeytrails.entities;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -14,11 +15,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class TrailTest {
-
+class DifficultyTest {
+	
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private Trail trail;
+	private Difficulty dif;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -33,29 +34,27 @@ class TrailTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		trail = em.find(Trail.class, 1);
+		dif = em.find(Difficulty.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		trail = null;
+		dif = null;
 	}
 
 	@Test
-	@DisplayName("test mappings to entity")
+	@DisplayName("test mapping to entity")
 	void test1() {
-		assertNotNull(trail);
-		assertEquals("Bear Peak Summit Hike", trail.getName());
-		assertEquals("Colorado", trail.getLocation());
-		assertEquals(8.40, trail.getLengthMiles());
+		assertNotNull(dif);
+		assertEquals("Easy", dif.getName());
 	}
 	
 	@Test
-	@DisplayName("test trail to difficulty mapping")
+	@DisplayName("test difficulty to trail mapping")
 	void test2() {
-		assertNotNull(trail);
-		assertEquals("Strenuous", trail.getDifficulty().getName());
+		assertNotNull(dif);
+		assertTrue(dif.getTrails().size() >= 0);
 	}
 
 }
