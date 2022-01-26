@@ -5,13 +5,14 @@
 	<provider>org.hibernate.jpa.HibernatePersistenceProvider
     </provider>
     
-    <class>com.skilldistillery.honeytrails.entities.Address</class>
+ <class>com.skilldistillery.honeytrails.entities.Address</class>
     <class>com.skilldistillery.honeytrails.entities.Condition</class>
     <class>com.skilldistillery.honeytrails.entities.Difficulty</class>
     <class>com.skilldistillery.honeytrails.entities.GroupHike</class>
     <class>com.skilldistillery.honeytrails.entities.HikePhoto</class>
     <class>com.skilldistillery.honeytrails.entities.HikeReport</class>
     <class>com.skilldistillery.honeytrails.entities.Trail</class>
+    <class>com.skilldistillery.honeytrails.entities.TrailComment</class>
     <class>com.skilldistillery.honeytrails.entities.User</class>
   
 

@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Address {
@@ -21,6 +23,15 @@ public class Address {
 	private String state;
 	
 	private String zipcode;
+
+	@OneToOne
+	@JoinColumn(name="user_id")
+	private User user;
+	
+	
+	public Address() {
+		super();
+	}
 
 	public int getId() {
 		return id;
@@ -61,6 +72,8 @@ public class Address {
 	public void setZipcode(String zipcode) {
 		this.zipcode = zipcode;
 	}
+	
+	
 
 	@Override
 	public int hashCode() {

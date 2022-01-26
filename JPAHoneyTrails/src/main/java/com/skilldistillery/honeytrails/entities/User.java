@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class User {
@@ -37,8 +38,8 @@ public class User {
 	private String lastName;
 	
 	//need to make "user" in address
-	@OneToMany(mappedBy="user")
-	private Integer addressId;
+	@OneToOne(mappedBy="user")
+	private Address address;
 	
 	private String biography;
 	
@@ -54,10 +55,22 @@ public class User {
 	inverseJoinColumns=@JoinColumn(name="trail_id"))
 	private List<Trail> plannedHikes;
 	
-	public User() {
-		super();
-	}
+	@OneToMany(mappedBy = "user")
+	private List<TrailComment> comments;
+	
+	@ManyToMany(fetch=FetchType.EAGER)
+	@JoinTable(name="group_hike_has_user", 
+	joinColumns=@JoinColumn(name="user_id"),
+	inverseJoinColumns=@JoinColumn(name="group_hike_id"))
+	private List<GroupHike> groupHikes;
+	
 
+	/*-----------------------------------------------------------------------------------------------------
+	 * 
+	 *       Getters & Setters
+	 * 
+	 -----------------------------------------------------------------------------------------------------*/
+	
 	public int getId() {
 		return id;
 	}
@@ -122,12 +135,12 @@ public class User {
 		this.lastName = lastName;
 	}
 
-	public Integer getAddressId() {
-		return addressId;
+	public Address getAddress() {
+		return address;
 	}
 
-	public void setAddressId(Integer addressId) {
-		this.addressId = addressId;
+	public void setAddressId(Address address) {
+		this.address = address;
 	}
 
 	public String getBiography() {
@@ -155,10 +168,62 @@ public class User {
 		this.plannedHikes = plannedHikes;
 	}
 
+	public List<TrailComment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<TrailComment> comments) {
+		this.comments = comments;
+	}
+
+	public List<GroupHike> getGroupHikes() {
+		return groupHikes;
+	}
+
+	public void setGroupHikes(List<GroupHike> groupHikes) {
+		this.groupHikes = groupHikes;
+	}
+	
+	/*-----------------------------------------------------------------------------------------------------
+	 * 
+	 *       Constructor
+	 * 
+	 -----------------------------------------------------------------------------------------------------*/
+	public User() {
+		super();
+	}
+
+	
+	public User(int id, String username, String password, String profilePicture, String role, Boolean enabled,
+			String firstName, String lastName, Address address, String biography, List<Trail> favoriteTrails,
+			List<Trail> plannedHikes, List<TrailComment> comments, List<GroupHike> groupHikes) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.password = password;
+		this.profilePicture = profilePicture;
+		this.role = role;
+		this.enabled = enabled;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.address = address;
+		this.biography = biography;
+		this.favoriteTrails = favoriteTrails;
+		this.plannedHikes = plannedHikes;
+		this.comments = comments;
+		this.groupHikes = groupHikes;
+	}
+
+	/*-----------------------------------------------------------------------------------------------------
+	 * 
+	 *      Hashcode & Equals
+	 * 
+	 -----------------------------------------------------------------------------------------------------*/
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -176,7 +241,7 @@ public class User {
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", password=" + password + ", profilePicture="
 				+ profilePicture + ", role=" + role + ", enabled=" + enabled + ", firstName=" + firstName
-				+ ", lastName=" + lastName + ", addressId=" + addressId + ", biography=" + biography + "]";
+				+ ", lastName=" + lastName + ", address=" + address + ", biography=" + biography + "]";
 	}
 
 }
