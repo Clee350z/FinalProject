@@ -48,7 +48,7 @@ class HikePhotoTest {
 //	+-----------------+
 
 	@Test
-	@DisplayName("test Condition mappings to entity")
+	@DisplayName("test Hike Photo mappings to entity")
 	void test1() {
 		assertNotNull(photo);
 		assertEquals("Small Waterfall", photo.getTitle());
