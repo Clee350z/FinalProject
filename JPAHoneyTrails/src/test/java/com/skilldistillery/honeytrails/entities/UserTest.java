@@ -56,7 +56,27 @@ class UserTest {
 		user = em.find(User.class, 2);
 		assertNotNull(user);
 		assertTrue(user.getHikeReports().size() > 0);
-		assertEquals(3, user.getHikeReports().size());
+	}
+	
+	@Test
+	@DisplayName("test user to comment mapping")
+	void test3() {
+		user = em.find(User.class, 2);
+		assertTrue(user.getComments().size() >= 0);
+	}
+	
+	@Test
+	@DisplayName("test user to favorite trails mapping")
+	void test4() {
+		user = em.find(User.class, 2);
+		assertTrue(user.getFavoriteTrails().size() >= 0);
+	}
+	
+	@Test
+	@DisplayName("test user to planned trails mapping")
+	void test5() {
+		user = em.find(User.class, 2);
+		assertTrue(user.getPlannedHikes().size() >= 0);
 	}
 
 }

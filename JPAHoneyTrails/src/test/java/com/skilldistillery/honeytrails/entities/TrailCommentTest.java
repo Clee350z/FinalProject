@@ -55,5 +55,13 @@ class TrailCommentTest {
 		assertNotNull(tc);
 		assertEquals("Eldorado Canyon State Park Trails", tc.getTrail().getName());
 	}
+	
+	@Test
+	@DisplayName("test trail comment to user mapping")
+	void test3() {
+		assertNotNull(tc);
+		assertEquals("tester", tc.getUser().getUsername());
+	}
+	
 
 }

@@ -2,6 +2,7 @@ package com.skilldistillery.honeytrails.entities;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -49,12 +50,25 @@ class GroupHikeTest {
 		assertEquals("Trail Fun Time", gh.getEventName());
 	}
 	
-//	@Test
-//	@DisplayName("test group hike to trail mapping")
-//	void test2() {
-//		assertNotNull(gh);
-//		assertEquals("Iwakuni Castle Trail", gh.getTrail().getName());
-//	}
+	@Test
+	@DisplayName("test group hike to trail mapping")
+	void test2() {
+		assertNotNull(gh);
+		assertEquals("Iwakuni Castle Trail", gh.getTrail().getName());
+	}
 	
+	@Test
+	@DisplayName("test group hike to created user")
+	void test3() {
+		assertNotNull(gh);
+		assertEquals("tester", gh.getCreatedByUser().getUsername());
+	}
+	
+	@Test
+	@DisplayName("test grouphike to list of users participating")
+	void test4() {
+		assertNotNull(gh);
+		assertTrue(gh.getUsers().size() >= 0);
+	}
 
 }
