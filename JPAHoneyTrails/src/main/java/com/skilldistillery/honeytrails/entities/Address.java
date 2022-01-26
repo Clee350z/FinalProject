@@ -26,6 +26,8 @@ public class Address {
 	
 	private String zipcode;
 
+	///
+	
 //	@OneToOne
 //	@JoinColumn(name="user_id")
 //	private User user;
