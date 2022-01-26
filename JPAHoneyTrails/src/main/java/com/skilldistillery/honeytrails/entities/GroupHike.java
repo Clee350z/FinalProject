@@ -25,14 +25,15 @@ public class GroupHike {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name = "event_date")
+	@Column(name = "event_name")
 	private String eventName;
 	
 	@Column(name = "meetup_date")
 	private LocalDateTime meetupDate;
 	
-//	@JoinColumn(name= "user_id")
-//	private User createdByUser;
+	@ManyToOne
+	@JoinColumn(name= "user_id")
+	private User createdByUser;
 	
 //	@ManyToOne
 //	@JoinColumn(name = "trail_id")
@@ -122,13 +123,13 @@ public class GroupHike {
 		this.imageUrl = imageUrl;
 	}
 	
-//	public User getCreatedByUser() {
-//		return createdByUser;
-//	}
-//
-//	public void setCreatedByUser(User createdByUser) {
-//		this.createdByUser = createdByUser;
-//	}
+	public User getCreatedByUser() {
+		return createdByUser;
+	}
+
+	public void setCreatedByUser(User createdByUser) {
+		this.createdByUser = createdByUser;
+	}
 	
 	/*-----------------------------------------------------------------------------------------------------
 	 * 
