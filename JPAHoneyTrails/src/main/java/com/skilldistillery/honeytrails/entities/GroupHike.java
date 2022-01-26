@@ -31,13 +31,13 @@ public class GroupHike {
 	@Column(name = "meetup_date")
 	private LocalDateTime meetupDate;
 	
-	@ManyToOne
-	@JoinColumn(name= "user_id")
-	private User createdByUser;
-	
 //	@ManyToOne
-//	@JoinColumn(name = "trail_id")
-//	private Trail trail;
+//	@JoinColumn(name= "user_id")
+//	private User createdByUser;
+	
+	@ManyToOne
+	@JoinColumn(name = "trail_id")
+	private Trail trail;
 	
 	@Column(name = "meetup_time")
 	private LocalDateTime meetupTime;
@@ -90,14 +90,14 @@ public class GroupHike {
 //	public void setUsers(List<User> users) {
 //		this.users = users;
 //	}
-//
-//	public Trail getTrail() {
-//		return trail;
-//	}
-//
-//	public void setTrail(Trail trail) {
-//		this.trail = trail;
-//	}
+
+	public Trail getTrail() {
+		return trail;
+	}
+
+	public void setTrail(Trail trail) {
+		this.trail = trail;
+	}
 
 	public LocalDateTime getMeetupTime() {
 		return meetupTime;
@@ -123,13 +123,13 @@ public class GroupHike {
 		this.imageUrl = imageUrl;
 	}
 	
-	public User getCreatedByUser() {
-		return createdByUser;
-	}
-
-	public void setCreatedByUser(User createdByUser) {
-		this.createdByUser = createdByUser;
-	}
+//	public User getCreatedByUser() {
+//		return createdByUser;
+//	}
+//
+//	public void setCreatedByUser(User createdByUser) {
+//		this.createdByUser = createdByUser;
+//	}
 	
 	/*-----------------------------------------------------------------------------------------------------
 	 * 

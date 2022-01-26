@@ -49,11 +49,12 @@ class GroupHikeTest {
 		assertEquals("Trail Fun Time", gh.getEventName());
 	}
 	
-	@Test
-	@DisplayName("test group hike to the user who created it")
-	void test2() {
-		assertNotNull(gh);
-		assertEquals("tester", gh.getCreatedByUser().getUsername());
-	}
+//	@Test
+//	@DisplayName("test group hike to trail mapping")
+//	void test2() {
+//		assertNotNull(gh);
+//		assertEquals("Iwakuni Castle Trail", gh.getTrail().getName());
+//	}
+	
 
 }
