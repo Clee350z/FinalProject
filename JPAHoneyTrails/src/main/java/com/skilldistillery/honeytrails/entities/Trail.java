@@ -1,5 +1,6 @@
 package com.skilldistillery.honeytrails.entities;
 
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -8,7 +9,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Trail {
@@ -37,6 +40,18 @@ public class Trail {
 	@ManyToOne
 	@JoinColumn(name = "difficulty_id")
 	private Difficulty difficulty;
+	
+	@ManyToMany(mappedBy = "favoriteTrails")
+	private List<User> usersFavorite;
+	
+	@ManyToMany(mappedBy = "plannedHikes")
+	private List<User> usersPlanned;
+	
+	@OneToMany(mappedBy = "trail")
+	private List<TrailComment> comments;
+	
+	@OneToMany(mappedBy = "trail")
+	private List<GroupHike> groupHikes;
 	
 	/*-----------------------------------------------------------------------------------------------------
 	 * 
@@ -116,12 +131,44 @@ public class Trail {
 		this.difficulty = difficulty;
 	}
 	
+	public List<User> getUsersFavorite() {
+		return usersFavorite;
+	}
+
+	public void setUsersFavorite(List<User> usersFavorite) {
+		this.usersFavorite = usersFavorite;
+	}
+
+	public List<User> getUsersPlanned() {
+		return usersPlanned;
+	}
+
+	public void setUsersPlanned(List<User> usersPlanned) {
+		this.usersPlanned = usersPlanned;
+	}
+
+	public List<TrailComment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<TrailComment> comments) {
+		this.comments = comments;
+	}
+
+	public List<GroupHike> getGroupHikes() {
+		return groupHikes;
+	}
+
+	public void setGroupHikes(List<GroupHike> groupHikes) {
+		this.groupHikes = groupHikes;
+	}
+	
 	/*-----------------------------------------------------------------------------------------------------
 	 * 
 	 *       Constructor
 	 * 
 	 -----------------------------------------------------------------------------------------------------*/
-	
+
 	public Trail() {}
 
 	public Trail(int id, String name, String location, double lengthMiles, String pictureUrl, boolean trailOpen,

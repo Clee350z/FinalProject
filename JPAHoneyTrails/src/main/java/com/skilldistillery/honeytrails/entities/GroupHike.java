@@ -6,10 +6,12 @@ import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -29,9 +31,8 @@ public class GroupHike {
 	@Column(name = "meetup_date")
 	private LocalDateTime meetupDate;
 	
-	@ManyToMany
-	@JoinColumn(name = "user_id")
-	private List<User> users;
+	@JoinColumn(name= "user_id")
+	private User createdByUser;
 	
 	@ManyToOne
 	@JoinColumn(name = "trail_id")
@@ -44,6 +45,12 @@ public class GroupHike {
 	
 	@Column(name = "image_url")
 	private String imageUrl;
+	
+	@ManyToMany(fetch=FetchType.EAGER)
+	@JoinTable(name="group_hike_has_user", 
+	joinColumns=@JoinColumn(name="group_hike_id"),
+	inverseJoinColumns=@JoinColumn(name="user_id"))
+	private List<User> users;
 	
 	/*-----------------------------------------------------------------------------------------------------
 	 * 
@@ -115,12 +122,20 @@ public class GroupHike {
 		this.imageUrl = imageUrl;
 	}
 	
+	public User getCreatedByUser() {
+		return createdByUser;
+	}
+
+	public void setCreatedByUser(User createdByUser) {
+		this.createdByUser = createdByUser;
+	}
+	
 	/*-----------------------------------------------------------------------------------------------------
 	 * 
 	 *       Constructor
 	 * 
 	 -----------------------------------------------------------------------------------------------------*/
-	
+
 	public GroupHike() {}
 
 	public GroupHike(int id, String eventName, LocalDateTime meetupDate, List<User> users, Trail trail,
