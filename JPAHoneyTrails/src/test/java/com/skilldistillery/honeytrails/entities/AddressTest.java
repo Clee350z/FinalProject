@@ -46,4 +46,5 @@ class AddressTest {
 		assertEquals("International", address.getStreet());
 	}
 
+	
 }

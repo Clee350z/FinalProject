@@ -31,8 +31,8 @@ public class User {
 	
 	private String lastName;
 	
-	@OneToOne(mappedBy="user")
-	private Address address;
+//	@OneToOne(mappedBy="user")
+//	private Address address;
 	
 	private String biography;
 	
