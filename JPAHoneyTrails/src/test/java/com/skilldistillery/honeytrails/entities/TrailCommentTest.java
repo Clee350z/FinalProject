@@ -14,11 +14,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class TrailTest {
-
+class TrailCommentTest {
+	
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private Trail trail;
+	private TrailComment tc;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -33,29 +33,27 @@ class TrailTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		trail = em.find(Trail.class, 1);
+		tc = em.find(TrailComment.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		trail = null;
+		tc = null;
 	}
 
 	@Test
-	@DisplayName("test mappings to entity")
+	@DisplayName("test mapping to entity")
 	void test1() {
-		assertNotNull(trail);
-		assertEquals("Bear Peak Summit Hike", trail.getName());
-		assertEquals("Colorado", trail.getLocation());
-		assertEquals(8.40, trail.getLengthMiles());
+		assertNotNull(tc);
+		assertEquals("The trail was so beautiful!", tc.getCommentBody());
 	}
 	
 	@Test
-	@DisplayName("test trail to difficulty mapping")
+	@DisplayName("test trail comment to trail mapping")
 	void test2() {
-		assertNotNull(trail);
-		assertEquals("Strenuous", trail.getDifficulty().getName());
+		assertNotNull(tc);
+		assertEquals("Eldorado Canyon State Park Trails", tc.getTrail().getName());
 	}
 
 }

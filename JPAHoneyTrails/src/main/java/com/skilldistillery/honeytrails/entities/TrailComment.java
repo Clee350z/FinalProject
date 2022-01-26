@@ -20,7 +20,7 @@ public class TrailComment {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name = "commnet_body")
+	@Column(name = "comment_body")
 	private String commentBody;
 	
 	@Column(name = "time_posted")
@@ -30,9 +30,9 @@ public class TrailComment {
 //	@JoinColumn(name = "user_id")
 //	private User user;
 //	
-//	@ManyToOne
-//	@JoinColumn(name = "trail_id")
-//	private Trail trail;
+	@ManyToOne
+	@JoinColumn(name = "trail_id")
+	private Trail trail;
 
 
 	/*-----------------------------------------------------------------------------------------------------
@@ -74,13 +74,13 @@ public class TrailComment {
 //		this.user = user;
 //	}
 //
-//	public Trail getTrail() {
-//		return trail;
-//	}
-//
-//	public void setTrail(Trail trail) {
-//		this.trail = trail;
-//	}
+	public Trail getTrail() {
+		return trail;
+	}
+
+	public void setTrail(Trail trail) {
+		this.trail = trail;
+	}
 	
 	/*-----------------------------------------------------------------------------------------------------
 	 * 
