@@ -440,6 +440,7 @@ COMMIT;
 START TRANSACTION;
 USE `honeytrailsdb`;
 INSERT INTO `hike_photo` (`id`, `hike_report_id`, `image_url`, `title`, `description`) VALUES (1, 1, 'https://files.slack.com/files-pri/T052X7BAZ-F02V6H7H5ML/image_from_ios.jpg', 'Small Waterfall', 'Small waterfall about 10 mins to the east of the trail.');
+INSERT INTO `hike_photo` (`id`, `hike_report_id`, `image_url`, `title`, `description`) VALUES (2, 1, 'https://i0.wp.com/backpackingroutes.com/wp-content/uploads/2021/01/Colorado-Trail-2.png?resize=750%2C438', 'This View', 'This view is crazy! Having the best day!');
 
 COMMIT;
 

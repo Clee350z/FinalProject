@@ -2,6 +2,7 @@ package com.skilldistillery.honeytrails.entities;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -95,6 +96,15 @@ public class HikeReportTest {
 			report = em.find(HikeReport.class, 2);
 			assertNotNull(report);
 			assertEquals("tester", report.getUser().getUsername());
+		}
+		
+		
+		@Test
+		@DisplayName("test Hike Report to Hike Photo mappings to entity")
+		void test5() {
+			assertNotNull(report);
+			assertTrue(report.getHikePhoto().size() > 0);
+			assertEquals(2, report.getHikePhoto().size());
 		}
 		
 		
