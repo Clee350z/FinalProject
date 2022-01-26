@@ -8,8 +8,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="user_address")
 public class Address {
 
 	@Id
@@ -24,9 +26,9 @@ public class Address {
 	
 	private String zipcode;
 
-	@OneToOne
-	@JoinColumn(name="user_id")
-	private User user;
+//	@OneToOne
+//	@JoinColumn(name="user_id")
+//	private User user;
 	
 	
 	public Address() {
