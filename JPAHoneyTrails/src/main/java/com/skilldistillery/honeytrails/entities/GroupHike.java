@@ -31,12 +31,12 @@ public class GroupHike {
 	@Column(name = "meetup_date")
 	private LocalDateTime meetupDate;
 	
-	@JoinColumn(name= "user_id")
-	private User createdByUser;
+//	@JoinColumn(name= "user_id")
+//	private User createdByUser;
 	
-	@ManyToOne
-	@JoinColumn(name = "trail_id")
-	private Trail trail;
+//	@ManyToOne
+//	@JoinColumn(name = "trail_id")
+//	private Trail trail;
 	
 	@Column(name = "meetup_time")
 	private LocalDateTime meetupTime;
@@ -46,12 +46,12 @@ public class GroupHike {
 	@Column(name = "image_url")
 	private String imageUrl;
 	
-	@ManyToMany(fetch=FetchType.EAGER)
-	@JoinTable(name="group_hike_has_user", 
-	joinColumns=@JoinColumn(name="group_hike_id"),
-	inverseJoinColumns=@JoinColumn(name="user_id"))
-	private List<User> users;
-	
+//	@ManyToMany(fetch=FetchType.EAGER)
+//	@JoinTable(name="group_hike_has_user", 
+//	joinColumns=@JoinColumn(name="group_hike_id"),
+//	inverseJoinColumns=@JoinColumn(name="user_id"))
+//	private List<User> users;
+//	
 	/*-----------------------------------------------------------------------------------------------------
 	 * 
 	 *       Getters & Setters
@@ -82,21 +82,21 @@ public class GroupHike {
 		this.meetupDate = meetupDate;
 	}
 
-	public List<User> getUsers() {
-		return users;
-	}
-
-	public void setUsers(List<User> users) {
-		this.users = users;
-	}
-
-	public Trail getTrail() {
-		return trail;
-	}
-
-	public void setTrail(Trail trail) {
-		this.trail = trail;
-	}
+//	public List<User> getUsers() {
+//		return users;
+//	}
+//
+//	public void setUsers(List<User> users) {
+//		this.users = users;
+//	}
+//
+//	public Trail getTrail() {
+//		return trail;
+//	}
+//
+//	public void setTrail(Trail trail) {
+//		this.trail = trail;
+//	}
 
 	public LocalDateTime getMeetupTime() {
 		return meetupTime;
@@ -122,13 +122,13 @@ public class GroupHike {
 		this.imageUrl = imageUrl;
 	}
 	
-	public User getCreatedByUser() {
-		return createdByUser;
-	}
-
-	public void setCreatedByUser(User createdByUser) {
-		this.createdByUser = createdByUser;
-	}
+//	public User getCreatedByUser() {
+//		return createdByUser;
+//	}
+//
+//	public void setCreatedByUser(User createdByUser) {
+//		this.createdByUser = createdByUser;
+//	}
 	
 	/*-----------------------------------------------------------------------------------------------------
 	 * 
@@ -138,18 +138,7 @@ public class GroupHike {
 
 	public GroupHike() {}
 
-	public GroupHike(int id, String eventName, LocalDateTime meetupDate, List<User> users, Trail trail,
-			LocalDateTime meetupTime, String description, String imageUrl) {
-		super();
-		this.id = id;
-		this.eventName = eventName;
-		this.meetupDate = meetupDate;
-		this.users = users;
-		this.trail = trail;
-		this.meetupTime = meetupTime;
-		this.description = description;
-		this.imageUrl = imageUrl;
-	}
+	
 	
 	/*-----------------------------------------------------------------------------------------------------
 	 * 
@@ -157,9 +146,10 @@ public class GroupHike {
 	 * 
 	 -----------------------------------------------------------------------------------------------------*/
 
+	
 	@Override
 	public int hashCode() {
-		return Objects.hash(description, eventName, id, imageUrl, meetupDate, meetupTime, trail, users);
+		return Objects.hash(id);
 	}
 
 	@Override
@@ -171,12 +161,8 @@ public class GroupHike {
 		if (getClass() != obj.getClass())
 			return false;
 		GroupHike other = (GroupHike) obj;
-		return Objects.equals(description, other.description) && Objects.equals(eventName, other.eventName)
-				&& id == other.id && Objects.equals(imageUrl, other.imageUrl)
-				&& Objects.equals(meetupDate, other.meetupDate) && Objects.equals(meetupTime, other.meetupTime)
-				&& Objects.equals(trail, other.trail) && Objects.equals(users, other.users);
+		return id == other.id;
 	}
-	
 	
 	
 	
