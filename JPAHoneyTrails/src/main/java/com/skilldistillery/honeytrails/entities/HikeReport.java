@@ -2,6 +2,7 @@ package com.skilldistillery.honeytrails.entities;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -11,7 +12,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "hike_report")
@@ -45,6 +49,10 @@ public class HikeReport {
 	@ManyToOne
 	@JoinColumn(name="user_id")
 	private User user;
+	
+	@OneToMany(mappedBy = "hikeReport")
+	@JsonIgnore
+	private List<HikePhoto> hikePhoto;
 
 	public HikeReport() {
 		super();
@@ -120,6 +128,14 @@ public class HikeReport {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public List<HikePhoto> getHikePhoto() {
+		return hikePhoto;
+	}
+
+	public void setHikePhoto(List<HikePhoto> hikePhoto) {
+		this.hikePhoto = hikePhoto;
 	}
 
 	@Override

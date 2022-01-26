@@ -25,7 +25,11 @@ public class HikePhoto {
 	private String title;
 
 	private String description;
-
+	
+	@ManyToOne
+	@JoinColumn(name="hike_report_id")
+	private HikeReport hikeReport;
+	
 	public HikePhoto() {
 		super();
 	}
@@ -60,6 +64,14 @@ public class HikePhoto {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public HikeReport getHikeReport() {
+		return hikeReport;
+	}
+
+	public void setHikeReport(HikeReport hikeReport) {
+		this.hikeReport = hikeReport;
 	}
 
 	@Override
