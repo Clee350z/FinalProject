@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class User {
 
@@ -28,15 +30,21 @@ public class User {
 
 	private Boolean enabled;
 	
+	@Column(name="first_name")
 	private String firstName;
 	
+	@Column(name="last_name")
 	private String lastName;
 	
+	private String biography;
+	
+	@OneToMany(mappedBy = "user")
+	@JsonIgnore
+	private List<HikeReport> hikeReports;
 	//need to make "user" in address
 //	@OneToOne(mappedBy="user")
 //	private Address address;
 	
-	private String biography;
 	
 //	@ManyToMany(fetch=FetchType.EAGER)
 //	@JoinTable(name="favorite_trail", 
@@ -190,6 +198,14 @@ public class User {
 //	public void setGroupHikesCreated(List<GroupHike> groupHikesCreated) {
 //		this.groupHikesCreated = groupHikesCreated;
 //	}
+
+	public List<HikeReport> getHikeReports() {
+		return hikeReports;
+	}
+
+	public void setHikeReports(List<HikeReport> hikeReports) {
+		this.hikeReports = hikeReports;
+	}
 
 	/*-----------------------------------------------------------------------------------------------------
 	 * 

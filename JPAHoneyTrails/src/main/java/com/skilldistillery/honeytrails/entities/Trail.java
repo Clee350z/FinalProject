@@ -52,6 +52,9 @@ public class Trail{
 //	@OneToMany(mappedBy = "trail")
 //	private List<GroupHike> groupHikes;
 	
+	@OneToMany(mappedBy = "trails")
+	private List<HikeReport> hikeReports;
+	
 	/*-----------------------------------------------------------------------------------------------------
 	 * 
 	 *       Getters & Setters
@@ -162,11 +165,19 @@ public class Trail{
 //		this.groupHikes = groupHikes;
 //	}
 	
+	public List<HikeReport> getHikeReports() {
+		return hikeReports;
+	}
+	
+	public void setHikeReports(List<HikeReport> hikeReports) {
+		this.hikeReports = hikeReports;
+	}
 	/*-----------------------------------------------------------------------------------------------------
 	 * 
 	 *       Constructor
 	 * 
 	 -----------------------------------------------------------------------------------------------------*/
+
 
 	public Trail() {}
 
