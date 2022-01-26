@@ -57,5 +57,13 @@ public class HikeReportTest {
 			assertEquals(2021, report.getHikedDate().getYear());
 			assertEquals(12, report.getHikedDate().getMonthValue());
 		}
+		@Test
+		@DisplayName("test Hike Report to Condition mappings to entity")
+		void test2() {
+			assertNotNull(report);
+			assertEquals("near dry", report.getCondition().getName());
+		}
+		
+		
 }
 

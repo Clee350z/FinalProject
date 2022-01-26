@@ -9,28 +9,34 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="hike_report")
+@Table(name = "hike_report")
 public class HikeReport {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
-	@Column(name="hike_title")
+
+	@Column(name = "hike_title")
 	private String hikeTitle;
-	
+
 	private String report;
-	
-	@Column(name="date_created")
+
+	@Column(name = "date_created")
 	private LocalDateTime dateCreated;
-	
-	@Column(name="hiked_date")
+
+	@Column(name = "hiked_date")
 	private LocalDate hikedDate;
-	
+
 	private int rating;
+
+	@ManyToOne
+	@JoinColumn(name = "condition_type_id")
+	private Condition condition;
 
 	public HikeReport() {
 		super();
@@ -84,6 +90,14 @@ public class HikeReport {
 		this.rating = rating;
 	}
 
+	public Condition getCondition() {
+		return condition;
+	}
+
+	public void setCondition(Condition condition) {
+		this.condition = condition;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -106,7 +120,5 @@ public class HikeReport {
 		return "HikeReport [id=" + id + ", hikeTitle=" + hikeTitle + ", report=" + report + ", dateCreated="
 				+ dateCreated + ", hikedDate=" + hikedDate + ", rating=" + rating + "]";
 	}
-	
-	
-	
+
 }

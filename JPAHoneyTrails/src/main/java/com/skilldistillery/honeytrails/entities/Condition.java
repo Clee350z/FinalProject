@@ -7,7 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="condition_type")
@@ -21,8 +24,9 @@ public class Condition {
 	
 	private String description;
 	
-	
-//	private List<HikeReport> hikeReports;
+	@OneToMany(mappedBy = "condition")
+	@JsonIgnore
+	private List<HikeReport> hikeReports;
 
 	public Condition() {
 		super();
@@ -52,13 +56,13 @@ public class Condition {
 		this.description = description;
 	}
 
-//	public List<HikeReport> getHikeReports() {
-//		return hikeReports;
-//	}
-//
-//	public void setHikeReports(List<HikeReport> hikeReports) {
-//		this.hikeReports = hikeReports;
-//	}
+	public List<HikeReport> getHikeReports() {
+		return hikeReports;
+	}
+
+	public void setHikeReports(List<HikeReport> hikeReports) {
+		this.hikeReports = hikeReports;
+	}
 
 	@Override
 	public int hashCode() {
