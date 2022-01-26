@@ -12,23 +12,19 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="hike_photo")
+@Table(name = "hike_photo")
 public class HikePhoto {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
-	@Column(name="image_url")
+
+	@Column(name = "image_url")
 	private String imageUrl;
-	
+
 	private String title;
-	
+
 	private String description;
-	
-//	@ManyToOne
-//	@JoinColumn(name="condition_type_id")
-//	private Condition condition;
 
 	public HikePhoto() {
 		super();
@@ -66,14 +62,6 @@ public class HikePhoto {
 		this.description = description;
 	}
 
-//	public Condition getCondition() {
-//		return condition;
-//	}
-//
-//	public void setCondition(Condition condition) {
-//		this.condition = condition;
-//	}
-
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -96,7 +84,5 @@ public class HikePhoto {
 		return "HikePhoto [id=" + id + ", imageUrl=" + imageUrl + ", title=" + title + ", description=" + description
 				+ "]";
 	}
-	
-	
 
 }

@@ -57,5 +57,21 @@ public class HikeReportTest {
 			assertEquals(2021, report.getHikedDate().getYear());
 			assertEquals(12, report.getHikedDate().getMonthValue());
 		}
+		
+//		select c.name from condition_type c JOIN hike_report h ON c.id = h.condition_type_id WHERE h.id =1;
+//		+----------+
+//		| name     |
+//		+----------+
+//		| near dry |
+//		+----------+
+		
+		@Test
+		@DisplayName("test Hike Report to Condition mappings to entity")
+		void test2() {
+			assertNotNull(report);
+			assertEquals("near dry", report.getCondition().getName());
+		}
+		
+		
 }
 
