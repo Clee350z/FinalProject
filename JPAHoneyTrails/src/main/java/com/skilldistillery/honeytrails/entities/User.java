@@ -59,8 +59,8 @@ public class User {
 //	inverseJoinColumns=@JoinColumn(name="group_hike_id"))
 //	private List<GroupHike> groupHikes;
 	
-	@OneToMany(mappedBy = "createdByUser")
-	private List <GroupHike> groupHikesCreated;
+//	@OneToMany(mappedBy = "createdByUser")
+//	private List <GroupHike> groupHikesCreated;
 	
 	
 
@@ -183,13 +183,13 @@ public class User {
 //		this.groupHikes = groupHikes;
 //	}
 	
-	public List<GroupHike> getGroupHikesCreated() {
-		return groupHikesCreated;
-	}
-
-	public void setGroupHikesCreated(List<GroupHike> groupHikesCreated) {
-		this.groupHikesCreated = groupHikesCreated;
-	}
+//	public List<GroupHike> getGroupHikesCreated() {
+//		return groupHikesCreated;
+//	}
+//
+//	public void setGroupHikesCreated(List<GroupHike> groupHikesCreated) {
+//		this.groupHikesCreated = groupHikesCreated;
+//	}
 
 	/*-----------------------------------------------------------------------------------------------------
 	 * 
