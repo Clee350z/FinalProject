@@ -2,6 +2,7 @@ package com.skilldistillery.honeytrails.entities;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -56,6 +57,15 @@ class TrailTest {
 	void test2() {
 		assertNotNull(trail);
 		assertEquals("Strenuous", trail.getDifficulty().getName());
+	}
+	@Test
+	@DisplayName("test Trail to Hike Report mapping")
+	void test3() {
+		trail = em.find(Trail.class, 2);
+		assertNotNull(trail);
+		assertTrue(trail.getHikeReports().size() > 0);
+		assertEquals(2, trail.getHikeReports().size());
+		
 	}
 
 }

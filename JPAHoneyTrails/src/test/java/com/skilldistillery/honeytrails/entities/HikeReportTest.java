@@ -71,6 +71,32 @@ public class HikeReportTest {
 			assertNotNull(report);
 			assertEquals("near dry", report.getCondition().getName());
 		}
+//		
+//		mysql> select t.name from trail t JOIN hike_report h ON t.id = h.trail_id WHERE h.trail_id =2;
+//		+-----------------------------------+
+//		| name                              |
+//		+-----------------------------------+
+//		| Eldorado Canyon State Park Trails |
+//		+-----------------------------------+
+
+		
+		@Test
+		@DisplayName("test Hike Report to Trail mappings to entity")
+		void test3() {
+			report = em.find(HikeReport.class, 2);
+			assertNotNull(report);
+			assertEquals("Eldorado Canyon State Park Trails", report.getTrails().getName());
+		}
+		
+		
+		@Test
+		@DisplayName("test Hike Report to User mappings to entity")
+		void test4() {
+			report = em.find(HikeReport.class, 2);
+			assertNotNull(report);
+			assertEquals("tester", report.getUser().getUsername());
+		}
+		
 		
 		
 }

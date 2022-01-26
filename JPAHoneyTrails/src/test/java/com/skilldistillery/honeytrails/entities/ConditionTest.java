@@ -53,6 +53,7 @@ class ConditionTest {
 	void test2() {
 		assertNotNull(con);
 		assertTrue(con.getHikeReports().size() > 0);
+		assertEquals(2, con.getHikeReports().size());
 		
 	}
 

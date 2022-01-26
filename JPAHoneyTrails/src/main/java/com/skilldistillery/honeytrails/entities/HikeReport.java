@@ -37,6 +37,14 @@ public class HikeReport {
 	@ManyToOne
 	@JoinColumn(name = "condition_type_id")
 	private Condition condition;
+	
+	@ManyToOne
+	@JoinColumn(name="trail_id")
+	private Trail trails;
+	
+	@ManyToOne
+	@JoinColumn(name="user_id")
+	private User user;
 
 	public HikeReport() {
 		super();
@@ -96,6 +104,22 @@ public class HikeReport {
 
 	public void setCondition(Condition condition) {
 		this.condition = condition;
+	}
+
+	public Trail getTrails() {
+		return trails;
+	}
+
+	public void setTrails(Trail trails) {
+		this.trails = trails;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	@Override

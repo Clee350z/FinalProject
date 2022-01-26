@@ -11,6 +11,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class User {
@@ -30,14 +33,21 @@ public class User {
 
 	private Boolean enabled;
 	
+	@Column(name="first_name")
 	private String firstName;
 	
+	@Column(name="last_name")
 	private String lastName;
 	
+	private String biography;
+	
+	@OneToMany(mappedBy = "user")
+	@JsonIgnore
+	private List<HikeReport> hikeReports;
+	//need to make "user" in address
 //	@OneToOne(mappedBy="user")
 //	private Address address;
 	
-	private String biography;
 	
 //	@ManyToMany(fetch=FetchType.EAGER)
 //	@JoinTable(name="favorite_trail", 
@@ -59,6 +69,10 @@ public class User {
 //	joinColumns=@JoinColumn(name="user_id"),
 //	inverseJoinColumns=@JoinColumn(name="group_hike_id"))
 //	private List<GroupHike> groupHikes;
+	
+//	@OneToMany(mappedBy = "createdByUser")
+//	private List <GroupHike> groupHikesCreated;
+	
 	
 
 	/*-----------------------------------------------------------------------------------------------------
@@ -180,6 +194,22 @@ public class User {
 //		this.groupHikes = groupHikes;
 //	}
 	
+//	public List<GroupHike> getGroupHikesCreated() {
+//		return groupHikesCreated;
+//	}
+//
+//	public void setGroupHikesCreated(List<GroupHike> groupHikesCreated) {
+//		this.groupHikesCreated = groupHikesCreated;
+//	}
+
+	public List<HikeReport> getHikeReports() {
+		return hikeReports;
+	}
+
+	public void setHikeReports(List<HikeReport> hikeReports) {
+		this.hikeReports = hikeReports;
+	}
+
 	/*-----------------------------------------------------------------------------------------------------
 	 * 
 	 *       Constructor

@@ -1,6 +1,7 @@
 package com.skilldistillery.honeytrails.entities;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -13,11 +14,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class UserTest {
-	
+class GroupHikeTest {
+
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private User user;
+	private GroupHike gh;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -32,29 +33,28 @@ class UserTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		user = em.find(User.class, 1);
+		gh = em.find(GroupHike.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		user = null;
+		gh = null;
 	}
 
 	@Test
 	@DisplayName("test mappings to entity")
 	void test1() {
-		assertNotNull(user);
-		assertEquals("admin", user.getUsername());
-		assertEquals("Honeycomb", user.getFirstName());
+		assertNotNull(gh);
+		assertEquals("Trail Fun Time", gh.getEventName());
 	}
-	@Test
-	@DisplayName("test User to Hike Report mappings to entity")
-	void test2() {
-		user = em.find(User.class, 2);
-		assertNotNull(user);
-		assertTrue(user.getHikeReports().size() > 0);
-		assertEquals(3, user.getHikeReports().size());
-	}
+	
+//	@Test
+//	@DisplayName("test group hike to trail mapping")
+//	void test2() {
+//		assertNotNull(gh);
+//		assertEquals("Iwakuni Castle Trail", gh.getTrail().getName());
+//	}
+	
 
 }
