@@ -38,31 +38,31 @@ public class User {
 	private String lastName;
 	
 	//need to make "user" in address
-	@OneToOne(mappedBy="user")
-	private Address address;
+//	@OneToOne(mappedBy="user")
+//	private Address address;
 	
 	private String biography;
 	
-	@ManyToMany(fetch=FetchType.EAGER)
-	@JoinTable(name="favorite_trail", 
-			joinColumns=@JoinColumn(name="user_id"),
-			inverseJoinColumns=@JoinColumn(name="trail_id"))
-	private List<Trail> favoriteTrails;
+//	@ManyToMany(fetch=FetchType.EAGER)
+//	@JoinTable(name="favorite_trail", 
+//			joinColumns=@JoinColumn(name="user_id"),
+//			inverseJoinColumns=@JoinColumn(name="trail_id"))
+//	private List<Trail> favoriteTrails;
 
-	@ManyToMany(fetch=FetchType.EAGER)
-	@JoinTable(name="planned_hikes", 
-	joinColumns=@JoinColumn(name="user_id"),
-	inverseJoinColumns=@JoinColumn(name="trail_id"))
-	private List<Trail> plannedHikes;
+//	@ManyToMany(fetch=FetchType.EAGER)
+//	@JoinTable(name="planned_hikes", 
+//	joinColumns=@JoinColumn(name="user_id"),
+//	inverseJoinColumns=@JoinColumn(name="trail_id"))
+//	private List<Trail> plannedHikes;
 	
-	@OneToMany(mappedBy = "user")
-	private List<TrailComment> comments;
+//	@OneToMany(mappedBy = "user")
+//	private List<TrailComment> comments;
 	
-	@ManyToMany(fetch=FetchType.EAGER)
-	@JoinTable(name="group_hike_has_user", 
-	joinColumns=@JoinColumn(name="user_id"),
-	inverseJoinColumns=@JoinColumn(name="group_hike_id"))
-	private List<GroupHike> groupHikes;
+//	@ManyToMany(fetch=FetchType.EAGER)
+//	@JoinTable(name="group_hike_has_user", 
+//	joinColumns=@JoinColumn(name="user_id"),
+//	inverseJoinColumns=@JoinColumn(name="group_hike_id"))
+//	private List<GroupHike> groupHikes;
 	
 
 	/*-----------------------------------------------------------------------------------------------------
@@ -135,13 +135,13 @@ public class User {
 		this.lastName = lastName;
 	}
 
-	public Address getAddress() {
-		return address;
-	}
-
-	public void setAddressId(Address address) {
-		this.address = address;
-	}
+//	public Address getAddress() {
+//		return address;
+//	}
+//
+//	public void setAddressId(Address address) {
+//		this.address = address;
+//	}
 
 	public String getBiography() {
 		return biography;
@@ -152,37 +152,37 @@ public class User {
 	}
 
 	
-	public List<Trail> getFavoriteTrails() {
-		return favoriteTrails;
-	}
+//	public List<Trail> getFavoriteTrails() {
+//		return favoriteTrails;
+//	}
+//
+//	public void setFavoriteTrails(List<Trail> favoriteTrails) {
+//		this.favoriteTrails = favoriteTrails;
+//	}
+//
+//	public List<Trail> getPlannedHikes() {
+//		return plannedHikes;
+//	}
+//
+//	public void setPlannedHikes(List<Trail> plannedHikes) {
+//		this.plannedHikes = plannedHikes;
+//	}
+//
+//	public List<TrailComment> getComments() {
+//		return comments;
+//	}
+//
+//	public void setComments(List<TrailComment> comments) {
+//		this.comments = comments;
+//	}
 
-	public void setFavoriteTrails(List<Trail> favoriteTrails) {
-		this.favoriteTrails = favoriteTrails;
-	}
-
-	public List<Trail> getPlannedHikes() {
-		return plannedHikes;
-	}
-
-	public void setPlannedHikes(List<Trail> plannedHikes) {
-		this.plannedHikes = plannedHikes;
-	}
-
-	public List<TrailComment> getComments() {
-		return comments;
-	}
-
-	public void setComments(List<TrailComment> comments) {
-		this.comments = comments;
-	}
-
-	public List<GroupHike> getGroupHikes() {
-		return groupHikes;
-	}
-
-	public void setGroupHikes(List<GroupHike> groupHikes) {
-		this.groupHikes = groupHikes;
-	}
+//	public List<GroupHike> getGroupHikes() {
+//		return groupHikes;
+//	}
+//
+//	public void setGroupHikes(List<GroupHike> groupHikes) {
+//		this.groupHikes = groupHikes;
+//	}
 	
 	/*-----------------------------------------------------------------------------------------------------
 	 * 
@@ -191,27 +191,6 @@ public class User {
 	 -----------------------------------------------------------------------------------------------------*/
 	public User() {
 		super();
-	}
-
-	
-	public User(int id, String username, String password, String profilePicture, String role, Boolean enabled,
-			String firstName, String lastName, Address address, String biography, List<Trail> favoriteTrails,
-			List<Trail> plannedHikes, List<TrailComment> comments, List<GroupHike> groupHikes) {
-		super();
-		this.id = id;
-		this.username = username;
-		this.password = password;
-		this.profilePicture = profilePicture;
-		this.role = role;
-		this.enabled = enabled;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.address = address;
-		this.biography = biography;
-		this.favoriteTrails = favoriteTrails;
-		this.plannedHikes = plannedHikes;
-		this.comments = comments;
-		this.groupHikes = groupHikes;
 	}
 
 	/*-----------------------------------------------------------------------------------------------------
@@ -241,7 +220,7 @@ public class User {
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", password=" + password + ", profilePicture="
 				+ profilePicture + ", role=" + role + ", enabled=" + enabled + ", firstName=" + firstName
-				+ ", lastName=" + lastName + ", address=" + address + ", biography=" + biography + "]";
+				+ ", lastName=" + lastName + ", biography=" + biography + "]";
 	}
 
 }
