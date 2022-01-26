@@ -14,7 +14,6 @@
     <class>com.skilldistillery.honeytrails.entities.Trail</class>
     <class>com.skilldistillery.honeytrails.entities.TrailComment</class>
     <class>com.skilldistillery.honeytrails.entities.User</class>
-    <class>com.skilldistillery.honeytrails.entities.TrailComment</class>
   
 
     <properties>
