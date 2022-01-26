@@ -54,6 +54,15 @@ public class User {
 	inverseJoinColumns=@JoinColumn(name="trail_id"))
 	private List<Trail> plannedHikes;
 	
+	@OneToMany(mappedBy = "user")
+	private List<TrailComment> comments;
+	
+	@ManyToMany(fetch=FetchType.EAGER)
+	@JoinTable(name="group_hike_has_user", 
+	joinColumns=@JoinColumn(name="user_id"),
+	inverseJoinColumns=@JoinColumn(name="group_hike_id"))
+	private List<GroupHike> groupHikes;
+	
 	public User() {
 		super();
 	}
@@ -153,6 +162,22 @@ public class User {
 
 	public void setPlannedHikes(List<Trail> plannedHikes) {
 		this.plannedHikes = plannedHikes;
+	}
+
+	public List<TrailComment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<TrailComment> comments) {
+		this.comments = comments;
+	}
+
+	public List<GroupHike> getGroupHikes() {
+		return groupHikes;
+	}
+
+	public void setGroupHikes(List<GroupHike> groupHikes) {
+		this.groupHikes = groupHikes;
 	}
 
 	@Override

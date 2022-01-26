@@ -2,13 +2,16 @@ package com.skilldistillery.honeytrails.entities;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -28,9 +31,8 @@ public class GroupHike {
 	@Column(name = "meetup_date")
 	private LocalDateTime meetupDate;
 	
-	@ManyToMany
-	@JoinColumn(name = "user_id")
-	private List<User> users;
+	@JoinColumn(name= "user_id")
+	private User createdByUser;
 	
 	@ManyToOne
 	@JoinColumn(name = "trail_id")
@@ -43,6 +45,12 @@ public class GroupHike {
 	
 	@Column(name = "image_url")
 	private String imageUrl;
+	
+	@ManyToMany(fetch=FetchType.EAGER)
+	@JoinTable(name="group_hike_has_user", 
+	joinColumns=@JoinColumn(name="group_hike_id"),
+	inverseJoinColumns=@JoinColumn(name="user_id"))
+	private List<User> users;
 	
 	/*-----------------------------------------------------------------------------------------------------
 	 * 
@@ -113,6 +121,65 @@ public class GroupHike {
 	public void setImageUrl(String imageUrl) {
 		this.imageUrl = imageUrl;
 	}
+	
+	public User getCreatedByUser() {
+		return createdByUser;
+	}
+
+	public void setCreatedByUser(User createdByUser) {
+		this.createdByUser = createdByUser;
+	}
+	
+	/*-----------------------------------------------------------------------------------------------------
+	 * 
+	 *       Constructor
+	 * 
+	 -----------------------------------------------------------------------------------------------------*/
+
+	public GroupHike() {}
+
+	public GroupHike(int id, String eventName, LocalDateTime meetupDate, List<User> users, Trail trail,
+			LocalDateTime meetupTime, String description, String imageUrl) {
+		super();
+		this.id = id;
+		this.eventName = eventName;
+		this.meetupDate = meetupDate;
+		this.users = users;
+		this.trail = trail;
+		this.meetupTime = meetupTime;
+		this.description = description;
+		this.imageUrl = imageUrl;
+	}
+	
+	/*-----------------------------------------------------------------------------------------------------
+	 * 
+	 *       Hashcode & Equals
+	 * 
+	 -----------------------------------------------------------------------------------------------------*/
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(description, eventName, id, imageUrl, meetupDate, meetupTime, trail, users);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		GroupHike other = (GroupHike) obj;
+		return Objects.equals(description, other.description) && Objects.equals(eventName, other.eventName)
+				&& id == other.id && Objects.equals(imageUrl, other.imageUrl)
+				&& Objects.equals(meetupDate, other.meetupDate) && Objects.equals(meetupTime, other.meetupTime)
+				&& Objects.equals(trail, other.trail) && Objects.equals(users, other.users);
+	}
+	
+	
+	
+	
 	
 	
 }
