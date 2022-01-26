@@ -46,6 +46,15 @@ class UserTest {
 	void test1() {
 		assertNotNull(user);
 		assertEquals("admin", user.getUsername());
+		assertEquals("Honeycomb", user.getFirstName());
+	}
+	@Test
+	@DisplayName("test User to Hike Report mappings to entity")
+	void test2() {
+		user = em.find(User.class, 2);
+		assertNotNull(user);
+		assertTrue(user.getHikeReports().size() > 0);
+		assertEquals(3, user.getHikeReports().size());
 	}
 
 }
