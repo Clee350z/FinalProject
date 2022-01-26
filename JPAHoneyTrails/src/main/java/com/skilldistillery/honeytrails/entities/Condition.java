@@ -1,13 +1,19 @@
 package com.skilldistillery.honeytrails.entities;
 
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
+@Table(name="condition_type")
 public class Condition {
 	
 	@Id
@@ -17,6 +23,10 @@ public class Condition {
 	private String name;
 	
 	private String description;
+	
+	@OneToMany(mappedBy = "condition")
+	@JsonIgnore
+	private List<HikeReport> hikeReports;
 
 	public Condition() {
 		super();
@@ -44,6 +54,14 @@ public class Condition {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public List<HikeReport> getHikeReports() {
+		return hikeReports;
+	}
+
+	public void setHikeReports(List<HikeReport> hikeReports) {
+		this.hikeReports = hikeReports;
 	}
 
 	@Override
