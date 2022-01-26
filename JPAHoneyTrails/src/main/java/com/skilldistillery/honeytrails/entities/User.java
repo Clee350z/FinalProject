@@ -47,6 +47,12 @@ public class User {
 			joinColumns=@JoinColumn(name="user_id"),
 			inverseJoinColumns=@JoinColumn(name="trail_id"))
 	private List<Trail> favoriteTrails;
+
+	@ManyToMany(fetch=FetchType.EAGER)
+	@JoinTable(name="planned_hikes", 
+	joinColumns=@JoinColumn(name="user_id"),
+	inverseJoinColumns=@JoinColumn(name="trail_id"))
+	private List<Trail> plannedHikes;
 	
 	public User() {
 		super();
@@ -130,6 +136,23 @@ public class User {
 
 	public void setBiography(String biography) {
 		this.biography = biography;
+	}
+
+	
+	public List<Trail> getFavoriteTrails() {
+		return favoriteTrails;
+	}
+
+	public void setFavoriteTrails(List<Trail> favoriteTrails) {
+		this.favoriteTrails = favoriteTrails;
+	}
+
+	public List<Trail> getPlannedHikes() {
+		return plannedHikes;
+	}
+
+	public void setPlannedHikes(List<Trail> plannedHikes) {
+		this.plannedHikes = plannedHikes;
 	}
 
 	@Override
