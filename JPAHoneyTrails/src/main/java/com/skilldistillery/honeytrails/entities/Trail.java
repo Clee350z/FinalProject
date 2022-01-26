@@ -1,5 +1,6 @@
 package com.skilldistillery.honeytrails.entities;
 
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -8,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -37,6 +39,12 @@ public class Trail {
 	@ManyToOne
 	@JoinColumn(name = "difficulty_id")
 	private Difficulty difficulty;
+	
+	@ManyToMany(mappedBy = "favoriteTrails")
+	private List<User> usersFavorite;
+	
+	@ManyToMany(mappedBy = "plannedHikes")
+	private List<User> usersPlanned;
 	
 	/*-----------------------------------------------------------------------------------------------------
 	 * 
@@ -116,12 +124,29 @@ public class Trail {
 		this.difficulty = difficulty;
 	}
 	
+	
 	/*-----------------------------------------------------------------------------------------------------
 	 * 
 	 *       Constructor
 	 * 
 	 -----------------------------------------------------------------------------------------------------*/
 	
+	public List<User> getUsersFavorite() {
+		return usersFavorite;
+	}
+
+	public void setUsersFavorite(List<User> usersFavorite) {
+		this.usersFavorite = usersFavorite;
+	}
+
+	public List<User> getUsersPlanned() {
+		return usersPlanned;
+	}
+
+	public void setUsersPlanned(List<User> usersPlanned) {
+		this.usersPlanned = usersPlanned;
+	}
+
 	public Trail() {}
 
 	public Trail(int id, String name, String location, double lengthMiles, String pictureUrl, boolean trailOpen,
