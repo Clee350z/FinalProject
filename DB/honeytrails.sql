@@ -428,6 +428,8 @@ COMMIT;
 START TRANSACTION;
 USE `honeytrailsdb`;
 INSERT INTO `hike_report` (`id`, `hike_title`, `trail_id`, `condition_type_id`, `report`, `date_created`, `hiked_date`, `user_id`, `rating`) VALUES (1, 'Slightly damp trail', 2, 2, 'The ground was slightly wet, a bit slippery. Exercise ccaution during hikes within the next 24 hours withstanding no more rain.', '2021-01-01', '2021-12-15', 2, 3);
+INSERT INTO `hike_report` (`id`, `hike_title`, `trail_id`, `condition_type_id`, `report`, `date_created`, `hiked_date`, `user_id`, `rating`) VALUES (2, 'All clear', 2, 1, 'No issues', '2022-01-01', '2021-12-30', 2, 3);
+INSERT INTO `hike_report` (`id`, `hike_title`, `trail_id`, `condition_type_id`, `report`, `date_created`, `hiked_date`, `user_id`, `rating`) VALUES (3, 'All clear', 3, 1, 'No issues', '2022-01-10', '2022-01-01', 2, 3);
 
 COMMIT;
 

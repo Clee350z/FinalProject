@@ -48,5 +48,12 @@ class ConditionTest {
 		assertEquals("dry", con.getName());
 		
 	}
+	@Test
+	@DisplayName("test Condition to Hike Report mappings to entity")
+	void test2() {
+		assertNotNull(con);
+		assertTrue(con.getHikeReports().size() > 0);
+		
+	}
 
 }
