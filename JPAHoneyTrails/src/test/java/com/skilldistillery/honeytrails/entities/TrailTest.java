@@ -64,8 +64,21 @@ class TrailTest {
 		trail = em.find(Trail.class, 2);
 		assertNotNull(trail);
 		assertTrue(trail.getHikeReports().size() > 0);
-		assertEquals(2, trail.getHikeReports().size());
-		
+		assertEquals(1, trail.getHikeReports().size());
+	}
+	
+	@Test
+	@DisplayName("test tail to users favorite")
+	void test4() {
+		assertNotNull(trail);
+		assertTrue(trail.getUsersFavorite().size() >= 0);
+	}
+	
+	@Test
+	@DisplayName("test tail to users planned")
+	void test5() {
+		assertNotNull(trail);
+		assertTrue(trail.getUsersPlanned().size() >= 0);
 	}
 
 }
