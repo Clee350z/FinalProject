@@ -1,5 +1,6 @@
 package com.skilldistillery.honeytrails.entities;
 
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
@@ -17,6 +18,9 @@ public class Condition {
 	private String name;
 	
 	private String description;
+	
+	
+	private List<HikeReport> hikeReports;
 
 	public Condition() {
 		super();
@@ -44,6 +48,14 @@ public class Condition {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public List<HikeReport> getHikeReports() {
+		return hikeReports;
+	}
+
+	public void setHikeReports(List<HikeReport> hikeReports) {
+		this.hikeReports = hikeReports;
 	}
 
 	@Override
