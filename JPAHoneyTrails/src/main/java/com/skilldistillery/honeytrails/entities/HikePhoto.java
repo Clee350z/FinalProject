@@ -9,8 +9,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="hike_photo")
 public class HikePhoto {
 	
 	@Id
@@ -24,9 +26,9 @@ public class HikePhoto {
 	
 	private String description;
 	
-	@ManyToOne
-	@JoinColumn(name="condition_type_id")
-	private Condition condition;
+//	@ManyToOne
+//	@JoinColumn(name="condition_type_id")
+//	private Condition condition;
 
 	public HikePhoto() {
 		super();
@@ -64,13 +66,13 @@ public class HikePhoto {
 		this.description = description;
 	}
 
-	public Condition getCondition() {
-		return condition;
-	}
-
-	public void setCondition(Condition condition) {
-		this.condition = condition;
-	}
+//	public Condition getCondition() {
+//		return condition;
+//	}
+//
+//	public void setCondition(Condition condition) {
+//		this.condition = condition;
+//	}
 
 	@Override
 	public int hashCode() {

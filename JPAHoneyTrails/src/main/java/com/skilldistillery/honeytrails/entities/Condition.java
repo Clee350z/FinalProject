@@ -7,8 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="condition_type")
 public class Condition {
 	
 	@Id
@@ -20,7 +22,7 @@ public class Condition {
 	private String description;
 	
 	
-	private List<HikeReport> hikeReports;
+//	private List<HikeReport> hikeReports;
 
 	public Condition() {
 		super();
@@ -50,13 +52,13 @@ public class Condition {
 		this.description = description;
 	}
 
-	public List<HikeReport> getHikeReports() {
-		return hikeReports;
-	}
-
-	public void setHikeReports(List<HikeReport> hikeReports) {
-		this.hikeReports = hikeReports;
-	}
+//	public List<HikeReport> getHikeReports() {
+//		return hikeReports;
+//	}
+//
+//	public void setHikeReports(List<HikeReport> hikeReports) {
+//		this.hikeReports = hikeReports;
+//	}
 
 	@Override
 	public int hashCode() {
