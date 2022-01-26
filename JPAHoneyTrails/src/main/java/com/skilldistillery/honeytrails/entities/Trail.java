@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -40,17 +41,17 @@ public class Trail{
 	@JoinColumn(name = "difficulty_id")
 	private Difficulty difficulty;
 	
-//	@ManyToMany(mappedBy = "favoriteTrails")
-//	private List<User> usersFavorite;
-//	
-//	@ManyToMany(mappedBy = "plannedHikes")
-//	private List<User> usersPlanned;
+	@ManyToMany(mappedBy = "favoriteTrails")
+	private List<User> usersFavorite;
+	
+	@ManyToMany(mappedBy = "plannedHikes")
+	private List<User> usersPlanned;
 	
 	@OneToMany(mappedBy = "trail")
 	private List<TrailComment> comments;
 	
-//	@OneToMany(mappedBy = "trail")
-//	private List<GroupHike> groupHikes;
+	@OneToMany(mappedBy = "trail")
+	private List<GroupHike> groupHikes;
 	
 	@OneToMany(mappedBy = "trails")
 	private List<HikeReport> hikeReports;
@@ -132,23 +133,23 @@ public class Trail{
 	public void setDifficulty(Difficulty difficulty) {
 		this.difficulty = difficulty;
 	}
-//	
-//	public List<User> getUsersFavorite() {
-//		return usersFavorite;
-//	}
-//
-//	public void setUsersFavorite(List<User> usersFavorite) {
-//		this.usersFavorite = usersFavorite;
-//	}
-//
-//	public List<User> getUsersPlanned() {
-//		return usersPlanned;
-//	}
-//
-//	public void setUsersPlanned(List<User> usersPlanned) {
-//		this.usersPlanned = usersPlanned;
-//	}
-//
+	
+	public List<User> getUsersFavorite() {
+		return usersFavorite;
+	}
+
+	public void setUsersFavorite(List<User> usersFavorite) {
+		this.usersFavorite = usersFavorite;
+	}
+
+	public List<User> getUsersPlanned() {
+		return usersPlanned;
+	}
+
+	public void setUsersPlanned(List<User> usersPlanned) {
+		this.usersPlanned = usersPlanned;
+	}
+
 	public List<TrailComment> getComments() {
 		return comments;
 	}
@@ -156,14 +157,14 @@ public class Trail{
 	public void setComments(List<TrailComment> comments) {
 		this.comments = comments;
 	}
-//
-//	public List<GroupHike> getGroupHikes() {
-//		return groupHikes;
-//	}
-//
-//	public void setGroupHikes(List<GroupHike> groupHikes) {
-//		this.groupHikes = groupHikes;
-//	}
+
+	public List<GroupHike> getGroupHikes() {
+		return groupHikes;
+	}
+
+	public void setGroupHikes(List<GroupHike> groupHikes) {
+		this.groupHikes = groupHikes;
+	}
 	
 	public List<HikeReport> getHikeReports() {
 		return hikeReports;

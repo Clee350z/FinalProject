@@ -5,9 +5,13 @@ import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -46,29 +50,29 @@ public class User {
 //	private Address address;
 	
 	
-//	@ManyToMany(fetch=FetchType.EAGER)
-//	@JoinTable(name="favorite_trail", 
-//			joinColumns=@JoinColumn(name="user_id"),
-//			inverseJoinColumns=@JoinColumn(name="trail_id"))
-//	private List<Trail> favoriteTrails;
+	@ManyToMany(fetch=FetchType.LAZY)
+	@JoinTable(name="favorite_trail", 
+			joinColumns=@JoinColumn(name="user_id"),
+			inverseJoinColumns=@JoinColumn(name="trail_id"))
+	private List<Trail> favoriteTrails;
 
-//	@ManyToMany(fetch=FetchType.EAGER)
-//	@JoinTable(name="planned_hikes", 
-//	joinColumns=@JoinColumn(name="user_id"),
-//	inverseJoinColumns=@JoinColumn(name="trail_id"))
-//	private List<Trail> plannedHikes;
+	@ManyToMany(fetch=FetchType.LAZY)
+	@JoinTable(name="planned_hikes", 
+	joinColumns=@JoinColumn(name="user_id"),
+	inverseJoinColumns=@JoinColumn(name="trail_id"))
+	private List<Trail> plannedHikes;
 	
-//	@OneToMany(mappedBy = "user")
-//	private List<TrailComment> comments;
+	@OneToMany(mappedBy = "user")
+	private List<TrailComment> comments;
 	
-//	@ManyToMany(fetch=FetchType.EAGER)
-//	@JoinTable(name="group_hike_has_user", 
-//	joinColumns=@JoinColumn(name="user_id"),
-//	inverseJoinColumns=@JoinColumn(name="group_hike_id"))
-//	private List<GroupHike> groupHikes;
+	@ManyToMany(fetch=FetchType.LAZY)
+	@JoinTable(name="group_hike_has_user", 
+	joinColumns=@JoinColumn(name="user_id"),
+	inverseJoinColumns=@JoinColumn(name="group_hike_id"))
+	private List<GroupHike> groupHikes;
 	
-//	@OneToMany(mappedBy = "createdByUser")
-//	private List <GroupHike> groupHikesCreated;
+	@OneToMany(mappedBy = "createdByUser")
+	private List <GroupHike> groupHikesCreated;
 	
 	
 
@@ -159,45 +163,45 @@ public class User {
 	}
 
 	
-//	public List<Trail> getFavoriteTrails() {
-//		return favoriteTrails;
-//	}
-//
-//	public void setFavoriteTrails(List<Trail> favoriteTrails) {
-//		this.favoriteTrails = favoriteTrails;
-//	}
-//
-//	public List<Trail> getPlannedHikes() {
-//		return plannedHikes;
-//	}
-//
-//	public void setPlannedHikes(List<Trail> plannedHikes) {
-//		this.plannedHikes = plannedHikes;
-//	}
-//
-//	public List<TrailComment> getComments() {
-//		return comments;
-//	}
-//
-//	public void setComments(List<TrailComment> comments) {
-//		this.comments = comments;
-//	}
+	public List<Trail> getFavoriteTrails() {
+		return favoriteTrails;
+	}
 
-//	public List<GroupHike> getGroupHikes() {
-//		return groupHikes;
-//	}
-//
-//	public void setGroupHikes(List<GroupHike> groupHikes) {
-//		this.groupHikes = groupHikes;
-//	}
+	public void setFavoriteTrails(List<Trail> favoriteTrails) {
+		this.favoriteTrails = favoriteTrails;
+	}
+
+	public List<Trail> getPlannedHikes() {
+		return plannedHikes;
+	}
+
+	public void setPlannedHikes(List<Trail> plannedHikes) {
+		this.plannedHikes = plannedHikes;
+	}
+
+	public List<TrailComment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<TrailComment> comments) {
+		this.comments = comments;
+	}
+
+	public List<GroupHike> getGroupHikes() {
+		return groupHikes;
+	}
+
+	public void setGroupHikes(List<GroupHike> groupHikes) {
+		this.groupHikes = groupHikes;
+	}
 	
-//	public List<GroupHike> getGroupHikesCreated() {
-//		return groupHikesCreated;
-//	}
-//
-//	public void setGroupHikesCreated(List<GroupHike> groupHikesCreated) {
-//		this.groupHikesCreated = groupHikesCreated;
-//	}
+	public List<GroupHike> getGroupHikesCreated() {
+		return groupHikesCreated;
+	}
+
+	public void setGroupHikesCreated(List<GroupHike> groupHikesCreated) {
+		this.groupHikesCreated = groupHikesCreated;
+	}
 
 	public List<HikeReport> getHikeReports() {
 		return hikeReports;

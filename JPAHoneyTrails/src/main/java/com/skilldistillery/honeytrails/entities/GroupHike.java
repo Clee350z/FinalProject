@@ -31,9 +31,9 @@ public class GroupHike {
 	@Column(name = "meetup_date")
 	private LocalDateTime meetupDate;
 	
-//	@ManyToOne
-//	@JoinColumn(name= "user_id")
-//	private User createdByUser;
+	@ManyToOne
+	@JoinColumn(name= "user_id")
+	private User createdByUser;
 	
 	@ManyToOne
 	@JoinColumn(name = "trail_id")
@@ -47,12 +47,12 @@ public class GroupHike {
 	@Column(name = "image_url")
 	private String imageUrl;
 	
-//	@ManyToMany(fetch=FetchType.EAGER)
-//	@JoinTable(name="group_hike_has_user", 
-//	joinColumns=@JoinColumn(name="group_hike_id"),
-//	inverseJoinColumns=@JoinColumn(name="user_id"))
-//	private List<User> users;
-//	
+	@ManyToMany(fetch=FetchType.EAGER)
+	@JoinTable(name="group_hike_has_user", 
+	joinColumns=@JoinColumn(name="group_hike_id"),
+	inverseJoinColumns=@JoinColumn(name="user_id"))
+	private List<User> users;
+	
 	/*-----------------------------------------------------------------------------------------------------
 	 * 
 	 *       Getters & Setters
@@ -83,13 +83,13 @@ public class GroupHike {
 		this.meetupDate = meetupDate;
 	}
 
-//	public List<User> getUsers() {
-//		return users;
-//	}
-//
-//	public void setUsers(List<User> users) {
-//		this.users = users;
-//	}
+	public List<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<User> users) {
+		this.users = users;
+	}
 
 	public Trail getTrail() {
 		return trail;
@@ -123,13 +123,13 @@ public class GroupHike {
 		this.imageUrl = imageUrl;
 	}
 	
-//	public User getCreatedByUser() {
-//		return createdByUser;
-//	}
-//
-//	public void setCreatedByUser(User createdByUser) {
-//		this.createdByUser = createdByUser;
-//	}
+	public User getCreatedByUser() {
+		return createdByUser;
+	}
+
+	public void setCreatedByUser(User createdByUser) {
+		this.createdByUser = createdByUser;
+	}
 	
 	/*-----------------------------------------------------------------------------------------------------
 	 * 

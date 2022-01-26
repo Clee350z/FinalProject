@@ -26,10 +26,10 @@ public class TrailComment {
 	@Column(name = "time_posted")
 	private LocalDateTime timePosted;
 	
-//	@ManyToOne
-//	@JoinColumn(name = "user_id")
-//	private User user;
-//	
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	private User user;
+	
 	@ManyToOne
 	@JoinColumn(name = "trail_id")
 	private Trail trail;
@@ -66,14 +66,14 @@ public class TrailComment {
 		this.timePosted = timePosted;
 	}
 
-//	public User getUser() {
-//		return user;
-//	}
-//
-//	public void setUser(User user) {
-//		this.user = user;
-//	}
-//
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 	public Trail getTrail() {
 		return trail;
 	}
