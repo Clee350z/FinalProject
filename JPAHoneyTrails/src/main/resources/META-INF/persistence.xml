@@ -9,6 +9,7 @@
     <class>com.skilldistillery.honeytrails.entities.Trail</class>
     <class>com.skilldistillery.honeytrails.entities.Difficulty</class>
     <class>com.skilldistillery.honeytrails.entities.GroupHike</class>
+    <class>com.skilldistillery.honeytrails.entities.TrailComment</class>
   
 
     <properties>
