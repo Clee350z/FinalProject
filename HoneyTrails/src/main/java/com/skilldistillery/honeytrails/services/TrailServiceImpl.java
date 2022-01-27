@@ -3,10 +3,12 @@ package com.skilldistillery.honeytrails.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.skilldistillery.honeytrails.entities.Trail;
 import com.skilldistillery.honeytrails.repositories.TrailRepository;
 
+@Service
 public class TrailServiceImpl implements TrailService {
 
 	@Autowired
