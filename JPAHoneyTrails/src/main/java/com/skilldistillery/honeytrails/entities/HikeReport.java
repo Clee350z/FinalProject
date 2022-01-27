@@ -15,6 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -31,6 +33,7 @@ public class HikeReport {
 	private String report;
 
 	@Column(name = "date_created")
+	@CreationTimestamp
 	private LocalDateTime dateCreated;
 
 	@Column(name = "hiked_date")
