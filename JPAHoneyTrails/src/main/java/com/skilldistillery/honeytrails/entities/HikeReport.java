@@ -40,6 +40,7 @@ public class HikeReport {
 
 	@ManyToOne
 	@JoinColumn(name = "condition_type_id")
+	@JsonIgnore 
 	private Condition condition;
 	
 	@ManyToOne
@@ -56,9 +57,9 @@ public class HikeReport {
 	@JsonIgnore
 	private List<HikePhoto> hikePhoto;
 	
-	@OneToMany(mappedBy = "hikeReport")
-	@JsonIgnore
-	private List<HikeReportComment> hikeReportComments;
+//	@OneToMany(mappedBy = "hikeReport")
+//	@JsonIgnore
+//	private List<HikeReportComment> hikeReportComments;
 
 	public HikeReport() {
 		super();
@@ -144,13 +145,13 @@ public class HikeReport {
 		this.hikePhoto = hikePhoto;
 	}
 
-	public List<HikeReportComment> getGroupHikeComments() {
-		return hikeReportComments;
-	}
-
-	public void setGroupHikeComments(List<HikeReportComment> hikeReportComments) {
-		this.hikeReportComments = hikeReportComments;
-	}
+//	public List<HikeReportComment> getGroupHikeComments() {
+//		return hikeReportComments;
+//	}
+//
+//	public void setGroupHikeComments(List<HikeReportComment> hikeReportComments) {
+//		this.hikeReportComments = hikeReportComments;
+//	}
 
 	@Override
 	public int hashCode() {

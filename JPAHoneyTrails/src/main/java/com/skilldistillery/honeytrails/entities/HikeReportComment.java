@@ -32,6 +32,7 @@ public class HikeReportComment {
 	
 	@ManyToOne
 	@JoinColumn(name="hike_report_id")
+	@JsonIgnore
 	private HikeReport hikeReport;
 	
 	@ManyToOne
