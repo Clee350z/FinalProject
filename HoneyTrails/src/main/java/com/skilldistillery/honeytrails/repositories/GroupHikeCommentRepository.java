@@ -11,5 +11,5 @@ public interface GroupHikeCommentRepository extends JpaRepository<HikeReportComm
 	
 //	List<HikeReportComment> findByGroupHike_Id(int groupHikeId);
 	
-	HikeReportComment findByUser_Username(String username);
+//	HikeReportComment findByUser_Username(String username);
 }

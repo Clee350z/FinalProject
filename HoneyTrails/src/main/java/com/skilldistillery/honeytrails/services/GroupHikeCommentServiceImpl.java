@@ -43,10 +43,10 @@ public class GroupHikeCommentServiceImpl implements GroupHikeCommentService {
 		return null;
 	}
 
-	@Override
-	public HikeReportComment getGroupHikeCommentByUsername(String username) {
-		return ghcRepo.findByUser_Username(username);
-	}
+//	@Override
+//	public HikeReportComment getGroupHikeCommentByUsername(String username) {
+//		return ghcRepo.findByUser_Username(username);
+//	}
 
 	@Override
 	public HikeReportComment addGroupHikeComment(HikeReportComment hikeReportComment) {

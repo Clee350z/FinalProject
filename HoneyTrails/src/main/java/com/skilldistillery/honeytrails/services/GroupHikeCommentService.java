@@ -10,7 +10,7 @@ public interface GroupHikeCommentService {
 	
 	HikeReportComment getGroupHikeCommentById(int groupHikeCommentId);
 	
-	HikeReportComment getGroupHikeCommentByUsername(String username);
+//	HikeReportComment getGroupHikeCommentByUsername(String username);
 	
 	HikeReportComment addGroupHikeComment(HikeReportComment hikeReportComment);
 	
