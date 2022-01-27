@@ -4,12 +4,12 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.skilldistillery.honeytrails.entities.HikeReportComment;
+import com.skilldistillery.honeytrails.entities.GroupHikeComment;
 
-public interface GroupHikeCommentRepository extends JpaRepository<HikeReportComment, Integer>{
+public interface GroupHikeCommentRepository extends JpaRepository<GroupHikeComment, Integer>{
 
 	
-//	List<HikeReportComment> findByGroupHike_Id(int groupHikeId);
+//	List<GroupHikeComment> findByGroupHike_Id(int groupHikeId);
 	
-//	HikeReportComment findByUser_Username(String username);
+//	GroupHikeComment findByUser_Username(String username);
 }

@@ -14,12 +14,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class HikeReportCommentTest {
+class GroupHikeCommentTest {
 
 
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private HikeReportComment ghc;
+	private GroupHikeComment ghc;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -34,7 +34,7 @@ class HikeReportCommentTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		ghc = em.find(HikeReportComment.class, 1);
+		ghc = em.find(GroupHikeComment.class, 1);
 	}
 
 	@AfterEach
