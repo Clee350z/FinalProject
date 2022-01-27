@@ -12,9 +12,13 @@ public class AddressServiceImpl implements AddressService{
 	@Autowired
 	private AddressRepository addressRepo;
 	
+	
+	//Probably dont need but if an admin needs or something
 	@Override
 	public List<Address> allAddresses() {
 		return addressRepo.findAll();
 	}
+	
+	
 	
 }
