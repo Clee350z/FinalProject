@@ -44,10 +44,12 @@ public class HikeReport {
 	
 	@ManyToOne
 	@JoinColumn(name="trail_id")
+	@JsonIgnore
 	private Trail trails;
 	
 	@ManyToOne
 	@JoinColumn(name="user_id")
+	@JsonIgnore
 	private User user;
 	
 	@OneToMany(mappedBy = "hikeReport")

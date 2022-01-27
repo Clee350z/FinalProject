@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.skilldistillery.honeytrails.entities.Condition;
 import com.skilldistillery.honeytrails.entities.HikeReport;
@@ -11,6 +12,7 @@ import com.skilldistillery.honeytrails.entities.Trail;
 import com.skilldistillery.honeytrails.entities.User;
 import com.skilldistillery.honeytrails.repositories.HikeReportRepository;
 
+@Service
 public class HikeReportServiceImpl implements HikeReportService {
 
 	@Autowired
