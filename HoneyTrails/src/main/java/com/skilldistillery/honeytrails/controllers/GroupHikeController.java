@@ -1,5 +1,6 @@
 package com.skilldistillery.honeytrails.controllers;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -59,9 +60,11 @@ public class GroupHikeController {
 		return groupHikeByName;
 	}
 	
-	@PostMapping("grouphikes")
-	public GroupHike createGroupHike(@RequestBody GroupHike groupHike, HttpServletResponse res) {
-		GroupHike newGroupHike = ghServ.addGroupHike(groupHike);
+	// TODO: add get groups by trail id
+	
+	@PostMapping("trails/{trailId}/grouphikes")
+	public GroupHike createGroupHike(@PathVariable int trailId, @RequestBody GroupHike groupHike, HttpServletResponse res, Principal principal) {
+		GroupHike newGroupHike = ghServ.addGroupHike(groupHike, principal.getName(), trailId);
 		if(newGroupHike == null) {
 			res.setStatus(400);
 		} else {
@@ -71,8 +74,8 @@ public class GroupHikeController {
 	}
 	
 	@PutMapping("grouphikes/{grouphikeid}")
-	public GroupHike updateGroupHike(@RequestBody GroupHike groupHike, @PathVariable int grouphikeid, HttpServletResponse res) {
-		GroupHike updatedGroupHike = ghServ.updateGroupHikeById(groupHike, grouphikeid);
+	public GroupHike updateGroupHike(@RequestBody GroupHike groupHike, @PathVariable int grouphikeid, HttpServletResponse res, Principal principal) {
+		GroupHike updatedGroupHike = ghServ.updateGroupHikeById(groupHike, grouphikeid, principal.getName());
 		if(updatedGroupHike != groupHike) {
 			res.setStatus(200);
 		} else {
@@ -81,9 +84,9 @@ public class GroupHikeController {
 		return updatedGroupHike;
 	}
 	
-	@DeleteMapping("groupHikes/{grouhikeid}")
-	public void deletedGroupHike(@PathVariable int grouphikeid) {
-		ghServ.deleteGroupHikeById(grouphikeid);
+	@DeleteMapping("grouphikes/{grouphikeid}")
+	public void deletedGroupHike(@PathVariable int grouphikeid, Principal principal) {
+		ghServ.deleteGroupHikeById(grouphikeid, principal.getName());
 	}
 
 }
