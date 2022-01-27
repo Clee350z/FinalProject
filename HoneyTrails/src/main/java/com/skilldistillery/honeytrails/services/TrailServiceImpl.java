@@ -15,22 +15,22 @@ public class TrailServiceImpl implements TrailService {
 	TrailRepository tr;
 
 	@Override
-	public List<Trail> index() {
+	public List<Trail> getAllTrails() {
 		return tr.findAll();
 	}
 
 	@Override
-	public Trail show(int trailId) {
+	public Trail getTrailById(int trailId) {
 		return tr.findById(trailId).get();
 	}
 
 	@Override
-	public Trail create(Trail trail) {
+	public Trail addTrail(Trail trail) {
 		return tr.saveAndFlush(trail);
 	}
 
 	@Override
-	public Trail update(int trailId, Trail trail) {
+	public Trail updateTrail(int trailId, Trail trail) {
 		if (tr.existsById(trailId)) {
 			return tr.save(trail);
 		}
@@ -38,12 +38,12 @@ public class TrailServiceImpl implements TrailService {
 	}
 
 	@Override
-	public boolean destroy(int trailId) {
+	public boolean deleteTrail(int trailId) {
 		tr.deleteById(trailId);
 		if (tr.existsById(trailId)) {
 			return false;
 		} else {
-			return false;
+			return true;
 		}
 	}
 
