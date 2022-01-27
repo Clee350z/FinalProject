@@ -30,6 +30,7 @@ public class TrailComment {
 	
 	@ManyToOne
 	@JoinColumn(name = "user_id")
+	@JsonIgnore
 	private User user;
 	
 	@JsonIgnore
