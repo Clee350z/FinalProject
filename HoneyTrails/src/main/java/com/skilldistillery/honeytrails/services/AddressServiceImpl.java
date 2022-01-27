@@ -7,13 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.skilldistillery.honeytrails.entities.Address;
 import com.skilldistillery.honeytrails.repositories.AddressRepository;
 
-public class AddressServiceImpl {
+public class AddressServiceImpl implements AddressService{
 
 	@Autowired
 	private AddressRepository addressRepo;
 	
 	@Override
-	public List<Address> index() {
+	public List<Address> allAddresses() {
 		return addressRepo.findAll();
 	}
 	

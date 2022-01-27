@@ -6,5 +6,5 @@ import com.skilldistillery.honeytrails.entities.Address;
 
 public interface AddressService {
 
-	List<Address> index();
+	List<Address> allAddresses();
 }
