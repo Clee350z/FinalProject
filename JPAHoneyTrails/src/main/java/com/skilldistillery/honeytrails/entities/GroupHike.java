@@ -53,6 +53,8 @@ public class GroupHike {
 	inverseJoinColumns=@JoinColumn(name="user_id"))
 	private List<User> users;
 	
+	
+	
 	/*-----------------------------------------------------------------------------------------------------
 	 * 
 	 *       Getters & Setters

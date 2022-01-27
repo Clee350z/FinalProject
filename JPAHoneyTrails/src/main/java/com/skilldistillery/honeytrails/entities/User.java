@@ -78,7 +78,7 @@ public class User {
 	private List <GroupHike> groupHikesCreated;
 	
 	@OneToMany(mappedBy = "userId")
-	private List<GroupHikeComment> groupHikeComments;
+	private List<HikeReportComment> hikeReportComments;
 	
 	
 
@@ -217,12 +217,12 @@ public class User {
 		this.hikeReports = hikeReports;
 	}
 
-	public List<GroupHikeComment> getGroupHikeComments() {
-		return groupHikeComments;
+	public List<HikeReportComment> getGroupHikeComments() {
+		return hikeReportComments;
 	}
 
-	public void setGroupHikeComments(List<GroupHikeComment> groupHikeComments) {
-		this.groupHikeComments = groupHikeComments;
+	public void setGroupHikeComments(List<HikeReportComment> hikeReportComments) {
+		this.hikeReportComments = hikeReportComments;
 	}
 
 	/*-----------------------------------------------------------------------------------------------------

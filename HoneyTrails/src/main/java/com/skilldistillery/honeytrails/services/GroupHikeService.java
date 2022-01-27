@@ -16,6 +16,6 @@ public interface GroupHikeService {
 	
 	GroupHike updateGroupHikeById(int groupHikeId);
 	
-	GroupHike deleteGroupHikeById(int groupHikeId);
+	void deleteGroupHikeById(int groupHikeId);
 
 }

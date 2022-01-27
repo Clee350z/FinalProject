@@ -1,6 +1,7 @@
 package com.skilldistillery.honeytrails.entities;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -10,13 +11,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="group_hike_comment")
-public class GroupHikeComment {
+public class HikeReportComment {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,10 +41,15 @@ public class GroupHikeComment {
 	@Column(name="create_date")
 	private LocalDateTime createDate;
 	
-//	@Column(name="reply_to_id")
-//	private int replyToId;
+	@ManyToOne
+	@JoinColumn(name="reply_to_id")
+	HikeReportComment inReplyTo;
+	
+	@OneToMany(mappedBy="inReplyTo")
+	@JsonIgnore
+	List<HikeReportComment> replies;
 
-	public GroupHikeComment() {
+	public HikeReportComment() {
 		super();
 	}
 
@@ -84,19 +93,25 @@ public class GroupHikeComment {
 		this.createDate = createDate;
 	}
 
-//	public int getReplyToId() {
-//		return replyToId;
-//	}
-//
-//	public void setReplyToId(int replyToId) {
-//		this.replyToId = replyToId;
-//	}
+	public HikeReportComment getInReplyTo() {
+		return inReplyTo;
+	}
 
-	
-	
+	public void setInReplyTo(HikeReportComment inReplyTo) {
+		this.inReplyTo = inReplyTo;
+	}
+
+	public List<HikeReportComment> getReplies() {
+		return replies;
+	}
+
+	public void setReplies(List<HikeReportComment> replies) {
+		this.replies = replies;
+	}
+
 	@Override
 	public String toString() {
-		return "GroupHikeComment [id=" + id + ", commentBox=" + commentBox + ", hikeReport=" + hikeReport + ", userId="
+		return "HikeReportComment [id=" + id + ", commentBox=" + commentBox + ", hikeReport=" + hikeReport + ", userId="
 				+ userId + ", createDate=" + createDate + "]";
 	}
 
@@ -113,7 +128,7 @@ public class GroupHikeComment {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		GroupHikeComment other = (GroupHikeComment) obj;
+		HikeReportComment other = (HikeReportComment) obj;
 		return id == other.id;
 	}
 	

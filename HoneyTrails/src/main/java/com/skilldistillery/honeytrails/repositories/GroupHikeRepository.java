@@ -7,5 +7,7 @@ import com.skilldistillery.honeytrails.entities.GroupHike;
 public interface GroupHikeRepository extends JpaRepository<GroupHike, Integer> {
 	
 	GroupHike findByEventName(String eventName);
+	
+	
 
 }
