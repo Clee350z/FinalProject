@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "trail_comment")
 public class TrailComment {
@@ -28,10 +30,12 @@ public class TrailComment {
 	
 	@ManyToOne
 	@JoinColumn(name = "user_id")
+	@JsonIgnore
 	private User user;
 	
 	@ManyToOne
 	@JoinColumn(name = "trail_id")
+	@JsonIgnore
 	private Trail trail;
 
 

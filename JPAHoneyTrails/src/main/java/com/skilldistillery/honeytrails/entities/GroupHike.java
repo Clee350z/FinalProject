@@ -35,10 +35,12 @@ public class GroupHike {
 	
 	@ManyToOne
 	@JoinColumn(name= "user_id")
+	@JsonIgnore
 	private User createdByUser;
 	
 	@ManyToOne
 	@JoinColumn(name = "trail_id")
+	@JsonIgnore
 	private Trail trail;
 	
 	@Column(name = "meetup_time")
