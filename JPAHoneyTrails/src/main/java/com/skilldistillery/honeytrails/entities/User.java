@@ -48,7 +48,8 @@ public class User {
 	@JsonIgnore
 	private List<HikeReport> hikeReports;
 
-	@OneToOne(mappedBy="user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToOne
+	@JoinColumn(name="address_id")
 	private Address address;
 	
 	
@@ -151,13 +152,13 @@ public class User {
 		this.lastName = lastName;
 	}
 
-//	public Address getAddress() {
-//		return address;
-//	}
-//
-//	public void setAddressId(Address address) {
-//		this.address = address;
-//	}
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddressId(Address address) {
+		this.address = address;
+	}
 
 	public String getBiography() {
 		return biography;

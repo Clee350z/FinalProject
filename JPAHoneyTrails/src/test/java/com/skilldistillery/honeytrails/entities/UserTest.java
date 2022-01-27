@@ -78,5 +78,10 @@ class UserTest {
 		user = em.find(User.class, 2);
 		assertTrue(user.getPlannedHikes().size() >= 0);
 	}
+	@Test
+	@DisplayName("test user to address mapping")
+	void test6() {
+		assertEquals("International", user.getAddress().getStreet());
+	}
 
 }
