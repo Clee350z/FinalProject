@@ -14,8 +14,8 @@
     <class>com.skilldistillery.honeytrails.entities.HikeReport</class>
     <class>com.skilldistillery.honeytrails.entities.TrailComment</class>
     <class>com.skilldistillery.honeytrails.entities.User</class>
-     <class>com.skilldistillery.honeytrails.entities.Trail</class>
-  
+    <class>com.skilldistillery.honeytrails.entities.Trail</class>
+
 
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/honeytrailsdb?useSSL=false&amp;useLegacyDatetimeCode=false&amp;serverTimezone=US/Mountain" />
