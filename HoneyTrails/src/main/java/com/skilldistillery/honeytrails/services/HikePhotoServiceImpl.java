@@ -4,11 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.skilldistillery.honeytrails.entities.HikePhoto;
 import com.skilldistillery.honeytrails.entities.HikeReport;
 import com.skilldistillery.honeytrails.repositories.HikePhotoRepository;
 
+@Service
 public class HikePhotoServiceImpl implements HikePhotoService {
 
 	@Autowired
