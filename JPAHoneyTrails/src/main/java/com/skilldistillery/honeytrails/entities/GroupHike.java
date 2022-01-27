@@ -25,12 +25,13 @@ public class GroupHike {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name = "event_date")
+	@Column(name = "event_name")
 	private String eventName;
 	
 	@Column(name = "meetup_date")
 	private LocalDateTime meetupDate;
 	
+	@ManyToOne
 	@JoinColumn(name= "user_id")
 	private User createdByUser;
 	
@@ -138,18 +139,7 @@ public class GroupHike {
 
 	public GroupHike() {}
 
-	public GroupHike(int id, String eventName, LocalDateTime meetupDate, List<User> users, Trail trail,
-			LocalDateTime meetupTime, String description, String imageUrl) {
-		super();
-		this.id = id;
-		this.eventName = eventName;
-		this.meetupDate = meetupDate;
-		this.users = users;
-		this.trail = trail;
-		this.meetupTime = meetupTime;
-		this.description = description;
-		this.imageUrl = imageUrl;
-	}
+	
 	
 	/*-----------------------------------------------------------------------------------------------------
 	 * 
@@ -157,9 +147,10 @@ public class GroupHike {
 	 * 
 	 -----------------------------------------------------------------------------------------------------*/
 
+	
 	@Override
 	public int hashCode() {
-		return Objects.hash(description, eventName, id, imageUrl, meetupDate, meetupTime, trail, users);
+		return Objects.hash(id);
 	}
 
 	@Override
@@ -171,12 +162,8 @@ public class GroupHike {
 		if (getClass() != obj.getClass())
 			return false;
 		GroupHike other = (GroupHike) obj;
-		return Objects.equals(description, other.description) && Objects.equals(eventName, other.eventName)
-				&& id == other.id && Objects.equals(imageUrl, other.imageUrl)
-				&& Objects.equals(meetupDate, other.meetupDate) && Objects.equals(meetupTime, other.meetupTime)
-				&& Objects.equals(trail, other.trail) && Objects.equals(users, other.users);
+		return id == other.id;
 	}
-	
 	
 	
 	

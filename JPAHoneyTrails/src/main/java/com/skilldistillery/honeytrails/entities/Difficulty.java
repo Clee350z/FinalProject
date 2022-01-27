@@ -11,6 +11,7 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Difficulty {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
@@ -68,13 +69,6 @@ public class Difficulty {
 	
 	public Difficulty() {}
 
-	public Difficulty(int id, String name, String description, List<Trail> trails) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.description = description;
-		this.trails = trails;
-	}
 	
 	/*-----------------------------------------------------------------------------------------------------
 	 * 
@@ -82,11 +76,12 @@ public class Difficulty {
 	 * 
 	 -----------------------------------------------------------------------------------------------------*/
 
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(description, id, name, trails);
+		return Objects.hash(id);
 	}
-
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -96,8 +91,7 @@ public class Difficulty {
 		if (getClass() != obj.getClass())
 			return false;
 		Difficulty other = (Difficulty) obj;
-		return Objects.equals(description, other.description) && id == other.id && Objects.equals(name, other.name)
-				&& Objects.equals(trails, other.trails);
+		return id == other.id;
 	}
 	
 	

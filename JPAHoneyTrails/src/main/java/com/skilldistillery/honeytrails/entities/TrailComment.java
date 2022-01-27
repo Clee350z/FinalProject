@@ -20,7 +20,7 @@ public class TrailComment {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name = "commnet_body")
+	@Column(name = "comment_body")
 	private String commentBody;
 	
 	@Column(name = "time_posted")
@@ -90,14 +90,6 @@ public class TrailComment {
 	
 	public TrailComment() {}
 
-	public TrailComment(int id, String commentBody, LocalDateTime timePosted, User user, Trail trail) {
-		super();
-		this.id = id;
-		this.commentBody = commentBody;
-		this.timePosted = timePosted;
-		this.user = user;
-		this.trail = trail;
-	}
 	
 	/*-----------------------------------------------------------------------------------------------------
 	 * 
@@ -107,9 +99,9 @@ public class TrailComment {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(commentBody, id, timePosted, trail, user);
+		return Objects.hash(id);
 	}
-
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -119,9 +111,7 @@ public class TrailComment {
 		if (getClass() != obj.getClass())
 			return false;
 		TrailComment other = (TrailComment) obj;
-		return Objects.equals(commentBody, other.commentBody) && id == other.id
-				&& Objects.equals(timePosted, other.timePosted) && Objects.equals(trail, other.trail)
-				&& Objects.equals(user, other.user);
+		return id == other.id;
 	}
 	
 	

@@ -14,7 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Trail {
+public class Trail{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -52,6 +52,9 @@ public class Trail {
 	
 	@OneToMany(mappedBy = "trail")
 	private List<GroupHike> groupHikes;
+	
+	@OneToMany(mappedBy = "trails")
+	private List<HikeReport> hikeReports;
 	
 	/*-----------------------------------------------------------------------------------------------------
 	 * 
@@ -163,27 +166,22 @@ public class Trail {
 		this.groupHikes = groupHikes;
 	}
 	
+	public List<HikeReport> getHikeReports() {
+		return hikeReports;
+	}
+	
+	public void setHikeReports(List<HikeReport> hikeReports) {
+		this.hikeReports = hikeReports;
+	}
 	/*-----------------------------------------------------------------------------------------------------
 	 * 
 	 *       Constructor
 	 * 
 	 -----------------------------------------------------------------------------------------------------*/
 
+
 	public Trail() {}
 
-	public Trail(int id, String name, String location, double lengthMiles, String pictureUrl, boolean trailOpen,
-			double latitude, double longitude, Difficulty difficulty) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.location = location;
-		this.lengthMiles = lengthMiles;
-		this.pictureUrl = pictureUrl;
-		this.trailOpen = trailOpen;
-		this.latitude = latitude;
-		this.longitude = longitude;
-		this.difficulty = difficulty;
-	}
 	
 	/*-----------------------------------------------------------------------------------------------------
 	 * 
@@ -193,7 +191,7 @@ public class Trail {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(difficulty, id, latitude, lengthMiles, location, longitude, name, pictureUrl, trailOpen);
+		return Objects.hash(id);
 	}
 
 	@Override
@@ -205,13 +203,7 @@ public class Trail {
 		if (getClass() != obj.getClass())
 			return false;
 		Trail other = (Trail) obj;
-		return Objects.equals(difficulty, other.difficulty) && id == other.id
-				&& Double.doubleToLongBits(latitude) == Double.doubleToLongBits(other.latitude)
-				&& Double.doubleToLongBits(lengthMiles) == Double.doubleToLongBits(other.lengthMiles)
-				&& Objects.equals(location, other.location)
-				&& Double.doubleToLongBits(longitude) == Double.doubleToLongBits(other.longitude)
-				&& Objects.equals(name, other.name) && Objects.equals(pictureUrl, other.pictureUrl)
-				&& trailOpen == other.trailOpen;
+		return id == other.id;
 	}
 	
 	

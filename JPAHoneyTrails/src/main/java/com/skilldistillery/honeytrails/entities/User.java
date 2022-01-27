@@ -14,6 +14,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class User {
 
@@ -32,23 +34,29 @@ public class User {
 
 	private Boolean enabled;
 	
+	@Column(name="first_name")
 	private String firstName;
 	
+	@Column(name="last_name")
 	private String lastName;
-	
-	//need to make "user" in address
-	@OneToMany(mappedBy="user")
-	private Integer addressId;
 	
 	private String biography;
 	
-	@ManyToMany(fetch=FetchType.EAGER)
+	@OneToMany(mappedBy = "user")
+	@JsonIgnore
+	private List<HikeReport> hikeReports;
+	//need to make "user" in address
+//	@OneToOne(mappedBy="user")
+//	private Address address;
+	
+	
+	@ManyToMany(fetch=FetchType.LAZY)
 	@JoinTable(name="favorite_trail", 
 			joinColumns=@JoinColumn(name="user_id"),
 			inverseJoinColumns=@JoinColumn(name="trail_id"))
 	private List<Trail> favoriteTrails;
 
-	@ManyToMany(fetch=FetchType.EAGER)
+	@ManyToMany(fetch=FetchType.LAZY)
 	@JoinTable(name="planned_hikes", 
 	joinColumns=@JoinColumn(name="user_id"),
 	inverseJoinColumns=@JoinColumn(name="trail_id"))
@@ -57,16 +65,23 @@ public class User {
 	@OneToMany(mappedBy = "user")
 	private List<TrailComment> comments;
 	
-	@ManyToMany(fetch=FetchType.EAGER)
+	@ManyToMany(fetch=FetchType.LAZY)
 	@JoinTable(name="group_hike_has_user", 
 	joinColumns=@JoinColumn(name="user_id"),
 	inverseJoinColumns=@JoinColumn(name="group_hike_id"))
 	private List<GroupHike> groupHikes;
 	
-	public User() {
-		super();
-	}
+	@OneToMany(mappedBy = "createdByUser")
+	private List <GroupHike> groupHikesCreated;
+	
+	
 
+	/*-----------------------------------------------------------------------------------------------------
+	 * 
+	 *       Getters & Setters
+	 * 
+	 -----------------------------------------------------------------------------------------------------*/
+	
 	public int getId() {
 		return id;
 	}
@@ -131,13 +146,13 @@ public class User {
 		this.lastName = lastName;
 	}
 
-	public Integer getAddressId() {
-		return addressId;
-	}
-
-	public void setAddressId(Integer addressId) {
-		this.addressId = addressId;
-	}
+//	public Address getAddress() {
+//		return address;
+//	}
+//
+//	public void setAddressId(Address address) {
+//		this.address = address;
+//	}
 
 	public String getBiography() {
 		return biography;
@@ -179,11 +194,42 @@ public class User {
 	public void setGroupHikes(List<GroupHike> groupHikes) {
 		this.groupHikes = groupHikes;
 	}
+	
+	public List<GroupHike> getGroupHikesCreated() {
+		return groupHikesCreated;
+	}
 
+	public void setGroupHikesCreated(List<GroupHike> groupHikesCreated) {
+		this.groupHikesCreated = groupHikesCreated;
+	}
+
+	public List<HikeReport> getHikeReports() {
+		return hikeReports;
+	}
+
+	public void setHikeReports(List<HikeReport> hikeReports) {
+		this.hikeReports = hikeReports;
+	}
+
+	/*-----------------------------------------------------------------------------------------------------
+	 * 
+	 *       Constructor
+	 * 
+	 -----------------------------------------------------------------------------------------------------*/
+	public User() {
+		super();
+	}
+
+	/*-----------------------------------------------------------------------------------------------------
+	 * 
+	 *      Hashcode & Equals
+	 * 
+	 -----------------------------------------------------------------------------------------------------*/
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -201,7 +247,7 @@ public class User {
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", password=" + password + ", profilePicture="
 				+ profilePicture + ", role=" + role + ", enabled=" + enabled + ", firstName=" + firstName
-				+ ", lastName=" + lastName + ", addressId=" + addressId + ", biography=" + biography + "]";
+				+ ", lastName=" + lastName + ", biography=" + biography + "]";
 	}
 
 }
