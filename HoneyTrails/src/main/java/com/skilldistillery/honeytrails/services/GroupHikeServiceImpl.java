@@ -15,6 +15,7 @@ public class GroupHikeServiceImpl implements GroupHikeService {
 	@Autowired
 	private GroupHikeRepository ghRepo;
 
+
 	@Override
 	public List<GroupHike> getAllGroupHikes() {
 		return ghRepo.findAll();
@@ -30,8 +31,8 @@ public class GroupHikeServiceImpl implements GroupHikeService {
 	}
 
 	@Override
-	public GroupHike getGroupHikeByTitle(String groupHikeTitle) {
-		return ghRepo.findByEventName(groupHikeTitle);
+	public GroupHike getGroupHikeByEventName(String groupHikeEventName) {
+		return ghRepo.findByEventName(groupHikeEventName);
 	}
 
 	@Override
@@ -40,8 +41,22 @@ public class GroupHikeServiceImpl implements GroupHikeService {
 	}
 
 	@Override
-	public GroupHike updateGroupHikeById(int groupHikeId) {
-		return null;
+	public GroupHike updateGroupHikeById(GroupHike groupHike, int groupHikeId) {
+		Optional<GroupHike> groupOpt = ghRepo.findById(groupHikeId);
+		GroupHike managed = null;
+		if(groupOpt.isPresent()) {
+			managed = groupOpt.get();
+			if(groupHike.getTrail() !=null) {
+			managed.setTrail(groupHike.getTrail());
+			}
+			if(groupHike.getUsers() !=null) {
+			managed.setUsers(groupHike.getUsers());
+			}
+			managed.setEventName(groupHike.getEventName());
+			managed.setMeetupDate(groupHike.getMeetupDate());
+		}
+		ghRepo.saveAndFlush(managed);
+		return managed;
 	}
 
 	@Override
