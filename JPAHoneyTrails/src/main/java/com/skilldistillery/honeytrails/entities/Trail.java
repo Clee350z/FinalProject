@@ -13,6 +13,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Trail{
 	
@@ -42,18 +44,23 @@ public class Trail{
 	private Difficulty difficulty;
 	
 	@ManyToMany(mappedBy = "favoriteTrails")
+	@JsonIgnore
 	private List<User> usersFavorite;
 	
 	@ManyToMany(mappedBy = "plannedHikes")
+	@JsonIgnore
 	private List<User> usersPlanned;
 	
 	@OneToMany(mappedBy = "trail")
+	@JsonIgnore
 	private List<TrailComment> comments;
 	
 	@OneToMany(mappedBy = "trail")
+	@JsonIgnore
 	private List<GroupHike> groupHikes;
 	
 	@OneToMany(mappedBy = "trails")
+	@JsonIgnore
 	private List<HikeReport> hikeReports;
 	
 	/*-----------------------------------------------------------------------------------------------------
