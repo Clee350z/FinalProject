@@ -3,6 +3,7 @@ package com.skilldistillery.honeytrails.entities;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -45,9 +47,9 @@ public class User {
 	@OneToMany(mappedBy = "user")
 	@JsonIgnore
 	private List<HikeReport> hikeReports;
-	//need to make "user" in address
-//	@OneToOne(mappedBy="user")
-//	private Address address;
+
+	@OneToOne(mappedBy="user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private Address address;
 	
 	
 	@ManyToMany(fetch=FetchType.LAZY)
