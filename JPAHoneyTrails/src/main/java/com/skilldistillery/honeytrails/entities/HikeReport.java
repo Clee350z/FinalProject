@@ -53,6 +53,10 @@ public class HikeReport {
 	@OneToMany(mappedBy = "hikeReport")
 	@JsonIgnore
 	private List<HikePhoto> hikePhoto;
+	
+	@OneToMany(mappedBy = "hikeReport")
+	@JsonIgnore
+	private List<GroupHikeComment> groupHikeComments;
 
 	public HikeReport() {
 		super();
@@ -136,6 +140,14 @@ public class HikeReport {
 
 	public void setHikePhoto(List<HikePhoto> hikePhoto) {
 		this.hikePhoto = hikePhoto;
+	}
+
+	public List<GroupHikeComment> getGroupHikeComments() {
+		return groupHikeComments;
+	}
+
+	public void setGroupHikeComments(List<GroupHikeComment> groupHikeComments) {
+		this.groupHikeComments = groupHikeComments;
 	}
 
 	@Override

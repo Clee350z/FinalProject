@@ -14,11 +14,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class HikePhotoTest {
-	
+class GroupHikeCommentTest {
+
+
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private HikePhoto photo;
+	private GroupHikeComment ghc;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -33,34 +34,34 @@ class HikePhotoTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		photo = em.find(HikePhoto.class, 1);
+		ghc = em.find(GroupHikeComment.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		photo = null;
+		ghc = null;
 	}
 	
-//	+-----------------+
-//	| title           |
-//	+-----------------+
-//	| Small Waterfall |
-//	+-----------------+
-
 	@Test
-	@DisplayName("test Hike Photo mappings to entity")
+	@DisplayName("test basic mappings to entity")
 	void test1() {
-		assertNotNull(photo);
-		assertEquals("Small Waterfall", photo.getTitle());
-		
+		assertNotNull(ghc);
+		assertEquals(2021, ghc.getCreateDate().getYear());
 	}
+	
 	@Test
-	@DisplayName("test Hike Photo To Hike Report mappings to entity")
+	@DisplayName("test mapping group hike comment to user")
 	void test2() {
-		assertNotNull(photo);
-		assertEquals("Slightly damp trail", photo.getHikeReport().getHikeTitle());
-		
+		assertNotNull(ghc);
+		assertEquals("tester", ghc.getUserId().getUsername());
+	}
+	
+	@Test
+	@DisplayName("test mapping group hike comment to hike report")
+	void test3() {
+		assertNotNull(ghc);
+		assertEquals("Slightly damp trail", ghc.getHikeReport().getHikeTitle());
 	}
 
 }

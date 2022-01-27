@@ -3,6 +3,7 @@ package com.skilldistillery.honeytrails.entities;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -45,9 +47,10 @@ public class User {
 	@OneToMany(mappedBy = "user")
 	@JsonIgnore
 	private List<HikeReport> hikeReports;
-	//need to make "user" in address
-//	@OneToOne(mappedBy="user")
-//	private Address address;
+
+	@OneToOne
+	@JoinColumn(name="address_id")
+	private Address address;
 	
 	
 	@ManyToMany(fetch=FetchType.LAZY)
@@ -73,6 +76,9 @@ public class User {
 	
 	@OneToMany(mappedBy = "createdByUser")
 	private List <GroupHike> groupHikesCreated;
+	
+	@OneToMany(mappedBy = "userId")
+	private List<GroupHikeComment> groupHikeComments;
 	
 	
 
@@ -146,13 +152,13 @@ public class User {
 		this.lastName = lastName;
 	}
 
-//	public Address getAddress() {
-//		return address;
-//	}
-//
-//	public void setAddressId(Address address) {
-//		this.address = address;
-//	}
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddressId(Address address) {
+		this.address = address;
+	}
 
 	public String getBiography() {
 		return biography;
@@ -209,6 +215,14 @@ public class User {
 
 	public void setHikeReports(List<HikeReport> hikeReports) {
 		this.hikeReports = hikeReports;
+	}
+
+	public List<GroupHikeComment> getGroupHikeComments() {
+		return groupHikeComments;
+	}
+
+	public void setGroupHikeComments(List<GroupHikeComment> groupHikeComments) {
+		this.groupHikeComments = groupHikeComments;
 	}
 
 	/*-----------------------------------------------------------------------------------------------------

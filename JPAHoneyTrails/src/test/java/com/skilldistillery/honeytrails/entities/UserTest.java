@@ -1,6 +1,8 @@
 package com.skilldistillery.honeytrails.entities;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -75,6 +77,11 @@ class UserTest {
 	void test5() {
 		user = em.find(User.class, 2);
 		assertTrue(user.getPlannedHikes().size() >= 0);
+	}
+	@Test
+	@DisplayName("test user to address mapping")
+	void test6() {
+		assertEquals("International", user.getAddress().getStreet());
 	}
 
 }
