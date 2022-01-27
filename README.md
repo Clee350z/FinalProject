@@ -29,6 +29,11 @@ This project includes Angular functionality including all CRUD functionality to 
 |`Trail`       | `PUT /api/trails/{id}`| Updates trail |    |
 |`void`        |`DELETE /api/trails/{id}`| Deletes a trail by id|
 |`List<Trail>`| `GET /api/trails/search/{keyword}`| Gets all trail by title|
+|`List<HikeReport>` | `GET /api/hikes`| Gets all hike reports| |
+|`HikeReport`       | `GET /api/hikes/{id}` | Gets hikes by id| |
+|`HikeReport`       | `POST /api/hikes/` | Creates a new hike report| |
+|`HikeReport`       | `PUT /api/hikes/{id}`| Updates hike report |    |
+|`void`        |`DELETE /api/hikes/{id}`| Deletes a hike by id|
 
 
 ##Technologies used
