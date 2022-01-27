@@ -456,6 +456,16 @@ COMMIT;
 
 
 -- -----------------------------------------------------
+-- Data for table `group_hike_comment`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `honeytrailsdb`;
+INSERT INTO `group_hike_comment` (`id`, `comment_box`, `hike_report_id`, `user_id`, `create_date`, `reply_to_id`) VALUES (1, 'This was such a great group hike!', 1, 2, '2021-01-15 15:15:15', NULL);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
 -- Data for table `favorite_trail`
 -- -----------------------------------------------------
 START TRANSACTION;
