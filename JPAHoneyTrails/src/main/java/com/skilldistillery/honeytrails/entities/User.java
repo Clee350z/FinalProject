@@ -74,6 +74,9 @@ public class User {
 	@OneToMany(mappedBy = "createdByUser")
 	private List <GroupHike> groupHikesCreated;
 	
+	@OneToMany(mappedBy = "userId")
+	private List<GroupHikeComment> groupHikeComments;
+	
 	
 
 	/*-----------------------------------------------------------------------------------------------------
@@ -209,6 +212,14 @@ public class User {
 
 	public void setHikeReports(List<HikeReport> hikeReports) {
 		this.hikeReports = hikeReports;
+	}
+
+	public List<GroupHikeComment> getGroupHikeComments() {
+		return groupHikeComments;
+	}
+
+	public void setGroupHikeComments(List<GroupHikeComment> groupHikeComments) {
+		this.groupHikeComments = groupHikeComments;
 	}
 
 	/*-----------------------------------------------------------------------------------------------------

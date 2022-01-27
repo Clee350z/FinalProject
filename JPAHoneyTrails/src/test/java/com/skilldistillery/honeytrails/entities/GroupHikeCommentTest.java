@@ -49,5 +49,19 @@ class GroupHikeCommentTest {
 		assertNotNull(ghc);
 		assertEquals(2021, ghc.getCreateDate().getYear());
 	}
+	
+	@Test
+	@DisplayName("test mapping group hike comment to user")
+	void test2() {
+		assertNotNull(ghc);
+		assertEquals("tester", ghc.getUserId().getUsername());
+	}
+	
+	@Test
+	@DisplayName("test mapping group hike comment to hike report")
+	void test3() {
+		assertNotNull(ghc);
+		assertEquals("Slightly damp trail", ghc.getHikeReport().getHikeTitle());
+	}
 
 }

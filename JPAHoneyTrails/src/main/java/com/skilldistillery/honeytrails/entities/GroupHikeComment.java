@@ -26,18 +26,19 @@ public class GroupHikeComment {
 	private String commentBox;
 	
 	@ManyToOne
-	@JoinColumn(name="hike_report")
+	@JoinColumn(name="hike_report_id")
 	private HikeReport hikeReport;
 	
 	@ManyToOne
-	@JoinColumn(name="user")
+	@JoinColumn(name="user_id")
 	private User userId;
 	
 	@CreationTimestamp
+	@Column(name="create_date")
 	private LocalDateTime createDate;
 	
-	@Column(name="reply_to_date")
-	private int replyToId;
+//	@Column(name="reply_to_id")
+//	private int replyToId;
 
 	public GroupHikeComment() {
 		super();
@@ -83,17 +84,25 @@ public class GroupHikeComment {
 		this.createDate = createDate;
 	}
 
-	public int getReplyToId() {
-		return replyToId;
-	}
+//	public int getReplyToId() {
+//		return replyToId;
+//	}
+//
+//	public void setReplyToId(int replyToId) {
+//		this.replyToId = replyToId;
+//	}
 
-	public void setReplyToId(int replyToId) {
-		this.replyToId = replyToId;
+	
+	
+	@Override
+	public String toString() {
+		return "GroupHikeComment [id=" + id + ", commentBox=" + commentBox + ", hikeReport=" + hikeReport + ", userId="
+				+ userId + ", createDate=" + createDate + "]";
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(commentBox, createDate, hikeReport, id, replyToId, userId);
+		return Objects.hash(id);
 	}
 
 	@Override
@@ -105,15 +114,7 @@ public class GroupHikeComment {
 		if (getClass() != obj.getClass())
 			return false;
 		GroupHikeComment other = (GroupHikeComment) obj;
-		return Objects.equals(commentBox, other.commentBox) && Objects.equals(createDate, other.createDate)
-				&& hikeReport == other.hikeReport && id == other.id && replyToId == other.replyToId
-				&& Objects.equals(userId, other.userId);
-	}
-
-	@Override
-	public String toString() {
-		return "GroupHikeComment [id=" + id + ", commentBox=" + commentBox + ", hikeReport=" + hikeReport + ", userId="
-				+ userId + ", createDate=" + createDate + ", replyToId=" + replyToId + "]";
+		return id == other.id;
 	}
 	
 	
