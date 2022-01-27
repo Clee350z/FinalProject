@@ -16,6 +16,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 @Table(name = "group_hike")
@@ -51,6 +53,7 @@ public class GroupHike {
 	@JoinTable(name="group_hike_has_user", 
 	joinColumns=@JoinColumn(name="group_hike_id"),
 	inverseJoinColumns=@JoinColumn(name="user_id"))
+	@JsonIgnore
 	private List<User> users;
 	
 	

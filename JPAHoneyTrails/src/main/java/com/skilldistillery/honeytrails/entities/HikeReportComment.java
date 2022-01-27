@@ -19,6 +19,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
+//TODO: change name to hike_report_comment after schema change
 @Table(name="group_hike_comment")
 public class HikeReportComment {
 	

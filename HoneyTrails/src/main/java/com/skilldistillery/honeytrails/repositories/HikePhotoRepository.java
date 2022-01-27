@@ -2,8 +2,8 @@ package com.skilldistillery.honeytrails.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.skilldistillery.honeytrails.entities.HikeReport;
+import com.skilldistillery.honeytrails.entities.HikePhoto;
 
-public interface HikePhotoRepository extends JpaRepository<HikeReport, Integer> {
+public interface HikePhotoRepository extends JpaRepository<HikePhoto, Integer> {
 
 }
