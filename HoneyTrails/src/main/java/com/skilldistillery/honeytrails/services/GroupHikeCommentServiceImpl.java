@@ -19,13 +19,19 @@ public class GroupHikeCommentServiceImpl implements GroupHikeCommentService {
 	@Autowired
 	private GroupHikeRepository ghRepo;
 	
+//	@Override
+//	public List<HikeReportComment> getAllGroupHikeCommentsByGroupHikeId(int groupHikeId) {
+//		if(!ghRepo.existsById(groupHikeId)) {
+//			return null;
+//		}
+//		return ghcRepo.findByGroupHike_Id(groupHikeId);
+//		
+//	}
+	
 	@Override
 	public List<HikeReportComment> getAllGroupHikeCommentsByGroupHikeId(int groupHikeId) {
-		if(!ghRepo.existsById(groupHikeId)) {
-			return null;
-		}
-		return ghcRepo.findByGroupHike_Id(groupHikeId);
-		
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
@@ -56,5 +62,6 @@ public class GroupHikeCommentServiceImpl implements GroupHikeCommentService {
 	public void deleteGroupHikeCommentById(int groupHikeCommentId) {
 		ghcRepo.deleteById(groupHikeCommentId);
 	}
+
 
 }
