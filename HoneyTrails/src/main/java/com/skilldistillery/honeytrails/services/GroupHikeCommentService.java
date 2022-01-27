@@ -2,19 +2,19 @@ package com.skilldistillery.honeytrails.services;
 
 import java.util.List;
 
-import com.skilldistillery.honeytrails.entities.HikeReportComment;
+import com.skilldistillery.honeytrails.entities.GroupHikeComment;
 
 public interface GroupHikeCommentService {
 	
-	List<HikeReportComment> getAllGroupHikeCommentsByGroupHikeId(int groupHikeId);
+	List<GroupHikeComment> getAllGroupHikeCommentsByGroupHikeId(int groupHikeId);
 	
-	HikeReportComment getGroupHikeCommentById(int groupHikeCommentId);
+	GroupHikeComment getGroupHikeCommentById(int groupHikeCommentId);
 	
-//	HikeReportComment getGroupHikeCommentByUsername(String username);
+//	GroupHikeComment getGroupHikeCommentByUsername(String username);
 	
-	HikeReportComment addGroupHikeComment(HikeReportComment hikeReportComment);
+	GroupHikeComment addGroupHikeComment(GroupHikeComment groupHikeComment);
 	
-	HikeReportComment updateGroupHikeCommentById(int groupHikeCommentId);
+	GroupHikeComment updateGroupHikeCommentById(int groupHikeCommentId);
 	
 	void deleteGroupHikeCommentById(int groupHikeCommentId);
 

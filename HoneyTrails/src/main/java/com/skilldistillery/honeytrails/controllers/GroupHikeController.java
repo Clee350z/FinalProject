@@ -47,7 +47,7 @@ public class GroupHikeController {
 		return groupHike;
 	}
 	
-	@GetMapping("grouphikes/{eventname}")
+	@GetMapping("grouphikes/eventname/{eventname}")
 	public GroupHike groupHikeByEventName(@PathVariable String eventname, HttpServletResponse res) {
 		GroupHike groupHikeByName = ghServ.getGroupHikeByEventName(eventname);
 		if(groupHikeByName == null) {
