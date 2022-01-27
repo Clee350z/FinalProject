@@ -9,7 +9,7 @@ import com.skilldistillery.honeytrails.entities.HikeReportComment;
 public interface GroupHikeCommentRepository extends JpaRepository<HikeReportComment, Integer>{
 
 	
-	List<HikeReportComment> findByGroupHike_Id(int groupHikeId);
+//	List<HikeReportComment> findByGroupHike_Id(int groupHikeId);
 	
 	HikeReportComment findByUser_Username(String username);
 }

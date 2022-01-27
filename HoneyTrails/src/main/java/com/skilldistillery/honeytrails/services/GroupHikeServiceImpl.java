@@ -41,7 +41,6 @@ public class GroupHikeServiceImpl implements GroupHikeService {
 
 	@Override
 	public GroupHike updateGroupHikeById(int groupHikeId) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

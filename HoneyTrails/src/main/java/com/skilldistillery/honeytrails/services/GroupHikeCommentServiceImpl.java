@@ -49,7 +49,6 @@ public class GroupHikeCommentServiceImpl implements GroupHikeCommentService {
 
 	@Override
 	public HikeReportComment updateGroupHikeCommentById(int groupHikeCommentId) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
