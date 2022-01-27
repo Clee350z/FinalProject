@@ -15,11 +15,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class UserTest {
-	
+class TrailTest {
+
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private User user;
+	private Trail trail;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -34,54 +34,51 @@ class UserTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		user = em.find(User.class, 1);
+		trail = em.find(Trail.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		user = null;
+		trail = null;
 	}
 
 	@Test
 	@DisplayName("test mappings to entity")
 	void test1() {
-		assertNotNull(user);
-		assertEquals("admin", user.getUsername());
-		assertEquals("Honeycomb", user.getFirstName());
+		assertNotNull(trail);
+		assertEquals("Bear Peak Summit Hike", trail.getName());
+		assertEquals("Colorado", trail.getLocation());
+		assertEquals(8.40, trail.getLengthMiles());
 	}
+	
 	@Test
-	@DisplayName("test User to Hike Report mappings to entity")
+	@DisplayName("test trail to difficulty mapping")
 	void test2() {
-		user = em.find(User.class, 2);
-		assertNotNull(user);
-		assertTrue(user.getHikeReports().size() > 0);
+		assertNotNull(trail);
+		assertEquals("Strenuous", trail.getDifficulty().getName());
 	}
-	
 	@Test
-	@DisplayName("test user to comment mapping")
+	@DisplayName("test Trail to Hike Report mapping")
 	void test3() {
-		user = em.find(User.class, 2);
-		assertTrue(user.getComments().size() >= 0);
+		trail = em.find(Trail.class, 2);
+		assertNotNull(trail);
+		assertTrue(trail.getHikeReports().size() > 0);
+//		assertEquals(1, trail.getHikeReports().size());
 	}
 	
 	@Test
-	@DisplayName("test user to favorite trails mapping")
+	@DisplayName("test tail to users favorite")
 	void test4() {
-		user = em.find(User.class, 2);
-		assertTrue(user.getFavoriteTrails().size() >= 0);
+		assertNotNull(trail);
+		assertTrue(trail.getUsersFavorite().size() >= 0);
 	}
 	
 	@Test
-	@DisplayName("test user to planned trails mapping")
+	@DisplayName("test tail to users planned")
 	void test5() {
-		user = em.find(User.class, 2);
-		assertTrue(user.getPlannedHikes().size() >= 0);
-	}
-	@Test
-	@DisplayName("test user to address mapping")
-	void test6() {
-		assertEquals("International", user.getAddress().getStreet());
+		assertNotNull(trail);
+		assertTrue(trail.getUsersPlanned().size() >= 0);
 	}
 
 }

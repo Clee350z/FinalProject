@@ -15,11 +15,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class UserTest {
-	
+class GroupHikeTest {
+
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private User user;
+	private GroupHike gh;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -34,54 +34,41 @@ class UserTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		user = em.find(User.class, 1);
+		gh = em.find(GroupHike.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		user = null;
+		gh = null;
 	}
 
 	@Test
 	@DisplayName("test mappings to entity")
 	void test1() {
-		assertNotNull(user);
-		assertEquals("admin", user.getUsername());
-		assertEquals("Honeycomb", user.getFirstName());
+		assertNotNull(gh);
+		assertEquals("Trail Fun Time", gh.getEventName());
 	}
+	
 	@Test
-	@DisplayName("test User to Hike Report mappings to entity")
+	@DisplayName("test group hike to trail mapping")
 	void test2() {
-		user = em.find(User.class, 2);
-		assertNotNull(user);
-		assertTrue(user.getHikeReports().size() > 0);
+		assertNotNull(gh);
+		assertEquals("Iwakuni Castle Trail", gh.getTrail().getName());
 	}
 	
 	@Test
-	@DisplayName("test user to comment mapping")
+	@DisplayName("test group hike to created user")
 	void test3() {
-		user = em.find(User.class, 2);
-		assertTrue(user.getComments().size() >= 0);
+		assertNotNull(gh);
+		assertEquals("tester", gh.getCreatedByUser().getUsername());
 	}
 	
 	@Test
-	@DisplayName("test user to favorite trails mapping")
+	@DisplayName("test grouphike to list of users participating")
 	void test4() {
-		user = em.find(User.class, 2);
-		assertTrue(user.getFavoriteTrails().size() >= 0);
-	}
-	
-	@Test
-	@DisplayName("test user to planned trails mapping")
-	void test5() {
-		user = em.find(User.class, 2);
-		assertTrue(user.getPlannedHikes().size() >= 0);
-	}
-	@Test
-	@DisplayName("test user to address mapping")
-	void test6() {
-		assertEquals("International", user.getAddress().getStreet());
+		assertNotNull(gh);
+		assertTrue(gh.getUsers().size() >= 0);
 	}
 
 }

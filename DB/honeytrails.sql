@@ -428,6 +428,8 @@ COMMIT;
 START TRANSACTION;
 USE `honeytrailsdb`;
 INSERT INTO `hike_report` (`id`, `hike_title`, `trail_id`, `condition_type_id`, `report`, `date_created`, `hiked_date`, `user_id`, `rating`) VALUES (1, 'Slightly damp trail', 2, 2, 'The ground was slightly wet, a bit slippery. Exercise ccaution during hikes within the next 24 hours withstanding no more rain.', '2021-01-01', '2021-12-15', 2, 3);
+INSERT INTO `hike_report` (`id`, `hike_title`, `trail_id`, `condition_type_id`, `report`, `date_created`, `hiked_date`, `user_id`, `rating`) VALUES (2, 'All clear', 2, 1, 'No issues', '2022-01-01', '2021-12-30', 2, 3);
+INSERT INTO `hike_report` (`id`, `hike_title`, `trail_id`, `condition_type_id`, `report`, `date_created`, `hiked_date`, `user_id`, `rating`) VALUES (3, 'All clear', 3, 1, 'No issues', '2022-01-10', '2022-01-01', 2, 3);
 
 COMMIT;
 
@@ -438,6 +440,7 @@ COMMIT;
 START TRANSACTION;
 USE `honeytrailsdb`;
 INSERT INTO `hike_photo` (`id`, `hike_report_id`, `image_url`, `title`, `description`) VALUES (1, 1, 'https://files.slack.com/files-pri/T052X7BAZ-F02V6H7H5ML/image_from_ios.jpg', 'Small Waterfall', 'Small waterfall about 10 mins to the east of the trail.');
+INSERT INTO `hike_photo` (`id`, `hike_report_id`, `image_url`, `title`, `description`) VALUES (2, 1, 'https://i0.wp.com/backpackingroutes.com/wp-content/uploads/2021/01/Colorado-Trail-2.png?resize=750%2C438', 'This View', 'This view is crazy! Having the best day!');
 
 COMMIT;
 
@@ -448,6 +451,16 @@ COMMIT;
 START TRANSACTION;
 USE `honeytrailsdb`;
 INSERT INTO `group_hike_has_user` (`group_hike_id`, `user_id`) VALUES (1, 1);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `group_hike_comment`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `honeytrailsdb`;
+INSERT INTO `group_hike_comment` (`id`, `comment_box`, `hike_report_id`, `user_id`, `create_date`, `reply_to_id`) VALUES (1, 'This was such a great group hike!', 1, 2, '2021-01-15 15:15:15', NULL);
 
 COMMIT;
 

@@ -15,11 +15,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class UserTest {
+class DifficultyTest {
 	
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private User user;
+	private Difficulty dif;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -34,54 +34,27 @@ class UserTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		user = em.find(User.class, 1);
+		dif = em.find(Difficulty.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		user = null;
+		dif = null;
 	}
 
 	@Test
-	@DisplayName("test mappings to entity")
+	@DisplayName("test mapping to entity")
 	void test1() {
-		assertNotNull(user);
-		assertEquals("admin", user.getUsername());
-		assertEquals("Honeycomb", user.getFirstName());
+		assertNotNull(dif);
+		assertEquals("Easy", dif.getName());
 	}
+	
 	@Test
-	@DisplayName("test User to Hike Report mappings to entity")
+	@DisplayName("test difficulty to trail mapping")
 	void test2() {
-		user = em.find(User.class, 2);
-		assertNotNull(user);
-		assertTrue(user.getHikeReports().size() > 0);
-	}
-	
-	@Test
-	@DisplayName("test user to comment mapping")
-	void test3() {
-		user = em.find(User.class, 2);
-		assertTrue(user.getComments().size() >= 0);
-	}
-	
-	@Test
-	@DisplayName("test user to favorite trails mapping")
-	void test4() {
-		user = em.find(User.class, 2);
-		assertTrue(user.getFavoriteTrails().size() >= 0);
-	}
-	
-	@Test
-	@DisplayName("test user to planned trails mapping")
-	void test5() {
-		user = em.find(User.class, 2);
-		assertTrue(user.getPlannedHikes().size() >= 0);
-	}
-	@Test
-	@DisplayName("test user to address mapping")
-	void test6() {
-		assertEquals("International", user.getAddress().getStreet());
+		assertNotNull(dif);
+		assertTrue(dif.getTrails().size() >= 0);
 	}
 
 }
