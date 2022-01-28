@@ -25,6 +25,10 @@ public class TrailCommentController {
 
 	@Autowired
 	private TrailCommentService tcSvc;
+	
+	/*---------------------------------------------------------------------
+	 * get all trail comments
+	 ---------------------------------------------------------------------*/
 
 	@GetMapping("trailcomments")
 	public List<TrailComment> getAllComments(HttpServletResponse res) {
@@ -36,6 +40,10 @@ public class TrailCommentController {
 		}
 		return trailComments;
 	}
+	
+	/*---------------------------------------------------------------------
+	 * get trail comment by id
+	 ---------------------------------------------------------------------*/
 
 	@GetMapping("trails/{trailId}/trailcomments/{commentId}")
 	public TrailComment getCommentById(@PathVariable int commentId, HttpServletResponse res) {
@@ -45,6 +53,10 @@ public class TrailCommentController {
 		}
 		return trailComment;
 	}
+	
+	/*---------------------------------------------------------------------
+	 * create a trail comment
+	 ---------------------------------------------------------------------*/
 
 	@PostMapping("trails/{trailId}/comments")
 	public TrailComment addTrailComment(@PathVariable int trailId, @RequestBody TrailComment trailComment, HttpServletResponse res,
@@ -63,6 +75,10 @@ public class TrailCommentController {
 		}
 		return trailComment;
 	}
+	
+	/*---------------------------------------------------------------------
+	 * edit a trail comment
+	 ---------------------------------------------------------------------*/
 
 	@PutMapping("trails/{trailId}/comments/{commentId}")
 	public TrailComment editTrailComment(@PathVariable int commentId, @RequestBody TrailComment trailComment,
@@ -79,6 +95,10 @@ public class TrailCommentController {
 		}
 		return trailComment;
 	}
+	
+	/*---------------------------------------------------------------------
+	 * delete a trail comment
+	 ---------------------------------------------------------------------*/
 
 	@DeleteMapping("trails/{trailId}/comments/{commentId}")
 	public void deleteTrailComment(@PathVariable int commentId, HttpServletResponse res, Principal principal) {
