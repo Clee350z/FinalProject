@@ -52,7 +52,6 @@ public class Trail{
 	private List<User> usersPlanned;
 	
 	@OneToMany(mappedBy = "trail")
-	@JsonIgnore
 	private List<TrailComment> comments;
 	
 	@OneToMany(mappedBy = "trail")
