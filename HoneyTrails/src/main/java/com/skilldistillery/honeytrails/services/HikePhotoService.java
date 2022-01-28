@@ -6,7 +6,7 @@ import com.skilldistillery.honeytrails.entities.HikePhoto;
 
 public interface HikePhotoService {
 	
-	List<HikePhoto> allHikePhotos();
+	List<HikePhoto> allHikePhotos(int reportId);
 	
 	HikePhoto showPhoto(int photoId);
 	
