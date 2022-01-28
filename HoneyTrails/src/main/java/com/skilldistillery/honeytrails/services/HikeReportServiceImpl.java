@@ -1,7 +1,7 @@
 package com.skilldistillery.honeytrails.services;
 
-import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,6 +11,7 @@ import com.skilldistillery.honeytrails.entities.HikeReport;
 import com.skilldistillery.honeytrails.entities.Trail;
 import com.skilldistillery.honeytrails.entities.User;
 import com.skilldistillery.honeytrails.repositories.HikeReportRepository;
+import com.skilldistillery.honeytrails.repositories.TrailRepository;
 import com.skilldistillery.honeytrails.repositories.UserRepository;
 
 @Service
@@ -21,34 +22,26 @@ public class HikeReportServiceImpl implements HikeReportService {
 	
 	@Autowired
 	private UserRepository userRepo;
+	
+	@Autowired
+	private TrailRepository tRepo;
 
 	@Override
-	public List<HikeReport> allHikeRports() {
-		return hrRepo.findAll();
+	public Set<HikeReport> allHikeRports(String username) {
+		return hrRepo.findByUser_Username(username);
 	}
 
 	@Override
 	public HikeReport showReport(String username, int reportId) {
-		Optional<HikeReport> reportOpt = hrRepo.findById(reportId);
-		HikeReport report = null;
-		if (reportOpt.isPresent()) {
-			report = reportOpt.get();
-		}
-		return report;
+		return hrRepo.findByIdAndUser_Username(reportId, username);
 	}
 
 	@Override
-	public HikeReport createReport(String username, HikeReport report) {
+	public HikeReport createReport(String username, HikeReport report, int trailId) {
 		User user = userRepo.findByUsername(username);
-		if (report.getTrails() == null) {
-			Trail trail = new Trail();
-			trail.setId(1);
-			report.setTrails(trail);
-		}
-		if (report.getCondition() == null) {
-			Condition con = new Condition();
-			con.setId(1);
-			report.setCondition(con);
+		Optional<Trail> trail = tRepo.findById(trailId);
+		if(trail.isPresent()) {
+			report.setTrails(trail.get());
 		}
 		if (report.getUser() != null) {
 			report.setUser(user);
