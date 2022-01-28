@@ -48,7 +48,7 @@ public class TrailController {
 	public Trail getTrailById(@PathVariable int id, HttpServletResponse res) {
 		Trail trail = trailSvc.getTrailById(id);
 		if (trail == null) {
-			res.setStatus(400);
+			res.setStatus(404);
 		}
 		return trail;
 	}

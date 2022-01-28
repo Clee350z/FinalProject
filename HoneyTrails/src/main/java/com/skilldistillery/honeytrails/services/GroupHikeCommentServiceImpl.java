@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.skilldistillery.honeytrails.entities.GroupHike;
 import com.skilldistillery.honeytrails.entities.GroupHikeComment;
 import com.skilldistillery.honeytrails.entities.User;
 import com.skilldistillery.honeytrails.repositories.GroupHikeCommentRepository;
@@ -21,16 +22,7 @@ public class GroupHikeCommentServiceImpl implements GroupHikeCommentService {
 	private GroupHikeRepository ghRepo;
 
 	@Autowired
-	private UserRepository uRepo;
-
-//	@Override
-//	public List<GroupHikeComment> getAllGroupHikeCommentsByGroupHikeId(int groupHikeId) {
-//		if(!ghRepo.existsById(groupHikeId)) {
-//			return null;
-//		}
-//		return ghcRepo.findByGroupHike_Id(groupHikeId);
-//		
-//	}
+	private UserRepository uRepo; 
 
 	@Override
 	public List<GroupHikeComment> getAllGroupHikeComments() {
@@ -39,31 +31,31 @@ public class GroupHikeCommentServiceImpl implements GroupHikeCommentService {
 
 	@Override
 	public GroupHikeComment getGroupHikeCommentById(int groupHikeCommentId) {
-		GroupHikeComment comment = ghcRepo.findById(groupHikeCommentId).get();
-		if (comment != null) {
-			return comment;
+		if (ghcRepo.existsById(groupHikeCommentId)) {
+			return ghcRepo.findById(groupHikeCommentId).get();
 		}
 		return null;
 	}
 
 	@Override
-	public GroupHikeComment addGroupHikeComment(GroupHikeComment groupHikeComment, String username) {
+	public GroupHikeComment addGroupHikeComment(GroupHikeComment groupHikeComment, String username, int groupHikeId) {
+		GroupHike grpHike = ghRepo.findById(groupHikeId).get();
 		User user = uRepo.findByUsername(username);
-		groupHikeComment.setUserId(user);
-
+		groupHikeComment.setUser(user);
+		groupHikeComment.setGroupHike(grpHike);
 		return ghcRepo.saveAndFlush(groupHikeComment);
-
 	}
 
 	@Override
 	public GroupHikeComment updateGroupHikeCommentById(GroupHikeComment groupHikeComment, int groupHikeCommentId,
-			String username) {
+			String username, int groupHikeId) {
+		GroupHike grpHike = ghRepo.findById(groupHikeId).get();
 		User user = uRepo.findByUsername(username);
-		if (user == groupHikeComment.getUserId()) {
+		if (username.equals(groupHikeComment.getUser().getUsername())) {
 			if (ghcRepo.existsById(groupHikeCommentId)) {
-				if (groupHikeComment != null) {
-					return ghcRepo.saveAndFlush(groupHikeComment);
-				}
+				groupHikeComment.setUser(user);
+				groupHikeComment.setGroupHike(grpHike);
+				return ghcRepo.save(groupHikeComment);
 			}
 		}
 		return null;
@@ -72,7 +64,7 @@ public class GroupHikeCommentServiceImpl implements GroupHikeCommentService {
 	@Override
 	public void deleteGroupHikeCommentById(int groupHikeCommentId, String username) {
 		User user = uRepo.findByUsername(username);
-		if (user == ghcRepo.findById(groupHikeCommentId).get().getUserId()) {
+		if (user == ghcRepo.findById(groupHikeCommentId).get().getUser()) {
 			ghcRepo.deleteById(groupHikeCommentId);
 		}
 	}

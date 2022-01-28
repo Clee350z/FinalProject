@@ -45,11 +45,11 @@ public class TrailCommentController {
 	 * get trail comment by id
 	 ---------------------------------------------------------------------*/
 
-	@GetMapping("trails/{trailId}/trailcomments/{commentId}")
+	@GetMapping("trails/{trailId}/comments/{commentId}")
 	public TrailComment getCommentById(@PathVariable int commentId, HttpServletResponse res) {
 		TrailComment trailComment = tcSvc.show(commentId);
 		if (trailComment == null) {
-			res.setStatus(400);
+			res.setStatus(404);
 		}
 		return trailComment;
 	}

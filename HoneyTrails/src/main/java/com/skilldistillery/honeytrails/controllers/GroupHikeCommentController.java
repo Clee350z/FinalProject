@@ -40,20 +40,19 @@ public class GroupHikeCommentController {
 		return comments;
 	}
 	
-	@GetMapping("grouphikes/comments/{grouphikecommentid}")
+	@GetMapping("grouphikes/{grouphikesid}/comments/{grouphikecommentid}")
 	public GroupHikeComment getGHCById(@PathVariable int grouphikecommentid, HttpServletResponse res) {
 		GroupHikeComment ghc = ghcServ.getGroupHikeCommentById(grouphikecommentid);
 		if(ghc == null) {
 			res.setStatus(404);
-		} else {
-			res.setStatus(200);
-		}
-		return ghc;
+		} 
+			return ghc;
+		
 	}
 	
-	@PostMapping("grouphikes/comments")
-	public GroupHikeComment createGHC(@RequestBody GroupHikeComment ghc, HttpServletResponse res, Principal principal) {
-		GroupHikeComment newGHC = ghcServ.addGroupHikeComment(ghc, principal.getName());
+	@PostMapping("grouphikes/{grouphikesid}/comments")
+	public GroupHikeComment createGHC(@PathVariable int grouphikesid, @RequestBody GroupHikeComment ghc, HttpServletResponse res, Principal principal) {
+		GroupHikeComment newGHC = ghcServ.addGroupHikeComment(ghc, principal.getName(), grouphikesid);
 		if(newGHC == null) {
 			res.setStatus(400);
 		} else {
@@ -63,18 +62,20 @@ public class GroupHikeCommentController {
 		
 	}
 	
-	@PutMapping("grouphikes/comments/{grouhikecommentid}")
-	public GroupHikeComment updateGHC(@PathVariable int grouphikecommentid, @RequestBody GroupHikeComment ghc, HttpServletResponse res, Principal principal) {
-		GroupHikeComment updatedGHC = ghcServ.updateGroupHikeCommentById(ghc, grouphikecommentid, principal.getName());
+	@PutMapping("grouphikes/{grouphikeid}/comments/{grouphikecommentid}")
+	public GroupHikeComment updateGHC(@PathVariable int grouphikecommentid, @PathVariable int grouphikeid, @RequestBody GroupHikeComment ghc, HttpServletResponse res, Principal principal) {
+		GroupHikeComment updatedGHC = ghcServ.updateGroupHikeCommentById(ghc, grouphikecommentid, principal.getName(), grouphikeid);
 		if(updatedGHC != ghc) {
 			res.setStatus(200);
+			return updatedGHC;
 		} else {
 			res.setStatus(400);
+			
 		}
 		return updatedGHC;
 	}
 	
-	@DeleteMapping("grouphikes/comments/{grouphikecommentid}")
+	@DeleteMapping("grouphikes/{grouphikesid}/comments/{grouphikecommentid}")
 	public void deleteGHC(@PathVariable int grouphikecommentid, Principal principal) {
 		ghcServ.deleteGroupHikeCommentById(grouphikecommentid, principal.getName());
 	}

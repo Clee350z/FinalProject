@@ -9,4 +9,8 @@ public interface AddressService {
 	List<Address> allAddresses();
 
 	Address getAddressById(int addressId);
+
+	Address addAddress(Address address, String username, int userId);
+
+	Address updateAddressById(Address address, int addressId, String username);
 }

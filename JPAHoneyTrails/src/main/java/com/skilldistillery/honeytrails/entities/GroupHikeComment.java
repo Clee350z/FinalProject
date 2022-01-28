@@ -19,7 +19,6 @@ import org.hibernate.annotations.CreationTimestamp;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-//TODO: change name to hike_report_comment after schema change
 @Table(name="group_hike_comment")
 public class GroupHikeComment {
 	
@@ -31,13 +30,8 @@ public class GroupHikeComment {
 	private String commentBox;
 	
 	@ManyToOne
-	@JoinColumn(name="hike_report_id")
-	@JsonIgnore
-	private HikeReport hikeReport;
-	
-	@ManyToOne
 	@JoinColumn(name="user_id")
-	private User userId;
+	private User user;
 	
 	@CreationTimestamp
 	@Column(name="create_date")
@@ -45,15 +39,33 @@ public class GroupHikeComment {
 	
 	@ManyToOne
 	@JoinColumn(name="reply_to_id")
-	GroupHikeComment inReplyTo;
+	private GroupHikeComment inReplyTo;
+	
+	@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name = "group_hike_id")
+	private GroupHike groupHike;
 	
 	@OneToMany(mappedBy="inReplyTo")
 	@JsonIgnore
-	List<GroupHikeComment> replies;
+	private List<GroupHikeComment> replies;
+	
+	/*-----------------------------------------------------------------------------------------------------
+	 * 
+	 *       Constructor
+	 * 
+	 -----------------------------------------------------------------------------------------------------*/
+	
 
 	public GroupHikeComment() {
 		super();
 	}
+	
+	/*-----------------------------------------------------------------------------------------------------
+	 * 
+	 *       Getters & Setters
+	 * 
+	 -----------------------------------------------------------------------------------------------------*/
 
 	public int getId() {
 		return id;
@@ -69,22 +81,6 @@ public class GroupHikeComment {
 
 	public void setCommentBox(String commentBox) {
 		this.commentBox = commentBox;
-	}
-
-	public HikeReport getHikeReport() {
-		return hikeReport;
-	}
-
-	public void setHikeReport(HikeReport hikeReport) {
-		this.hikeReport = hikeReport;
-	}
-
-	public User getUserId() {
-		return userId;
-	}
-
-	public void setUserId(User userId) {
-		this.userId = userId;
 	}
 
 	public LocalDateTime getCreateDate() {
@@ -111,11 +107,27 @@ public class GroupHikeComment {
 		this.replies = replies;
 	}
 
-	@Override
-	public String toString() {
-		return "GroupHikeComment [id=" + id + ", commentBox=" + commentBox + ", hikeReport=" + hikeReport + ", userId="
-				+ userId + ", createDate=" + createDate + "]";
+	public User getUser() {
+		return user;
 	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public GroupHike getGroupHike() {
+		return groupHike;
+	}
+
+	public void setGroupHike(GroupHike groupHike) {
+		this.groupHike = groupHike;
+	}
+	
+	/*-----------------------------------------------------------------------------------------------------
+	 * 
+	 *      Hashcode & Equals
+	 * 
+	 -----------------------------------------------------------------------------------------------------*/
 
 	@Override
 	public int hashCode() {
