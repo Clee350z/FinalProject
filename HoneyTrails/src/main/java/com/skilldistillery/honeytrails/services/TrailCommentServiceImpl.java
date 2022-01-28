@@ -21,7 +21,7 @@ public class TrailCommentServiceImpl implements TrailCommentService {
 
 	@Autowired
 	UserRepository ur;
-	
+
 	@Autowired
 	TrailRepository tr;
 
@@ -51,19 +51,23 @@ public class TrailCommentServiceImpl implements TrailCommentService {
 	}
 
 	@Override
-	public TrailComment update(String username, int tcId, TrailComment tc) {
-		if(username.equals(tc.getUser().getUsername())) {
-			if(tcr.existsById(tcId)) {
-				return tcr.save(tc);
+	public TrailComment update(String username, int tcId, TrailComment tc, int trailId) {
+		if (username.equals(tc.getUser().getUsername())) {
+			Trail trail = tr.findById(trailId).get();
+			User user = ur.findByUsername(username);
+				if (tcr.existsById(tcId)) {
+					tc.setTrail(trail);
+					tc.setUser(user);
+					return tcr.save(tc);
+				}
 			}
-		}
 		return null;
 	}
 
 	@Override
 	public boolean delete(String username, int tcId) {
 		TrailComment tc = tcr.findById(tcId).get();
-		if(tc.getUser().getUsername().equals(username)) {
+		if (tc.getUser().getUsername().equals(username)) {
 			tcr.deleteById(tcId);
 			return true;
 		}
