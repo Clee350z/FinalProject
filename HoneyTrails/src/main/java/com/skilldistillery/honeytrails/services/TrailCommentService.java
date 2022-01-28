@@ -12,7 +12,7 @@ public interface TrailCommentService {
 	
 	public TrailComment show(int tcId);
 	
-	public TrailComment create(String username, TrailComment tc);
+	public TrailComment create(int trailId, String username, TrailComment tc);
 	
 	public TrailComment update(String username, int tcId, TrailComment tc);
 	

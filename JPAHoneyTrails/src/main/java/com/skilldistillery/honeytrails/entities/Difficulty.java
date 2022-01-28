@@ -22,8 +22,8 @@ public class Difficulty {
 
 	private String description;
 
-	@OneToMany(mappedBy = "difficulty")
 	@JsonIgnore
+	@OneToMany(mappedBy = "difficulty")
 	private List<Trail> trails;
 
 	/*-----------------------------------------------------------------------------------------------------

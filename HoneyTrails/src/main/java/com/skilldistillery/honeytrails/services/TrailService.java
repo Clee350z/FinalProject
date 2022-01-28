@@ -5,13 +5,13 @@ import java.util.List;
 import com.skilldistillery.honeytrails.entities.Trail;
 
 public interface TrailService {
-	public List<Trail> index();
+	public List<Trail> getAllTrails();
 	
-	public Trail show(int trailId);
+	public Trail getTrailById(int trailId);
 	
-	public Trail create(Trail trail);
+	public Trail addTrail(Trail trail);
 	
-	public Trail update(int trailId, Trail trail);
+	public Trail updateTrail(int trailId, Trail trail);
 	
-	public boolean destroy(int trailId);
+	public boolean deleteTrail(int trailId);
 }

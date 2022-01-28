@@ -3,10 +3,12 @@ package com.skilldistillery.honeytrails.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.skilldistillery.honeytrails.entities.Difficulty;
 import com.skilldistillery.honeytrails.repositories.DifficultyRepository;
 
+@Service
 public class DifficultyServiceImpl implements DifficultyService {
 
 	@Autowired
