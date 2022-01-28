@@ -7,5 +7,7 @@ import com.skilldistillery.honeytrails.entities.User;
 public interface UserRepository extends JpaRepository<User, Integer> {
 	
 	User findByUsername(String username);
+	
+	User queryById(int id);
 
 }
