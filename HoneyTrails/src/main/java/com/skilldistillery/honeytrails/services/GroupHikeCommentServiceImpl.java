@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.skilldistillery.honeytrails.entities.HikeReportComment;
+import com.skilldistillery.honeytrails.entities.GroupHikeComment;
 import com.skilldistillery.honeytrails.repositories.GroupHikeCommentRepository;
 import com.skilldistillery.honeytrails.repositories.GroupHikeRepository;
 
@@ -20,7 +20,7 @@ public class GroupHikeCommentServiceImpl implements GroupHikeCommentService {
 	private GroupHikeRepository ghRepo;
 	
 //	@Override
-//	public List<HikeReportComment> getAllGroupHikeCommentsByGroupHikeId(int groupHikeId) {
+//	public List<GroupHikeComment> getAllGroupHikeCommentsByGroupHikeId(int groupHikeId) {
 //		if(!ghRepo.existsById(groupHikeId)) {
 //			return null;
 //		}
@@ -29,14 +29,14 @@ public class GroupHikeCommentServiceImpl implements GroupHikeCommentService {
 //	}
 	
 	@Override
-	public List<HikeReportComment> getAllGroupHikeCommentsByGroupHikeId(int groupHikeId) {
+	public List<GroupHikeComment> getAllGroupHikeCommentsByGroupHikeId(int groupHikeId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public HikeReportComment getGroupHikeCommentById(int groupHikeCommentId) {
-		Optional<HikeReportComment> commentOpt = ghcRepo.findById(groupHikeCommentId);
+	public GroupHikeComment getGroupHikeCommentById(int groupHikeCommentId) {
+		Optional<GroupHikeComment> commentOpt = ghcRepo.findById(groupHikeCommentId);
 		if(commentOpt.isPresent()) {
 			return commentOpt.get();
 		}
@@ -44,17 +44,17 @@ public class GroupHikeCommentServiceImpl implements GroupHikeCommentService {
 	}
 
 //	@Override
-//	public HikeReportComment getGroupHikeCommentByUsername(String username) {
+//	public GroupHikeComment getGroupHikeCommentByUsername(String username) {
 //		return ghcRepo.findByUser_Username(username);
 //	}
 
 	@Override
-	public HikeReportComment addGroupHikeComment(HikeReportComment hikeReportComment) {
-		return ghcRepo.save(hikeReportComment);
+	public GroupHikeComment addGroupHikeComment(GroupHikeComment groupHikeComment) {
+		return ghcRepo.save(groupHikeComment);
 	}
 
 	@Override
-	public HikeReportComment updateGroupHikeCommentById(int groupHikeCommentId) {
+	public GroupHikeComment updateGroupHikeCommentById(int groupHikeCommentId) {
 		return null;
 	}
 

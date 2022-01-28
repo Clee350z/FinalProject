@@ -10,12 +10,12 @@ public interface GroupHikeService {
 	
 	GroupHike getGroupHikeById(int groupHikeId);
 	
-	GroupHike getGroupHikeByTitle(String groupHikeTitle);
+	GroupHike getGroupHikeByEventName(String groupHikeEventName);
 	
-	GroupHike addGroupHike(GroupHike groupHike);
+	GroupHike addGroupHike(GroupHike groupHike, String username, int trailId);
 	
-	GroupHike updateGroupHikeById(int groupHikeId);
+	GroupHike updateGroupHikeById(GroupHike groupHike, int groupHikeId, String username);
 	
-	void deleteGroupHikeById(int groupHikeId);
+	void deleteGroupHikeById(int groupHikeId, String username);
 
 }
