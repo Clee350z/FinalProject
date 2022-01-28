@@ -12,9 +12,9 @@ public interface GroupHikeCommentService {
 	
 //	GroupHikeComment getGroupHikeCommentByUsername(String username);
 	
-	GroupHikeComment addGroupHikeComment(GroupHikeComment groupHikeComment, String username);
+	GroupHikeComment addGroupHikeComment(GroupHikeComment groupHikeComment, String username, int groupHikeId);
 	
-	GroupHikeComment updateGroupHikeCommentById(GroupHikeComment groupHikeComment, int groupHikeCommentId, String username);
+	GroupHikeComment updateGroupHikeCommentById(GroupHikeComment groupHikeComment, int groupHikeCommentId, String username, int groupHikeId);
 	
 	void deleteGroupHikeCommentById(int groupHikeCommentId, String username);
 

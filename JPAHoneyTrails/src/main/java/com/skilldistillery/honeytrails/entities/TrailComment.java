@@ -31,7 +31,7 @@ public class TrailComment {
 	@Column(name = "time_posted")
 	private LocalDateTime timePosted;
 	
-	@JsonIgnore
+	
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;

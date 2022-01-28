@@ -21,7 +21,10 @@ public class TrailServiceImpl implements TrailService {
 
 	@Override
 	public Trail getTrailById(int trailId) {
-		return tr.findById(trailId).get();
+		if (tr.existsById(trailId)) {
+			return tr.findById(trailId).get();
+		}
+		return null;
 	}
 
 	@Override
