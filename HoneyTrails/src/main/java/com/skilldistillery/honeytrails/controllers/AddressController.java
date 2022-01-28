@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.honeytrails.entities.Address;
-import com.skilldistillery.honeytrails.entities.GroupHike;
 import com.skilldistillery.honeytrails.services.AddressService;
 
 @RestController

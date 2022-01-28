@@ -40,7 +40,6 @@ public class AddressServiceImpl implements AddressService{
 	@Override
 	public Address addAddress(Address address, String username, int userId) {
 		Optional<User> user = userRepo.findById(userId);
-		
 		if (user.isPresent()) {			
 			return addressRepo.saveAndFlush(address);
 		}
