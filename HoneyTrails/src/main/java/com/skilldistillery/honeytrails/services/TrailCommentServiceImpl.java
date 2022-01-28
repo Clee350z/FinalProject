@@ -32,8 +32,10 @@ public class TrailCommentServiceImpl implements TrailCommentService {
 
 	@Override
 	public TrailComment show(int tcId) {
-		TrailComment tc = tcr.findById(tcId).get();
-		return tc;
+		if (tcr.existsById(tcId)) {
+			return tcr.findById(tcId).get();
+		}
+		return null;
 	}
 
 	@Override

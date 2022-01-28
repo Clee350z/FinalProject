@@ -41,6 +41,7 @@ public class GroupHikeComment {
 	@JoinColumn(name="reply_to_id")
 	private GroupHikeComment inReplyTo;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "group_hike_id")
 	private GroupHike groupHike;
