@@ -1,6 +1,7 @@
 package com.skilldistillery.honeytrails.controllers;
 
-import java.util.List;
+import java.security.Principal;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,23 +25,23 @@ public class HikeReportController {
 	private HikeReportService hkSer;
 	
 	@GetMapping("hikes")
-	public List<HikeReport> index(){
-		return hkSer.allHikeRports();
+	public Set<HikeReport> index(HttpServletRequest req, HttpServletResponse res, Principal principal){
+		return hkSer.allHikeRports(principal.getName());
 	}
 	
 	@GetMapping("hikes/{reportId}")
-	public HikeReport showReport(@PathVariable int reportId, HttpServletResponse res, String username) {
-		HikeReport report = hkSer.showReport(username, reportId);
+	public HikeReport showReport(@PathVariable int reportId, HttpServletResponse res, Principal principal) {
+		HikeReport report = hkSer.showReport(principal.getName(), reportId);
 		if(report == null) {
 			res.setStatus(404);
 		}
 		return report;
 	}
 	
-	@PostMapping("hikes")
-	public HikeReport addReport(@RequestBody HikeReport report, String username, HttpServletResponse res, HttpServletRequest req) {
+	@PostMapping("trails/{trailId}/hikes")
+	public HikeReport addReport(@RequestBody HikeReport report, Principal principal, HttpServletResponse res, HttpServletRequest req, @PathVariable int trailId) {
 		try {
-			hkSer.createReport(username, report);
+			hkSer.createReport(principal.getName(), report, trailId);
 			res.setStatus(201);
 			StringBuffer url = req.getRequestURL();
 			url.append("/").append(report.getId());
@@ -54,9 +55,9 @@ public class HikeReportController {
 		return report;
 	}
 	
-	public HikeReport updateReport(@PathVariable int reportId, @RequestBody HikeReport report, String username, HttpServletResponse res, HttpServletRequest req ) {
+	public HikeReport updateReport(@PathVariable int reportId, @RequestBody HikeReport report, Principal principal, HttpServletResponse res, HttpServletRequest req ) {
 		try {
-			report = hkSer.updateReport(username, reportId, report);
+			report = hkSer.updateReport(principal.getName(), reportId, report);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

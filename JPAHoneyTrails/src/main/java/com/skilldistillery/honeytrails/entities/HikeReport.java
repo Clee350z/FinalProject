@@ -43,17 +43,17 @@ public class HikeReport {
 
 	@ManyToOne
 	@JoinColumn(name = "condition_type_id")
-	@JsonIgnore 
+//	@JsonIgnore 
 	private Condition condition;
 	
 	@ManyToOne
 	@JoinColumn(name="trail_id")
-	@JsonIgnore
+//	@JsonIgnore
 	private Trail trails;
 	
 	@ManyToOne
 	@JoinColumn(name="user_id")
-	@JsonIgnore
+//	@JsonIgnore
 	private User user;
 	
 	@OneToMany(mappedBy = "hikeReport")
