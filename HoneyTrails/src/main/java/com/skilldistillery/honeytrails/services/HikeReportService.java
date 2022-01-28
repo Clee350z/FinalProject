@@ -8,12 +8,12 @@ public interface HikeReportService {
 	
 	List<HikeReport> allHikeRports();
 	
-	HikeReport showReport(int reportId);
+	HikeReport showReport(String username, int reportId);
 	
-	HikeReport createReport(HikeReport report);
+	HikeReport createReport(String username, HikeReport report);
 	
-	HikeReport updateReport(int reportId, HikeReport report);
+	HikeReport updateReport(String username, int reportId, HikeReport report);
 	
-	boolean delete(int reportId);
+	boolean delete(String username, int reportId);
 
 }
