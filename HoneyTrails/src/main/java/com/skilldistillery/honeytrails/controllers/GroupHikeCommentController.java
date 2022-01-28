@@ -50,7 +50,7 @@ public class GroupHikeCommentController {
 		
 	}
 	
-	@PostMapping("grouphikes/{grouphikesid}/comments/")
+	@PostMapping("grouphikes/{grouphikesid}/comments")
 	public GroupHikeComment createGHC(@PathVariable int grouphikesid, @RequestBody GroupHikeComment ghc, HttpServletResponse res, Principal principal) {
 		GroupHikeComment newGHC = ghcServ.addGroupHikeComment(ghc, principal.getName(), grouphikesid);
 		if(newGHC == null) {
