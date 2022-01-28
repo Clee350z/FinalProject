@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -25,12 +27,13 @@ public class TrailComment {
 	@Column(name = "comment_body")
 	private String commentBody;
 	
+	@CreationTimestamp
 	@Column(name = "time_posted")
 	private LocalDateTime timePosted;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "user_id")
-	@JsonIgnore
 	private User user;
 	
 	@JsonIgnore

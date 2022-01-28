@@ -7,9 +7,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -35,20 +37,20 @@ public class TrailCommentController {
 		return trailComments;
 	}
 
-	@GetMapping("trailcomments/{id}")
-	public TrailComment getCommentById(@PathVariable int id, HttpServletResponse res) {
-		TrailComment trailComment = tcSvc.show(id);
+	@GetMapping("trails/{trailId}/trailcomments/{commentId}")
+	public TrailComment getCommentById(@PathVariable int commentId, HttpServletResponse res) {
+		TrailComment trailComment = tcSvc.show(commentId);
 		if (trailComment == null) {
 			res.setStatus(400);
 		}
 		return trailComment;
 	}
 
-	@PostMapping("trailcomments")
-	public TrailComment addTrailComment(@RequestBody TrailComment trailComment, HttpServletResponse res,
+	@PostMapping("trails/{trailId}/comments")
+	public TrailComment addTrailComment(@PathVariable int trailId, @RequestBody TrailComment trailComment, HttpServletResponse res,
 			HttpServletRequest req, Principal principal) {
 		try {
-			tcSvc.create(principal.getName(), trailComment);
+			tcSvc.create(trailId, principal.getName(), trailComment);
 			res.setStatus(201);
 			StringBuffer url = req.getRequestURL();
 			url.append("/").append(trailComment.getTrail().getId());
@@ -60,5 +62,35 @@ public class TrailCommentController {
 			trailComment = null;
 		}
 		return trailComment;
+	}
+
+	@PutMapping("trails/{trailId}/comments/{commentId}")
+	public TrailComment editTrailComment(@PathVariable int commentId, @RequestBody TrailComment trailComment,
+			HttpServletResponse res, Principal principal) {
+		try {
+			if (tcSvc.show(commentId) != null) {
+				tcSvc.update(principal.getName(), commentId, trailComment);
+			} else {
+				res.setStatus(404);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.setStatus(400);
+		}
+		return trailComment;
+	}
+
+	@DeleteMapping("trails/{trailId}/comments/{commentId}")
+	public void deleteTrailComment(@PathVariable int commentId, HttpServletResponse res, Principal principal) {
+		try {
+			if (tcSvc.delete(principal.getName(), commentId)) {
+				res.setStatus(204);
+			} else {
+				res.setStatus(404);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.setStatus(400);
+		}
 	}
 }

@@ -6,9 +6,11 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.skilldistillery.honeytrails.entities.Trail;
 import com.skilldistillery.honeytrails.entities.TrailComment;
 import com.skilldistillery.honeytrails.entities.User;
 import com.skilldistillery.honeytrails.repositories.TrailCommentRepository;
+import com.skilldistillery.honeytrails.repositories.TrailRepository;
 import com.skilldistillery.honeytrails.repositories.UserRepository;
 
 @Service
@@ -19,6 +21,9 @@ public class TrailCommentServiceImpl implements TrailCommentService {
 
 	@Autowired
 	UserRepository ur;
+	
+	@Autowired
+	TrailRepository tr;
 
 	@Override
 	public List<TrailComment> index() {
@@ -32,10 +37,12 @@ public class TrailCommentServiceImpl implements TrailCommentService {
 	}
 
 	@Override
-	public TrailComment create(String username, TrailComment tc) {
+	public TrailComment create(int trailId, String username, TrailComment tc) {
 		User user = ur.findByUsername(username);
-		if (user != null) {
+		Trail trail = tr.findById(trailId).get();
+		if (user != null && trail != null) {
 			tc.setUser(user);
+			tc.setTrail(trail);
 			return tcr.saveAndFlush(tc);
 		}
 		return null;
