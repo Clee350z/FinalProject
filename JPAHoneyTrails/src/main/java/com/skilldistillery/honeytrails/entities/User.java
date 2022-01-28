@@ -86,6 +86,10 @@ public class User {
 	@JsonIgnore
 	private List<GroupHikeComment> groupHikeComments;
 	
+	@OneToMany(mappedBy = "userId")
+	@JsonIgnore
+	private List<HikeReportComment> hikeReportComments;
+	
 
 	
 	
@@ -231,6 +235,18 @@ public class User {
 
 	public void setGroupHikeComments(List<GroupHikeComment> groupHikeComments) {
 		this.groupHikeComments = groupHikeComments;
+	}
+
+	public List<HikeReportComment> getHikeReportComments() {
+		return hikeReportComments;
+	}
+
+	public void setHikeReportComments(List<HikeReportComment> hikeReportComments) {
+		this.hikeReportComments = hikeReportComments;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
 	}
 
 	/*-----------------------------------------------------------------------------------------------------

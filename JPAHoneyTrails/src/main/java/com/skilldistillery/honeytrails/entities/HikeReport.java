@@ -60,6 +60,10 @@ public class HikeReport {
 	@JsonIgnore
 	private List<HikePhoto> hikePhoto;
 	
+	@OneToMany(mappedBy = "hikeReportId")
+	@JsonIgnore
+	private List<HikeReportComment> hikeComments;
+	
 //	@OneToMany(mappedBy = "hikeReport")
 //	@JsonIgnore
 //	private List<GroupHikeComment> hikeReportComments;
@@ -155,6 +159,14 @@ public class HikeReport {
 //	public void setGroupHikeComments(List<GroupHikeComment> hikeReportComments) {
 //		this.hikeReportComments = hikeReportComments;
 //	}
+
+	public List<HikeReportComment> getHikeComments() {
+		return hikeComments;
+	}
+
+	public void setHikeComments(List<HikeReportComment> hikeComments) {
+		this.hikeComments = hikeComments;
+	}
 
 	@Override
 	public int hashCode() {

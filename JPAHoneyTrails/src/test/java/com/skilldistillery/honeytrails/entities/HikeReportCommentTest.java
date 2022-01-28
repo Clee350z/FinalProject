@@ -41,16 +41,27 @@ class HikeReportCommentTest {
 	}
 
 	
-	/*
-	 *  +---------------------+
-		| hike_title          |
-		+---------------------+
-		| Slightly damp trail |
-		+---------------------+
-	 */
 	@Test
 	@DisplayName("test Hike Report Comment mappings to entity")
 	void test1() {
+		assertNotNull(report);
+		assertEquals(2021, report.getCreateDate().getYear());
+	}
+	
+	
+	@Test
+	@DisplayName("test Hike Report Comment to Hike Report mappings to entity")
+	void test2() {
+		assertNotNull(report);
+		assertEquals("Slightly damp trail", report.getHikeReportId().getHikeTitle());
+		
+	}
+	
+	@Test
+	@DisplayName("test Hike Report Comment to User mappings to entity")
+	void test3() {
+		assertNotNull(report);
+		assertEquals("tester", report.getUserId().getUsername());
 	}
 	
 

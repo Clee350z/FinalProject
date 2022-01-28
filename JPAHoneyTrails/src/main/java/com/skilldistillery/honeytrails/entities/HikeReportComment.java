@@ -1,6 +1,7 @@
 package com.skilldistillery.honeytrails.entities;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -8,22 +9,40 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="hike_report_comment")
+@Table(name = "hike_report_comment")
 public class HikeReportComment {
-	
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
-	@Column(name="comment_box")
+
+	@Column(name = "comment_box")
 	private String commentBox;
-	
-	@Column(name="create_date")
+
+	@Column(name = "create_date")
 	private LocalDateTime createDate;
+	
+	@ManyToOne
+	@JoinColumn(name="hike_report_id")
+	private HikeReport hikeReportId;
+	
+	@ManyToOne
+	@JoinColumn(name="user_id")
+	private User userId;
+	
+	
+	@ManyToOne
+	@JoinColumn(name="reply_to_id")
+	private HikeReportComment inReplyTo;
+	
+	@OneToMany(mappedBy = "inReplyTo")
+	List<HikeReportComment> replies;
 
 	public HikeReportComment() {
 		super();
@@ -53,6 +72,38 @@ public class HikeReportComment {
 		this.createDate = createDate;
 	}
 
+	public HikeReport getHikeReportId() {
+		return hikeReportId;
+	}
+
+	public void setHikeReportId(HikeReport hikeReportId) {
+		this.hikeReportId = hikeReportId;
+	}
+
+	public User getUserId() {
+		return userId;
+	}
+
+	public void setUserId(User userId) {
+		this.userId = userId;
+	}
+
+	public HikeReportComment getInReplyTo() {
+		return inReplyTo;
+	}
+
+	public void setInReplyTo(HikeReportComment inReplyTo) {
+		this.inReplyTo = inReplyTo;
+	}
+
+	public List<HikeReportComment> getReplies() {
+		return replies;
+	}
+
+	public void setReplies(List<HikeReportComment> replies) {
+		this.replies = replies;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -74,6 +125,5 @@ public class HikeReportComment {
 	public String toString() {
 		return "HikeReportComment [id=" + id + ", commentBox=" + commentBox + ", createDate=" + createDate + "]";
 	}
-	
 
 }
