@@ -12,7 +12,7 @@ public interface HikeReportService {
 	
 	HikeReport createReport(String username, HikeReport report, int trailId);
 	
-	HikeReport updateReport(String username, int reportId, HikeReport report);
+	HikeReport updateReport(String username, int reportId, HikeReport report, int trailId);
 	
 	boolean delete(String username, int reportId);
 

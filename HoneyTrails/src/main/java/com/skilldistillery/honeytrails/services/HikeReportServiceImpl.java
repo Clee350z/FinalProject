@@ -6,7 +6,6 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.skilldistillery.honeytrails.entities.Condition;
 import com.skilldistillery.honeytrails.entities.HikeReport;
 import com.skilldistillery.honeytrails.entities.Trail;
 import com.skilldistillery.honeytrails.entities.User;
@@ -19,10 +18,10 @@ public class HikeReportServiceImpl implements HikeReportService {
 
 	@Autowired
 	private HikeReportRepository hrRepo;
-	
+
 	@Autowired
 	private UserRepository userRepo;
-	
+
 	@Autowired
 	private TrailRepository tRepo;
 
@@ -40,7 +39,7 @@ public class HikeReportServiceImpl implements HikeReportService {
 	public HikeReport createReport(String username, HikeReport report, int trailId) {
 		User user = userRepo.findByUsername(username);
 		Optional<Trail> trail = tRepo.findById(trailId);
-		if(trail.isPresent()) {
+		if (trail.isPresent()) {
 			report.setTrails(trail.get());
 		}
 		if (report.getUser() != null) {
@@ -51,24 +50,20 @@ public class HikeReportServiceImpl implements HikeReportService {
 	}
 
 	@Override
-	public HikeReport updateReport(String username, int reportId, HikeReport report) {
-		Optional<HikeReport> reportOpt = hrRepo.findById(reportId);
-		HikeReport managed = null;
-		if (reportOpt.isPresent()) {
-			managed = reportOpt.get();
+	public HikeReport updateReport(String username, int reportId, HikeReport report, int trailId) {
+		HikeReport managed = hrRepo.findByIdAndUser_Username(reportId, username);
+		Optional<Trail> trail = tRepo.findById(trailId);
+		if (trail.isPresent()) {
+			report.setTrails(trail.get());
+		}
+		if (managed != null) {
 			managed.setHikeTitle(report.getHikeTitle());
 			managed.setReport(report.getReport());
 			managed.setDateCreated(report.getDateCreated());
 			managed.setHikedDate(report.getHikedDate());
 			managed.setRating(report.getRating());
-			if (report.getTrails() != null) {
-				managed.setTrails(report.getTrails());
-			}
 			if (report.getCondition() != null) {
 				managed.setCondition(report.getCondition());
-			}
-			if (report.getUser() != null) {
-				managed.setUser(report.getUser());
 			}
 		}
 		hrRepo.saveAndFlush(managed);
@@ -78,7 +73,8 @@ public class HikeReportServiceImpl implements HikeReportService {
 	@Override
 	public boolean delete(String username, int reportId) {
 		boolean deleted = false;
-		if (hrRepo.existsById(reportId)) {
+		HikeReport report = hrRepo.findByIdAndUser_Username(reportId, username);
+		if (report != null) {
 			hrRepo.deleteById(reportId);
 			deleted = true;
 		}
