@@ -21,7 +21,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 //TODO: change name to hike_report_comment after schema change
 @Table(name="group_hike_comment")
-public class HikeReportComment {
+public class GroupHikeComment {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,13 +45,13 @@ public class HikeReportComment {
 	
 	@ManyToOne
 	@JoinColumn(name="reply_to_id")
-	HikeReportComment inReplyTo;
+	GroupHikeComment inReplyTo;
 	
 	@OneToMany(mappedBy="inReplyTo")
 	@JsonIgnore
-	List<HikeReportComment> replies;
+	List<GroupHikeComment> replies;
 
-	public HikeReportComment() {
+	public GroupHikeComment() {
 		super();
 	}
 
@@ -95,25 +95,25 @@ public class HikeReportComment {
 		this.createDate = createDate;
 	}
 
-	public HikeReportComment getInReplyTo() {
+	public GroupHikeComment getInReplyTo() {
 		return inReplyTo;
 	}
 
-	public void setInReplyTo(HikeReportComment inReplyTo) {
+	public void setInReplyTo(GroupHikeComment inReplyTo) {
 		this.inReplyTo = inReplyTo;
 	}
 
-	public List<HikeReportComment> getReplies() {
+	public List<GroupHikeComment> getReplies() {
 		return replies;
 	}
 
-	public void setReplies(List<HikeReportComment> replies) {
+	public void setReplies(List<GroupHikeComment> replies) {
 		this.replies = replies;
 	}
 
 	@Override
 	public String toString() {
-		return "HikeReportComment [id=" + id + ", commentBox=" + commentBox + ", hikeReport=" + hikeReport + ", userId="
+		return "GroupHikeComment [id=" + id + ", commentBox=" + commentBox + ", hikeReport=" + hikeReport + ", userId="
 				+ userId + ", createDate=" + createDate + "]";
 	}
 
@@ -130,7 +130,7 @@ public class HikeReportComment {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		HikeReportComment other = (HikeReportComment) obj;
+		GroupHikeComment other = (GroupHikeComment) obj;
 		return id == other.id;
 	}
 	

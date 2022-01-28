@@ -15,6 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -31,6 +33,7 @@ public class HikeReport {
 	private String report;
 
 	@Column(name = "date_created")
+	@CreationTimestamp
 	private LocalDateTime dateCreated;
 
 	@Column(name = "hiked_date")
@@ -59,7 +62,7 @@ public class HikeReport {
 	
 //	@OneToMany(mappedBy = "hikeReport")
 //	@JsonIgnore
-//	private List<HikeReportComment> hikeReportComments;
+//	private List<GroupHikeComment> hikeReportComments;
 
 	public HikeReport() {
 		super();
@@ -145,11 +148,11 @@ public class HikeReport {
 		this.hikePhoto = hikePhoto;
 	}
 
-//	public List<HikeReportComment> getGroupHikeComments() {
+//	public List<GroupHikeComment> getGroupHikeComments() {
 //		return hikeReportComments;
 //	}
 //
-//	public void setGroupHikeComments(List<HikeReportComment> hikeReportComments) {
+//	public void setGroupHikeComments(List<GroupHikeComment> hikeReportComments) {
 //		this.hikeReportComments = hikeReportComments;
 //	}
 

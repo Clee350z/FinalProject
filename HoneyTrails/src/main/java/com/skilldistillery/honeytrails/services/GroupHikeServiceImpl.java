@@ -7,13 +7,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.honeytrails.entities.GroupHike;
+import com.skilldistillery.honeytrails.entities.Trail;
+import com.skilldistillery.honeytrails.entities.User;
 import com.skilldistillery.honeytrails.repositories.GroupHikeRepository;
+import com.skilldistillery.honeytrails.repositories.TrailRepository;
+import com.skilldistillery.honeytrails.repositories.UserRepository;
 
 @Service
 public class GroupHikeServiceImpl implements GroupHikeService {
-	
+
 	@Autowired
 	private GroupHikeRepository ghRepo;
+
+	@Autowired
+	private UserRepository uRepo;
+
+	@Autowired
+	private TrailRepository tRepo;
 
 	@Override
 	public List<GroupHike> getAllGroupHikes() {
@@ -23,30 +33,59 @@ public class GroupHikeServiceImpl implements GroupHikeService {
 	@Override
 	public GroupHike getGroupHikeById(int groupHikeId) {
 		Optional<GroupHike> groupOpt = ghRepo.findById(groupHikeId);
-		if(groupOpt.isPresent()) {
+		if (groupOpt.isPresent()) {
 			return groupOpt.get();
 		}
 		return null;
 	}
 
 	@Override
-	public GroupHike getGroupHikeByTitle(String groupHikeTitle) {
-		return ghRepo.findByEventName(groupHikeTitle);
+	public GroupHike getGroupHikeByEventName(String groupHikeEventName) {
+		return ghRepo.findByEventName(groupHikeEventName);
 	}
 
 	@Override
-	public GroupHike addGroupHike(GroupHike groupHike) {
-		return ghRepo.save(groupHike);
-	}
-
-	@Override
-	public GroupHike updateGroupHikeById(int groupHikeId) {
+	public GroupHike addGroupHike(GroupHike groupHike, String username, int trailId) {
+		User user = uRepo.findByUsername(username);
+		groupHike.setCreatedByUser(user);
+		Optional<Trail> trail = tRepo.findById(trailId);
+		if (trail.isPresent()) {
+			groupHike.setTrail(trail.get());
+			return ghRepo.saveAndFlush(groupHike);
+		}
 		return null;
 	}
 
 	@Override
-	public void deleteGroupHikeById(int groupHikeId) {
-		ghRepo.deleteById(groupHikeId);
+	public GroupHike updateGroupHikeById(GroupHike groupHike, int groupHikeId, String username) {
+		GroupHike updatedGroupHike = ghRepo.findById(groupHikeId).get();
+		if (updatedGroupHike == null) {
+			return null;
+		}
+		User user = uRepo.findByUsername(username);
+		if (user == updatedGroupHike.getCreatedByUser()) {
+
+			if (groupHike.getTrail() != null) {
+				updatedGroupHike.setTrail(groupHike.getTrail());
+			}
+			if (groupHike.getUsers() != null) {
+				updatedGroupHike.setUsers(groupHike.getUsers());
+			}
+			updatedGroupHike.setEventName(groupHike.getEventName());
+			updatedGroupHike.setMeetupDate(groupHike.getMeetupDate());
+
+			ghRepo.saveAndFlush(updatedGroupHike);
+
+		}
+		return updatedGroupHike;
+	}
+
+	@Override
+	public void deleteGroupHikeById(int groupHikeId, String username) {
+		User user = uRepo.findByUsername(username);
+		if (user == ghRepo.findById(groupHikeId).get().getCreatedByUser()) {
+			ghRepo.deleteById(groupHikeId);
+		}
 	}
 
 }
