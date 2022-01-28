@@ -17,6 +17,10 @@ public class DifficultyController {
 	@Autowired
 	private DifficultyService difSvc;
 	
+	/*---------------------------------------------------------------------
+	 * get all difficulties
+	 ---------------------------------------------------------------------*/
+	
 	@GetMapping("difficulties")
 	public List<Difficulty> getAllDifficulties(){
 		return difSvc.index();
