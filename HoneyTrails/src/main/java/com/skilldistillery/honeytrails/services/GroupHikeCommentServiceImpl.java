@@ -22,7 +22,7 @@ public class GroupHikeCommentServiceImpl implements GroupHikeCommentService {
 	private GroupHikeRepository ghRepo;
 
 	@Autowired
-	private UserRepository uRepo;
+	private UserRepository uRepo; 
 
 	@Override
 	public List<GroupHikeComment> getAllGroupHikeComments() {
@@ -43,16 +43,18 @@ public class GroupHikeCommentServiceImpl implements GroupHikeCommentService {
 		User user = uRepo.findByUsername(username);
 		groupHikeComment.setUser(user);
 		groupHikeComment.setGroupHike(grpHike);
-
 		return ghcRepo.saveAndFlush(groupHikeComment);
-
 	}
 
 	@Override
 	public GroupHikeComment updateGroupHikeCommentById(GroupHikeComment groupHikeComment, int groupHikeCommentId,
-			String username) {
+			String username, int groupHikeId) {
+		GroupHike grpHike = ghRepo.findById(groupHikeId).get();
+		User user = uRepo.findByUsername(username);
 		if (username.equals(groupHikeComment.getUser().getUsername())) {
 			if (ghcRepo.existsById(groupHikeCommentId)) {
+				groupHikeComment.setUser(user);
+				groupHikeComment.setGroupHike(grpHike);
 				return ghcRepo.save(groupHikeComment);
 			}
 		}

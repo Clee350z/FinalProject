@@ -62,9 +62,9 @@ public class GroupHikeCommentController {
 		
 	}
 	
-	@PutMapping("grouphikes/{grouphikesid}/comments/{grouphikecommentid}")
-	public GroupHikeComment updateGHC(@PathVariable int grouphikecommentid, @RequestBody GroupHikeComment ghc, HttpServletResponse res, Principal principal) {
-		GroupHikeComment updatedGHC = ghcServ.updateGroupHikeCommentById(ghc, grouphikecommentid, principal.getName());
+	@PutMapping("grouphikes/{grouphikeid}/comments/{grouphikecommentid}")
+	public GroupHikeComment updateGHC(@PathVariable int grouphikecommentid, @PathVariable int grouphikeid, @RequestBody GroupHikeComment ghc, HttpServletResponse res, Principal principal) {
+		GroupHikeComment updatedGHC = ghcServ.updateGroupHikeCommentById(ghc, grouphikecommentid, principal.getName(), grouphikeid);
 		if(updatedGHC != ghc) {
 			res.setStatus(200);
 			return updatedGHC;
