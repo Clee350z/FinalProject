@@ -9,16 +9,20 @@ import org.springframework.stereotype.Service;
 import com.skilldistillery.honeytrails.entities.HikePhoto;
 import com.skilldistillery.honeytrails.entities.HikeReport;
 import com.skilldistillery.honeytrails.repositories.HikePhotoRepository;
+import com.skilldistillery.honeytrails.repositories.HikeReportRepository;
 
 @Service
 public class HikePhotoServiceImpl implements HikePhotoService {
 
 	@Autowired
 	private HikePhotoRepository hkRepo;
+	
+	@Autowired
+	private HikeReportRepository hrRepo;
 
 	@Override
-	public List<HikePhoto> allHikePhotos() {
-		return hkRepo.findAll();
+	public List<HikePhoto> allHikePhotos(int reportId) {
+		return hkRepo.findByHikeReport_Id(reportId);
 	}
 
 	@Override
