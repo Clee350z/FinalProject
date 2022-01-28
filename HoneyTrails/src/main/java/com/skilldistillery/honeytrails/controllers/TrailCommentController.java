@@ -81,11 +81,11 @@ public class TrailCommentController {
 	 ---------------------------------------------------------------------*/
 
 	@PutMapping("trails/{trailId}/comments/{commentId}")
-	public TrailComment editTrailComment(@PathVariable int commentId, @RequestBody TrailComment trailComment,
+	public TrailComment editTrailComment(@PathVariable int trailId, @PathVariable int commentId, @RequestBody TrailComment trailComment,
 			HttpServletResponse res, Principal principal) {
 		try {
 			if (tcSvc.show(commentId) != null) {
-				tcSvc.update(principal.getName(), commentId, trailComment);
+				tcSvc.update(principal.getName(), commentId, trailComment, trailId);
 			} else {
 				res.setStatus(404);
 			}

@@ -14,7 +14,7 @@ public interface TrailCommentService {
 	
 	public TrailComment create(int trailId, String username, TrailComment tc);
 	
-	public TrailComment update(String username, int tcId, TrailComment tc);
+	public TrailComment update(String username, int tcId, TrailComment tc, int trailId);
 	
 	public boolean delete(String username, int tcId);
 }
