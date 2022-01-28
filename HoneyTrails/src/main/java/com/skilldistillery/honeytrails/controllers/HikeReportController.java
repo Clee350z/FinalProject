@@ -29,8 +29,8 @@ public class HikeReportController {
 	}
 	
 	@GetMapping("hikes/{reportId}")
-	public HikeReport showReport(@PathVariable int reportId, HttpServletResponse res) {
-		HikeReport report = hkSer.showReport(reportId);
+	public HikeReport showReport(@PathVariable int reportId, HttpServletResponse res, String username) {
+		HikeReport report = hkSer.showReport(username, reportId);
 		if(report == null) {
 			res.setStatus(404);
 		}
@@ -38,9 +38,9 @@ public class HikeReportController {
 	}
 	
 	@PostMapping("hikes")
-	public HikeReport addReport(@RequestBody HikeReport report, HttpServletResponse res, HttpServletRequest req) {
+	public HikeReport addReport(@RequestBody HikeReport report, String username, HttpServletResponse res, HttpServletRequest req) {
 		try {
-			hkSer.createReport(report);
+			hkSer.createReport(username, report);
 			res.setStatus(201);
 			StringBuffer url = req.getRequestURL();
 			url.append("/").append(report.getId());
@@ -54,9 +54,9 @@ public class HikeReportController {
 		return report;
 	}
 	
-	public HikeReport updateReport(@PathVariable int reportId, @RequestBody HikeReport report, HttpServletResponse res, HttpServletRequest req ) {
+	public HikeReport updateReport(@PathVariable int reportId, @RequestBody HikeReport report, String username, HttpServletResponse res, HttpServletRequest req ) {
 		try {
-			report = hkSer.updateReport(reportId, report);
+			report = hkSer.updateReport(username, reportId, report);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
