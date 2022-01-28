@@ -49,7 +49,7 @@ public class GroupHikeCommentServiceImpl implements GroupHikeCommentService {
 	@Override
 	public GroupHikeComment addGroupHikeComment(GroupHikeComment groupHikeComment, String username) {
 		User user = uRepo.findByUsername(username);
-		groupHikeComment.setUserId(user);
+		groupHikeComment.setUser(user);
 
 		return ghcRepo.saveAndFlush(groupHikeComment);
 
@@ -59,7 +59,7 @@ public class GroupHikeCommentServiceImpl implements GroupHikeCommentService {
 	public GroupHikeComment updateGroupHikeCommentById(GroupHikeComment groupHikeComment, int groupHikeCommentId,
 			String username) {
 		User user = uRepo.findByUsername(username);
-		if (user == groupHikeComment.getUserId()) {
+		if (user == groupHikeComment.getUser()) {
 			if (ghcRepo.existsById(groupHikeCommentId)) {
 				if (groupHikeComment != null) {
 					return ghcRepo.saveAndFlush(groupHikeComment);
@@ -72,7 +72,7 @@ public class GroupHikeCommentServiceImpl implements GroupHikeCommentService {
 	@Override
 	public void deleteGroupHikeCommentById(int groupHikeCommentId, String username) {
 		User user = uRepo.findByUsername(username);
-		if (user == ghcRepo.findById(groupHikeCommentId).get().getUserId()) {
+		if (user == ghcRepo.findById(groupHikeCommentId).get().getUser()) {
 			ghcRepo.deleteById(groupHikeCommentId);
 		}
 	}
