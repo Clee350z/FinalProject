@@ -248,11 +248,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `group_hike_comment`
+-- Table `hike_report_comment`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `group_hike_comment` ;
+DROP TABLE IF EXISTS `hike_report_comment` ;
 
-CREATE TABLE IF NOT EXISTS `group_hike_comment` (
+CREATE TABLE IF NOT EXISTS `hike_report_comment` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `comment_box` TEXT NULL,
   `hike_report_id` INT NOT NULL,
@@ -275,7 +275,7 @@ CREATE TABLE IF NOT EXISTS `group_hike_comment` (
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_group_hike_comments_group_hike_comments1`
     FOREIGN KEY (`reply_to_id`)
-    REFERENCES `group_hike_comment` (`id`)
+    REFERENCES `hike_report_comment` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -324,6 +324,40 @@ CREATE TABLE IF NOT EXISTS `planned_hikes` (
   CONSTRAINT `fk_user_has_trail_trail2`
     FOREIGN KEY (`trail_id`)
     REFERENCES `trail` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `group_hike_comment`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `group_hike_comment` ;
+
+CREATE TABLE IF NOT EXISTS `group_hike_comment` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `comment_box` TEXT NULL,
+  `user_id` INT NOT NULL,
+  `create_date` DATETIME NULL,
+  `reply_to_id` INT NULL,
+  `group_hike_id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_group_hike_comments_user1_idx` (`user_id` ASC),
+  INDEX `fk_group_hike_comments_group_hike_comments1_idx` (`reply_to_id` ASC),
+  INDEX `fk_group_hike_comment_group_hike1_idx` (`group_hike_id` ASC),
+  CONSTRAINT `fk_group_hike_comments_user10`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `user` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_group_hike_comments_group_hike_comments10`
+    FOREIGN KEY (`reply_to_id`)
+    REFERENCES `group_hike_comment` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_group_hike_comment_group_hike1`
+    FOREIGN KEY (`group_hike_id`)
+    REFERENCES `group_hike` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -456,11 +490,11 @@ COMMIT;
 
 
 -- -----------------------------------------------------
--- Data for table `group_hike_comment`
+-- Data for table `hike_report_comment`
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `honeytrailsdb`;
-INSERT INTO `group_hike_comment` (`id`, `comment_box`, `hike_report_id`, `user_id`, `create_date`, `reply_to_id`) VALUES (1, 'This was such a great group hike!', 1, 2, '2021-01-15 15:15:15', NULL);
+INSERT INTO `hike_report_comment` (`id`, `comment_box`, `hike_report_id`, `user_id`, `create_date`, `reply_to_id`) VALUES (1, 'This was such a great group hike!', 1, 2, '2021-01-15 15:15:15', NULL);
 
 COMMIT;
 
