@@ -9,14 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.honeytrails.entities.Address;
-import com.skilldistillery.honeytrails.entities.GroupHike;
-import com.skilldistillery.honeytrails.entities.User;
 import com.skilldistillery.honeytrails.services.AddressService;
 
 @RestController
@@ -44,8 +41,8 @@ public class AddressController {
 
 	
 	@PostMapping("address")
-	public Address createAddress(@PathVariable int userId, @RequestBody Address address, HttpServletResponse res, Principal principal) {
-		Address newAddress = addressSer.addAddress(address, principal.getName(), userId);
+	public Address createAddress(@RequestBody Address address, HttpServletResponse res, Principal principal) {
+		Address newAddress = addressSer.addAddress(address, principal.getName());
 		if(newAddress == null) {
 			res.setStatus(400);
 		} else {
@@ -54,16 +51,7 @@ public class AddressController {
 		return newAddress;
 	}
 	
-	@PutMapping("address/{addressid}")
-	public Address updateAddress(@RequestBody Address address, @PathVariable int addressId, HttpServletResponse res, Principal principal) {
-		Address updatedAddress = addressSer.updateAddressById(address, addressId, principal.getName());
-		if(updatedAddress != address) {
-			res.setStatus(200);
-		} else {
-			res.setStatus(400);
-		}
-		return updatedAddress;
-	}
+
 
 	
 	
