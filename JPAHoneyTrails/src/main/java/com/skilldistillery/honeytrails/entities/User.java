@@ -82,7 +82,7 @@ public class User {
 	@JsonIgnore
 	private List <GroupHike> groupHikesCreated;
 	
-	@OneToMany(mappedBy = "userId")
+	@OneToMany(mappedBy = "user")
 	@JsonIgnore
 	private List<GroupHikeComment> groupHikeComments;
 	
