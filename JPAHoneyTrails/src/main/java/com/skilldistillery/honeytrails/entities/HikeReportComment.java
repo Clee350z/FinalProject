@@ -14,6 +14,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.CreationTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "hike_report_comment")
 public class HikeReportComment {
@@ -26,14 +30,17 @@ public class HikeReportComment {
 	private String commentBox;
 
 	@Column(name = "create_date")
+	@CreationTimestamp
 	private LocalDateTime createDate;
 	
 	@ManyToOne
 	@JoinColumn(name="hike_report_id")
+	@JsonIgnore
 	private HikeReport hikeReportId;
 	
 	@ManyToOne
 	@JoinColumn(name="user_id")
+	@JsonIgnore
 	private User userId;
 	
 	
