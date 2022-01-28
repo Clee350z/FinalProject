@@ -28,7 +28,7 @@ public class AddressController {
 	
 	@GetMapping("addresses/{addressId}")
 	public Address findAddress(@PathVariable int addressId, HttpServletResponse res){
-		Address address = addressSer.(addressId);
+		Address address = addressSer.getAddressById(addressId);
 		if(address == null) {
 			res.setStatus(404);
 		}

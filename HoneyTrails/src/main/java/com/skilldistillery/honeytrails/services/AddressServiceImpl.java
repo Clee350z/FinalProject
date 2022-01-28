@@ -4,12 +4,14 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.skilldistillery.honeytrails.entities.Address;
 import com.skilldistillery.honeytrails.entities.GroupHike;
 import com.skilldistillery.honeytrails.repositories.AddressRepository;
 import com.skilldistillery.honeytrails.repositories.UserRepository;
 
+@Service
 public class AddressServiceImpl implements AddressService{
 
 	@Autowired

@@ -47,15 +47,12 @@ public class GroupHikeCommentServiceImpl implements GroupHikeCommentService {
 	}
 
 	@Override
-	public GroupHikeComment addGroupHikeComment(GroupHikeComment groupHikeComment, String username,
-			int groupHikeCommentId) {
+	public GroupHikeComment addGroupHikeComment(GroupHikeComment groupHikeComment, String username) {
 		User user = uRepo.findByUsername(username);
 		groupHikeComment.setUserId(user);
-		GroupHikeComment ghc = ghcRepo.findById(groupHikeCommentId).get();
-		if (ghc != null) {
-			return ghcRepo.saveAndFlush(ghc);
-		}
-		return null;
+
+		return ghcRepo.saveAndFlush(groupHikeComment);
+
 	}
 
 	@Override
