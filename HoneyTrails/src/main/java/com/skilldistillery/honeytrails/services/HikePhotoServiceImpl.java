@@ -26,7 +26,8 @@ public class HikePhotoServiceImpl implements HikePhotoService {
 	}
 
 	@Override
-	public HikePhoto showPhoto(int photoId) {
+	public HikePhoto showPhoto(int photoId, int reportId) {
+		hkRepo.findByHikeReport_Id(reportId);
 		Optional<HikePhoto> phoOpt = hkRepo.findById(photoId);
 		HikePhoto photo = null;
 		if (phoOpt.isPresent()) {
@@ -36,18 +37,21 @@ public class HikePhotoServiceImpl implements HikePhotoService {
 	}
 
 	@Override
-	public HikePhoto createPhoto(HikePhoto photo) {
-		if(photo.getHikeReport() == null) {
-			HikeReport report = new HikeReport();
-			report.setId(1);
-			photo.setHikeReport(report);
+	public HikePhoto createPhoto(HikePhoto photo, int reportId) {
+		Optional<HikeReport> report = hrRepo.findById(reportId);
+		if(report.isPresent()) {
+			photo.setHikeReport(report.get());
 		}
 		hkRepo.saveAndFlush(photo);
 		return photo;
 	}
 
 	@Override
-	public HikePhoto updatePhoto(int photoId, HikePhoto photo) {
+	public HikePhoto updatePhoto(int photoId, HikePhoto photo, int reportId) {
+		Optional<HikeReport> report = hrRepo.findById(reportId);
+		if(report.isPresent()) {
+			photo.setHikeReport(report.get());
+		}
 		Optional<HikePhoto> phoOpt = hkRepo.findById(photoId);
 		HikePhoto managed = null;
 		if(phoOpt.isPresent()) {
@@ -55,18 +59,16 @@ public class HikePhotoServiceImpl implements HikePhotoService {
 			managed.setImageUrl(photo.getImageUrl());
 			managed.setTitle(photo.getTitle());
 			managed.setDescription(photo.getDescription());
-			if(photo.getHikeReport() != null) {
-				managed.setHikeReport(photo.getHikeReport());
-			}
 		}
 		hkRepo.saveAndFlush(managed);
 		return managed;
 	}
 
 	@Override
-	public boolean delete(int photoId) {
+	public boolean delete(int photoId, int reportId) {
 		boolean deleted = false;
-		if(hkRepo.existsById(photoId)) {
+		HikePhoto p = hkRepo.findByIdAndHikeReport_Id(photoId, reportId);
+		if(p != null) {
 			hkRepo.deleteById(photoId);
 			deleted = true;
 		}
