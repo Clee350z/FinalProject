@@ -25,20 +25,14 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User addUser(User user) {
-		return null;
-	}
-
-	@Override
-	public User updateUser(int trailId, User user) {
+	public User updateUser(int userId, User user) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public boolean deleteUser(int userId) {
-		// TODO Auto-generated method stub
-		return false;
+	public void deleteUser(int userId) {
+		uRepo.deleteById(userId);
 	}
 
 }
