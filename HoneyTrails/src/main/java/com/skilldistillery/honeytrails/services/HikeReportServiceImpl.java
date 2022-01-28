@@ -11,12 +11,16 @@ import com.skilldistillery.honeytrails.entities.HikeReport;
 import com.skilldistillery.honeytrails.entities.Trail;
 import com.skilldistillery.honeytrails.entities.User;
 import com.skilldistillery.honeytrails.repositories.HikeReportRepository;
+import com.skilldistillery.honeytrails.repositories.UserRepository;
 
 @Service
 public class HikeReportServiceImpl implements HikeReportService {
 
 	@Autowired
 	private HikeReportRepository hrRepo;
+	
+	@Autowired
+	private UserRepository userRepo;
 
 	@Override
 	public List<HikeReport> allHikeRports() {
@@ -24,7 +28,7 @@ public class HikeReportServiceImpl implements HikeReportService {
 	}
 
 	@Override
-	public HikeReport showReport(int reportId) {
+	public HikeReport showReport(String username, int reportId) {
 		Optional<HikeReport> reportOpt = hrRepo.findById(reportId);
 		HikeReport report = null;
 		if (reportOpt.isPresent()) {
@@ -34,7 +38,8 @@ public class HikeReportServiceImpl implements HikeReportService {
 	}
 
 	@Override
-	public HikeReport createReport(HikeReport report) {
+	public HikeReport createReport(String username, HikeReport report) {
+		User user = userRepo.findByUsername(username);
 		if (report.getTrails() == null) {
 			Trail trail = new Trail();
 			trail.setId(1);
@@ -45,9 +50,7 @@ public class HikeReportServiceImpl implements HikeReportService {
 			con.setId(1);
 			report.setCondition(con);
 		}
-		if (report.getUser() == null) {
-			User user = new User();
-			user.setId(1);
+		if (report.getUser() != null) {
 			report.setUser(user);
 		}
 		hrRepo.saveAndFlush(report);
@@ -55,7 +58,7 @@ public class HikeReportServiceImpl implements HikeReportService {
 	}
 
 	@Override
-	public HikeReport updateReport(int reportId, HikeReport report) {
+	public HikeReport updateReport(String username, int reportId, HikeReport report) {
 		Optional<HikeReport> reportOpt = hrRepo.findById(reportId);
 		HikeReport managed = null;
 		if (reportOpt.isPresent()) {
@@ -80,7 +83,7 @@ public class HikeReportServiceImpl implements HikeReportService {
 	}
 
 	@Override
-	public boolean delete(int reportId) {
+	public boolean delete(String username, int reportId) {
 		boolean deleted = false;
 		if (hrRepo.existsById(reportId)) {
 			hrRepo.deleteById(reportId);
