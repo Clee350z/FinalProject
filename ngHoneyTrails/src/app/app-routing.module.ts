@@ -16,7 +16,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'about', component: AboutComponent },
   { path: 'trail', component: TrailComponent },
-  { path: 'hikes', component: HikeReportComponent },
+  { path: 'hikereports', component: HikeReportComponent },
   { path: 'photos', component: HikePhotoComponent },
   { path: '**', component: NotFoundComponent },
 ];

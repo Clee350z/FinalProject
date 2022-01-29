@@ -1,5 +1,6 @@
 package com.skilldistillery.honeytrails.services;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -26,8 +27,8 @@ public class HikeReportServiceImpl implements HikeReportService {
 	private TrailRepository tRepo;
 
 	@Override
-	public Set<HikeReport> allHikeRports(String username) {
-		return hrRepo.findByUser_Username(username);
+	public List<HikeReport> allHikeRports() {
+		return hrRepo.findAll();
 	}
 
 	@Override
