@@ -19,6 +19,8 @@ import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { GroupHikeComponent } from './components/group-hike/group-hike.component';
+import { GroupHikeCommentComponent } from './components/group-hike-comment/group-hike-comment.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     RegisterComponent,
     AboutComponent,
     LoginComponent,
-    LogoutComponent
+    LogoutComponent,
+    GroupHikeComponent,
+    GroupHikeCommentComponent
   ],
   imports: [
     BrowserModule,
