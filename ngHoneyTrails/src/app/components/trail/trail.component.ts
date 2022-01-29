@@ -39,8 +39,8 @@ export class TrailComponent implements OnInit {
   viewTrailDetails(trailId : number){
     this.trailSvc.viewTrailDetails(trailId).subscribe(
       trail => {
-        this.router.navigateByUrl('/trail/' + trail.id);
         this.selected = trail;
+
       },
 
       fail =>{
@@ -48,6 +48,7 @@ export class TrailComponent implements OnInit {
         console.error(fail);
       }
     );
+
   }
 
 }
