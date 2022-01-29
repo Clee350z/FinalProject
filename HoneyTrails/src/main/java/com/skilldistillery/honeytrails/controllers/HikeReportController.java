@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,17 +22,18 @@ import com.skilldistillery.honeytrails.services.HikeReportService;
 
 @RestController
 @RequestMapping("api")
+@CrossOrigin({"*", "http://localhost:4300"})
 public class HikeReportController {
 
 	@Autowired
 	private HikeReportService hkSer;
 
-	@GetMapping("hikes")
+	@GetMapping("trails/{trailId}/hikereports")
 	public Set<HikeReport> index(HttpServletRequest req, HttpServletResponse res, Principal principal) {
 		return hkSer.allHikeRports(principal.getName());
 	}
 
-	@GetMapping("hikes/{reportId}")
+	@GetMapping("trails/{trailId}/hikereports/{reportId}")
 	public HikeReport showReport(@PathVariable int reportId, HttpServletResponse res, HttpServletRequest req,
 			Principal principal) {
 		HikeReport report = hkSer.showReport(principal.getName(), reportId);
@@ -44,7 +46,7 @@ public class HikeReportController {
 		return report;
 	}
 
-	@PostMapping("trails/{trailId}/hikes")
+	@PostMapping("ttrails/{trailId}/hikereports")
 	public HikeReport addReport(@RequestBody HikeReport report, Principal principal, HttpServletResponse res,
 			HttpServletRequest req, @PathVariable int trailId) {
 		try {
@@ -62,7 +64,7 @@ public class HikeReportController {
 		return report;
 	}
 
-	@PutMapping("trails/{trailId}/hikes/{reportId}")
+	@PutMapping("trails/{trailId}/hikereports/{reportId}")
 	public HikeReport updateReport(@PathVariable int reportId, @PathVariable int trailId,
 			@RequestBody HikeReport report, Principal principal, HttpServletResponse res, HttpServletRequest req) {
 		try {
@@ -81,7 +83,7 @@ public class HikeReportController {
 		return report;
 	}
 
-	@DeleteMapping("hikes/{reportId}")
+	@DeleteMapping("trails/{trailId}/hikereports/{reportId}")
 	public void destroy(HttpServletRequest req, HttpServletResponse res, @PathVariable int reportId,
 			Principal principal) {
 		if (hkSer.delete(principal.getName(), reportId)) {

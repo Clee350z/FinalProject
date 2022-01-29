@@ -21,14 +21,14 @@ import com.skilldistillery.honeytrails.services.GroupHikeCommentService;
 
 @RestController
 @RequestMapping("api")
-@CrossOrigin({ "http://localhost:4300" })
+@CrossOrigin({"*", "http://localhost:4300"})
 public class GroupHikeCommentController {
 	
 	@Autowired
 	private GroupHikeCommentService ghcServ;
 	
 	
-	@GetMapping("grouphikes/comments")
+	@GetMapping("trails/grouphikes/{groupHikeId}/comments")
 	public List<GroupHikeComment> getAllGhcComments(HttpServletResponse res) {
 		
 		List<GroupHikeComment> comments = ghcServ.getAllGroupHikeComments();
@@ -40,9 +40,9 @@ public class GroupHikeCommentController {
 		return comments;
 	}
 	
-	@GetMapping("grouphikes/{grouphikesid}/comments/{grouphikecommentid}")
-	public GroupHikeComment getGHCById(@PathVariable int grouphikecommentid, HttpServletResponse res) {
-		GroupHikeComment ghc = ghcServ.getGroupHikeCommentById(grouphikecommentid);
+	@GetMapping("trails/grouphikes/{groupHikeId}/comments/{commentId}")
+	public GroupHikeComment getGHCById(@PathVariable int commentId, HttpServletResponse res) {
+		GroupHikeComment ghc = ghcServ.getGroupHikeCommentById(commentId);
 		if(ghc == null) {
 			res.setStatus(404);
 		} 
@@ -50,9 +50,9 @@ public class GroupHikeCommentController {
 		
 	}
 	
-	@PostMapping("grouphikes/{grouphikesid}/comments")
-	public GroupHikeComment createGHC(@PathVariable int grouphikesid, @RequestBody GroupHikeComment ghc, HttpServletResponse res, Principal principal) {
-		GroupHikeComment newGHC = ghcServ.addGroupHikeComment(ghc, principal.getName(), grouphikesid);
+	@PostMapping("grouphikes/{groupHikeId}/comments")
+	public GroupHikeComment createGHC(@PathVariable int groupHikeId, @RequestBody GroupHikeComment ghc, HttpServletResponse res, Principal principal) {
+		GroupHikeComment newGHC = ghcServ.addGroupHikeComment(ghc, principal.getName(), groupHikeId);
 		if(newGHC == null) {
 			res.setStatus(400);
 		} else {
@@ -62,9 +62,9 @@ public class GroupHikeCommentController {
 		
 	}
 	
-	@PutMapping("grouphikes/{grouphikeid}/comments/{grouphikecommentid}")
-	public GroupHikeComment updateGHC(@PathVariable int grouphikecommentid, @PathVariable int grouphikeid, @RequestBody GroupHikeComment ghc, HttpServletResponse res, Principal principal) {
-		GroupHikeComment updatedGHC = ghcServ.updateGroupHikeCommentById(ghc, grouphikecommentid, principal.getName(), grouphikeid);
+	@PutMapping("trails/grouphikes/{groupHikeId}/comments/{commentId}")
+	public GroupHikeComment updateGHC(@PathVariable int commentId, @PathVariable int groupHikeId, @RequestBody GroupHikeComment ghc, HttpServletResponse res, Principal principal) {
+		GroupHikeComment updatedGHC = ghcServ.updateGroupHikeCommentById(ghc, commentId, principal.getName(), groupHikeId);
 		if(updatedGHC != ghc) {
 			res.setStatus(200);
 			return updatedGHC;
@@ -75,8 +75,8 @@ public class GroupHikeCommentController {
 		return updatedGHC;
 	}
 	
-	@DeleteMapping("grouphikes/{grouphikesid}/comments/{grouphikecommentid}")
-	public void deleteGHC(@PathVariable int grouphikecommentid, Principal principal) {
-		ghcServ.deleteGroupHikeCommentById(grouphikecommentid, principal.getName());
+	@DeleteMapping("trails/grouphikes/{groupHikeId}/comments/{commentId}")
+	public void deleteGHC(@PathVariable int commentId, Principal principal) {
+		ghcServ.deleteGroupHikeCommentById(commentId, principal.getName());
 	}
 }

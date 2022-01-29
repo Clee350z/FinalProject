@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +22,7 @@ import com.skilldistillery.honeytrails.services.TrailCommentService;
 
 @RestController
 @RequestMapping("api")
+@CrossOrigin({"*", "http://localhost:4300"})
 public class TrailCommentController {
 
 	@Autowired
@@ -30,7 +32,7 @@ public class TrailCommentController {
 	 * get all trail comments
 	 ---------------------------------------------------------------------*/
 
-	@GetMapping("trailcomments")
+	@GetMapping("trails/comments")
 	public List<TrailComment> getAllComments(HttpServletResponse res) {
 		List<TrailComment> trailComments = tcSvc.index();
 		if (trailComments != null) {

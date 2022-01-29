@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,17 +21,18 @@ import com.skilldistillery.honeytrails.services.HikePhotoService;
 
 @RestController
 @RequestMapping("api")
+@CrossOrigin({"*", "http://localhost:4300"})
 public class HikePhotoController {
 
 	@Autowired
 	private HikePhotoService photoSer;
 
-	@GetMapping("hikes/{reportId}/photos")
+	@GetMapping("trails/{trailId}/hikereports/{reportId}/photos")
 	public List<HikePhoto> index(@PathVariable int reportId) {
 		return photoSer.allHikePhotos(reportId);
 	}
 
-	@GetMapping("hikes/{reportId}/photos/{photoId}")
+	@GetMapping("trails/{trailId}/hikereports/{reportId}/photos/{photoId}")
 	public HikePhoto showPhoto(@PathVariable int reportId, @PathVariable int photoId, HttpServletRequest req,
 			HttpServletResponse res) {
 		HikePhoto photo = photoSer.showPhoto(photoId, reportId);
@@ -43,7 +45,7 @@ public class HikePhotoController {
 		return photo;
 	}
 
-	@PostMapping("hikes/{reportId}/photos")
+	@PostMapping("trails/{trailId}/hikereports/{reportId}/photos")
 	public HikePhoto addPhoto(@PathVariable int reportId, @RequestBody HikePhoto photo, HttpServletRequest req,
 			HttpServletResponse res) {
 		try {
@@ -60,7 +62,7 @@ public class HikePhotoController {
 		return photo;
 	}
 
-	@PutMapping("hikes/{reportId}/photos/{photoId}")
+	@PutMapping("trails/{trailId}/hikereports/{reportId}/photos/{photoId}")
 	public HikePhoto updatePhoto(@PathVariable int photoId, @RequestBody HikePhoto photo, @PathVariable int reportId,
 			HttpServletRequest req, HttpServletResponse res) {
 		try {
@@ -79,7 +81,7 @@ public class HikePhotoController {
 		return photo;
 	}
 	
-	@DeleteMapping("hikes/{reportId}/photos/{photoId}")
+	@DeleteMapping("trails/{trailId}/hikereports/{reportId}/photos/{photoId}")
 	public void destroy(@PathVariable int photoId, @PathVariable int reportId, HttpServletRequest req, HttpServletResponse res) {
 	if(photoSer.delete(photoId, reportId)) {
 		res.setStatus(204);
