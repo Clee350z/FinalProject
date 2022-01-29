@@ -1,7 +1,7 @@
 package com.skilldistillery.honeytrails.controllers;
 
 import java.security.Principal;
-import java.util.Set;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,9 +28,9 @@ public class HikeReportController {
 	@Autowired
 	private HikeReportService hkSer;
 
-	@GetMapping("trails/{trailId}/hikereports")
-	public Set<HikeReport> index(HttpServletRequest req, HttpServletResponse res, Principal principal) {
-		return hkSer.allHikeRports(principal.getName());
+	@GetMapping("hikereports")
+	public List<HikeReport> index(HttpServletRequest req, HttpServletResponse res) {
+		return hkSer.allHikeRports();
 	}
 
 	@GetMapping("trails/{trailId}/hikereports/{reportId}")
@@ -46,7 +46,7 @@ public class HikeReportController {
 		return report;
 	}
 
-	@PostMapping("ttrails/{trailId}/hikereports")
+	@PostMapping("trails/{trailId}/hikereports")
 	public HikeReport addReport(@RequestBody HikeReport report, Principal principal, HttpServletResponse res,
 			HttpServletRequest req, @PathVariable int trailId) {
 		try {

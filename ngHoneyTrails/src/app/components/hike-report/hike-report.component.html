@@ -1,1 +1,19 @@
-<p>hike-report works!</p>
+<h1>{{title}}</h1>
+<div>
+  <table>
+    <thead>
+      <tr>
+        <th>Hike Title</th>
+        <th>Report</th>
+        <th>Date Created</th>
+        <th>Date Hiked On</th>
+        <th>Rating</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let report of reports">
+        <td>{{report.hikeTitle}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
