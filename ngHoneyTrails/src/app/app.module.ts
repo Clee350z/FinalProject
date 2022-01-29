@@ -10,15 +10,23 @@ import { UserComponent } from './components/user/user.component';
 import { HikePhotoComponent } from './components/hike-photo/hike-photo.component';
 import { HikeReportComponent } from './components/hike-report/hike-report.component';
 import { HikeReportCommentComponent } from './components/hike-report-comment/hike-report-comment.component';
+import { HomeComponent } from './components/home/home.component';
+import { NavigationComponent } from './components/navigation/navigation.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import { RegisterComponent } from './components/register/register.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-TrailComponent,
-UserComponent,
+    TrailComponent,
+    UserComponent,
     HikePhotoComponent,
     HikeReportComponent,
-    HikeReportCommentComponent
+    HikeReportCommentComponent,
+    HomeComponent,
+    NavigationComponent,
+    NotFoundComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
