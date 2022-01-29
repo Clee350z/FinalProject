@@ -22,18 +22,18 @@ import com.skilldistillery.honeytrails.services.HikeReportCommentService;
 
 @RestController
 @RequestMapping("api")
-@CrossOrigin({ "http://localhost:4300" })
+@CrossOrigin({"*", "http://localhost:4300"})
 public class HikeReportCommentController {
 
 	@Autowired
 	private HikeReportCommentService commentSer;
 
-	@GetMapping("hikes/{reportId}/comments")
+	@GetMapping("trails/{trailId}/hikereports/{reportId}/comments")
 	public List<HikeReportComment> index(@PathVariable int reportId) {
 		return commentSer.getAllComments(reportId);
 	}
 
-	@GetMapping("hikes/{reportId}/comments/{commentId}")
+	@GetMapping("trails/{trailId}/hikereports/{reportId}/comments/{commentId}")
 	public HikeReportComment showComment(@PathVariable int reportId, @PathVariable int commentId,
 			HttpServletRequest req, HttpServletResponse res) {
 		HikeReportComment comment = commentSer.CommentById(commentId, reportId);
@@ -46,7 +46,7 @@ public class HikeReportCommentController {
 		return comment;
 	}
 
-	@PostMapping("hikes/{reportId}/comments")
+	@PostMapping("trails/{trailId}/hikereports/{reportId}/comments")
 	public HikeReportComment addcomment(@RequestBody HikeReportComment comment, @PathVariable int reportId,
 			 HttpServletRequest req, HttpServletResponse res, Principal principal) {
 		try {
@@ -63,7 +63,7 @@ public class HikeReportCommentController {
 		return comment;
 	}
 	
-	@PutMapping("hikes/{reportId}/comments/{commentId}")
+	@PutMapping("trails/{trailId}/hikereports/{reportId}/comments/{commentId}")
 	public HikeReportComment updateComment(@PathVariable int reportId, @RequestBody HikeReportComment comment,
 			@PathVariable int commentId, HttpServletRequest req, HttpServletResponse res, Principal principal) {
 		try {
@@ -82,7 +82,7 @@ public class HikeReportCommentController {
 		return comment;
 	}
 	
-	@DeleteMapping("hikes/{reportId}/comments/{commentId}")
+	@DeleteMapping("trails/{trailId}/hikereports/{reportId}/comments/{commentId}")
 	public void destroy(@PathVariable int reportId, @PathVariable int commentId, HttpServletResponse res, 
 			HttpServletRequest req, Principal principal) {
 		if(commentSer.deleteComment(commentId, reportId, principal.getName())) {
