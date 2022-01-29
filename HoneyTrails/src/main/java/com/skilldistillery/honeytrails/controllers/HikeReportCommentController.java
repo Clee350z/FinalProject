@@ -8,9 +8,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -59,5 +61,35 @@ public class HikeReportCommentController {
 			comment = null;
 		}
 		return comment;
+	}
+	
+	@PutMapping("hikes/{reportId}/comments/{commentId}")
+	public HikeReportComment updateComment(@PathVariable int reportId, @RequestBody HikeReportComment comment,
+			@PathVariable int commentId, HttpServletRequest req, HttpServletResponse res, Principal principal) {
+		try {
+			comment = commentSer.updateComment(comment, principal.getName(), reportId, commentId);
+			if(comment == null) {
+				res.setStatus(404);
+				return null;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.setStatus(400);
+		}
+		StringBuffer url = req.getRequestURL();
+		url.append("/").append(comment.getId());
+		res.setHeader("Location", url.toString());
+		return comment;
+	}
+	
+	@DeleteMapping("hikes/{reportId}/comments/{commentId}")
+	public void destroy(@PathVariable int reportId, @PathVariable int commentId, HttpServletResponse res, 
+			HttpServletRequest req, Principal principal) {
+		if(commentSer.deleteComment(commentId, reportId, principal.getName())) {
+			res.setStatus(204);
+		}
+		else {
+			res.setStatus(404);
+		}
 	}
 }

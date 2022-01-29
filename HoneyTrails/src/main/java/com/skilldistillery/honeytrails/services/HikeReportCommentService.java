@@ -14,6 +14,6 @@ public interface HikeReportCommentService {
 
 	HikeReportComment updateComment(HikeReportComment comment, String username, int reportId, int commentId);
 	
-	boolean deleteComment(int commentId, String username);
+	boolean deleteComment(int commentId, int reportId, String username);
 
 }

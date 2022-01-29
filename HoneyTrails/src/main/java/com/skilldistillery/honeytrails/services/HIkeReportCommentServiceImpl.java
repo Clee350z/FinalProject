@@ -54,16 +54,27 @@ public class HIkeReportCommentServiceImpl implements HikeReportCommentService {
 	}
 
 	@Override
-	public HikeReportComment updateComment(HikeReportComment comment, String username, int reportId, int commentId) {
-		User user = userRepo.findByUsername(username);
+	public HikeReportComment updateComment(HikeReportComment comment,
+			String username, int reportId, int commentId) {
+		HikeReportComment managed = comRepo.findByIdAndUserId_Username(commentId, username);
 		
-		return null;
+		if(managed != null) {
+			managed.setCommentBox(comment.getCommentBox());
+			managed.setCreateDate(comment.getCreateDate());
+		}
+		comRepo.saveAndFlush(managed);
+		return managed;
 	}
 
 	@Override
-	public boolean deleteComment(int commentId, String username) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean deleteComment(int commentId, int reportId, String username) {
+		boolean deleted = false;
+		HikeReportComment comment = comRepo.findByIdAndUserId_Username(commentId, username);
+		if(comment != null) {
+			comRepo.deleteById(commentId);
+			deleted = true;
+		}
+		return deleted;
 	}
 
 }
