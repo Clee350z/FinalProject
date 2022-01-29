@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HikeReport } from 'src/app/models/hike-report';
+import { Trail } from 'src/app/models/trail';
 import { HikeReportService } from 'src/app/services/hike-report.service';
 
 @Component({
@@ -10,6 +11,8 @@ import { HikeReportService } from 'src/app/services/hike-report.service';
 export class HikeReportComponent implements OnInit {
   title = 'Hike Report';
   reports: HikeReport[] = [];
+  // trails: Trail [] = [];
+  selected: HikeReport | null = null;
 
   constructor(private HRptSvc: HikeReportService) {}
 
@@ -28,5 +31,12 @@ export class HikeReportComponent implements OnInit {
         }
       }//end of object
     );
+  }
+
+  displayReport(report: HikeReport){
+    this.selected = report;
+  }
+  displayTable(){
+    this.selected = null;
   }
 }
