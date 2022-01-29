@@ -17,7 +17,7 @@ export class TrailComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
+    this.reload();
   }
 
   reload(){
