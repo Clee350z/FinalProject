@@ -39,7 +39,7 @@ export class TrailComponent implements OnInit {
   viewTrailDetails(trailId : number){
     this.trailSvc.viewTrailDetails(trailId).subscribe(
       trail => {
-        this.router.navigateByUrl('/trails/' + trail.id);
+        this.router.navigateByUrl('/trail/' + trail.id);
         this.selected = trail;
       },
 
