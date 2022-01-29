@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Trail } from 'src/app/models/trail';
-import { TrailService } from 'src/app/services/trail.service'
+import { TrailService } from 'src/app/services/trail.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -11,9 +12,11 @@ import { TrailService } from 'src/app/services/trail.service'
 export class TrailComponent implements OnInit {
 
   trails: Trail[] = [];
+  selected : Trail | null = null;
 
   constructor(
-    private trailSvc : TrailService
+    private trailSvc : TrailService,
+    private router : Router
   ) { }
 
   ngOnInit(): void {
@@ -26,11 +29,26 @@ export class TrailComponent implements OnInit {
         this.trails = trails;
       },
 
-      wrong =>{
+      fail =>{
         console.error('TrailComponent.reload(): Error retreiving trails');
-        console.error(wrong);
+        console.error(fail);
       }
     );
+  }
+
+  viewTrailDetails(trailId : number){
+    this.trailSvc.viewTrailDetails(trailId).subscribe(
+      trail => {
+        this.selected = trail;
+
+      },
+
+      fail =>{
+        console.error('TrailComponent.reload(): Error retreiving trail');
+        console.error(fail);
+      }
+    );
+
   }
 
 }

@@ -47,12 +47,16 @@ public class TrailController {
 	 ---------------------------------------------------------------------*/
 
 	@GetMapping("trails/{trailId}")
-	public Trail getTrailById(@PathVariable int trailId, HttpServletResponse res) {
+	public Trail getTrailById(@PathVariable int trailId, HttpServletResponse res, HttpServletRequest req) {
+		try {
 		Trail trail = trailSvc.getTrailById(trailId);
-		if (trail == null) {
-			res.setStatus(404);
-		}
 		return trail;
+		}catch (Exception e) {
+			e.printStackTrace();
+			System.err.println("Cannot find trail");
+			res.setStatus(404);
+			return null;
+		}
 	}
 	
 	/*---------------------------------------------------------------------
