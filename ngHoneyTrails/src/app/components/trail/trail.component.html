@@ -1,1 +1,17 @@
-<p>trail works!</p>
+<table>
+  <thead>
+    <tr>
+      <th>trail</th>
+      <th>difficulty</th>
+      <th>Location</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let trail of trails">
+      <td>{{ trail.name }}</td>
+      <td *ngIf="trail.difficulty != null">{{ trail.difficulty.name }}</td>
+      <td>{{trail.location}}</td>
+    </tr>
+  </tbody>
+</table>
+

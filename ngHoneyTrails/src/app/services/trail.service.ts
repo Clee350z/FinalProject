@@ -9,7 +9,7 @@ import { AuthService } from './auth.service';
 })
 export class TrailService {
   private baseUrl ='http://localhost:8086/';
-  private url = this.baseUrl + 'api/trails';
+  private url = this.baseUrl + 'api/trails/';
 
   constructor(
     private http: HttpClient,

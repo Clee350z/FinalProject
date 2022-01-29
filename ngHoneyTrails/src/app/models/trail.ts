@@ -27,8 +27,5 @@ export class Trail {
                 this.longitude = longitude;
                 this.difficulty = difficulty;
                 this.comments = comments;
-
-
-
               }
 }

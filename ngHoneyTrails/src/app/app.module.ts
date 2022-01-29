@@ -14,8 +14,8 @@ import { HikeReportCommentComponent } from './components/hike-report-comment/hik
 @NgModule({
   declarations: [
     AppComponent,
-TrailComponent,
-UserComponent,
+    TrailComponent,
+    UserComponent,
     HikePhotoComponent,
     HikeReportComponent,
     HikeReportCommentComponent
