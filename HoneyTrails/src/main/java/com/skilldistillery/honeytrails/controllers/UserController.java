@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -40,6 +42,21 @@ public class UserController {
 			res.setStatus(404);
 		} else {
 			res.setStatus(200);
+		}
+		return user;
+	}
+	
+	@PutMapping("users/{userid}")
+	public User updateUser(@PathVariable int userid, @RequestBody User user, HttpServletResponse res, Principal principal) {
+		try {
+			if (uServ.getUserById(userid) != null) {
+				uServ.updateUser(userid, user, principal.getName());
+			} else {
+				res.setStatus(404);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.setStatus(400);
 		}
 		return user;
 	}

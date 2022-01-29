@@ -11,7 +11,7 @@ public List<User> getAllUsers();
 	
 	public User getUserById(int userId);
 	
-	public User updateUser(int userId, User user);
+	public User updateUser(int userId, User user, String username);
 	
 	public void deleteUser(int userId);
 
