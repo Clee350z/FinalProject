@@ -10,7 +10,7 @@ import com.skilldistillery.honeytrails.repositories.UserRepository;
 
 @Service
 public class UserServiceImpl implements UserService {
-	
+
 	@Autowired
 	private UserRepository uRepo;
 
@@ -25,8 +25,12 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User updateUser(int userId, User user) {
-		// TODO Auto-generated method stub
+	public User updateUser(int userId, User user, String username) {
+		if (user.getUsername() == username) {
+			if (uRepo.existsById(userId)) {
+				return uRepo.save(user);
+			}
+		}
 		return null;
 	}
 
