@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +21,7 @@ import com.skilldistillery.honeytrails.services.TrailService;
 
 @RestController
 @RequestMapping("api")
+@CrossOrigin({"*", "http://localhost:4300"})
 public class TrailController {
 	
 	@Autowired
@@ -44,9 +46,9 @@ public class TrailController {
 	 * get trail by id
 	 ---------------------------------------------------------------------*/
 
-	@GetMapping("trails/{id}")
-	public Trail getTrailById(@PathVariable int id, HttpServletResponse res) {
-		Trail trail = trailSvc.getTrailById(id);
+	@GetMapping("trails/{trailId}")
+	public Trail getTrailById(@PathVariable int trailId, HttpServletResponse res) {
+		Trail trail = trailSvc.getTrailById(trailId);
 		if (trail == null) {
 			res.setStatus(404);
 		}
@@ -78,11 +80,11 @@ public class TrailController {
 	 * edit a trail
 	 ---------------------------------------------------------------------*/
 	
-	@PutMapping("trails/{id}")
-	public Trail editExercise(@PathVariable int id, @RequestBody Trail trail, HttpServletResponse res) {
+	@PutMapping("trails/{trailId}")
+	public Trail editExercise(@PathVariable int trailId, @RequestBody Trail trail, HttpServletResponse res) {
 		try {
-			if (trailSvc.getTrailById(id) != null) {
-				trailSvc.updateTrail(id, trail);
+			if (trailSvc.getTrailById(trailId) != null) {
+				trailSvc.updateTrail(trailId, trail);
 			} else {
 				res.setStatus(404);
 			}
@@ -97,10 +99,10 @@ public class TrailController {
 	 * delete a trail
 	 ---------------------------------------------------------------------*/
 	
-	@DeleteMapping("trails/{id}")
-	public void deleteExercise(@PathVariable int id, HttpServletResponse res) {
+	@DeleteMapping("trails/{trailId}")
+	public void deleteExercise(@PathVariable int trailId, HttpServletResponse res) {
 		try {
-		if(trailSvc.deleteTrail(id)) {
+		if(trailSvc.deleteTrail(trailId)) {
 			res.setStatus(204);
 		}else {
 			res.setStatus(404);
