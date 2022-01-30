@@ -33,6 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()     // will hit the OPTIONS on the route
         .antMatchers(HttpMethod.GET, "/api/trails/**").permitAll()     // anybody can look at GET request can be viewed without logging in .
         .antMatchers(HttpMethod.GET, "/api/hikereports/**").permitAll()     // anybody can look at GET request can be viewed without logging in .
+        .antMatchers(HttpMethod.GET, "/api/grouphikes/**").permitAll()     // anybody can look at GET request can be viewed without logging in .
         .antMatchers("/api/**").authenticated() // Requests for our REST API must be authorized.
         .anyRequest().permitAll()               // All other requests are allowed without authorization.
         .and()

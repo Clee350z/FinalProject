@@ -79,6 +79,31 @@ public class GroupHikeServiceImpl implements GroupHikeService {
 		}
 		return updatedGroupHike;
 	}
+	
+	@Override
+	public GroupHike hideGroupHikeById(GroupHike groupHike, int groupHikeId, String username) {
+		GroupHike hiddenGroupHike = ghRepo.findById(groupHikeId).get();
+		if (hiddenGroupHike == null) {
+			return null;
+		}
+		User user = uRepo.findByUsername(username);
+		if (user == hiddenGroupHike.getCreatedByUser()) {
+
+			if (groupHike.getTrail() != null) {
+				hiddenGroupHike.setTrail(groupHike.getTrail());
+			}
+			if (groupHike.getUsers() != null) {
+				hiddenGroupHike.setUsers(groupHike.getUsers());
+			}
+			hiddenGroupHike.setEventName(groupHike.getEventName());
+			hiddenGroupHike.setMeetupDate(groupHike.getMeetupDate());
+//			updatedGroupHike.setHidden(true);
+
+			ghRepo.saveAndFlush(hiddenGroupHike);
+
+		}
+		return hiddenGroupHike;
+	}
 
 	@Override
 	public void deleteGroupHikeById(int groupHikeId, String username) {

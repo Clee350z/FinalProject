@@ -1,1 +1,65 @@
 <p>group-hike-comment works!</p>
+
+<div name="group-hikes-comments" *ngIf="!selected && !editGroupHikeComment && !addGroupHikeComment">
+  <br />
+  <button (click)="addGroupHikeComment = true">Add Comment</button>
+  <div class="groupHikeCommentsTable">
+    <table class="content-table" >
+      <thead>
+        <tr>
+          <th>Comment:</th>
+          <th>User:</th>
+          <th>Posted on:</th>
+          <th>Group Hike:</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="table-secondary" *ngFor="let groupHikeComment of groupHikeComments" (click)="selected = groupHikeComment" (click)="displayGroupHikeComment(groupHikeComment)">
+          <td class="groupHikeCommentTableData">{{ groupHikeComment.commentBox }}</td>
+          <td class="groupHikeCommentTableData">{{ groupHikeComment.user }}</td>
+          <td class="groupHikeCommentTableData">{{ groupHikeComment.createDate }}</td>
+          <td class="groupHikeCommentTableData">{{ groupHikeComment.groupHike }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <br />
+  </div>
+</div>
+
+<div class="groupHikeCommentDisplay" *ngIf="selected && !addGroupHikeComment && !editGroupHikeComment">
+  <ul>
+    <br>
+    <li class="groupHikeCommentDetails">Text: {{ selected.commentBox }}</li>
+    <li class="groupHikeCommentDetails">User: {{ selected.user }}</li>
+    <li class="groupHikeCommentDetails">Posted: {{ selected.createDate }}</li>
+    <li class="groupHikeCommentDetails">Group Hike: {{ selected.groupHike }}</li>
+    <button class="formButtons" (click)="selected = null">Back</button>
+    <button class="formButtons" (click)="setEditGroupHikeComment()">Update</button>
+    <button class="formButtons" (click)="deleteGroupHikeComment(selected.id)" (click)="selected = null">
+    <!-- <button class="formButtons" (click)="setEditTournament()">Update</button>
+    <button class="formButtons" (click)="deleteTournament(selected.id)" (click)="selected = null"> -->
+    Delete
+    </button>
+  </ul>
+</div>
+
+<div class="addCommentForm" *ngIf="!selected && addGroupHikeComment && !editGroupHikeComment">
+  <form>
+    <div>
+      <label for="newCommentBox"></label>
+      <input type="text" name="newCommentBox" [(ngModel)]="newGroupHikeComment.commentBox" />
+      <input type="submit" name="addCommentButton" (click)="createGroupHikeComment(newGroupHikeComment)">
+    </div>
+  </form>
+</div>
+
+<div class="updateCommentForm" *ngIf="editGroupHikeComment">
+  <form>
+    <div>
+      <label for="editCommentbox"></label>
+      <input type="text" name="editCommentbox" [(ngModel)]="editGroupHikeComment.commentBox" />
+      <input type="submit" name="editCommentButton" (click)="updateGroupHikeComment(editGroupHikeComment)">
+    </div>
+  </form>
+</div>
+
