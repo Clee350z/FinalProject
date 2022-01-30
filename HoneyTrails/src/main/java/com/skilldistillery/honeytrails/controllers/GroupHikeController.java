@@ -26,7 +26,7 @@ public class GroupHikeController {
 	
 	@Autowired GroupHikeService ghServ;
 	
-	@GetMapping("trails/grouphikes")
+	@GetMapping("grouphikes")
 	public List<GroupHike> index(HttpServletResponse res) {
 		List<GroupHike> groupHikes = ghServ.getAllGroupHikes();
 		if(groupHikes.size() <= 0) {
@@ -37,7 +37,7 @@ public class GroupHikeController {
 		return groupHikes;
 	}
 	
-	@GetMapping("trails/{trailId}/grouphikes/{groupHikeId}")
+	@GetMapping("grouphikes/{groupHikeId}")
 	public GroupHike groupHikeById(@PathVariable int groupHikeId, HttpServletResponse res) {
 		GroupHike groupHike = ghServ.getGroupHikeById(groupHikeId);
 		if(groupHike == null) {
@@ -48,7 +48,7 @@ public class GroupHikeController {
 		return groupHike;
 	}
 	
-	@GetMapping("trails/{trailId}/grouphikes/eventname/{eventname}")
+	@GetMapping("grouphikes/eventname/{eventname}")
 	public GroupHike groupHikeByEventName(@PathVariable String eventname, HttpServletResponse res) {
 		GroupHike groupHikeByName = ghServ.getGroupHikeByEventName(eventname);
 		if(groupHikeByName == null) {
@@ -62,7 +62,7 @@ public class GroupHikeController {
 	
 	// TODO: add get groups by trail id
 	
-	@PostMapping("trails/{trailId}/grouphikes")
+	@PostMapping("grouphikes")
 	public GroupHike createGroupHike(@PathVariable int trailId, @RequestBody GroupHike groupHike, HttpServletResponse res, Principal principal) {
 		GroupHike newGroupHike = ghServ.addGroupHike(groupHike, principal.getName(), trailId);
 		if(newGroupHike == null) {
@@ -73,7 +73,7 @@ public class GroupHikeController {
 		return newGroupHike;
 	}
 	
-	@PutMapping("trails/{trailId}/grouphikes/{groupHikeId}")
+	@PutMapping("grouphikes/{groupHikeId}")
 	public GroupHike updateGroupHike(@RequestBody GroupHike groupHike, @PathVariable int groupHikeId, HttpServletResponse res, Principal principal) {
 		GroupHike updatedGroupHike = ghServ.updateGroupHikeById(groupHike, groupHikeId, principal.getName());
 		if(updatedGroupHike != groupHike) {
@@ -84,7 +84,18 @@ public class GroupHikeController {
 		return updatedGroupHike;
 	}
 	
-	@DeleteMapping("trails/{trailId}/grouphikes/{groupHikeId}")
+	@PutMapping("grouphikes/hide/{groupHikeId}")
+	public GroupHike hideGroupHike(@RequestBody GroupHike groupHike, @PathVariable int groupHikeId, HttpServletResponse res, Principal principal) {
+		GroupHike updatedGroupHike = ghServ.hideGroupHikeById(groupHike, groupHikeId, principal.getName());
+		if(updatedGroupHike != groupHike) {
+			res.setStatus(200);
+		} else {
+			res.setStatus(400);
+		}
+		return updatedGroupHike;
+	}
+	
+	@DeleteMapping("grouphikes/{groupHikeId}")
 	public void deletedGroupHike(@PathVariable int groupHikeId, Principal principal) {
 		ghServ.deleteGroupHikeById(groupHikeId, principal.getName());
 	}

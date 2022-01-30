@@ -28,7 +28,7 @@ public class GroupHikeCommentController {
 	private GroupHikeCommentService ghcServ;
 	
 	
-	@GetMapping("trails/grouphikes/{groupHikeId}/comments")
+	@GetMapping("grouphikes/comments")
 	public List<GroupHikeComment> getAllGhcComments(HttpServletResponse res) {
 		
 		List<GroupHikeComment> comments = ghcServ.getAllGroupHikeComments();
@@ -40,7 +40,7 @@ public class GroupHikeCommentController {
 		return comments;
 	}
 	
-	@GetMapping("trails/grouphikes/{groupHikeId}/comments/{commentId}")
+	@GetMapping("grouphikes/{groupHikeId}/comments/{commentId}")
 	public GroupHikeComment getGHCById(@PathVariable int commentId, HttpServletResponse res) {
 		GroupHikeComment ghc = ghcServ.getGroupHikeCommentById(commentId);
 		if(ghc == null) {
@@ -62,7 +62,7 @@ public class GroupHikeCommentController {
 		
 	}
 	
-	@PutMapping("trails/grouphikes/{groupHikeId}/comments/{commentId}")
+	@PutMapping("grouphikes/{groupHikeId}/comments/{commentId}")
 	public GroupHikeComment updateGHC(@PathVariable int commentId, @PathVariable int groupHikeId, @RequestBody GroupHikeComment ghc, HttpServletResponse res, Principal principal) {
 		GroupHikeComment updatedGHC = ghcServ.updateGroupHikeCommentById(ghc, commentId, principal.getName(), groupHikeId);
 		if(updatedGHC != ghc) {
@@ -75,7 +75,7 @@ public class GroupHikeCommentController {
 		return updatedGHC;
 	}
 	
-	@DeleteMapping("trails/grouphikes/{groupHikeId}/comments/{commentId}")
+	@DeleteMapping("grouphikes/comments/{commentId}")
 	public void deleteGHC(@PathVariable int commentId, Principal principal) {
 		ghcServ.deleteGroupHikeCommentById(commentId, principal.getName());
 	}
