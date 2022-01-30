@@ -67,6 +67,15 @@ export class GroupHikeService {
     )
   }
 
+  hide(groupHike: GroupHike):Observable<GroupHike>{
+    return this.http.put<GroupHike>(this.url + "/hide/" + groupHike.id, groupHike, this.getHttpOptions()).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('Error updating groupHike');
+      })
+    )
+  }
+
   delete(groupHikeId: number): Observable<void> {
     return this.http.delete<void>(this.url + "/" + groupHikeId, this.getHttpOptions()).pipe(
       catchError((err: any) => {

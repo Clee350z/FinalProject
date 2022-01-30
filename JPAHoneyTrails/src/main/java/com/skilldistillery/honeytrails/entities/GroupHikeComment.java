@@ -50,6 +50,8 @@ public class GroupHikeComment {
 	@JsonIgnore
 	private List<GroupHikeComment> replies;
 	
+	private boolean hidden;
+	
 	/*-----------------------------------------------------------------------------------------------------
 	 * 
 	 *       Constructor
@@ -123,11 +125,20 @@ public class GroupHikeComment {
 		this.groupHike = groupHike;
 	}
 	
+	
 	/*-----------------------------------------------------------------------------------------------------
 	 * 
 	 *      Hashcode & Equals
 	 * 
 	 -----------------------------------------------------------------------------------------------------*/
+
+	public boolean isHidden() {
+		return hidden;
+	}
+
+	public void setHidden(boolean hidden) {
+		this.hidden = hidden;
+	}
 
 	@Override
 	public int hashCode() {

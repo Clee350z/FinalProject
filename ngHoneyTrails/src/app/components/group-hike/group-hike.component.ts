@@ -15,7 +15,7 @@ export class GroupHikeComponent implements OnInit {
   editGroupHike: GroupHike | null = null;
   groupHikes: GroupHike[] = [];
   addGroupHikeFormSelected: boolean = false;
-  updateGroupHikeFormSelected: boolean = false;
+  updateGroupHikeFormSelected: boolean  = false;
 
   constructor(
     private ghServ: GroupHikeService,
@@ -89,6 +89,19 @@ export class GroupHikeComponent implements OnInit {
         if(goToDetails) {
           this.selected = gh;
         }
+        this.reload();
+      },
+      error: (fail) => {
+        console.error('GroupHikeComponent.updateGroupHike(): error on update')
+        console.error(fail);
+      }
+    });
+  }
+
+  hideGroupHike(groupHike: GroupHike, goToDetails = true): void {
+    this.ghServ.hide(groupHike).subscribe({
+      next: (gh) =>  {
+
         this.reload();
       },
       error: (fail) => {
