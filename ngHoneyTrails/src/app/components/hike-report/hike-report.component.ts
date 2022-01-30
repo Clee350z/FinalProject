@@ -13,7 +13,7 @@ export class HikeReportComponent implements OnInit {
   title = 'Hike Report';
   reports: HikeReport[] = [];
   selected: HikeReport | null = null;
-  newReport: HikeReport | null = null;
+  // newReport: HikeReport = new HikeReport();
   editReport: HikeReport | null = null;
 
   constructor(private HRptSvc: HikeReportService,
@@ -58,7 +58,15 @@ export class HikeReportComponent implements OnInit {
 
   addReport(report: HikeReport){
     // this.HRptSvc.create(this.newReport);
-    // this.
+    this.HRptSvc.create(report).subscribe({
+      next: (report) => {
+        // this.newReport = new HikeReport();
+        this.reload();
+      },
+      error:(fail) => {
+        console.error('Error on creation');
+      }
+    });
   }
 
   displayReport(report: HikeReport){
