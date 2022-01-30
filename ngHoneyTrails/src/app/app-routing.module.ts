@@ -18,6 +18,7 @@ const routes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'trails', component: TrailComponent },
   { path: 'hikereports', component: HikeReportComponent },
+  { path: 'hikereports/:id', component: HikeReportComponent },
   { path: 'grouphikes', component: GroupHikeComponent },
   { path: 'photos', component: HikePhotoComponent },
   { path: '**', component: NotFoundComponent },

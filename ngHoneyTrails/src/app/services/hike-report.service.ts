@@ -34,4 +34,16 @@ index():Observable<HikeReport[]>{
   );
 }
 
+
+show(reportId: number): Observable<HikeReport> {
+return this.http.get<HikeReport>(`${this.url}/${reportId}`).pipe(
+  catchError((err: any) => {
+    console.error("HikeReportService.show(): error retrieving report");
+    console.error(err);
+    return throwError(
+      () => new Error('HikeReportService.show(): err retrieving report' + err)
+    );
+  })
+);
+}
 }
