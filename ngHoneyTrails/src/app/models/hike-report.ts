@@ -1,37 +1,37 @@
-import { Condition } from "./condition";
-import { Trail } from "./trail";
-import { User } from "./user";
+import { Condition } from './condition';
+import { Trail } from './trail';
+import { User } from './user';
 
 export class HikeReport {
-id: number;
-hikeTitle: string | undefined;
-trails: Trail | undefined;
-condition: Condition | undefined;
-report: string | undefined;
-dateCreated: string | undefined;
-hikedDate: string | undefined;
-user: User | undefined;
-rating: number | undefined;
+  id: number;
+  hikeTitle: string;
+  report: string;
+  dateCreated: string;
+  hikedDate: string;
+  rating: number;
+  trail: Trail;
+  user: User ;
+  condition: Condition ;
 
-constructor(
-id: number = 0,
-hikeTitle?: string,
-trails?: Trail,
-condition?: Condition,
-report?: string,
-dateCreated?: string ,
-hikedDate?: string,
-user?: User,
-rating?: number
-){
-this.id = id;
-this.hikeTitle = hikeTitle;
-this.trails = trails;
-this.condition = condition;
-this.report = report;
-this.dateCreated = dateCreated;
-this.hikedDate = hikedDate;
-this.user = user;
-this.rating = rating;
-}
+  constructor(
+    trail: Trail,
+    user: User,
+    condition: Condition,
+    id?: number,
+    hikeTitle?: string,
+    report?: string,
+    dateCreated?: string,
+    hikedDate?: string,
+    rating?: number,
+  ) {
+    this.id = id || 0;
+    this.hikeTitle = hikeTitle || '';
+    this.report = report || '';
+    this.dateCreated = dateCreated || '';
+    this.hikedDate = hikedDate || '';
+    this.rating = rating || 0;
+    this.trail = trail;
+    this.user = user;
+    this.condition = condition;
+  }
 }
