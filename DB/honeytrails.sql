@@ -136,6 +136,7 @@ CREATE TABLE IF NOT EXISTS `group_hike` (
   `meetup_time` TIME NULL,
   `description` TEXT NULL,
   `image_url` VARCHAR(1500) NULL,
+  `hidden` TINYINT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_event_user1_idx` (`user_id` ASC),
   INDEX `fk_event_trail1_idx` (`trail_id` ASC),
@@ -341,6 +342,7 @@ CREATE TABLE IF NOT EXISTS `group_hike_comment` (
   `create_date` DATETIME NULL,
   `reply_to_id` INT NULL,
   `group_hike_id` INT NOT NULL,
+  `hidden` TINYINT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_group_hike_comments_user1_idx` (`user_id` ASC),
   INDEX `fk_group_hike_comments_group_hike_comments1_idx` (`reply_to_id` ASC),
@@ -418,6 +420,7 @@ START TRANSACTION;
 USE `honeytrailsdb`;
 INSERT INTO `user` (`id`, `username`, `password`, `profile_picture`, `role`, `enabled`, `first_name`, `last_name`, `address_id`, `biography`) VALUES (1, 'admin', '$2a$10$KJh/cJ4YO.f8zwcjN7HLHOzRC/Rn/Xf3BJwGjdqLlVR7ZYNdoWV/y', NULL, 'ROLE_ADMIN', 1, 'Honeycomb', 'Hearts', 1, 'We are ze creators of Honey Trails!');
 INSERT INTO `user` (`id`, `username`, `password`, `profile_picture`, `role`, `enabled`, `first_name`, `last_name`, `address_id`, `biography`) VALUES (2, 'tester', '$2a$10$t0JMDym48MB5hZSMVfk74eMYxUOa/VTb2/ULVpZxUZOHiT0YNk4nm', NULL, 'ROLE_TEST', 1, 'test', 'test', NULL, NULL);
+INSERT INTO `user` (`id`, `username`, `password`, `profile_picture`, `role`, `enabled`, `first_name`, `last_name`, `address_id`, `biography`) VALUES (3, 'jenny12', '$2a$10$pim7BCTCtoZ1yOVFHuCSXerXhfjfYUOFQJjbpcoDEJAeslUHNg1qu', NULL, 'ROLE_TEST', 1, 'Jenny', 'Zimmersum', NULL, 'BOOM');
 
 COMMIT;
 
@@ -428,6 +431,8 @@ COMMIT;
 START TRANSACTION;
 USE `honeytrailsdb`;
 INSERT INTO `trail_comment` (`id`, `comment_body`, `time_posted`, `user_id`, `trail_id`) VALUES (1, 'The trail was so beautiful!', '2021-01-09 13:15:15', 2, 2);
+INSERT INTO `trail_comment` (`id`, `comment_body`, `time_posted`, `user_id`, `trail_id`) VALUES (2, 'I love Colorado trails!', '2022-01-02 23:23:25', 3, 2);
+INSERT INTO `trail_comment` (`id`, `comment_body`, `time_posted`, `user_id`, `trail_id`) VALUES (3, 'I hiked this trail when I visited Japan in 2012!', '2022-01-15 15:19:24', 3, 4);
 
 COMMIT;
 
@@ -437,7 +442,9 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `honeytrailsdb`;
-INSERT INTO `group_hike` (`id`, `event_name`, `meetup_date`, `user_id`, `trail_id`, `meetup_time`, `description`, `image_url`) VALUES (1, 'Trail Fun Time', '2021-02-28', 2, 4, '15:04:04', 'Let\'s All Hike Together & Enjoy Nature While Being Healthy!!', 'https://files.slack.com/files-pri/T052X7BAZ-F02V6GUQ00N/image_from_ios.jpg');
+INSERT INTO `group_hike` (`id`, `event_name`, `meetup_date`, `user_id`, `trail_id`, `meetup_time`, `description`, `image_url`, `hidden`) VALUES (1, 'Trail Fun Time', '2021-02-28', 2, 4, '15:04:04', 'Let\'s All Hike Together & Enjoy Nature While Being Healthy!!', 'https://files.slack.com/files-pri/T052X7BAZ-F02V6GUQ00N/image_from_ios.jpg', 0);
+INSERT INTO `group_hike` (`id`, `event_name`, `meetup_date`, `user_id`, `trail_id`, `meetup_time`, `description`, `image_url`, `hidden`) VALUES (2, 'Hike Forever', '2022-01-01', 2, 3, '13:15:15', 'Hike this trail again', NULL, 0);
+INSERT INTO `group_hike` (`id`, `event_name`, `meetup_date`, `user_id`, `trail_id`, `meetup_time`, `description`, `image_url`, `hidden`) VALUES (3, 'Tiffany\'s Birthday hike', '2022-01-05', 3, 2, '12:12:12', 'Hiking for Tiffany\'s 18th birthday!', NULL, 0);
 
 COMMIT;
 
@@ -495,6 +502,8 @@ COMMIT;
 START TRANSACTION;
 USE `honeytrailsdb`;
 INSERT INTO `hike_report_comment` (`id`, `comment_box`, `hike_report_id`, `user_id`, `create_date`, `reply_to_id`) VALUES (1, 'This was such a great group hike!', 1, 2, '2021-01-15 15:15:15', NULL);
+INSERT INTO `hike_report_comment` (`id`, `comment_box`, `hike_report_id`, `user_id`, `create_date`, `reply_to_id`) VALUES (2, 'I love hiking', 2, 3, '2022-01-15 12:12:12', NULL);
+INSERT INTO `hike_report_comment` (`id`, `comment_box`, `hike_report_id`, `user_id`, `create_date`, `reply_to_id`) VALUES (3, 'When can I go hiking again?!?!?', 2, 3, '2022-01-16 13:15:28', NULL);
 
 COMMIT;
 
@@ -524,7 +533,9 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `honeytrailsdb`;
-INSERT INTO `group_hike_comment` (`id`, `comment_box`, `user_id`, `create_date`, `reply_to_id`, `group_hike_id`) VALUES (1, 'This was a beautiful hike!', 2, '2021-01-01 15:15:15', NULL, 1);
+INSERT INTO `group_hike_comment` (`id`, `comment_box`, `user_id`, `create_date`, `reply_to_id`, `group_hike_id`, `hidden`) VALUES (1, 'This was a beautiful hike!', 2, '2021-01-01 15:15:15', NULL, 1, 0);
+INSERT INTO `group_hike_comment` (`id`, `comment_box`, `user_id`, `create_date`, `reply_to_id`, `group_hike_id`, `hidden`) VALUES (2, 'I love hiking', 3, '2022-01-10 13:13:13', NULL, 2, 0);
+INSERT INTO `group_hike_comment` (`id`, `comment_box`, `user_id`, `create_date`, `reply_to_id`, `group_hike_id`, `hidden`) VALUES (3, 'Hiking FOREVER!!', 2, '2021-01-15 15:15:15', NULL, 2, 0);
 
 COMMIT;
 
