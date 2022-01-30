@@ -4,13 +4,13 @@ import { Observable, catchError, throwError } from 'rxjs';
 import { Trail } from '../models/trail';
 import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TrailService {
-  private baseUrl ='http://localhost:8086/';
-  private url = this.baseUrl + 'api/trails/';
+  private url = environment.baseUrl + 'api/trails';
 
   constructor(
     private http: HttpClient,
@@ -38,7 +38,7 @@ export class TrailService {
   };
 
   viewTrailDetails(trailId : number) : Observable<Trail>{
-    return this.http.get<Trail>(this.url + trailId)
+    return this.http.get<Trail>(this.url + "/" + trailId)
     .pipe(
       catchError((err: any) => {
         console.log(err);

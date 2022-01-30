@@ -4,9 +4,9 @@ export class Trailcomment {
   id : number;
   commentBody : string;
   timePosted : Date | undefined;
-  user : User;
+  user : User | undefined;
 
-  constructor(id: number, commentBody : string, user : User, timePosted? : Date){
+  constructor(id: number = 0, commentBody : string = "", user?: User, timePosted? : Date){
     this.id = id;
     this.commentBody = commentBody;
     this.user = user;

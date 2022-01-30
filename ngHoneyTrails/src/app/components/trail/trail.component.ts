@@ -4,6 +4,8 @@ import { TrailService } from 'src/app/services/trail.service';
 import { Router } from '@angular/router';
 import { Difficulty } from 'src/app/models/difficulty';
 import { DifficultyService } from 'src/app/services/difficulty.service';
+import { TrailCommentService } from 'src/app/services/trail-comment.service';
+import { Trailcomment } from 'src/app/models/trailcomment';
 
 
 @Component({
@@ -20,12 +22,14 @@ export class TrailComponent implements OnInit {
   difficulties : Difficulty[] = [];
   trailDetailsDropDown : boolean = false;
   leaveAComment : boolean = false;
+  newTrailComment : Trailcomment = new Trailcomment();
 
 
   constructor(
     private trailSvc : TrailService,
     private router : Router,
-    private difSvc : DifficultyService
+    private difSvc : DifficultyService,
+    private trlCmntSvc : TrailCommentService
   ) { }
 
   ngOnInit(): void {
@@ -112,9 +116,23 @@ export class TrailComponent implements OnInit {
       },
 
       wrong =>{
-        console.error('WeightComponent.reload(): Error retreiving difficulties');
+        console.error('TrailComponent.reload(): Error retreiving difficulties');
         console.error(wrong);
       }
     );
+  }
+
+  createTrailComment(newComment : Trailcomment, trail : Trail){
+    this.trlCmntSvc.createNewTrailComment(newComment, trail.id).subscribe(
+      comment => {
+        this.newTrailComment = new Trailcomment();
+        this.reload();
+      },
+
+      fail => {
+        console.error('TrailComponent.reload(): Error creating comment');
+        console.error(fail);
+      }
+      )
   }
 }

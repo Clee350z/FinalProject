@@ -50,8 +50,8 @@
       <tbody>
         <div class="table-body">
         <tr *ngFor="let comment of selected.comments">
-          <td *ngIf="comment.user.profilePicture"><img src={{comment.user.profilePicture}}></td>
-          <td>{{comment.user.username}}</td>
+          <td *ngIf="comment.user && comment.user.profilePicture"><img src={{comment.user.profilePicture}}></td>
+          <td *ngIf="comment.user">{{comment.user.username}}</td>
           <td>{{comment.commentBody}}</td>
         </tr>
       </div>
@@ -61,11 +61,12 @@
     <div *ngIf="leaveAComment">
       <br>
       <form>
-
+        <input type="text" name="commentBody" [(ngModel)]="newTrailComment.commentBody"/>
+        <button *ngIf="leaveAComment" (click)="leaveAComment = false">Cancel</button>
+        <input type="submit" (click)="[createTrailComment(newTrailComment, selected), leaveAComment = false]"/>
       </form>
 
     </div>
-    <button *ngIf="leaveAComment" (click)="leaveAComment = false">Cancel</button>
 
   </div>
   <button (click)="selected = null">Back</button>
