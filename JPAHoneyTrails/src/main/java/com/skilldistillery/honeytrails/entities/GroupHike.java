@@ -59,6 +59,8 @@ public class GroupHike {
 //	@JsonIgnore
 	private List<User> users;
 	
+	private boolean hidden;
+	
 	
 	
 	/*-----------------------------------------------------------------------------------------------------
@@ -146,11 +148,20 @@ public class GroupHike {
 		this.createdByUser = createdByUser;
 	}
 	
+	public boolean isHidden() {
+		return hidden;
+	}
+	
+	public void setHidden(boolean hidden) {
+		this.hidden = hidden;
+	}
+	
 	/*-----------------------------------------------------------------------------------------------------
 	 * 
 	 *       Constructor
 	 * 
 	 -----------------------------------------------------------------------------------------------------*/
+
 
 	public GroupHike() {}
 
