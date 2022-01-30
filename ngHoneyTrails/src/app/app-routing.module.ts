@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AboutComponent } from './components/about/about.component';
+import { GroupHikeCommentComponent } from './components/group-hike-comment/group-hike-comment.component';
 import { GroupHikeComponent } from './components/group-hike/group-hike.component';
 import { HikePhotoComponent } from './components/hike-photo/hike-photo.component';
 import { HikeReportComponent } from './components/hike-report/hike-report.component';
@@ -18,7 +19,12 @@ const routes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'trails', component: TrailComponent },
   { path: 'hikereports', component: HikeReportComponent },
+  { path: 'hikereports/:id', component: HikeReportComponent },
+  { path: 'trails/:id/grouphikes', component: GroupHikeComponent },
   { path: 'grouphikes', component: GroupHikeComponent },
+  { path: 'grouphikes/:id', component: GroupHikeComponent },
+  { path: 'grouphikes/hide/:id', component: GroupHikeComponent },
+  { path: 'grouphikes/:id/comments', component: GroupHikeCommentComponent },
   { path: 'photos', component: HikePhotoComponent },
   { path: '**', component: NotFoundComponent },
 ];

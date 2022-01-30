@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { GroupHike } from 'src/app/models/group-hike';
 import { GroupHikeService } from 'src/app/services/group-hike.service';
 
@@ -15,14 +15,32 @@ export class GroupHikeComponent implements OnInit {
   editGroupHike: GroupHike | null = null;
   groupHikes: GroupHike[] = [];
   addGroupHikeFormSelected: boolean = false;
-  updateGroupHikeFormSelected: boolean = false;
+  updateGroupHikeFormSelected: boolean  = false;
 
   constructor(
     private ghServ: GroupHikeService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
+     let groupHikeIdStr = this.route.snapshot.paramMap.get('id');
+    if (!this.selected && groupHikeIdStr) {
+      let groupHikeId = Number.parseInt(groupHikeIdStr);
+      if ( !isNaN(groupHikeId)) {
+        this.ghServ.show(groupHikeId).subscribe({
+          next: (tournament: GroupHike | null) => {
+            this.selected = tournament;
+          },
+          error: (fail: string) => {
+            console.error('GroupHikeComponent.ngOnInit(): invalid groupHikeId' + fail);
+            this.router.navigateByUrl("grouphikenotfound")
+          }
+        });
+      } else {
+        this.router.navigateByUrl('invalidGroupHike');
+      }
+    }
     this.reload();
   }
 
@@ -71,6 +89,19 @@ export class GroupHikeComponent implements OnInit {
         if(goToDetails) {
           this.selected = gh;
         }
+        this.reload();
+      },
+      error: (fail) => {
+        console.error('GroupHikeComponent.updateGroupHike(): error on update')
+        console.error(fail);
+      }
+    });
+  }
+
+  hideGroupHike(groupHike: GroupHike, goToDetails = true): void {
+    this.ghServ.hide(groupHike).subscribe({
+      next: (gh) =>  {
+
         this.reload();
       },
       error: (fail) => {

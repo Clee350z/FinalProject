@@ -48,6 +48,7 @@ public class GroupHikeServiceImpl implements GroupHikeService {
 	public GroupHike addGroupHike(GroupHike groupHike, String username, int trailId) {
 		User user = uRepo.findByUsername(username);
 		groupHike.setCreatedByUser(user);
+		groupHike.setHidden(false);
 		Optional<Trail> trail = tRepo.findById(trailId);
 		if (trail.isPresent()) {
 			groupHike.setTrail(trail.get());
@@ -97,7 +98,7 @@ public class GroupHikeServiceImpl implements GroupHikeService {
 			}
 			hiddenGroupHike.setEventName(groupHike.getEventName());
 			hiddenGroupHike.setMeetupDate(groupHike.getMeetupDate());
-//			updatedGroupHike.setHidden(true);
+			hiddenGroupHike.setHidden(true);
 
 			ghRepo.saveAndFlush(hiddenGroupHike);
 

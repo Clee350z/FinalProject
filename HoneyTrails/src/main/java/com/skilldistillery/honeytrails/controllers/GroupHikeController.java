@@ -62,7 +62,7 @@ public class GroupHikeController {
 	
 	// TODO: add get groups by trail id
 	
-	@PostMapping("grouphikes")
+	@PostMapping("trails/{trailId}/grouphikes")
 	public GroupHike createGroupHike(@PathVariable int trailId, @RequestBody GroupHike groupHike, HttpServletResponse res, Principal principal) {
 		GroupHike newGroupHike = ghServ.addGroupHike(groupHike, principal.getName(), trailId);
 		if(newGroupHike == null) {
