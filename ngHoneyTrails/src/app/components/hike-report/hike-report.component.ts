@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HikeReport } from 'src/app/models/hike-report';
 import { Trail } from 'src/app/models/trail';
 import { HikeReportService } from 'src/app/services/hike-report.service';
@@ -11,13 +12,35 @@ import { HikeReportService } from 'src/app/services/hike-report.service';
 export class HikeReportComponent implements OnInit {
   title = 'Hike Report';
   reports: HikeReport[] = [];
-  // trails: Trail [] = [];
   selected: HikeReport | null = null;
+  newReport: HikeReport | null = null;
+  editReport: HikeReport | null = null;
 
-  constructor(private HRptSvc: HikeReportService) {}
+  constructor(private HRptSvc: HikeReportService,
+    private route: ActivatedRoute,
+    private router: Router) {}
 
   ngOnInit(): void {
     this.reload();
+    let reportIdStr = this.route.snapshot.paramMap.get('id');
+    if(!this.selected && reportIdStr){
+      let reportId = Number.parseInt(reportIdStr);
+      if(!isNaN(reportId)){
+        this.HRptSvc.show(reportId).subscribe({
+          next: (report) =>{
+            this.selected = report;
+          },
+          error: (fail) => {
+            console.error('Error retrieving report' + reportId);
+            this.router.navigateByUrl('reportNotFound');
+          }
+        });
+      }
+      else{
+        this.router.navigateByUrl('invalidReportId');
+
+      }
+    }
   }
   reload() {
     this.HRptSvc.index().subscribe(
@@ -31,6 +54,11 @@ export class HikeReportComponent implements OnInit {
         }
       }//end of object
     );
+  }
+
+  addReport(report: HikeReport){
+    // this.HRptSvc.create(this.newReport);
+    // this.
   }
 
   displayReport(report: HikeReport){
