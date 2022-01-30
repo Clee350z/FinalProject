@@ -1,7 +1,7 @@
 package com.skilldistillery.honeytrails.controllers;
 
 import java.security.Principal;
-import java.util.Set;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,12 +28,12 @@ public class HikeReportController {
 	@Autowired
 	private HikeReportService hkSer;
 
-	@GetMapping("trails/{trailId}/hikereports")
-	public Set<HikeReport> index(HttpServletRequest req, HttpServletResponse res, Principal principal) {
-		return hkSer.allHikeRports(principal.getName());
+	@GetMapping("hikereports")
+	public List<HikeReport> index(HttpServletRequest req, HttpServletResponse res) {
+		return hkSer.allHikeRports();
 	}
 
-	@GetMapping("trails/{trailId}/hikereports/{reportId}")
+	@GetMapping("hikereports/{reportId}")
 	public HikeReport showReport(@PathVariable int reportId, HttpServletResponse res, HttpServletRequest req,
 			Principal principal) {
 		HikeReport report = hkSer.showReport(principal.getName(), reportId);
@@ -46,7 +46,7 @@ public class HikeReportController {
 		return report;
 	}
 
-	@PostMapping("ttrails/{trailId}/hikereports")
+	@PostMapping("hikereports")
 	public HikeReport addReport(@RequestBody HikeReport report, Principal principal, HttpServletResponse res,
 			HttpServletRequest req, @PathVariable int trailId) {
 		try {
@@ -64,7 +64,7 @@ public class HikeReportController {
 		return report;
 	}
 
-	@PutMapping("trails/{trailId}/hikereports/{reportId}")
+	@PutMapping("hikereports/{reportId}")
 	public HikeReport updateReport(@PathVariable int reportId, @PathVariable int trailId,
 			@RequestBody HikeReport report, Principal principal, HttpServletResponse res, HttpServletRequest req) {
 		try {
@@ -83,7 +83,7 @@ public class HikeReportController {
 		return report;
 	}
 
-	@DeleteMapping("trails/{trailId}/hikereports/{reportId}")
+	@DeleteMapping("hikereports/{reportId}")
 	public void destroy(HttpServletRequest req, HttpServletResponse res, @PathVariable int reportId,
 			Principal principal) {
 		if (hkSer.delete(principal.getName(), reportId)) {

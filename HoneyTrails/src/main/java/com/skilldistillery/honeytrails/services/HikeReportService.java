@@ -1,12 +1,12 @@
 package com.skilldistillery.honeytrails.services;
 
-import java.util.Set;
+import java.util.List;
 
 import com.skilldistillery.honeytrails.entities.HikeReport;
 
 public interface HikeReportService {
 	
-	Set<HikeReport> allHikeRports(String username);
+	List<HikeReport> allHikeRports();
 	
 	HikeReport showReport(String username, int reportId);
 	

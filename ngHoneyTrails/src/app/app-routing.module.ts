@@ -15,14 +15,14 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'about', component: AboutComponent },
-  { path: 'trail', component: TrailComponent },
-  { path: 'hikes', component: HikeReportComponent },
+  { path: 'trails', component: TrailComponent },
+  { path: 'hikereports', component: HikeReportComponent },
   { path: 'photos', component: HikePhotoComponent },
   { path: '**', component: NotFoundComponent },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {useHash: true})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
