@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Trail } from 'src/app/models/trail';
 import { TrailService } from 'src/app/services/trail.service';
 import { Router } from '@angular/router';
+import { Difficulty } from 'src/app/models/difficulty';
+import { DifficultyService } from 'src/app/services/difficulty.service';
 
 
 @Component({
@@ -13,14 +15,22 @@ export class TrailComponent implements OnInit {
 
   trails: Trail[] = [];
   selected : Trail | null = null;
+  newTrail : Trail = new Trail();
+  addTrailFormSelected : boolean = false;
+  difficulties : Difficulty[] = [];
+  trailDetailsDropDown : boolean = false;
+  leaveAComment : boolean = false;
+
 
   constructor(
     private trailSvc : TrailService,
-    private router : Router
+    private router : Router,
+    private difSvc : DifficultyService
   ) { }
 
   ngOnInit(): void {
     this.reload();
+    this.getDifficultyList();
   }
 
   reload(){
@@ -51,4 +61,60 @@ export class TrailComponent implements OnInit {
 
   }
 
+  addTrail(newTrail : Trail) {
+    this.trailSvc.createNewTrail(newTrail).subscribe(
+      trail => {
+        this.newTrail = new Trail();
+        this.reload();
+      },
+
+      fail => {
+        this.router.navigateByUrl('/login')
+        console.error('TrailComponent.addTrail(): Error creating trail');
+        console.error(fail);
+
+      }
+    );
+    this.newTrail = new Trail();
+    this.reload();
+  }
+
+  deleteTrail(trailId : number){
+    this.trailSvc.delete(trailId).subscribe(
+      success => {
+        this.reload();
+      },
+
+      fail => {
+        console.error('Error deleting trail');
+        console.error(fail);
+      }
+    )
+  }
+
+  updateTrail(trail : Trail){
+    this.trailSvc.update(trail).subscribe(
+      success => {
+        this.reload();
+      },
+
+      fail => {
+        console.error('Error updating trail');
+        console.error(trail);
+      }
+    )
+  }
+
+  getDifficultyList(){
+    this.difSvc.index().subscribe(
+      difficulties => {
+        this.difficulties = difficulties;
+      },
+
+      wrong =>{
+        console.error('WeightComponent.reload(): Error retreiving difficulties');
+        console.error(wrong);
+      }
+    );
+  }
 }

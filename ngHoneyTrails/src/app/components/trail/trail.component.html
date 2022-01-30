@@ -1,34 +1,100 @@
-<div *ngIf="!selected">
-<table>
-  <thead>
-  </thead>
-  <tbody>
-    <tr *ngFor="let trail of trails" (click)='viewTrailDetails(trail.id)'>
-      <td>{{ trail.name }}</td>
-      <td><img src={{trail.pictureUrl}} style = "width:200px; height:300px" ></td>
-      <td>{{ trail.lengthMiles }}</td>
-      <td>{{trail.location}}</td>
-      <td *ngIf="trail.difficulty != null">{{ trail.difficulty.name }}</td>
-    </tr>
-  </tbody>
-</table>
+<!-- List of all Trails -->
+<div *ngIf="!selected && !addTrailFormSelected">
+  <button (click)="addTrailFormSelected = true">Add a Trail</button>
+      <table class="trail-table">
+        <thead>
+        </thead>
+        <tbody>
+          <tr *ngFor="let trail of trails" (click)='viewTrailDetails(trail.id)'>
+            <div class="table-responsive">
+              <div class="div-hover ">
+                <div class="table-body">
+                  <td>{{ trail.name }}</td>
+                  <td><img class="trailImage-sm" src={{trail.pictureUrl}}></td>
+                  <td>{{ trail.lengthMiles }}</td>
+                  <td>{{trail.location}}</td>
+                  <td *ngIf="trail.difficulty != null">{{ trail.difficulty.name }}</td>
+
+                </div>
+              </div>
+            </div>
+          </tr>
+        </tbody>
+      </table>
 </div>
+
+<!-- Detail of trail -->
 <div *ngIf="selected">
   <div>
-  <p>{{selected.name}}</p>
-  <img [src]="selected.pictureUrl">
-  <p>{{selected.location}}</p>
-  <p>{{selected.difficulty.name}}</p>
-  </div>
-  <div>
-    <table>
-      <thead></thead>
-      <tbody>
-        <tr *ngFor="let comment of selected.comments">
-          <td>{{comment.commentBody}}</td>
-        </tr>
-      </tbody>
+    <table class = "trail-table">
+      <div class="table-body">
+      <tr>
+        <td>{{selected.name}}</td>
+        <td><img src="selected.pictureUrl"></td>
+        <td>{{selected.location}}</td>
+        <td>{{selected.lengthMiles}}</td>
+        <td *ngIf="selected.difficulty">{{selected.difficulty.name}}</td>
+        <td *ngIf="selected.trailOpen">Trail is open</td>
+        <td *ngIf="!selected.trailOpen">Trail is closed</td>
+        <td>{{selected.latitude}}</td>
+        <td>{{selected.longitude}}</td>
+      </tr>
+    </div>
     </table>
   </div>
+  <br>
+  <!-- Comments of Trail -->
+  <div>
+    <table class = "trail-table">
+      <thead></thead>
+      <tbody>
+        <div class="table-body">
+        <tr *ngFor="let comment of selected.comments">
+          <td *ngIf="comment.user.profilePicture"><img src={{comment.user.profilePicture}}></td>
+          <td>{{comment.user.username}}</td>
+          <td>{{comment.commentBody}}</td>
+        </tr>
+      </div>
+      </tbody>
+    </table>
+    <button *ngIf="!leaveAComment" (click)="leaveAComment = true">Leave a comment</button>
+    <div *ngIf="leaveAComment">
+      <br>
+      <form>
+
+      </form>
+
+    </div>
+    <button *ngIf="leaveAComment" (click)="leaveAComment = false">Cancel</button>
+
+  </div>
   <button (click)="selected = null">Back</button>
+</div>
+
+<!-- Create Trail Form -->
+<div *ngIf="!selected && addTrailFormSelected">
+  <form>
+    <label for="name">Trail Name:</label>
+      <input type="text" name="name" [(ngModel)]="newTrail.name" />
+    <br>
+    <label for="location">Location:</label>
+      <input type="text" name="location" [(ngModel)]="newTrail.location" />
+    <br>
+    <label for="lengthMiles">Length in Miles:</label>
+      <input type="number" name="lengthMiles" [(ngModel)]="newTrail.lengthMiles" />
+    <br>
+    <label for="">Difficulty:</label>
+    <select name="difficulty" [(ngModel)]="newTrail.difficulty">
+      <option *ngFor="let difficulty of difficulties" [ngValue]="difficulty">{{difficulty.name}}</option>
+    </select>
+    <br>
+    <label for="latitude">Latitude:</label>
+      <input type="number" name="latitude" [(ngModel)]="newTrail.latitude" />
+    <br>
+    <label for="longitude">Longitude:</label>
+      <input type="number" name="longitude" [(ngModel)]="newTrail.longitude" />
+    <br>
+      <button (click)="addTrailFormSelected = false">Cancel</button>
+      <input type="submit" (click)="[addTrail(newTrail), addTrailFormSelected = false]">
+  </form>
 </div>

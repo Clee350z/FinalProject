@@ -10,11 +10,11 @@ export class Trail {
   trailOpen : boolean;
   latitude : number | undefined;
   longitude : number | undefined;
-  difficulty : Difficulty;
+  difficulty : Difficulty | undefined;
   comments : Trailcomment [] | undefined;
 
   constructor(id :number = 0, name : string = "", location : string = "", lengthMiles : number = 0,
-               trailOpen : boolean = true, difficulty : Difficulty, latitude?: number, longitude?:number,
+               trailOpen : boolean = true, difficulty?: Difficulty, latitude?: number, longitude?:number,
                comments?: Trailcomment [], pictureUrl? : string){
 
                 this.id = id;

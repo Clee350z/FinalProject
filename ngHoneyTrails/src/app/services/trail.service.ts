@@ -32,7 +32,7 @@ export class TrailService {
     .pipe(
       catchError((err: any) => {
         console.log(err);
-        return throwError('Error getting exrcise list');
+        return throwError('Error getting trail list');
       })
     );
   };
@@ -42,7 +42,7 @@ export class TrailService {
     .pipe(
       catchError((err: any) => {
         console.log(err);
-        return throwError('Error getting exrcise list');
+        return throwError('Error getting trail list');
       })
     );
   }
@@ -54,6 +54,25 @@ export class TrailService {
         return throwError('Error creating trail');
       })
     )
+  }
+
+  delete(trailId: number) {
+    return this.http.delete(this.url + '/' + trailId).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('failed to delete trail');
+      })
+    )
+  }
+
+  update(trail: Trail) {
+    return this.http.put<Trail>(this.url + '/' + trail.id, trail).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('failed to update trail');
+      })
+    )
+
   }
 
 

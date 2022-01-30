@@ -1,0 +1,42 @@
+
+/* List of Trails CSS */
+.table-responsive {
+	margin: 30px, 30px;
+	padding-top: 30px;
+    overflow-x: auto;
+}
+
+.table-body {
+    background: rgba(0, 0, 0, .75);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.div-hover  div:hover {
+	background: #65ad05;
+
+}
+
+table.trail-table tr th, table.trail-table tr td {
+  text-align: left;
+border-color: #e9e9e9;
+  color: white;
+padding: 12px 15px;
+  font-size: 20px;
+vertical-align: middle;
+}
+
+table.trail-table {
+width: 100%;
+}
+
+.trailImage-sm {
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 200px;
+  height: 200px;
+}
+
+/* Trail Detail CSS */
