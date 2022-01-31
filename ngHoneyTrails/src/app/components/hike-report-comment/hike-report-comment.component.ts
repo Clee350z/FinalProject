@@ -67,7 +67,7 @@ export class HikeReportCommentComponent implements OnInit {
 
   createReportComment(reportComment: HikeReportComment) {
     reportComment.hikeReport = this.hikeReport;
-    console.log(reportComment);
+    // console.log(reportComment);
     this.hRComServ.create(reportComment).subscribe({
       next: (comment) => {
         this.newReportComment = new HikeReportComment();

@@ -1,1 +1,27 @@
-<p>hike-photo works!</p>
+<div id="hikeReportPhoto" *ngIf="!selected">
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th></th>
+      <th>Hike Report</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let photo of photoCollection" >
+      <td class="HikePhotoDataTable">{{photo.title}}</td>
+      <td class="HikePhotoDataTable"><img src="photo.imageUrl"></td>
+      <!-- <td class="HikePhotoDataTable">{{photo.}}</td>
+      <td class="HikePhotoDataTable">{{photo.}}</td> -->
+    </tr>
+  </tbody>
+</table>
+</div>
+<div id="SinglePhoto" *ngIf="selected">
+<ul>
+  <li>Photo Id: {{selected.id}}</li>
+  <li>{{selected.title}}</li>
+  <li> <img [src]="selected.imageUrl"></li>
+</ul>
+</div>

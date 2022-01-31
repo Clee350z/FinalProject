@@ -21,8 +21,8 @@ public class HikePhotoServiceImpl implements HikePhotoService {
 	private HikeReportRepository hrRepo;
 
 	@Override
-	public List<HikePhoto> allHikePhotos(int reportId) {
-		return hkRepo.findByHikeReport_Id(reportId);
+	public List<HikePhoto> allHikePhotos() {
+		return hkRepo.findAll();
 	}
 
 	@Override
