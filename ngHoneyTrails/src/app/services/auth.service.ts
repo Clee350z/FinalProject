@@ -1,8 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { tap, catchError, throwError } from 'rxjs';
+import { tap, catchError, throwError, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from '../models/user';
+
 
 @Injectable({
   providedIn: 'root'
@@ -41,9 +42,9 @@ export class AuthService {
       );
   }
 
-  register(user: User) {
+  register(user: User) : Observable <User> {
     // create request to register a new account
-    return this.http.post(this.baseUrl + 'register', user)
+    return this.http.post<User>(this.baseUrl + 'register', user)
     .pipe(
       catchError((err: any) => {
         console.log(err);
