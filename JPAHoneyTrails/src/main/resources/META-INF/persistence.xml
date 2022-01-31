@@ -12,9 +12,10 @@
     <class>com.skilldistillery.honeytrails.entities.GroupHikeComment</class>
     <class>com.skilldistillery.honeytrails.entities.HikePhoto</class>
     <class>com.skilldistillery.honeytrails.entities.HikeReport</class>
+    <class>com.skilldistillery.honeytrails.entities.HikeReportComment</class>
+    <class>com.skilldistillery.honeytrails.entities.Trail</class>
     <class>com.skilldistillery.honeytrails.entities.TrailComment</class>
     <class>com.skilldistillery.honeytrails.entities.User</class>
-    <class>com.skilldistillery.honeytrails.entities.Trail</class>
 
 
     <properties>

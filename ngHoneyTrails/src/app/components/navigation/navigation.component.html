@@ -1,0 +1,77 @@
+<nav class="navbar navbar-expand-lg navbar-dark nav-background">
+  <div class="container-fluid">
+    <a class="navbar-brand" [routerLink]="['/home']"><img src="assets/images/logo.png" width="50" height="50"></a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarTogglerDemo02"
+      aria-controls="navbarTogglerDemo02"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+      (click)="isCollapsed = !isCollapsed"
+      [attr.aria-expanded]="!isCollapsed"
+
+
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02"
+    [ngbCollapse]='isCollapsed'
+    >
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a
+            class="nav-link active font-color"
+            aria-current="page"
+            style="color: #131118"
+            [routerLink]="['/about']"
+            >About</a
+          >
+        </li>
+
+        <li class="nav-item">
+          <a
+            class="nav-link active"
+            aria-current="page"
+            style="color: #131118"
+            [routerLink]="['/trails']"
+            >Trails</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link active"
+            aria-current="page"
+            style="color: #131118"
+            [routerLink]="['/hikereports']"
+            >Hike Reports</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link active"
+            aria-current="page"
+            style="color: #131118"
+            [routerLink]="['/grouphikes']"
+            >Group Hikes</a
+          >
+        </li>
+        <li *ngIf="! loggedIn()">
+          <a
+          class="nav-link active"
+          aria-current="page"
+          style="color: #131118"
+          [routerLink]="['/register']"
+          >Register</a>
+        </li>
+        <li *ngIf="! loggedIn()" >
+          <app-login></app-login>
+        </li>
+        <li *ngIf="loggedIn()">
+          <app-logout></app-logout>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

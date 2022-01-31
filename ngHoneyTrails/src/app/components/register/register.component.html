@@ -1,0 +1,5 @@
+<!-- New user form -->
+<input type="text" name="username" [(ngModel)]="newUser.username" required>
+<input type="text" name="firstName" [(ngModel)]="newUser.firstName" required>
+<input type="text" name="password" [(ngModel)]="newUser.password" required>
+<button (click)="register(newUser)">Register</button>

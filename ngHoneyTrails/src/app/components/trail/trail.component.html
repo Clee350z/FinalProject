@@ -1,0 +1,116 @@
+<!-- List of all Trails -->
+<div *ngIf="!selected && !addTrailFormSelected">
+  <button (click)="addTrailFormSelected = true">Add a Trail</button>
+      <table class="trail-table">
+        <thead>
+        </thead>
+        <tbody>
+          <tr *ngFor="let trail of trails" (click)='viewTrailDetails(trail.id)'>
+            <div class="table-responsive">
+              <div class="div-hover ">
+                <div class="table-body">
+                  <td>{{ trail.name }}</td>
+                  <td><img class="trailImage-sm" src={{trail.pictureUrl}}></td>
+                  <td>{{ trail.lengthMiles }}</td>
+                  <td>{{trail.location}}</td>
+                  <td *ngIf="trail.difficulty != null">{{ trail.difficulty.name }}</td>
+
+                </div>
+              </div>
+            </div>
+          </tr>
+        </tbody>
+      </table>
+</div>
+
+<!-- Detail of trail -->
+<div *ngIf="selected">
+  <div>
+    <table class = "trail-table">
+      <div class="table-body">
+      <tr>
+        <td>{{selected.name}}</td>
+        <td><img src="selected.pictureUrl"></td>
+        <td>{{selected.location}}</td>
+        <td>{{selected.lengthMiles}}</td>
+        <td *ngIf="selected.difficulty">{{selected.difficulty.name}}</td>
+        <td *ngIf="selected.trailOpen">Trail is open</td>
+        <td *ngIf="!selected.trailOpen">Trail is closed</td>
+        <td>{{selected.latitude}}</td>
+        <td>{{selected.longitude}}</td>
+        <td> <button (click)="addFormReportSelected = true">Create Hike Report</button></td>
+      </tr>
+    </div>
+    </table>
+  </div>
+  <br>
+  <!-- Comments of Trail -->
+  <div>
+    <table class = "trail-table">
+      <thead></thead>
+      <tbody>
+        <div class="table-body">
+        <tr *ngFor="let comment of selected.comments">
+          <td *ngIf="comment.user && comment.user.profilePicture"><img src={{comment.user.profilePicture}}></td>
+          <td *ngIf="comment.user">{{comment.user.username}}</td>
+          <td>{{comment.commentBody}}</td>
+        </tr>
+      </div>
+      </tbody>
+    </table>
+    <button *ngIf="!leaveAComment" (click)="leaveAComment = true">Leave a comment</button>
+    <div *ngIf="leaveAComment">
+      <br>
+      <form>
+        <input type="text" name="commentBody" [(ngModel)]="newTrailComment.commentBody"/>
+        <button *ngIf="leaveAComment" (click)="leaveAComment = false">Cancel</button>
+        <input type="submit" (click)="[createTrailComment(newTrailComment, selected), leaveAComment = false]"/>
+      </form>
+    </div>
+  </div>
+  <button (click)="selected = null">Back</button>
+</div>
+
+<!-- Create Trail Form -->
+<div *ngIf="!selected && addTrailFormSelected">
+  <form>
+    <label for="name">Trail Name:</label>
+      <input type="text" name="name" [(ngModel)]="newTrail.name" />
+    <br>
+    <label for="location">Location:</label>
+      <input type="text" name="location" [(ngModel)]="newTrail.location" />
+    <br>
+    <label for="lengthMiles">Length in Miles:</label>
+      <input type="number" name="lengthMiles" [(ngModel)]="newTrail.lengthMiles" />
+    <br>
+    <label for="">Difficulty:</label>
+    <select name="difficulty" [(ngModel)]="newTrail.difficulty">
+      <option *ngFor="let difficulty of difficulties" [ngValue]="difficulty">{{difficulty.name}}</option>
+    </select>
+    <br>
+    <label for="latitude">Latitude:</label>
+      <input type="number" name="latitude" [(ngModel)]="newTrail.latitude" />
+    <br>
+    <label for="longitude">Longitude:</label>
+      <input type="number" name="longitude" [(ngModel)]="newTrail.longitude" />
+    <br>
+      <button (click)="addTrailFormSelected = false">Cancel</button>
+      <input type="submit" (click)="[addTrail(newTrail), addTrailFormSelected = false]">
+  </form>
+</div>
+<!-- Add Hike Report -->
+<div id="addReport" *ngIf="addFormReportSelected" >
+  <h5>Add New Hike Report</h5>
+  <form>
+    <input type="text" name="title" placeholder="Title" [(ngModel)]="newReport.hikeTitle"/><br>
+    <input type="text" name="report" placeholder="Info about hike" [(ngModel)]="newReport.report"/><br>
+  <select name="condition" [(ngModel)]="newReport.condition.id">
+    <option value="{{con.id}}" *ngFor="let con of condition">{{con.name}}</option>
+  </select><br>
+  <input type="datetime-local" name="dateCreated" [(ngModel)]="newReport.dateCreated"/><br>
+  <input type="date" name="hikedDate" [(ngModel)]="newReport.hikedDate"/><br>
+  <input type="number" name="rating" [(ngModel)]="newReport.rating"/><br>
+  <input (click)="addReport(newReport); addFormReportSelected =false "  type="submit" />
+
+  </form>
+</div>

@@ -24,7 +24,6 @@ public class Address {
 	
 	private String zipcode;
 
-		
 	
 	public Address() {
 		super();

@@ -1,6 +1,8 @@
 package com.skilldistillery.honeytrails.entities;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Objects;
 
@@ -16,6 +18,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 @Table(name = "group_hike")
@@ -29,7 +33,7 @@ public class GroupHike {
 	private String eventName;
 	
 	@Column(name = "meetup_date")
-	private LocalDateTime meetupDate;
+	private LocalDate meetupDate;
 	
 	@ManyToOne
 	@JoinColumn(name= "user_id")
@@ -37,10 +41,11 @@ public class GroupHike {
 	
 	@ManyToOne
 	@JoinColumn(name = "trail_id")
+	@JsonIgnore
 	private Trail trail;
 	
 	@Column(name = "meetup_time")
-	private LocalDateTime meetupTime;
+	private LocalTime meetupTime;
 	
 	private String description;
 	
@@ -51,7 +56,12 @@ public class GroupHike {
 	@JoinTable(name="group_hike_has_user", 
 	joinColumns=@JoinColumn(name="group_hike_id"),
 	inverseJoinColumns=@JoinColumn(name="user_id"))
+//	@JsonIgnore
 	private List<User> users;
+	
+	private boolean hidden;
+	
+	
 	
 	/*-----------------------------------------------------------------------------------------------------
 	 * 
@@ -75,12 +85,20 @@ public class GroupHike {
 		this.eventName = eventName;
 	}
 
-	public LocalDateTime getMeetupDate() {
+	public LocalDate getMeetupDate() {
 		return meetupDate;
 	}
 
-	public void setMeetupDate(LocalDateTime meetupDate) {
+	public void setMeetupDate(LocalDate meetupDate) {
 		this.meetupDate = meetupDate;
+	}
+
+	public LocalTime getMeetupTime() {
+		return meetupTime;
+	}
+
+	public void setMeetupTime(LocalTime meetupTime) {
+		this.meetupTime = meetupTime;
 	}
 
 	public List<User> getUsers() {
@@ -99,12 +117,11 @@ public class GroupHike {
 		this.trail = trail;
 	}
 
-	public LocalDateTime getMeetupTime() {
-		return meetupTime;
-	}
-
-	public void setMeetupTime(LocalDateTime meetupTime) {
-		this.meetupTime = meetupTime;
+	@Override
+	public String toString() {
+		return "GroupHike [id=" + id + ", eventName=" + eventName + ", meetupDate=" + meetupDate + ", createdByUser="
+				+ createdByUser + ", trail=" + trail + ", meetupTime=" + meetupTime + ", description=" + description
+				+ ", imageUrl=" + imageUrl + "]";
 	}
 
 	public String getDescription() {
@@ -131,11 +148,20 @@ public class GroupHike {
 		this.createdByUser = createdByUser;
 	}
 	
+	public boolean isHidden() {
+		return hidden;
+	}
+	
+	public void setHidden(boolean hidden) {
+		this.hidden = hidden;
+	}
+	
 	/*-----------------------------------------------------------------------------------------------------
 	 * 
 	 *       Constructor
 	 * 
 	 -----------------------------------------------------------------------------------------------------*/
+
 
 	public GroupHike() {}
 

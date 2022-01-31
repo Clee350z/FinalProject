@@ -15,6 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -31,6 +33,7 @@ public class HikeReport {
 	private String report;
 
 	@Column(name = "date_created")
+	@CreationTimestamp
 	private LocalDateTime dateCreated;
 
 	@Column(name = "hiked_date")
@@ -40,23 +43,30 @@ public class HikeReport {
 
 	@ManyToOne
 	@JoinColumn(name = "condition_type_id")
+//	@JsonIgnore 
 	private Condition condition;
 	
 	@ManyToOne
 	@JoinColumn(name="trail_id")
-	private Trail trails;
+//	@JsonIgnore
+	private Trail trail;
 	
 	@ManyToOne
 	@JoinColumn(name="user_id")
+//	@JsonIgnore
 	private User user;
 	
 	@OneToMany(mappedBy = "hikeReport")
 	@JsonIgnore
 	private List<HikePhoto> hikePhoto;
 	
-	@OneToMany(mappedBy = "hikeReport")
+	@OneToMany(mappedBy = "hikeReportId")
 	@JsonIgnore
-	private List<GroupHikeComment> groupHikeComments;
+	private List<HikeReportComment> hikeComments;
+	
+//	@OneToMany(mappedBy = "hikeReport")
+//	@JsonIgnore
+//	private List<GroupHikeComment> hikeReportComments;
 
 	public HikeReport() {
 		super();
@@ -118,12 +128,12 @@ public class HikeReport {
 		this.condition = condition;
 	}
 
-	public Trail getTrails() {
-		return trails;
+	public Trail getTrail() {
+		return trail;
 	}
 
-	public void setTrails(Trail trails) {
-		this.trails = trails;
+	public void setTrail(Trail trails) {
+		this.trail = trails;
 	}
 
 	public User getUser() {
@@ -142,12 +152,20 @@ public class HikeReport {
 		this.hikePhoto = hikePhoto;
 	}
 
-	public List<GroupHikeComment> getGroupHikeComments() {
-		return groupHikeComments;
+//	public List<GroupHikeComment> getGroupHikeComments() {
+//		return hikeReportComments;
+//	}
+//
+//	public void setGroupHikeComments(List<GroupHikeComment> hikeReportComments) {
+//		this.hikeReportComments = hikeReportComments;
+//	}
+
+	public List<HikeReportComment> getHikeComments() {
+		return hikeComments;
 	}
 
-	public void setGroupHikeComments(List<GroupHikeComment> groupHikeComments) {
-		this.groupHikeComments = groupHikeComments;
+	public void setHikeComments(List<HikeReportComment> hikeComments) {
+		this.hikeComments = hikeComments;
 	}
 
 	@Override

@@ -57,28 +57,40 @@ public class User {
 	@JoinTable(name="favorite_trail", 
 			joinColumns=@JoinColumn(name="user_id"),
 			inverseJoinColumns=@JoinColumn(name="trail_id"))
+	@JsonIgnore
 	private List<Trail> favoriteTrails;
 
 	@ManyToMany(fetch=FetchType.LAZY)
 	@JoinTable(name="planned_hikes", 
 	joinColumns=@JoinColumn(name="user_id"),
 	inverseJoinColumns=@JoinColumn(name="trail_id"))
+	@JsonIgnore
 	private List<Trail> plannedHikes;
 	
 	@OneToMany(mappedBy = "user")
+	@JsonIgnore
 	private List<TrailComment> comments;
 	
 	@ManyToMany(fetch=FetchType.LAZY)
 	@JoinTable(name="group_hike_has_user", 
 	joinColumns=@JoinColumn(name="user_id"),
 	inverseJoinColumns=@JoinColumn(name="group_hike_id"))
+	@JsonIgnore
 	private List<GroupHike> groupHikes;
 	
 	@OneToMany(mappedBy = "createdByUser")
+	@JsonIgnore
 	private List <GroupHike> groupHikesCreated;
 	
-	@OneToMany(mappedBy = "userId")
+	@OneToMany(mappedBy = "user")
+	@JsonIgnore
 	private List<GroupHikeComment> groupHikeComments;
+	
+	@OneToMany(mappedBy = "userId")
+	@JsonIgnore
+	private List<HikeReportComment> hikeReportComments;
+	
+
 	
 	
 
@@ -223,6 +235,18 @@ public class User {
 
 	public void setGroupHikeComments(List<GroupHikeComment> groupHikeComments) {
 		this.groupHikeComments = groupHikeComments;
+	}
+
+	public List<HikeReportComment> getHikeReportComments() {
+		return hikeReportComments;
+	}
+
+	public void setHikeReportComments(List<HikeReportComment> hikeReportComments) {
+		this.hikeReportComments = hikeReportComments;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
 	}
 
 	/*-----------------------------------------------------------------------------------------------------

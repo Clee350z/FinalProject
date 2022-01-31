@@ -1,0 +1,116 @@
+<p>group-hike works!</p>
+
+<div name="group-hikes-list" *ngIf="!selected && !editGroupHike && !addGroupHikeFormSelected">
+    <br />
+    <h5 name="groupHikesTitle">Group Hikes</h5>
+    <button (click)="addGroupHikeFormSelected = true">Create Group Hike</button>
+    <div class="groupHikesTable">
+      <table class="content-table">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Date</th>
+            <th>User</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="table-secondary" *ngFor="let groupHike of groupHikes" (click)="selected = groupHike" (click)="displayGroupHike(groupHike)" >
+            <td *ngIf="!groupHike.hidden" class="groupHikeTableData">{{ groupHike.id }}</td>
+            <td *ngIf="!groupHike.hidden" class="groupHikeTableData">{{ groupHike.eventName }}</td>
+            <td *ngIf="!groupHike.hidden" class="groupHikeTableData">{{ groupHike.meetupDate }}</td>
+            <td *ngIf="!groupHike.hidden" class="groupHikeTableData">{{ groupHike.user }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <br />
+    </div>
+  </div>
+
+  <!-- Group Hike Display -->
+  <div class="groupHikeDisplay" *ngIf="selected && !addGroupHikeFormSelected && !editGroupHike">
+  <h4>{{ selected.eventName }}</h4>
+  <ul>
+    <br>
+    <li class="groupHikeDetails">Id: {{ selected.id }}</li>
+    <li class="groupHikeDetails">Tier: {{ selected.meetupDate }}</li>
+    <li class="groupHikeDetails">Creator: {{ selected.user }}</li>
+    <button class="formButtons" (click)="selected = null">Back</button>
+    <button class="formButtons" (click)="setEditGroupHike()">Update</button>
+    <button class="formButtons" (click)="hideGroupHike(selected)" (click)="selected = null" (click)="selected.hidden=true" >
+    <!-- <button class="formButtons" (click)="setEditTournament()">Update</button>
+    <button class="formButtons" (click)="deleteTournament(selected.id)" (click)="selected = null"> -->
+    Delete
+    </button>
+  </ul>
+  <div class="groupHikeComments">
+    <app-group-hike-comment [groupHike]="selected" ></app-group-hike-comment>
+  </div>
+</div>
+
+<!-- Add New GroupHike Form -->
+<div class="addNewGroupHikeForm" *ngIf="!selected && addGroupHikeFormSelected">
+  <h3>New GroupHike Form</h3>
+  <form>
+    <div>
+      <label for="newEventName">Event Name:</label>
+      <input type="text" name="newEventName" [(ngModel)]="newGroupHike.eventName" />
+    </div>
+    <div>
+      <label for="newMeetupDate">Meetup Date:</label>
+      <input type="date" name="newMeetupDate" [(ngModel)]="newGroupHike.meetupDate" />
+    </div>
+    <div>
+      <label for="newMeetupTime">Meetup Time:</label>
+      <input type="time" name="newMeetupTime" [(ngModel)]="newGroupHike.meetupTime"/>
+    </div>
+    <!-- <div>
+      <label for="newUser">Created By:</label>
+      <input type="text" name="newUser" [(ngModel)]="newGroupHike.user" />
+    </div> -->
+
+    <div>
+      <select name="trailDropdown" [(ngModel)]="newGroupHike.trail.id">
+        <option value="{{trail.id}}" *ngFor="let trail of trails"> {{trail.name}} </option>
+      </select>
+    </div>
+    <div>
+      <label for="newDescription">Description:</label>
+      <input type="text" name="newDescription" [(ngModel)]="newGroupHike.description"/>
+    </div>
+    <div>
+      <label for="newImage">Image</label>
+      <input type="text" name="newImage" [(ngModel)]="newGroupHike.imageUrl"/>
+    </div>
+    <br>
+    <!-- <input type="submit" (click)="addTournament(newTournament)"
+      value="Submit"
+      (click)="addTournamentFormSelected = false"
+    /> -->
+    <button class="formButtons" type="submit" (click)="createGroupHike(newGroupHike)" value="Submit">Submit</button>
+    <button class="formButtons" id="cancelButton" (click)="addGroupHikeFormSelected = false">Cancel</button>
+  </form>
+</div>
+
+<div class="updateGroupHikeForm" *ngIf="editGroupHike">
+  <h3>Update Group Hike Form</h3>
+  <form>
+    <label for="editEventName">Event Name:</label>
+    <input type="text" name="editEventName" [(ngModel)]="editGroupHike.eventName" />
+    <label for="editMeetupDate">Meetup Date:</label>
+    <input type="text" name="editMeetupDate" [(ngModel)]="editGroupHike.meetupDate" />
+    <label for="editMeetupTime">Meetup Time:</label>
+    <input type="text"  name="editMeetupTime" [(ngModel)]="editGroupHike.meetupTime"/>
+    <label for="editDescription">Description:</label>
+    <input type="text" name="editDescription" [(ngModel)]="editGroupHike.description" />
+    <label for="editImage">Image:</label>
+    <input type="text" name="editImage" [(ngModel)]="editGroupHike.imageUrl" />
+    <br>
+    <button class="formButtons" id="updateButton" type="submit"
+    (click)="updateGroupHike(editGroupHike)"
+    (click)="editGroupHike = null"
+    value="Submit">Submit</button>
+    <button class="formButtons" id="cancelButton" (click)="editGroupHike = null">Cancel</button>
+  </form>
+</div>
+

@@ -1,0 +1,56 @@
+<h1>{{title}}</h1>
+<div id="allHikeReports" *ngIf="!selected">
+  <table class="table table-dark table-striped">
+    <thead>
+      <tr>
+        <th>Hike Title</th>
+        <th>Date Hiked On</th>
+        <th>Delete Report</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let report of reports">
+        <td (click)="displayReport(report)">{{report.hikeTitle}}</td>
+        <td>{{report.hikedDate}}</td>
+        <td><button (click)="deleteReport(report.id)">X</button></td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
+<div *ngIf="selected && !editReport">
+<p>ID: {{selected.id}}</p>
+<p>{{selected.hikeTitle}}</p>
+<p>{{selected.dateCreated}}</p>
+<p>{{selected.condition.name}}</p>
+<p>{{selected.hikedDate}}</p>
+<p>{{selected.report}}</p>
+<p>{{selected.rating}}</p>
+<button (click)="displayTable()">Back</button>
+<button (click)="setEditReport()">Update Report</button>
+
+<div id="commentBox">
+<app-hike-report-comment [hikeReport]="selected"></app-hike-report-comment>
+</div>
+</div>
+
+<div class="updateHikeReportForm" *ngIf="editReport">
+<form>
+  <label for="editHikeTitle">Hike Title</label>
+  <input type="text" name="editHikeTitle" [(ngModel)]="editReport.hikeTitle"/>
+  <label for="editHikeReport">Hike Report</label>
+  <input type="text" name="editHikeReport"  [(ngModel)]="editReport.report"/><br>
+  <label for="editHikeCondition">Hike Condition</label>
+  <select name="editHikeCondition" [(ngModel)]="editReport.condition.id">
+    <option value="{{con.id}}" *ngFor="let con of condition">{{con.name}}</option>
+  </select><br>
+  <label for="editDateCreated">Date Created</label>
+  <input type="datetime-local" name="editDateCreated" [(ngModel)]="editReport.dateCreated"/><br>
+  <label for="editHikeDating">Hike Date</label>
+  <input type="date" name="editHikeDating" [(ngModel)]="editReport.hikedDate"/><br>
+  <label for="editHikeRating">Hike Rating</label>
+  <input type="number" name="editHikeRating" [(ngModel)]="editReport.rating"/><br>
+  <input (click)="updateReport(editReport)" type="submit" />
+</form>
+</div>

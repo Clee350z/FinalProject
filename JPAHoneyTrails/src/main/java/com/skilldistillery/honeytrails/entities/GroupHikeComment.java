@@ -1,6 +1,7 @@
 package com.skilldistillery.honeytrails.entities;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -10,9 +11,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="group_hike_comment")
@@ -26,23 +30,44 @@ public class GroupHikeComment {
 	private String commentBox;
 	
 	@ManyToOne
-	@JoinColumn(name="hike_report_id")
-	private HikeReport hikeReport;
-	
-	@ManyToOne
 	@JoinColumn(name="user_id")
-	private User userId;
+	private User user;
 	
 	@CreationTimestamp
 	@Column(name="create_date")
 	private LocalDateTime createDate;
 	
-//	@Column(name="reply_to_id")
-//	private int replyToId;
+	@ManyToOne
+	@JoinColumn(name="reply_to_id")
+	private GroupHikeComment inReplyTo;
+	
+	@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name = "group_hike_id")
+	private GroupHike groupHike;
+	
+	@OneToMany(mappedBy="inReplyTo")
+	@JsonIgnore
+	private List<GroupHikeComment> replies;
+	
+	private boolean hidden;
+	
+	/*-----------------------------------------------------------------------------------------------------
+	 * 
+	 *       Constructor
+	 * 
+	 -----------------------------------------------------------------------------------------------------*/
+	
 
 	public GroupHikeComment() {
 		super();
 	}
+	
+	/*-----------------------------------------------------------------------------------------------------
+	 * 
+	 *       Getters & Setters
+	 * 
+	 -----------------------------------------------------------------------------------------------------*/
 
 	public int getId() {
 		return id;
@@ -60,22 +85,6 @@ public class GroupHikeComment {
 		this.commentBox = commentBox;
 	}
 
-	public HikeReport getHikeReport() {
-		return hikeReport;
-	}
-
-	public void setHikeReport(HikeReport hikeReport) {
-		this.hikeReport = hikeReport;
-	}
-
-	public User getUserId() {
-		return userId;
-	}
-
-	public void setUserId(User userId) {
-		this.userId = userId;
-	}
-
 	public LocalDateTime getCreateDate() {
 		return createDate;
 	}
@@ -84,20 +93,51 @@ public class GroupHikeComment {
 		this.createDate = createDate;
 	}
 
-//	public int getReplyToId() {
-//		return replyToId;
-//	}
-//
-//	public void setReplyToId(int replyToId) {
-//		this.replyToId = replyToId;
-//	}
+	public GroupHikeComment getInReplyTo() {
+		return inReplyTo;
+	}
 
+	public void setInReplyTo(GroupHikeComment inReplyTo) {
+		this.inReplyTo = inReplyTo;
+	}
+
+	public List<GroupHikeComment> getReplies() {
+		return replies;
+	}
+
+	public void setReplies(List<GroupHikeComment> replies) {
+		this.replies = replies;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public GroupHike getGroupHike() {
+		return groupHike;
+	}
+
+	public void setGroupHike(GroupHike groupHike) {
+		this.groupHike = groupHike;
+	}
 	
 	
-	@Override
-	public String toString() {
-		return "GroupHikeComment [id=" + id + ", commentBox=" + commentBox + ", hikeReport=" + hikeReport + ", userId="
-				+ userId + ", createDate=" + createDate + "]";
+	/*-----------------------------------------------------------------------------------------------------
+	 * 
+	 *      Hashcode & Equals
+	 * 
+	 -----------------------------------------------------------------------------------------------------*/
+
+	public boolean isHidden() {
+		return hidden;
+	}
+
+	public void setHidden(boolean hidden) {
+		this.hidden = hidden;
 	}
 
 	@Override
