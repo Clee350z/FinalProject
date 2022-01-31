@@ -10,6 +10,7 @@ import { AuthService } from './auth.service';
 })
 export class GroupHikeService {
   private url = environment.baseUrl + 'api/grouphikes';
+  private url2 = environment.baseUrl + 'api/trails'
 
   constructor(private http: HttpClient, private auth: AuthService) { }
 
@@ -34,8 +35,22 @@ export class GroupHikeService {
     );
   }
 
+  show(groupHikeId: number): Observable<GroupHike> {
+    return this.http.get<GroupHike>(this.url + "/" + groupHikeId,).pipe(
+      catchError( (error: any) => {
+        console.error("GroupHikeService.show(): error finding GroupHike:");
+        console.error(error);
+        return throwError(
+          () => new Error(
+            "GroupHikeService.show(): error finding GroupHike: " + error
+          )
+        )
+      })
+    );
+  }
+
   create(groupHike: GroupHike):Observable<GroupHike>{
-    return this.http.post<GroupHike>(this.url, groupHike, this.getHttpOptions()).pipe(
+    return this.http.post<GroupHike>(this.url2 + "/" + groupHike.trail?.id + "/grouphikes", groupHike, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('Error creating groupHike');
@@ -45,6 +60,15 @@ export class GroupHikeService {
 
   update(groupHike: GroupHike):Observable<GroupHike>{
     return this.http.put<GroupHike>(this.url + "/" + groupHike.id, groupHike, this.getHttpOptions()).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('Error updating groupHike');
+      })
+    )
+  }
+
+  hide(groupHike: GroupHike):Observable<GroupHike>{
+    return this.http.put<GroupHike>(this.url + "/hide/" + groupHike.id, groupHike, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('Error updating groupHike');

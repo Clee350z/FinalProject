@@ -15,11 +15,11 @@
           </tr>
         </thead>
         <tbody>
-          <tr class="table-secondary" *ngFor="let groupHike of groupHikes" (click)="selected = groupHike" (click)="displayGroupHike(groupHike)">
-            <td class="tournamentTableData">{{ groupHike.id }}</td>
-            <td class="tournamentTableData">{{ groupHike.eventName }}</td>
-            <td class="tournamentTableData">{{ groupHike.meetupDate }}</td>
-            <td class="tournamentTableData">{{ groupHike.user }}</td>
+          <tr class="table-secondary" *ngFor="let groupHike of groupHikes" (click)="selected = groupHike" (click)="displayGroupHike(groupHike)" >
+            <td *ngIf="!groupHike.hidden" class="groupHikeTableData">{{ groupHike.id }}</td>
+            <td *ngIf="!groupHike.hidden" class="groupHikeTableData">{{ groupHike.eventName }}</td>
+            <td *ngIf="!groupHike.hidden" class="groupHikeTableData">{{ groupHike.meetupDate }}</td>
+            <td *ngIf="!groupHike.hidden" class="groupHikeTableData">{{ groupHike.user }}</td>
           </tr>
         </tbody>
       </table>
@@ -37,7 +37,7 @@
     <li class="groupHikeDetails">Creator: {{ selected.user }}</li>
     <button class="formButtons" (click)="selected = null">Back</button>
     <button class="formButtons" (click)="setEditGroupHike()">Update</button>
-    <button class="formButtons" (click)="deleteGroupHike(selected.id)" (click)="selected = null">
+    <button class="formButtons" (click)="hideGroupHike(selected)" (click)="selected = null" (click)="selected.hidden=true" >
     <!-- <button class="formButtons" (click)="setEditTournament()">Update</button>
     <button class="formButtons" (click)="deleteTournament(selected.id)" (click)="selected = null"> -->
     Delete
