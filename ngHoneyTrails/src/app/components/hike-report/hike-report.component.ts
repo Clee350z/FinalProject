@@ -12,8 +12,9 @@ import { HikeReportService } from 'src/app/services/hike-report.service';
 export class HikeReportComponent implements OnInit {
   title = 'Hike Report';
   reports: HikeReport[] = [];
+  // trails: Trail[] = [];
   selected: HikeReport | null = null;
-  // newReport: HikeReport = new HikeReport();
+  newReport: HikeReport = new HikeReport();
   editReport: HikeReport | null = null;
 
   constructor(private HRptSvc: HikeReportService,
@@ -57,10 +58,10 @@ export class HikeReportComponent implements OnInit {
   }
 
   addReport(report: HikeReport){
-    // this.HRptSvc.create(this.newReport);
+    this.HRptSvc.create(this.newReport);
     this.HRptSvc.create(report).subscribe({
       next: (report) => {
-        // this.newReport = new HikeReport();
+        this.newReport = new HikeReport();
         this.reload();
       },
       error:(fail) => {

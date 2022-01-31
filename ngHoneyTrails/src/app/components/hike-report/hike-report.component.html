@@ -15,8 +15,17 @@
     </tbody>
   </table>
   <div id="addReport">
-    <!-- <input type="text" name="title" [(ngModel)]="newReport.hikeTitle"/>
-    <input type="text" name="report" [(ngModel)]="newReport.report"/> -->
+    <h5>Add New Hike Report</h5>
+    <input type="text" name="title" placeholder="Title" [(ngModel)]="newReport.hikeTitle"/><br>
+    <input type="text" name="report" placeholder="Info about hike" [(ngModel)]="newReport.report"/><br>
+    <!-- <input  type="checkbox" name= "trail" [(ngModel)]="newReport.trails"/><br> -->
+    <select name="trails" [(ngModel)]="newReport.trails">
+      <option *ngFor="let trail of newReport.trails">{{trail}} </option>
+    </select><br>
+    <input type="datetime-local" name="dateCreated" [(ngModel)]="newReport.dateCreated"/><br>
+    <input type="date" name="hikedDate" [(ngModel)]="newReport.hikedDate"/><br>
+    <input type="number" name="rating" [(ngModel)]="newReport.rating"/><br>
+    <input (click)="addReport(newReport)" type="submit" />
   </div>
 </div>
 
