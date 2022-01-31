@@ -161,6 +161,8 @@ export class TrailComponent implements OnInit {
       comment => {
         this.newTrailComment = new Trailcomment();
         this.reload();
+        this.leaveAComment = false;
+        trail.comments?.push(comment);
       },
 
       fail => {
