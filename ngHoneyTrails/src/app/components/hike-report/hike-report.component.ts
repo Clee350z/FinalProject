@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Condition } from 'src/app/models/condition';
 import { HikeReport } from 'src/app/models/hike-report';
 import { Trail } from 'src/app/models/trail';
+import { ConditionService } from 'src/app/services/condition.service';
 import { HikeReportService } from 'src/app/services/hike-report.service';
+import { TrailService } from 'src/app/services/trail.service';
 
 @Component({
   selector: 'app-hike-report',
@@ -12,17 +15,22 @@ import { HikeReportService } from 'src/app/services/hike-report.service';
 export class HikeReportComponent implements OnInit {
   title = 'Hike Report';
   reports: HikeReport[] = [];
-  // trails: Trail[] = [];
+  trails: Trail[] = [];
+  condition: Condition[] =[];
   selected: HikeReport | null = null;
   newReport: HikeReport = new HikeReport();
   editReport: HikeReport | null = null;
 
   constructor(private HRptSvc: HikeReportService,
     private route: ActivatedRoute,
-    private router: Router) {}
+    private router: Router,
+    private tServ: TrailService,
+    private cServ: ConditionService
+    ) {}
 
   ngOnInit(): void {
     this.reload();
+
     let reportIdStr = this.route.snapshot.paramMap.get('id');
     if(!this.selected && reportIdStr){
       let reportId = Number.parseInt(reportIdStr);
@@ -42,6 +50,8 @@ export class HikeReportComponent implements OnInit {
 
       }
     }
+    this.populateTrails();
+    this.populateCondition();
   }
   reload() {
     this.HRptSvc.index().subscribe(
@@ -56,7 +66,25 @@ export class HikeReportComponent implements OnInit {
       }//end of object
     );
   }
-
+  populateTrails(){
+    this.tServ.index().subscribe({
+      next: (t)=> {
+        this.trails = t;
+      },
+      error:(fail) => {
+        console.error('Error on retrieval of trails');
+      }
+    });
+  }
+  populateCondition(){
+    this.cServ.index().subscribe({
+      next: (c) => {
+        this.condition = c;
+      },
+      error: (fail) => {
+        console.error('Error on retrieval of conditions');}
+    });
+  }
   addReport(report: HikeReport){
     this.HRptSvc.create(this.newReport);
     this.HRptSvc.create(report).subscribe({

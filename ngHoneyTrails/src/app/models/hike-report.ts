@@ -9,14 +9,12 @@ export class HikeReport {
   dateCreated: string;
   hikedDate: string;
   rating: number;
-  trails: Trail [];
-  user: User [];
-  condition: Condition [];
+  trails: Trail ;
+  condition: Condition ;
 
   constructor(
-    trails: Trail[] =[],
-    user: User[] =[],
-    condition: Condition[] =[],
+    trails?: Trail,
+    condition?: Condition,
     id?: number,
     hikeTitle?: string,
     report?: string,
@@ -30,8 +28,7 @@ export class HikeReport {
     this.dateCreated = dateCreated || '';
     this.hikedDate = hikedDate || '';
     this.rating = rating || 0;
-    this.trails = trails;
-    this.user = user;
-    this.condition = condition;
+    this.trails = trails? trails: new Trail();
+    this.condition = condition? condition : new Condition();
   }
 }
