@@ -18,9 +18,11 @@
     <h5>Add New Hike Report</h5>
     <input type="text" name="title" placeholder="Title" [(ngModel)]="newReport.hikeTitle"/><br>
     <input type="text" name="report" placeholder="Info about hike" [(ngModel)]="newReport.report"/><br>
-    <!-- <input  type="checkbox" name= "trail" [(ngModel)]="newReport.trails"/><br> -->
-    <select name="trails" [(ngModel)]="newReport.trails">
-      <option *ngFor="let trail of newReport.trails">{{trail}} </option>
+    <!-- <select name="trails" [(ngModel)]="newReport.trails.id">
+      <option value="{{trail.id}}" *ngFor="let trail of trails">{{trail.name}} </option>
+    </select><br> -->
+    <select name="condition" [(ngModel)]="newReport.condition.id">
+      <option value="{{con.id}}" *ngFor="let con of condition">{{con.name}}</option>
     </select><br>
     <input type="datetime-local" name="dateCreated" [(ngModel)]="newReport.dateCreated"/><br>
     <input type="date" name="hikedDate" [(ngModel)]="newReport.hikedDate"/><br>

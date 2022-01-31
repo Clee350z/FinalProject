@@ -46,7 +46,7 @@ public class HikeReportController {
 		return report;
 	}
 
-	@PostMapping("hikereports")
+	@PostMapping("trails/{trailId}/hikereports")
 	public HikeReport addReport(@RequestBody HikeReport report, Principal principal, HttpServletResponse res,
 			HttpServletRequest req, @PathVariable int trailId) {
 		try {
@@ -64,7 +64,7 @@ public class HikeReportController {
 		return report;
 	}
 
-	@PutMapping("hikereports/{reportId}")
+	@PutMapping("trails/{trailId}/hikereports/{reportId}")
 	public HikeReport updateReport(@PathVariable int reportId, @PathVariable int trailId,
 			@RequestBody HikeReport report, Principal principal, HttpServletResponse res, HttpServletRequest req) {
 		try {

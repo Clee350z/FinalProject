@@ -11,6 +11,7 @@ import { AuthService } from './auth.service';
 })
 export class HikeReportService {
   private url = environment.baseUrl + 'api/hikereports';
+  private url2 = environment.baseUrl + 'api/trails';
 
   constructor(private http: HttpClient, private auth: AuthService) {}
   getHttpOptions() {
@@ -39,7 +40,7 @@ export class HikeReportService {
 
   create(report: HikeReport): Observable<HikeReport> {
     return this.http
-      .post<HikeReport>(this.url, report, this.getHttpOptions())
+      .post<HikeReport>(this.url2 + "/" + report.trails.id + "/hikereports", report, this.getHttpOptions())
       .pipe(
         catchError((err: any) => {
           console.log(err);
@@ -54,7 +55,7 @@ export class HikeReportService {
   }
 
   update(report: HikeReport): Observable<HikeReport> {
-    return this.http.put<HikeReport>(this.url, this.getHttpOptions()).pipe(
+    return this.http.put<HikeReport>(this.url + "/" + report.id, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(
