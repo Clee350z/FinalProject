@@ -2,16 +2,16 @@
 <table>
   <thead>
     <tr>
-      <th>Title</th>
-      <th></th>
-      <th>Hike Report</th>
-      <th>Description</th>
+      <th>Report Title</th>
+      <th> Scenic View</th>
+      <!-- <th>Hike Report</th> -->
+      <!-- <th>Description</th> -->
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let photo of photoCollection" >
       <td class="HikePhotoDataTable">{{photo.title}}</td>
-      <td class="HikePhotoDataTable"><img src="photo.imageUrl"></td>
+      <td class="HikePhotoDataTable"><img class="photoImage-sm" src="{{photo.imageUrl}}"></td>
       <!-- <td class="HikePhotoDataTable">{{photo.}}</td>
       <td class="HikePhotoDataTable">{{photo.}}</td> -->
     </tr>
