@@ -66,9 +66,7 @@
         <button *ngIf="leaveAComment" (click)="leaveAComment = false">Cancel</button>
         <input type="submit" (click)="[createTrailComment(newTrailComment, selected), leaveAComment = false]"/>
       </form>
-
     </div>
-
   </div>
   <button (click)="selected = null">Back</button>
 </div>
