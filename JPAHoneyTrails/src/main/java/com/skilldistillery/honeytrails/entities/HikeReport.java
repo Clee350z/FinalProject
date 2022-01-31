@@ -49,7 +49,7 @@ public class HikeReport {
 	@ManyToOne
 	@JoinColumn(name="trail_id")
 //	@JsonIgnore
-	private Trail trails;
+	private Trail trail;
 	
 	@ManyToOne
 	@JoinColumn(name="user_id")
@@ -128,12 +128,12 @@ public class HikeReport {
 		this.condition = condition;
 	}
 
-	public Trail getTrails() {
-		return trails;
+	public Trail getTrail() {
+		return trail;
 	}
 
-	public void setTrails(Trail trails) {
-		this.trails = trails;
+	public void setTrail(Trail trails) {
+		this.trail = trails;
 	}
 
 	public User getUser() {

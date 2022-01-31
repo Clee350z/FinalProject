@@ -6,7 +6,7 @@ import com.skilldistillery.honeytrails.entities.HikeReportComment;
 
 public interface HikeReportCommentService {
 
-	List<HikeReportComment> getAllComments(int reportId);
+	List<HikeReportComment> getAllComments();
 
 	HikeReportComment CommentById(int commentId, int reportId);
 

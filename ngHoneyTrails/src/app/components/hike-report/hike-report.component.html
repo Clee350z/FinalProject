@@ -5,42 +5,52 @@
       <tr>
         <th>Hike Title</th>
         <th>Date Hiked On</th>
+        <th>Delete Report</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let report of reports">
         <td (click)="displayReport(report)">{{report.hikeTitle}}</td>
         <td>{{report.hikedDate}}</td>
+        <td><button (click)="deleteReport(report.id)">X</button></td>
       </tr>
     </tbody>
   </table>
-  <div id="addReport">
-    <h5>Add New Hike Report</h5>
-    <input type="text" name="title" placeholder="Title" [(ngModel)]="newReport.hikeTitle"/><br>
-    <input type="text" name="report" placeholder="Info about hike" [(ngModel)]="newReport.report"/><br>
-    <!-- <select name="trails" [(ngModel)]="newReport.trails.id">
-      <option value="{{trail.id}}" *ngFor="let trail of trails">{{trail.name}} </option>
-    </select><br> -->
-    <select name="condition" [(ngModel)]="newReport.condition.id">
-      <option value="{{con.id}}" *ngFor="let con of condition">{{con.name}}</option>
-    </select><br>
-    <input type="datetime-local" name="dateCreated" [(ngModel)]="newReport.dateCreated"/><br>
-    <input type="date" name="hikedDate" [(ngModel)]="newReport.hikedDate"/><br>
-    <input type="number" name="rating" [(ngModel)]="newReport.rating"/><br>
-    <input (click)="addReport(newReport)" type="submit" />
-  </div>
+
 </div>
 
-<div *ngIf="selected">
+<div *ngIf="selected && !editReport">
 <p>ID: {{selected.id}}</p>
-<p></p>
 <p>{{selected.hikeTitle}}</p>
-<!-- <p>{{selected.trails}}</p> showing object, WRONG! -->
 <p>{{selected.dateCreated}}</p>
+<p>{{selected.condition.name}}</p>
 <p>{{selected.hikedDate}}</p>
 <p>{{selected.report}}</p>
 <p>{{selected.rating}}</p>
-<!-- <p>{{selected.}}</p> -->
 <button (click)="displayTable()">Back</button>
+<button (click)="setEditReport()">Update Report</button>
+
+<div id="commentBox">
+<app-hike-report-comment [hikeReport]="selected"></app-hike-report-comment>
+</div>
 </div>
 
+<div class="updateHikeReportForm" *ngIf="editReport">
+<form>
+  <label for="editHikeTitle">Hike Title</label>
+  <input type="text" name="editHikeTitle" [(ngModel)]="editReport.hikeTitle"/>
+  <label for="editHikeReport">Hike Report</label>
+  <input type="text" name="editHikeReport"  [(ngModel)]="editReport.report"/><br>
+  <label for="editHikeCondition">Hike Condition</label>
+  <select name="editHikeCondition" [(ngModel)]="editReport.condition.id">
+    <option value="{{con.id}}" *ngFor="let con of condition">{{con.name}}</option>
+  </select><br>
+  <label for="editDateCreated">Date Created</label>
+  <input type="datetime-local" name="editDateCreated" [(ngModel)]="editReport.dateCreated"/><br>
+  <label for="editHikeDating">Hike Date</label>
+  <input type="date" name="editHikeDating" [(ngModel)]="editReport.hikedDate"/><br>
+  <label for="editHikeRating">Hike Rating</label>
+  <input type="number" name="editHikeRating" [(ngModel)]="editReport.rating"/><br>
+  <input (click)="updateReport(editReport)" type="submit" />
+</form>
+</div>

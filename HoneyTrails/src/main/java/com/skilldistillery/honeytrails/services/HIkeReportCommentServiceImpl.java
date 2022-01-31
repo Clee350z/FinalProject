@@ -26,8 +26,8 @@ public class HIkeReportCommentServiceImpl implements HikeReportCommentService {
 	private HikeReportRepository hikeRepo;
 
 	@Override
-	public List<HikeReportComment> getAllComments(int reportId) {
-		return comRepo.getByHikeReportId_Id(reportId);
+	public List<HikeReportComment> getAllComments() {
+		return comRepo.findAll();
 	}
 
 	@Override

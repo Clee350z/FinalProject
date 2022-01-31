@@ -85,17 +85,37 @@ export class HikeReportComponent implements OnInit {
         console.error('Error on retrieval of conditions');}
     });
   }
-  addReport(report: HikeReport){
-    this.HRptSvc.create(this.newReport);
-    this.HRptSvc.create(report).subscribe({
-      next: (report) => {
-        this.newReport = new HikeReport();
+
+
+  setEditReport(){
+    this.editReport = Object.assign({},this.selected);
+  }
+
+  updateReport(report: HikeReport, goToDetail = true): void{
+  this.HRptSvc.update(report).subscribe({
+    next: (report) =>{
+      this.editReport = null;
+      if(goToDetail){
+        this.selected = report;
+      }
+      this.reload();
+    },
+    error:(fail) => {
+      console.error('Error on update');
+    }
+  })
+  }
+
+  deleteReport(reportId: number): void{
+    this.HRptSvc.destroy(reportId).subscribe({
+      next: () =>{
         this.reload();
       },
       error:(fail) => {
-        console.error('Error on creation');
-      }
+        console.error('Error on deletion');
+  }
     });
+
   }
 
   displayReport(report: HikeReport){

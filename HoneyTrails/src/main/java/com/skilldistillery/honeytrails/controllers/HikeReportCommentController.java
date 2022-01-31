@@ -28,9 +28,9 @@ public class HikeReportCommentController {
 	@Autowired
 	private HikeReportCommentService commentSer;
 
-	@GetMapping("trails/{trailId}/hikereports/{reportId}/comments")
-	public List<HikeReportComment> index(@PathVariable int reportId) {
-		return commentSer.getAllComments(reportId);
+	@GetMapping("hikereports/comments")
+	public List<HikeReportComment> index() {
+		return commentSer.getAllComments();
 	}
 
 	@GetMapping("trails/{trailId}/hikereports/{reportId}/comments/{commentId}")

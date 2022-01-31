@@ -1,1 +1,64 @@
-<p>hike-report-comment works!</p>
+
+<div name="group-hikes-comments" *ngIf="!selected && !editReportComment && !addReportComment">
+  <br />
+  <button (click)="addReportComment = true">Add Comment</button>
+  <div class="reportCommentsTable">
+    <table class="content-table" >
+      <thead>
+        <tr>
+          <th>Comment:</th>
+          <th>User:</th>
+          <th>Posted on:</th>
+          <!-- <th>Hike Report:</th> -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="table-secondary" *ngFor="let comment of reportComments" (click)="selected = comment " (click)="displayReportComment(comment)">
+          <td class="HikeReportCommentTableData">{{ comment.commentBox }}</td>
+          <td class="HikeReportCommentTableData">{{ comment.user?.username }}</td>
+          <td class="HikeReportCommentTableData">{{ comment.createDate }}</td>
+          <!-- <td class="HikeReportCommentTableData">{{ comment.hikeReport }}</td> -->
+        </tr>
+      </tbody>
+    </table>
+    <br />
+  </div>
+</div>
+
+<div class="groupHikeCommentDisplay" *ngIf="selected && !addReportComment && !editReportComment">
+  <ul>
+    <br>
+    <li class="HikeReportCommentDetails">Text: {{ selected.commentBox }}</li>
+    <li class="HikeReportCommentDetails">User: {{ selected.user?.firstName + " " + selected.user?.lastName}}</li>
+    <li class="HikeReportCommentDetails">Posted: {{ selected.createDate }}</li>
+    <!-- <li class="HikeReportCommentDetails">Group Hike: {{ selected.groupHike }}</li> -->
+    <button class="formButtons" (click)="selected = null">Back</button>
+    <button class="formButtons" (click)="setEditReportComment()">Update</button>
+    <button class="formButtons" (click)="deleteReportComment(selected)" (click)="selected = null">
+    <!-- <button class="formButtons" (click)="setEditTournament()">Update</button>
+    <button class="formButtons" (click)="deleteTournament(selected.id)" (click)="selected = null"> -->
+    Delete
+    </button>
+  </ul>
+</div>
+
+<div class="addCommentForm" *ngIf="!selected && addReportComment && !editReportComment">
+  <form>
+    <div>
+      <label for="newCommentBox"></label>
+      <input type="text" name="newCommentBox" [(ngModel)]="newReportComment.commentBox" />
+      <input type="submit" name="addCommentButton" (click)="createReportComment(newReportComment)">
+    </div>
+  </form>
+</div>
+
+<div class="updateCommentForm" *ngIf="editReportComment">
+  <form>
+    <div>
+      <label for="editCommentbox"></label>
+      <input type="text" name="editCommentbox" [(ngModel)]="editReportComment.commentBox" />
+      <input type="submit" name="editCommentButton" (click)="updateReportComment(editReportComment)">
+    </div>
+  </form>
+</div>
+
