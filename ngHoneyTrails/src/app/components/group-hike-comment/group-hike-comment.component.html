@@ -16,7 +16,7 @@
       <tbody>
         <tr class="table-secondary" *ngFor="let groupHikeComment of groupHikeComments" (click)="selected = groupHikeComment" (click)="displayGroupHikeComment(groupHikeComment)">
           <td class="groupHikeCommentTableData">{{ groupHikeComment.commentBox }}</td>
-          <td class="groupHikeCommentTableData">{{ groupHikeComment.user }}</td>
+          <td class="groupHikeCommentTableData">{{ groupHikeComment.user?.username }}</td>
           <td class="groupHikeCommentTableData">{{ groupHikeComment.createDate }}</td>
           <td class="groupHikeCommentTableData">{{ groupHikeComment.groupHike }}</td>
         </tr>
@@ -30,7 +30,7 @@
   <ul>
     <br>
     <li class="groupHikeCommentDetails">Text: {{ selected.commentBox }}</li>
-    <li class="groupHikeCommentDetails">User: {{ selected.user }}</li>
+    <li class="groupHikeCommentDetails">User: {{ selected.user?.firstName + " " + selected.user?.lastName}}</li>
     <li class="groupHikeCommentDetails">Posted: {{ selected.createDate }}</li>
     <li class="groupHikeCommentDetails">Group Hike: {{ selected.groupHike }}</li>
     <button class="formButtons" (click)="selected = null">Back</button>
