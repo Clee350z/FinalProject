@@ -44,7 +44,7 @@
     </button>
   </ul>
   <div class="groupHikeComments">
-    <app-group-hike-comment></app-group-hike-comment>
+    <app-group-hike-comment [groupHike]="selected" ></app-group-hike-comment>
   </div>
 </div>
 
@@ -58,19 +58,21 @@
     </div>
     <div>
       <label for="newMeetupDate">Meetup Date:</label>
-      <input type="text" name="newMeetupDate" [(ngModel)]="newGroupHike.meetupDate" />
+      <input type="date" name="newMeetupDate" [(ngModel)]="newGroupHike.meetupDate" />
     </div>
     <div>
       <label for="newMeetupTime">Meetup Time:</label>
-      <input type="text" name="newMeetupTime" [(ngModel)]="newGroupHike.meetupTime"/>
+      <input type="time" name="newMeetupTime" [(ngModel)]="newGroupHike.meetupTime"/>
     </div>
-    <div>
+    <!-- <div>
       <label for="newUser">Created By:</label>
       <input type="text" name="newUser" [(ngModel)]="newGroupHike.user" />
-    </div>
+    </div> -->
+
     <div>
-      <label for="newTrail">Trail:</label>
-      <input type="text" name="newTrail" [(ngModel)]="newGroupHike.trail" />
+      <select name="trailDropdown" [(ngModel)]="newGroupHike.trail.id">
+        <option value="{{trail.id}}" *ngFor="let trail of trails"> {{trail.name}} </option>
+      </select>
     </div>
     <div>
       <label for="newDescription">Description:</label>
@@ -85,7 +87,7 @@
       value="Submit"
       (click)="addTournamentFormSelected = false"
     /> -->
-    <button class="formButtons" type="submit" (click)="createGroupHike(newGroupHike)" value="Submit"(click)="addGroupHikeFormSelected = false">Submit</button>
+    <button class="formButtons" type="submit" (click)="createGroupHike(newGroupHike)" value="Submit">Submit</button>
     <button class="formButtons" id="cancelButton" (click)="addGroupHikeFormSelected = false">Cancel</button>
   </form>
 </div>

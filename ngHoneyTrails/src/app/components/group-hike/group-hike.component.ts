@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { GroupHike } from 'src/app/models/group-hike';
+import { Trail } from 'src/app/models/trail';
 import { GroupHikeService } from 'src/app/services/group-hike.service';
+import { TrailService } from 'src/app/services/trail.service';
 
 @Component({
   selector: 'app-group-hike',
@@ -16,11 +18,13 @@ export class GroupHikeComponent implements OnInit {
   groupHikes: GroupHike[] = [];
   addGroupHikeFormSelected: boolean = false;
   updateGroupHikeFormSelected: boolean  = false;
+  trails: Trail [] = [];
 
   constructor(
     private ghServ: GroupHikeService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private tServ: TrailService
   ) { }
 
   ngOnInit(): void {
@@ -41,6 +45,7 @@ export class GroupHikeComponent implements OnInit {
         this.router.navigateByUrl('invalidGroupHike');
       }
     }
+    this.populateTrails();
     this.reload();
   }
 
@@ -63,9 +68,22 @@ export class GroupHikeComponent implements OnInit {
 
   }
 
+  populateTrails() {
+    this.tServ.index().subscribe({
+      next: (t) => {
+        this.trails = t;
+      },
+      error: (fail) => {
+        console.error('GroupHikeComponent.tServ.index(): error on populate trails');
+        console.error(fail);
+      }
+    })
+  }
+
   createGroupHike(groupHike: GroupHike) {
     this.ghServ.create(groupHike).subscribe({
       next: (gh) => {
+        this.addGroupHikeFormSelected = false;
         this.newGroupHike = new GroupHike();
         this.reload();
       },

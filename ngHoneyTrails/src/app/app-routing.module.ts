@@ -23,8 +23,8 @@ const routes: Routes = [
   { path: 'trails/:id/grouphikes', component: GroupHikeComponent },
   { path: 'grouphikes', component: GroupHikeComponent },
   { path: 'grouphikes/:id', component: GroupHikeComponent },
-  { path: 'grouphikes/hide/:id', component: GroupHikeComponent },
   { path: 'grouphikes/:id/comments', component: GroupHikeCommentComponent },
+  { path: 'grouphikes/:id/comments/:id', component: GroupHikeCommentComponent },
   { path: 'photos', component: HikePhotoComponent },
   { path: '**', component: NotFoundComponent },
 ];
