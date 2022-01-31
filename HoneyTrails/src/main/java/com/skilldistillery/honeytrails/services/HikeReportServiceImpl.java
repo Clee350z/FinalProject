@@ -41,11 +41,9 @@ public class HikeReportServiceImpl implements HikeReportService {
 		User user = userRepo.findByUsername(username);
 		Optional<Trail> trail = tRepo.findById(trailId);
 		if (trail.isPresent()) {
-			report.setTrails(trail.get());
+			report.setTrail(trail.get());
 		}
-		if (report.getUser() != null) {
 			report.setUser(user);
-		}
 		hrRepo.saveAndFlush(report);
 		return report;
 	}
@@ -55,7 +53,7 @@ public class HikeReportServiceImpl implements HikeReportService {
 		HikeReport managed = hrRepo.findByIdAndUser_Username(reportId, username);
 		Optional<Trail> trail = tRepo.findById(trailId);
 		if (trail.isPresent()) {
-			report.setTrails(trail.get());
+			report.setTrail(trail.get());
 		}
 		if (managed != null) {
 			managed.setHikeTitle(report.getHikeTitle());

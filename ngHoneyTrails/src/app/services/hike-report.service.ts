@@ -40,7 +40,7 @@ export class HikeReportService {
 
   create(report: HikeReport): Observable<HikeReport> {
     return this.http
-      .post<HikeReport>(this.url2 + "/" + report.trails.id + "/hikereports", report, this.getHttpOptions())
+      .post<HikeReport>(this.url2 + "/" + report.trail.id + "/hikereports", report, this.getHttpOptions())
       .pipe(
         catchError((err: any) => {
           console.log(err);
@@ -55,7 +55,7 @@ export class HikeReportService {
   }
 
   update(report: HikeReport): Observable<HikeReport> {
-    return this.http.put<HikeReport>(this.url + "/" + report.id, this.getHttpOptions()).pipe(
+    return this.http.put<HikeReport>(this.url2 + "/" + report.trail.id + "/hikereports/" + report.id, report, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(

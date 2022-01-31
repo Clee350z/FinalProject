@@ -86,7 +86,7 @@ public class HikeReportTest {
 		void test3() {
 			report = em.find(HikeReport.class, 2);
 			assertNotNull(report);
-			assertEquals("Eldorado Canyon State Park Trails", report.getTrails().getName());
+			assertEquals("Eldorado Canyon State Park Trails", report.getTrail().getName());
 		}
 		
 		

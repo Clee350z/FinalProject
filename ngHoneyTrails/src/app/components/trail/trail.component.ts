@@ -6,6 +6,10 @@ import { Difficulty } from 'src/app/models/difficulty';
 import { DifficultyService } from 'src/app/services/difficulty.service';
 import { TrailCommentService } from 'src/app/services/trail-comment.service';
 import { Trailcomment } from 'src/app/models/trailcomment';
+import { HikeReportService } from 'src/app/services/hike-report.service';
+import { HikeReport } from 'src/app/models/hike-report';
+import { ConditionService } from 'src/app/services/condition.service';
+import { Condition } from 'src/app/models/condition';
 
 
 @Component({
@@ -23,18 +27,24 @@ export class TrailComponent implements OnInit {
   trailDetailsDropDown : boolean = false;
   leaveAComment : boolean = false;
   newTrailComment : Trailcomment = new Trailcomment();
+  addFormReportSelected: boolean = false;
+  newReport: HikeReport = new HikeReport();
+  condition: Condition[] =[];
 
 
   constructor(
     private trailSvc : TrailService,
     private router : Router,
     private difSvc : DifficultyService,
-    private trlCmntSvc : TrailCommentService
+    private trlCmntSvc : TrailCommentService,
+    private hRptServ: HikeReportService,
+    private cServ: ConditionService
   ) { }
 
   ngOnInit(): void {
     this.reload();
     this.getDifficultyList();
+    this.populateCondition();
   }
 
   reload(){
@@ -64,6 +74,15 @@ export class TrailComponent implements OnInit {
     );
 
   }
+  populateCondition(){
+    this.cServ.index().subscribe({
+      next: (c) => {
+        this.condition = c;
+      },
+      error: (fail) => {
+        console.error('Error on retrieval of conditions');}
+    });
+  }
 
   addTrail(newTrail : Trail) {
     this.trailSvc.createNewTrail(newTrail).subscribe(
@@ -81,6 +100,21 @@ export class TrailComponent implements OnInit {
     );
     this.newTrail = new Trail();
     this.reload();
+  }
+
+  addReport(report: HikeReport){
+    if(this.selected){
+      report.trail.id = this.selected.id;
+    }
+    this.hRptServ.create(report).subscribe({
+      next: (report) => {
+        this.newReport = new HikeReport();
+        this.reload();
+      },
+      error:(fail) => {
+        console.error('Error on creation');
+      }
+    });
   }
 
   deleteTrail(trailId : number){

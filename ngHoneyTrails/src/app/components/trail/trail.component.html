@@ -38,6 +38,7 @@
         <td *ngIf="!selected.trailOpen">Trail is closed</td>
         <td>{{selected.latitude}}</td>
         <td>{{selected.longitude}}</td>
+        <td> <button (click)="addFormReportSelected = true">Create Hike Report</button></td>
       </tr>
     </div>
     </table>
@@ -97,5 +98,21 @@
     <br>
       <button (click)="addTrailFormSelected = false">Cancel</button>
       <input type="submit" (click)="[addTrail(newTrail), addTrailFormSelected = false]">
+  </form>
+</div>
+<!-- Add Hike Report -->
+<div id="addReport" *ngIf="addFormReportSelected" >
+  <h5>Add New Hike Report</h5>
+  <form>
+    <input type="text" name="title" placeholder="Title" [(ngModel)]="newReport.hikeTitle"/><br>
+    <input type="text" name="report" placeholder="Info about hike" [(ngModel)]="newReport.report"/><br>
+  <select name="condition" [(ngModel)]="newReport.condition.id">
+    <option value="{{con.id}}" *ngFor="let con of condition">{{con.name}}</option>
+  </select><br>
+  <input type="datetime-local" name="dateCreated" [(ngModel)]="newReport.dateCreated"/><br>
+  <input type="date" name="hikedDate" [(ngModel)]="newReport.hikedDate"/><br>
+  <input type="number" name="rating" [(ngModel)]="newReport.rating"/><br>
+  <input (click)="addReport(newReport); addFormReportSelected =false "  type="submit" />
+
   </form>
 </div>

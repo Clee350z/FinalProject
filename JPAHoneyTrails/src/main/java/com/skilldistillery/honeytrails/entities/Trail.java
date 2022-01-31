@@ -58,7 +58,7 @@ public class Trail{
 	@JsonIgnore
 	private List<GroupHike> groupHikes;
 	
-	@OneToMany(mappedBy = "trails")
+	@OneToMany(mappedBy = "trail")
 	@JsonIgnore
 	private List<HikeReport> hikeReports;
 	
