@@ -4,13 +4,13 @@ import { Observable, catchError, throwError } from 'rxjs';
 import { Trail } from '../models/trail';
 import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TrailService {
-  private baseUrl ='http://localhost:8086/';
-  private url = this.baseUrl + 'api/trails/';
+  private url = environment.baseUrl + 'api/trails';
 
   constructor(
     private http: HttpClient,
@@ -32,17 +32,17 @@ export class TrailService {
     .pipe(
       catchError((err: any) => {
         console.log(err);
-        return throwError('Error getting exrcise list');
+        return throwError('Error getting trail list');
       })
     );
   };
 
   viewTrailDetails(trailId : number) : Observable<Trail>{
-    return this.http.get<Trail>(this.url + trailId)
+    return this.http.get<Trail>(this.url + "/" + trailId)
     .pipe(
       catchError((err: any) => {
         console.log(err);
-        return throwError('Error getting exrcise list');
+        return throwError('Error getting trail list');
       })
     );
   }
@@ -54,6 +54,25 @@ export class TrailService {
         return throwError('Error creating trail');
       })
     )
+  }
+
+  delete(trailId: number) {
+    return this.http.delete(this.url + '/' + trailId).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('failed to delete trail');
+      })
+    )
+  }
+
+  update(trail: Trail) {
+    return this.http.put<Trail>(this.url + '/' + trail.id, trail).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('failed to update trail');
+      })
+    )
+
   }
 
 
