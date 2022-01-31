@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { group } from '@angular/animations';
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { GroupHike } from 'src/app/models/group-hike';
 import { GroupHikeComment } from 'src/app/models/group-hike-comment';
 import { GroupHikeCommentService } from 'src/app/services/group-hike-comment.service';
+import { GroupHikeComponent } from '../group-hike/group-hike.component';
 
 @Component({
   selector: 'app-group-hike-comment',
@@ -16,13 +19,33 @@ export class GroupHikeCommentComponent implements OnInit {
   groupHikeComments: GroupHikeComment [] = [];
   addGroupHikeComment: boolean = false;
   updateGroupHikeCommentSelected: boolean = false;
+  @Input() groupHike: GroupHike = new GroupHike();
 
   constructor(
     private ghcServ: GroupHikeCommentService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute,
+    private tempGroupHike: GroupHikeComponent
   ) { }
 
   ngOnInit(): void {
+    let groupHikeCommentIdStr = this.route.snapshot.paramMap.get('id');
+    if (!this.selected && groupHikeCommentIdStr) {
+      let groupHikeCommentId = Number.parseInt(groupHikeCommentIdStr);
+      if ( !isNaN(groupHikeCommentId)) {
+        this.ghcServ.show(groupHikeCommentId).subscribe({
+          next: (tournament: GroupHikeComment | null) => {
+            this.selected = tournament;
+          },
+          error: (fail: string) => {
+            console.error('GroupHikeComponent.ngOnInit(): invalid groupHikeId' + fail);
+            this.router.navigateByUrl("grouphikenotfound")
+          }
+        });
+      } else {
+        this.router.navigateByUrl('invalidGroupHike');
+      }
+    }
     this.reload();
   }
 
@@ -45,6 +68,7 @@ export class GroupHikeCommentComponent implements OnInit {
   }
 
   createGroupHikeComment(groupHikeComment: GroupHikeComment) {
+    groupHikeComment.groupHike = this.groupHike;
     this.ghcServ.create(groupHikeComment).subscribe({
       next: (ghc) => {
         this.newGroupHikeComment = new GroupHikeComment();
@@ -62,8 +86,9 @@ export class GroupHikeCommentComponent implements OnInit {
     this.editGroupHikeComment = Object.assign({}, this.selected)
   }
 
-  updateGroupHikeComment(groupHike: GroupHikeComment, goToDetails = true): void {
-    this.ghcServ.update(groupHike).subscribe({
+  updateGroupHikeComment(groupHikeComment: GroupHikeComment, goToDetails = true): void {
+    groupHikeComment.groupHike = this.groupHike;
+    this.ghcServ.update(groupHikeComment).subscribe({
       next: (ghc) =>  {
         this.editGroupHikeComment = null;
         if(goToDetails) {

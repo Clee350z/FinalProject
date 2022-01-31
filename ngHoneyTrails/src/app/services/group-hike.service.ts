@@ -50,7 +50,7 @@ export class GroupHikeService {
   }
 
   create(groupHike: GroupHike):Observable<GroupHike>{
-    return this.http.post<GroupHike>(this.url2 + "/" + groupHike.trail?.id + "/grouphikes", groupHike, this.getHttpOptions()).pipe(
+    return this.http.post<GroupHike>(this.url2 + "/" + groupHike.trail.id + "/grouphikes", groupHike, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('Error creating groupHike');

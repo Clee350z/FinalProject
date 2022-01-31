@@ -34,8 +34,22 @@ export class GroupHikeCommentService {
     );
   }
 
+  show(groupHikeCommentId: number): Observable<GroupHikeComment> {
+    return this.http.get<GroupHikeComment>(this.url + "/" + groupHikeCommentId,).pipe(
+      catchError( (error: any) => {
+        console.error("GroupHikeService.show(): error finding GroupHike:");
+        console.error(error);
+        return throwError(
+          () => new Error(
+            "GroupHikeService.show(): error finding GroupHike: " + error
+          )
+        )
+      })
+    );
+  }
+
   create(groupHikeComment: GroupHikeComment):Observable<GroupHikeComment>{
-    return this.http.post<GroupHikeComment>(this.url + groupHikeComment.groupHike?.id + "/comments", groupHikeComment, this.getHttpOptions()).pipe(
+    return this.http.post<GroupHikeComment>(this.url + "/" + groupHikeComment.groupHike.id + "/comments", groupHikeComment, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('Error creating groupHikeComment');
@@ -44,7 +58,7 @@ export class GroupHikeCommentService {
   }
 
   update(groupHikeComment: GroupHikeComment):Observable<GroupHikeComment>{
-    return this.http.put<GroupHikeComment>(this.url + groupHikeComment.groupHike?.id + "/comments", groupHikeComment, this.getHttpOptions()).pipe(
+    return this.http.put<GroupHikeComment>(this.url + "/" +groupHikeComment.groupHike.id + "/comments/" + groupHikeComment.id, groupHikeComment, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('Error updating groupHikeComment');
