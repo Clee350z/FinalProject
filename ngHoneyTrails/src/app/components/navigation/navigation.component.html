@@ -1,6 +1,6 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark nav-background">
   <div class="container-fluid">
-    <a class="navbar-brand" [routerLink]="['/home']">Home</a>
+    <a class="navbar-brand" [routerLink]="['/home']"><img src="assets/images/logo.png" width="50" height="50"></a>
     <button
       class="navbar-toggler"
       type="button"
@@ -22,16 +22,19 @@
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <a
-            class="nav-link active"
+            class="nav-link active font-color"
             aria-current="page"
+            style="color: #131118"
             [routerLink]="['/about']"
             >About</a
           >
         </li>
+
         <li class="nav-item">
           <a
             class="nav-link active"
             aria-current="page"
+            style="color: #131118"
             [routerLink]="['/trails']"
             >Trails</a
           >
@@ -40,6 +43,7 @@
           <a
             class="nav-link active"
             aria-current="page"
+            style="color: #131118"
             [routerLink]="['/hikereports']"
             >Hike Reports</a
           >
@@ -48,6 +52,7 @@
           <a
             class="nav-link active"
             aria-current="page"
+            style="color: #131118"
             [routerLink]="['/grouphikes']"
             >Group Hikes</a
           >
@@ -56,6 +61,7 @@
           <a
           class="nav-link active"
           aria-current="page"
+          style="color: #131118"
           [routerLink]="['/register']"
           >Register</a>
         </li>
