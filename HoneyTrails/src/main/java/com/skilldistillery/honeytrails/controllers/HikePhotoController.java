@@ -27,12 +27,12 @@ public class HikePhotoController {
 	@Autowired
 	private HikePhotoService photoSer;
 
-	@GetMapping("trails/{trailId}/hikereports/{reportId}/photos")
-	public List<HikePhoto> index(@PathVariable int reportId) {
-		return photoSer.allHikePhotos(reportId);
+	@GetMapping("hikereports/photos")
+	public List<HikePhoto> index() {
+		return photoSer.allHikePhotos();
 	}
 
-	@GetMapping("trails/{trailId}/hikereports/{reportId}/photos/{photoId}")
+	@GetMapping("hikereports/{reportId}/photos/{photoId}")
 	public HikePhoto showPhoto(@PathVariable int reportId, @PathVariable int photoId, HttpServletRequest req,
 			HttpServletResponse res) {
 		HikePhoto photo = photoSer.showPhoto(photoId, reportId);
@@ -45,7 +45,7 @@ public class HikePhotoController {
 		return photo;
 	}
 
-	@PostMapping("trails/{trailId}/hikereports/{reportId}/photos")
+	@PostMapping("hikereports/{reportId}/photos")
 	public HikePhoto addPhoto(@PathVariable int reportId, @RequestBody HikePhoto photo, HttpServletRequest req,
 			HttpServletResponse res) {
 		try {
@@ -62,7 +62,7 @@ public class HikePhotoController {
 		return photo;
 	}
 
-	@PutMapping("trails/{trailId}/hikereports/{reportId}/photos/{photoId}")
+	@PutMapping("hikereports/{reportId}/photos/{photoId}")
 	public HikePhoto updatePhoto(@PathVariable int photoId, @RequestBody HikePhoto photo, @PathVariable int reportId,
 			HttpServletRequest req, HttpServletResponse res) {
 		try {
@@ -81,7 +81,7 @@ public class HikePhotoController {
 		return photo;
 	}
 	
-	@DeleteMapping("trails/{trailId}/hikereports/{reportId}/photos/{photoId}")
+	@DeleteMapping("hikereports/{reportId}/photos/{photoId}")
 	public void destroy(@PathVariable int photoId, @PathVariable int reportId, HttpServletRequest req, HttpServletResponse res) {
 	if(photoSer.delete(photoId, reportId)) {
 		res.setStatus(204);
