@@ -56,7 +56,15 @@ section{
   /* Add shadows to create the "card" effect */
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
-  background-color: #333;
+  background-color: rgb(60, 116, 70);;
+  height: fit-content;
+  width: fit-content;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  padding-top: 25px;
+  border-radius: 10px;
+  text-align: center;
 }
 
 /* On mouse-over, add a deeper shadow */
@@ -65,6 +73,22 @@ section{
 }
 
 /* Add some padding inside the card container */
-.container {
+.trailCardContainer {
   padding: 2px 16px;
+}
+
+.trailPic{
+  height: 280px;
+  width: 280px;
+  border: .5px solid black;
+  border-radius: 5px;
+  box-shadow: 0 20px 16px 0 rgba(0,0,0,0.2);
+
+}
+
+.trailname{
+  font-size: 1rem;
+  color: white;
+  text-shadow: 0 0 5px black;
+  margin-top: 10px;
 }

@@ -117,6 +117,11 @@ public class TrailController {
 		}
 	}
 	
+	@GetMapping("trails/random/{howMany}")
+	public List<Trail> getRandomTrails(@PathVariable int howMany){
+		return trailSvc.getRandomTrail(howMany);
+	}
+	
 	
 	
 	

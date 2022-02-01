@@ -21,6 +21,7 @@ import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { GroupHikeComponent } from './components/group-hike/group-hike.component';
 import { GroupHikeCommentComponent } from './components/group-hike-comment/group-hike-comment.component';
+import { TrailFiltersPipe } from './pipes/trail-filters.pipe';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { GroupHikeCommentComponent } from './components/group-hike-comment/group
     LoginComponent,
     LogoutComponent,
     GroupHikeComponent,
-    GroupHikeCommentComponent
+    GroupHikeCommentComponent,
+    TrailFiltersPipe
   ],
   imports: [
     BrowserModule,
@@ -48,7 +50,8 @@ import { GroupHikeCommentComponent } from './components/group-hike-comment/group
     NgbModule
   ],
   providers: [
-    AuthService
+    AuthService,
+    TrailFiltersPipe
   ],
   bootstrap: [AppComponent]
 })

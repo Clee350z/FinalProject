@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Trail } from 'src/app/models/trail';
+import { TrailFiltersPipe } from 'src/app/pipes/trail-filters.pipe';
 import { TrailService } from 'src/app/services/trail.service';
 
 @Component({
@@ -12,7 +13,8 @@ export class HomeComponent implements OnInit {
   trails : Trail[] = [];
 
   constructor(
-    private trailSvc : TrailService
+    private trailSvc : TrailService,
+    private trailfilter : TrailFiltersPipe
   ) { }
 
   ngOnInit(): void {
@@ -20,7 +22,7 @@ export class HomeComponent implements OnInit {
   }
 
   reload(){
-    this.trailSvc.index().subscribe(
+    this.trailSvc.random(3).subscribe(
       trails => {
         this.trails = trails;
       },
@@ -31,5 +33,6 @@ export class HomeComponent implements OnInit {
       }
     );
   }
+
 
 }
