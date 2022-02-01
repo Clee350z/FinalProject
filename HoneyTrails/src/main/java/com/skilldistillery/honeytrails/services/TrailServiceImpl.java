@@ -49,5 +49,10 @@ public class TrailServiceImpl implements TrailService {
 			return true;
 		}
 	}
+	
+	@Override
+	public List<Trail> getRandomTrail(int howMany){
+		return tr.getRandomTrails(howMany);
+	}
 
 }

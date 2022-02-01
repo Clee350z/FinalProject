@@ -75,7 +75,15 @@ export class TrailService {
 
   }
 
-
+  random(howMany : number): Observable<Trail[]> {
+    return this.http.get<Trail[]>(this.url + '/random/' + howMany)
+    .pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('Error getting trail list');
+      })
+    );
+  };
 
 
 }

@@ -3,5 +3,11 @@
 body{
   background-color: rgb(60, 116, 70);
   color: rgb(90, 7, 7);
+  width: 100%;
+  margin: 0;
+  overscroll-behavior-y: none;
+  overscroll-behavior-x: none;
+  position: relative;
+  height: 100vh;
 
 }
