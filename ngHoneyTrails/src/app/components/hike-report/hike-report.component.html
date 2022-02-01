@@ -27,8 +27,13 @@
 <p>{{selected.hikedDate}}</p>
 <p>{{selected.report}}</p>
 <p>{{selected.rating}}</p>
+<p><button (click)="addFormPhotoSelected = true">Add New Photo</button></p>
 <button (click)="displayTable()">Back</button>
 <button (click)="setEditReport()">Update Report</button>
+
+<!-- <div>
+  <app-hike-photo [hikeReport]="selected"></app-hike-photo>
+</div> -->
 
 <div id="commentBox">
 <app-hike-report-comment [hikeReport]="selected"></app-hike-report-comment>
@@ -54,3 +59,18 @@
   <input (click)="updateReport(editReport)" type="submit" />
 </form>
 </div>
+
+<div class="addPhotoForm" *ngIf="addFormPhotoSelected">
+  <h5>Add New Hike Photo</h5>
+  <form>
+  <div>
+    <label for="image">Image: </label>
+    <input type="text" name="image" [(ngModel)]="newPhoto.imageUrl" />
+    <label name="title">Title: </label>
+    <input type="text" name="title" [(ngModel)]="newPhoto.title"/>
+    <label name="description">Description: </label>
+    <input type="text" name="description" [(ngModel)]="newPhoto.description"/>
+    <input (click)="createPhoto(newPhoto); addFormPhotoSelected =false" type="submit"/>
+  </div>
+  </form>
+  </div>
