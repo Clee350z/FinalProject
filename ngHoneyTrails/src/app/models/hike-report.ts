@@ -13,16 +13,16 @@ export class HikeReport {
   condition: Condition ;
 
   constructor(
+    id: number = 0,
     trail?: Trail,
     condition?: Condition,
-    id?: number,
     hikeTitle?: string,
     report?: string,
     dateCreated?: string,
     hikedDate?: string,
     rating?: number,
   ) {
-    this.id = id || 0;
+    this.id = id ;
     this.hikeTitle = hikeTitle || '';
     this.report = report || '';
     this.dateCreated = dateCreated || '';

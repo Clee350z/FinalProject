@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Condition } from 'src/app/models/condition';
+import { HikePhoto } from 'src/app/models/hike-photo';
 import { HikeReport } from 'src/app/models/hike-report';
 import { Trail } from 'src/app/models/trail';
 import { ConditionService } from 'src/app/services/condition.service';
+import { HikePhotoService } from 'src/app/services/hike-photo.service';
 import { HikeReportService } from 'src/app/services/hike-report.service';
 import { TrailService } from 'src/app/services/trail.service';
 
@@ -20,12 +22,15 @@ export class HikeReportComponent implements OnInit {
   selected: HikeReport | null = null;
   newReport: HikeReport = new HikeReport();
   editReport: HikeReport | null = null;
+  addFormPhotoSelected: boolean =false;
+  newPhoto: HikePhoto = new HikePhoto();
 
   constructor(private HRptSvc: HikeReportService,
     private route: ActivatedRoute,
     private router: Router,
     private tServ: TrailService,
-    private cServ: ConditionService
+    private cServ: ConditionService,
+    private photoSer: HikePhotoService
     ) {}
 
   ngOnInit(): void {
@@ -123,5 +128,21 @@ export class HikeReportComponent implements OnInit {
   }
   displayTable(){
     this.selected = null;
+  }
+
+  createPhoto(photo: HikePhoto){
+    if(this.selected){
+      photo.hikeReport.id =this.selected.id;
+    }
+    this.photoSer.create(photo).subscribe({
+      next: (photo)=>{
+        this.newPhoto = new HikePhoto();
+        this.reload();
+      },
+      error: (fail) => {
+        console.error('HikePhoto.createPhoto(): error on creation');
+        console.error(fail);
+      }
+    });
   }
 }
