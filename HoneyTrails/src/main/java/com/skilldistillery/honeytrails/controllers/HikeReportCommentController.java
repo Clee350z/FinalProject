@@ -32,6 +32,12 @@ public class HikeReportCommentController {
 	public List<HikeReportComment> index() {
 		return commentSer.getAllComments();
 	}
+	
+	@GetMapping("hikereports/{hikeReportId}/comments")
+	public List<HikeReportComment> getAllHikeReportCommentsByHikeReport(@PathVariable int hikeReportId) {
+		List<HikeReportComment> comments = commentSer.getAllHikeReportCommentsByHikeReport(hikeReportId);
+		return comments;
+	}
 
 	@GetMapping("trails/{trailId}/hikereports/{reportId}/comments/{commentId}")
 	public HikeReportComment showComment(@PathVariable int reportId, @PathVariable int commentId,

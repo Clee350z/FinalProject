@@ -7,6 +7,8 @@ import com.skilldistillery.honeytrails.entities.HikeReportComment;
 public interface HikeReportCommentService {
 
 	List<HikeReportComment> getAllComments();
+	
+	List<HikeReportComment> getAllHikeReportCommentsByHikeReport(int hikeReportId);
 
 	HikeReportComment CommentById(int commentId, int reportId);
 

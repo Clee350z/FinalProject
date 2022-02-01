@@ -77,4 +77,9 @@ public class HIkeReportCommentServiceImpl implements HikeReportCommentService {
 		return deleted;
 	}
 
+	@Override
+	public List<HikeReportComment> getAllHikeReportCommentsByHikeReport(int hikeReportId) {
+		return comRepo.findByHikeReportId(hikeReportId);
+	}
+
 }
