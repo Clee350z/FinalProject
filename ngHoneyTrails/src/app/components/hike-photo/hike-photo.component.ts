@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HikePhoto } from 'src/app/models/hike-photo';
+import { HikeReport } from 'src/app/models/hike-report';
 import { HikePhotoService } from 'src/app/services/hike-photo.service';
+import { HikeReportService } from 'src/app/services/hike-report.service';
 
 @Component({
   selector: 'app-hike-photo',
@@ -14,9 +16,13 @@ export class HikePhotoComponent implements OnInit {
   editPhoto: HikePhoto | null = null;
   photoCollection: HikePhoto [] =[];
   selected: HikePhoto | null = null;
+  hikeReports: HikeReport [] =[];
+  addPhoto: boolean = false;
+  @Input() hikeReport: HikeReport = new HikeReport() ;
 
   constructor(
     private photoSer: HikePhotoService,
+    private repServ: HikeReportService,
     private router: Router,
     private route: ActivatedRoute
   ) { }
@@ -38,6 +44,7 @@ export class HikePhotoComponent implements OnInit {
       this.router.navigateByUrl('invalidHikePhoto');
     }
   }
+  this.populateHikeReport();
   this.reload();
   }
 
@@ -53,11 +60,23 @@ export class HikePhotoComponent implements OnInit {
     });
   }
 
+  populateHikeReport(){
+    this.repServ.index().subscribe({
+      next: (r) =>{
+        this.hikeReports = r;
+      },
+      error:(fail) => {
+        console.error('Error on retrieval of hike reports');
+      }
+    })
+  }
+
   displayPhotoDetails(photoDetails: HikePhoto){
     this.selected = photoDetails;
   }
 
   createPhoto(photo: HikePhoto){
+    photo.hikeReport =this.hikeReport;
     this.photoSer.create(photo).subscribe({
       next: (photo)=>{
         this.newPhoto = new HikePhoto();
@@ -70,7 +89,12 @@ export class HikePhotoComponent implements OnInit {
     });
   }
 
+  setEditPhoto() {
+    this.editPhoto = Object.assign({}, this.selected)
+  }
+
   updatePhoto(photo: HikePhoto, goToDetails = true){
+    photo.hikeReport =this.hikeReport;
     this.photoSer.update(photo).subscribe({
       next: (photo)=> {
         this.editPhoto = null;
@@ -87,6 +111,10 @@ export class HikePhotoComponent implements OnInit {
   }
 
   deletePhoto(photo: HikePhoto): void{
+    photo.hikeReport =this.hikeReport;
+    if(this.selected){
+      photo.hikeReport.id =this.selected.id;
+    }
   this.photoSer.destroy(photo).subscribe({
     next: () => {
       this.reload();

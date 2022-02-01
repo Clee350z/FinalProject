@@ -9,7 +9,6 @@
           <th>Comment:</th>
           <th>User:</th>
           <th>Posted on:</th>
-          <!-- <th>Hike Report:</th> -->
         </tr>
       </thead>
       <tbody>
@@ -17,7 +16,6 @@
           <td class="HikeReportCommentTableData">{{ comment.commentBox }}</td>
           <td class="HikeReportCommentTableData">{{ comment.user?.username }}</td>
           <td class="HikeReportCommentTableData">{{ comment.createDate }}</td>
-          <!-- <td class="HikeReportCommentTableData">{{ comment.hikeReport }}</td> -->
         </tr>
       </tbody>
     </table>
@@ -25,7 +23,7 @@
   </div>
 </div>
 
-<div class="groupHikeCommentDisplay" *ngIf="selected && !addReportComment && !editReportComment">
+<div class="HikeReportCommentDisplay" *ngIf="selected && !addReportComment && !editReportComment">
   <ul>
     <br>
     <li class="HikeReportCommentDetails">Text: {{ selected.commentBox }}</li>
