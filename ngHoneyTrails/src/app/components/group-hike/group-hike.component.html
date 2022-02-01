@@ -42,6 +42,7 @@
     <button class="formButtons" (click)="deleteTournament(selected.id)" (click)="selected = null"> -->
     Delete
     </button>
+    <button class="formButtons" (click)="addUserToGroupHike(selected)">Join Group</button>
   </ul>
   <div class="groupHikeComments">
     <app-group-hike-comment [groupHike]="selected" ></app-group-hike-comment>
