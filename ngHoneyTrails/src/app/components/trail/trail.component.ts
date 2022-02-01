@@ -30,6 +30,7 @@ export class TrailComponent implements OnInit {
   addFormReportSelected: boolean = false;
   newReport: HikeReport = new HikeReport();
   condition: Condition[] =[];
+  selectedTrailHikeReports: HikeReport[] = [];
 
 
   constructor(
@@ -46,6 +47,9 @@ export class TrailComponent implements OnInit {
     this.getDifficultyList();
     this.populateCondition();
   }
+/*----------------------------------------------------------------------------------------------------
+    Gets a list of all Trails
+-----------------------------------------------------------------------------------------------------*/
 
   reload(){
     this.trailSvc.index().subscribe(
@@ -59,6 +63,10 @@ export class TrailComponent implements OnInit {
       }
     );
   }
+
+/*----------------------------------------------------------------------------------------------------
+    View Trail Details
+-----------------------------------------------------------------------------------------------------*/
 
   viewTrailDetails(trailId : number){
     this.trailSvc.viewTrailDetails(trailId).subscribe(
@@ -74,6 +82,11 @@ export class TrailComponent implements OnInit {
     );
 
   }
+
+/*----------------------------------------------------------------------------------------------------
+    Populates list of conditions for create Hike Report form
+-----------------------------------------------------------------------------------------------------*/
+
   populateCondition(){
     this.cServ.index().subscribe({
       next: (c) => {
@@ -83,6 +96,9 @@ export class TrailComponent implements OnInit {
         console.error('Error on retrieval of conditions');}
     });
   }
+/*----------------------------------------------------------------------------------------------------
+    Creates a trail
+-----------------------------------------------------------------------------------------------------*/
 
   addTrail(newTrail : Trail) {
     this.trailSvc.createNewTrail(newTrail).subscribe(
@@ -102,6 +118,10 @@ export class TrailComponent implements OnInit {
     this.reload();
   }
 
+/*----------------------------------------------------------------------------------------------------
+    Creates Hike Report for Trail
+-----------------------------------------------------------------------------------------------------*/
+
   addReport(report: HikeReport){
     if(this.selected){
       report.trail.id = this.selected.id;
@@ -117,6 +137,10 @@ export class TrailComponent implements OnInit {
     });
   }
 
+/*----------------------------------------------------------------------------------------------------
+    Deletes Trail
+-----------------------------------------------------------------------------------------------------*/
+
   deleteTrail(trailId : number){
     this.trailSvc.delete(trailId).subscribe(
       success => {
@@ -129,6 +153,10 @@ export class TrailComponent implements OnInit {
       }
     )
   }
+
+/*----------------------------------------------------------------------------------------------------
+    Updates Trail
+-----------------------------------------------------------------------------------------------------*/
 
   updateTrail(trail : Trail){
     this.trailSvc.update(trail).subscribe(
@@ -143,6 +171,10 @@ export class TrailComponent implements OnInit {
     )
   }
 
+/*----------------------------------------------------------------------------------------------------
+    Populates a list of difficulties for create Trail form
+-----------------------------------------------------------------------------------------------------*/
+
   getDifficultyList(){
     this.difSvc.index().subscribe(
       difficulties => {
@@ -156,6 +188,10 @@ export class TrailComponent implements OnInit {
     );
   }
 
+/*----------------------------------------------------------------------------------------------------
+    Create a Trail Comment
+-----------------------------------------------------------------------------------------------------*/
+
   createTrailComment(newComment : Trailcomment, trail : Trail){
     this.trlCmntSvc.createNewTrailComment(newComment, trail.id).subscribe(
       comment => {
@@ -167,6 +203,23 @@ export class TrailComponent implements OnInit {
 
       fail => {
         console.error('TrailComponent.reload(): Error creating comment');
+        console.error(fail);
+      }
+      )
+  }
+
+/*----------------------------------------------------------------------------------------------------
+    Set of Hike Reports for a specific Trail id
+-----------------------------------------------------------------------------------------------------*/
+
+  getHikeReportsForTrail(trailId : number){
+    this.hRptServ.getHikeReportsByTrailId(trailId).subscribe(
+      hikeReports => {
+        this.selectedTrailHikeReports = hikeReports
+      },
+
+      fail => {
+        console.error('TrailComponent.reload(): Error getting hike report for trail');
         console.error(fail);
       }
       )

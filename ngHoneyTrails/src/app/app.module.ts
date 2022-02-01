@@ -22,6 +22,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { GroupHikeComponent } from './components/group-hike/group-hike.component';
 import { GroupHikeCommentComponent } from './components/group-hike-comment/group-hike-comment.component';
 import { TrailFiltersPipe } from './pipes/trail-filters.pipe';
+import { HikeReportPipePipe } from './pipes/hike-report-pipe.pipe';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { TrailFiltersPipe } from './pipes/trail-filters.pipe';
     LogoutComponent,
     GroupHikeComponent,
     GroupHikeCommentComponent,
-    TrailFiltersPipe
+    TrailFiltersPipe,
+    HikeReportPipePipe
   ],
   imports: [
     BrowserModule,
