@@ -84,4 +84,17 @@ export class GroupHikeService {
       })
     )
   }
+
+  getGroupHikesByTrailId(trailId : number): Observable <GroupHike[]> {
+    return this.http.get<GroupHike[]>(this.url2 + '/' + trailId + '/hikereports').pipe(
+      catchError((err: any) => {
+        console.error('HikeReportService.show(): error retrieving report');
+        console.error(err);
+        return throwError(
+          () =>
+            new Error('HikeReportService.show(): err retrieving report' + err)
+        );
+      })
+    );
+  }
 }

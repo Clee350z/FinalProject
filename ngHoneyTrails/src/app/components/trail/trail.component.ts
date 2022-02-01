@@ -10,6 +10,10 @@ import { HikeReportService } from 'src/app/services/hike-report.service';
 import { HikeReport } from 'src/app/models/hike-report';
 import { ConditionService } from 'src/app/services/condition.service';
 import { Condition } from 'src/app/models/condition';
+import { GroupHikeService } from 'src/app/services/group-hike.service';
+import { GroupHike } from 'src/app/models/group-hike';
+import { Loader } from '@googlemaps/js-api-loader';
+import { map } from 'rxjs';
 
 
 @Component({
@@ -31,6 +35,7 @@ export class TrailComponent implements OnInit {
   newReport: HikeReport = new HikeReport();
   condition: Condition[] =[];
   selectedTrailHikeReports: HikeReport[] = [];
+  selectedTrailGroupHikes: GroupHike [] = [];
 
 
   constructor(
@@ -39,7 +44,8 @@ export class TrailComponent implements OnInit {
     private difSvc : DifficultyService,
     private trlCmntSvc : TrailCommentService,
     private hRptServ: HikeReportService,
-    private cServ: ConditionService
+    private cServ: ConditionService,
+    private grpHkSvc : GroupHikeService
   ) { }
 
   ngOnInit(): void {
@@ -73,13 +79,34 @@ export class TrailComponent implements OnInit {
       trail => {
         this.selected = trail;
 
+        let loader = new Loader({
+          apiKey: 'AIzaSyDHOH7qwK5gZYBdbYoWLS3PbPjVU3-pH4Q'
+        })
+
+        loader.load().then(() => {
+          let map = new google.maps.Map(document.getElementById("map") as HTMLElement,
+          {
+            center: { lat: trail.latitude, lng: trail.longitude},
+            zoom: 10
+          })
+
+          const marker = new google.maps.Marker({
+            position: { lat: trail.latitude, lng: trail.longitude},
+            map: map,
+          });
+        })
+
+
+
+
+
       },
 
       fail =>{
         console.error('TrailComponent.reload(): Error retreiving trail');
         console.error(fail);
       }
-    );
+      );
 
   }
 
@@ -224,4 +251,21 @@ export class TrailComponent implements OnInit {
       }
       )
   }
+
+/*----------------------------------------------------------------------------------------------------
+    Set of Group Hikes for a specific Trail id
+-----------------------------------------------------------------------------------------------------*/
+
+getGroupHikesForTrail(trailId : number){
+  this.grpHkSvc.getGroupHikesByTrailId(trailId).subscribe(
+    groupHikes => {
+      this.selectedTrailGroupHikes = groupHikes;
+    },
+
+    fail => {
+      console.error('TrailComponent.reload(): Error getting hike report for trail');
+      console.error(fail);
+    }
+    )
+}
 }
