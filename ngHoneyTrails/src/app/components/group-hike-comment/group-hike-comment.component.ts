@@ -34,8 +34,8 @@ export class GroupHikeCommentComponent implements OnInit {
       let groupHikeCommentId = Number.parseInt(groupHikeCommentIdStr);
       if ( !isNaN(groupHikeCommentId)) {
         this.ghcServ.show(groupHikeCommentId).subscribe({
-          next: (tournament: GroupHikeComment | null) => {
-            this.selected = tournament;
+          next: (ghc: GroupHikeComment | null) => {
+            this.selected = ghc;
           },
           error: (fail: string) => {
             console.error('GroupHikeComponent.ngOnInit(): invalid groupHikeId' + fail);
@@ -50,7 +50,7 @@ export class GroupHikeCommentComponent implements OnInit {
   }
 
   reload(){
-    this.ghcServ.index().subscribe(
+    this.ghcServ.showComments(this.groupHike.id).subscribe(
       {
         next: (groupHikeComments) => {
           this.groupHikeComments = groupHikeComments;
@@ -64,6 +64,17 @@ export class GroupHikeCommentComponent implements OnInit {
   }
 
   displayGroupHikeComment(groupHikeComment: GroupHikeComment) {
+    this.ghcServ.showComments(this.groupHike.id).subscribe(
+      {
+        next: (groupHikeComments) => {
+          this.groupHikeComments = groupHikeComments;
+        },
+        error: (err) => {
+          console.error('GroupHikeComp.reload(): error getting reports');
+          console.error(err);
+        }
+      }//end of object
+    );
     this.selected = groupHikeComment;
   }
 

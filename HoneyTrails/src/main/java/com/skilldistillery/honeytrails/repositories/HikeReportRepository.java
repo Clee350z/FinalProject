@@ -12,5 +12,7 @@ public interface HikeReportRepository extends JpaRepository<HikeReport, Integer>
 	
 	Set<HikeReport> findByUser_Username(String username);
 	
+	Set<HikeReport> findByTrail_Id(int id);
+	
 
 }

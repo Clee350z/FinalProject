@@ -35,6 +35,17 @@ export class HikeReportCommentService {
     );
   }
 
+  showComments(hikeReportId: number): Observable<HikeReportComment[]> {
+    return  this.http.get<HikeReportComment[]>(this.url + "/" + hikeReportId + "/comments").pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(
+          () => new Error('HikeReportCommentService.index(): error retrieving reports' + err)
+        );
+      })
+    );
+  }
+
   show(reportCommentId: number): Observable<HikeReportComment> {
     return this.http.get<HikeReportComment>(this.url + "/" + reportCommentId,).pipe(
       catchError( (error: any) => {

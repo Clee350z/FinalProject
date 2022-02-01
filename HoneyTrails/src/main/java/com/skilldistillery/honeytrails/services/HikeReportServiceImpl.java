@@ -79,5 +79,10 @@ public class HikeReportServiceImpl implements HikeReportService {
 		}
 		return deleted;
 	}
+	
+	@Override
+	public Set<HikeReport> getHikeReportByTrailId(int trailId){
+		return hrRepo.findByTrail_Id(trailId);
+	}
 
 }

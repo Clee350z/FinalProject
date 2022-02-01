@@ -12,7 +12,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr class="table-secondary" *ngFor="let comment of reportComments" (click)="selected = comment " (click)="displayReportComment(comment)">
+        <tr class="table-secondary" *ngFor="let comment of reportComments" (click)="selected = comment " (click)="displayHikeReportComment(comment)">
           <td class="HikeReportCommentTableData">{{ comment.commentBox }}</td>
           <td class="HikeReportCommentTableData">{{ comment.user?.username }}</td>
           <td class="HikeReportCommentTableData">{{ comment.createDate }}</td>

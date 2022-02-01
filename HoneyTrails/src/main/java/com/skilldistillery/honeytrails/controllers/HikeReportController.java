@@ -2,6 +2,7 @@ package com.skilldistillery.honeytrails.controllers;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -91,5 +92,10 @@ public class HikeReportController {
 		} else {
 			res.setStatus(404);
 		}
+	}
+	
+	@GetMapping("trails/{trailId}/hikereports")
+	public Set<HikeReport> getHikeReportByTrailId(@PathVariable int trailId){
+		return hkSer.getHikeReportByTrailId(trailId);
 	}
 }
