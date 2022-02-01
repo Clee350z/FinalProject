@@ -19,6 +19,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 @Entity
@@ -41,7 +42,7 @@ public class GroupHike {
 	
 	@ManyToOne
 	@JoinColumn(name = "trail_id")
-	@JsonIgnore
+	@JsonIgnoreProperties({"groupHikes"})
 	private Trail trail;
 	
 	@Column(name = "meetup_time")

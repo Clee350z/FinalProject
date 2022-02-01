@@ -10,9 +10,9 @@
     </thead>
     <tbody>
       <tr *ngFor="let report of reports">
-        <td (click)="displayReport(report)">{{report.hikeTitle}}</td>
+        <td (click)="displayReport(report)">{{report.hikeTitle |titlecase}}</td>
         <td>{{report.hikedDate}}</td>
-        <td><button (click)="deleteReport(report.id)">X</button></td>
+        <td><button class="btn-danger" (click)="deleteReport(report.id)">X</button></td>
       </tr>
     </tbody>
   </table>
@@ -21,11 +21,11 @@
 
 <div *ngIf="selected && !editReport">
 
-  <table class="table table-dark table-striped">
+  <table id="detailedView" class="table table-dark table-striped">
     <thead>
       <tr>
         <th>Hike Id</th>
-        <th>Hike Title</th>
+        <th rowspan="3">Hike Title</th>
         <th>Creation Date</th>
         <th>Hike Trail Condition</th>
         <th>Date Hiked</th>
@@ -36,24 +36,17 @@
     <tbody>
       <tr>
         <td>{{selected.id}}</td>
-        <td>{{selected.hikeTitle}}</td>
+        <td rowspan="3">{{selected.hikeTitle |titlecase}}</td>
         <td>{{selected.dateCreated}}</td>
-        <td>{{selected.condition.name}}</td>
+        <td>{{selected.condition.name |titlecase}}</td>
         <td>{{selected.hikedDate}}</td>
-        <td>{{selected.report}}</td>
+        <td rowspan="3">{{selected.report}}</td>
         <td>{{selected.rating}}</td>
       </tr>
     </tbody>
   </table>
-<!-- <p>ID: {{selected.id}}</p>
-<p>{{selected.hikeTitle}}</p>
-<p>{{selected.dateCreated}}</p>
-<p>{{selected.condition.name}}</p>
-<p>{{selected.hikedDate}}</p>
-<p>{{selected.report}}</p>
-<p>{{selected.rating}}</p> -->
-<p><button (click)="addFormPhotoSelected = true">Add New Photo</button></p>
-<button (click)="displayTable()">Back</button>
+  <button (click)="displayTable()">Back</button><br>
+<button (click)="addFormPhotoSelected = true">Add New Photo</button><br>
 <button (click)="setEditReport()">Update Report</button>
 
 <!-- <div>
@@ -81,7 +74,8 @@
   <input type="date" name="editHikeDating" [(ngModel)]="editReport.hikedDate"/><br>
   <label for="editHikeRating">Hike Rating</label>
   <input type="number" name="editHikeRating" [(ngModel)]="editReport.rating"/><br>
-  <input (click)="updateReport(editReport)" type="submit" />
+  <button (click)="updateReport(editReport)">Submit</button>
+  <button (click)="editReport = null">Cancel</button>
 </form>
 </div>
 
@@ -95,7 +89,8 @@
     <input type="text" name="title" [(ngModel)]="newPhoto.title"/>
     <label name="description">Description: </label>
     <input type="text" name="description" [(ngModel)]="newPhoto.description"/>
-    <input (click)="createPhoto(newPhoto); addFormPhotoSelected =false" type="submit"/>
+   <button (click)="createPhoto(newPhoto); addFormPhotoSelected =false">Add Photo!</button>
+   <!-- <button (click)="createPhoto(newPhoto); addFormPhotoSelected =false">Add Photo!</button> -->
   </div>
   </form>
   </div>

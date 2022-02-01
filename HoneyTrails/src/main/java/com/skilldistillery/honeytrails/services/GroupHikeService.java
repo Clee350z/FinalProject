@@ -24,7 +24,7 @@ public interface GroupHikeService {
 	
 	void deleteGroupHikeById(int groupHikeId, String username);
 
-	GroupHike addUsersToGroupHike(GroupHike groupHike, String username, int trailId);
+	GroupHike addUsersToGroupHike(int groupHikeId, String username, int trailId);
 
 	Set<GroupHike> findGroupHikeByTrailId(int trailId);
 
