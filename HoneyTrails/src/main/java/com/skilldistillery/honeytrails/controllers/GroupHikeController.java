@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.honeytrails.entities.GroupHike;
+import com.skilldistillery.honeytrails.entities.User;
 import com.skilldistillery.honeytrails.services.GroupHikeService;
 
 @RestController
@@ -61,7 +62,17 @@ public class GroupHikeController {
 		return groupHikeByName;
 	}
 	
-	// TODO: add get groups by trail id
+	
+//	@GetMapping("grouphikes/{groupHikeId}/users")
+//	public List<User> getUsersForGroupHike(@PathVariable int groupHikeId, HttpServletResponse res) {
+//		List<User> users = ghServ.getUsersByGroupHikeId(groupHikeId);
+//		if(users.size() <= 0) {
+//			res.setStatus(404);
+//		} else {
+//			res.setStatus(200);
+//		}
+//		return users;
+//	}
 	
 	@PostMapping("trails/{trailId}/grouphikes")
 	public GroupHike createGroupHike(@PathVariable int trailId, @RequestBody GroupHike groupHike, HttpServletResponse res, Principal principal) {
@@ -72,6 +83,18 @@ public class GroupHikeController {
 			res.setStatus(201);
 		}
 		return newGroupHike;
+	}
+	
+//	@PutMapping("trails/{trailId}/grouphikes/adduser")
+	@PostMapping("trails/{trailId}/grouphikes/{groupHikeId}/users")
+	public GroupHike addUsersToGroupHike(@PathVariable int trailId, @PathVariable int groupHikeId, HttpServletResponse res, Principal principal) {
+		GroupHike userAddedToGroupHike = ghServ.addUsersToGroupHike(groupHikeId, principal.getName(), trailId);
+		if(userAddedToGroupHike == null) {
+			res.setStatus(400);
+		} else {
+			res.setStatus(201);
+		}
+		return userAddedToGroupHike;
 	}
 	
 	@PutMapping("grouphikes/{groupHikeId}")

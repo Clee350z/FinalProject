@@ -48,10 +48,10 @@ export class HikeReportCommentComponent implements OnInit {
   }
 
   reload(){
-    this.hRComServ.index().subscribe(
+    this.hRComServ.showComments(this.hikeReport.id).subscribe(
       {
-        next: (reportComments) => {
-          this.reportComments = reportComments;
+        next: (hikeReportComments) => {
+          this.reportComments = hikeReportComments;
         },
         error: (err) => {
           console.error('HikeReportComment.reload(): error getting reports');
@@ -61,8 +61,19 @@ export class HikeReportCommentComponent implements OnInit {
     );
   }
 
-  displayReportComment(reportComment: HikeReportComment) {
-    this.selected = reportComment;
+  displayHikeReportComment(hikeReportComment: HikeReportComment) {
+    this.hRComServ.showComments(this.hikeReport.id).subscribe(
+      {
+        next: (hikeReportComments) => {
+          this.reportComments = hikeReportComments;
+        },
+        error: (err) => {
+          console.error('GroupHikeComp.reload(): error getting reports');
+          console.error(err);
+        }
+      }//end of object
+    );
+    this.selected = hikeReportComment;
   }
 
   createReportComment(reportComment: HikeReportComment) {

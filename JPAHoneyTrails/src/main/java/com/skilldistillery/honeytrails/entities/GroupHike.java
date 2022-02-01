@@ -1,8 +1,8 @@
 package com.skilldistillery.honeytrails.entities;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -19,6 +19,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 @Entity
@@ -41,7 +42,7 @@ public class GroupHike {
 	
 	@ManyToOne
 	@JoinColumn(name = "trail_id")
-	@JsonIgnore
+	@JsonIgnoreProperties({"groupHikes"})
 	private Trail trail;
 	
 	@Column(name = "meetup_time")
@@ -56,7 +57,7 @@ public class GroupHike {
 	@JoinTable(name="group_hike_has_user", 
 	joinColumns=@JoinColumn(name="group_hike_id"),
 	inverseJoinColumns=@JoinColumn(name="user_id"))
-//	@JsonIgnore
+//	@JsonIgnoreProperties({"groupHikes"})
 	private List<User> users;
 	
 	private boolean hidden;
@@ -154,6 +155,22 @@ public class GroupHike {
 	
 	public void setHidden(boolean hidden) {
 		this.hidden = hidden;
+	}
+	
+	public void addUser(User user) {
+		if(users == null) users = new ArrayList<>();
+		
+		if(!users.contains(user)) {
+			users.add(user);
+			user.addGroupHike(this);
+		}
+	}
+	
+	public void removeUser(User user) {
+		if(users != null && users.contains(user)) {
+			users.remove(user);
+			user.removeGroupHike(null);
+		}
 	}
 	
 	/*-----------------------------------------------------------------------------------------------------

@@ -27,7 +27,7 @@ export class RegisterComponent implements OnInit {
       user => {
         this.isSuccessful = true;
         this.isRegisterFailed = false;
-        this.router.navigateByUrl('/user/' + user.id);
+        this.router.navigateByUrl('/home');
       },
       fail => {
         this.isSuccessful = false;

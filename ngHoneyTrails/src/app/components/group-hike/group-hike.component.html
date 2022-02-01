@@ -34,14 +34,15 @@
     <br>
     <li class="groupHikeDetails">Id: {{ selected.id }}</li>
     <li class="groupHikeDetails">Tier: {{ selected.meetupDate }}</li>
-    <li class="groupHikeDetails">Creator: {{ selected.user }}</li>
+    <!-- <li class="groupHikeDetails">Creator: {{ selected.user?.username }}</li> -->
+    <div *ngFor="let user of selected.users">
+      <p>{{user.firstName}} {{user.lastName}}</p>
+    </div>
     <button class="formButtons" (click)="selected = null">Back</button>
     <button class="formButtons" (click)="setEditGroupHike()">Update</button>
-    <button class="formButtons" (click)="hideGroupHike(selected)" (click)="selected = null" (click)="selected.hidden=true" >
-    <!-- <button class="formButtons" (click)="setEditTournament()">Update</button>
-    <button class="formButtons" (click)="deleteTournament(selected.id)" (click)="selected = null"> -->
-    Delete
+    <button class="formButtons" (click)="hideGroupHike(selected)" (click)="selected = null" (click)="selected.hidden=true" > Delete
     </button>
+    <button class="formButtons" (click)="addUserToGroupHike(selected)">Join Group</button>
   </ul>
   <div class="groupHikeComments">
     <app-group-hike-comment [groupHike]="selected" ></app-group-hike-comment>
