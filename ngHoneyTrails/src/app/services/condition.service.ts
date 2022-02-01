@@ -1,13 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { Condition } from '../models/condition';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ConditionService {
-  private baseUrl = 'http://localhost:8086/';
+  private baseUrl = environment.baseUrl;
   private url = this.baseUrl + 'api/trails/conditions';
 
   constructor(

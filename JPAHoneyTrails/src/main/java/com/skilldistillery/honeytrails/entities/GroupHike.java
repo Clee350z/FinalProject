@@ -1,8 +1,8 @@
 package com.skilldistillery.honeytrails.entities;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -154,6 +154,22 @@ public class GroupHike {
 	
 	public void setHidden(boolean hidden) {
 		this.hidden = hidden;
+	}
+	
+	public void addUser(User user) {
+		if(users == null) users = new ArrayList<>();
+		
+		if(!users.contains(user)) {
+			users.add(user);
+			user.addGroupHike(this);
+		}
+	}
+	
+	public void removeUser(User user) {
+		if(users != null && users.contains(user)) {
+			users.remove(user);
+			user.removeGroupHike(null);
+		}
 	}
 	
 	/*-----------------------------------------------------------------------------------------------------

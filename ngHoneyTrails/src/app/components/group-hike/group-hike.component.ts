@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { GroupHike } from 'src/app/models/group-hike';
 import { Trail } from 'src/app/models/trail';
+import { User } from 'src/app/models/user';
 import { GroupHikeService } from 'src/app/services/group-hike.service';
 import { TrailService } from 'src/app/services/trail.service';
 
@@ -19,12 +20,13 @@ export class GroupHikeComponent implements OnInit {
   addGroupHikeFormSelected: boolean = false;
   updateGroupHikeFormSelected: boolean  = false;
   trails: Trail [] = [];
+  users: User [] = [];
 
   constructor(
     private ghServ: GroupHikeService,
     private router: Router,
     private route: ActivatedRoute,
-    private tServ: TrailService
+    private tServ: TrailService,
   ) { }
 
   ngOnInit(): void {
@@ -65,6 +67,22 @@ export class GroupHikeComponent implements OnInit {
 
   displayGroupHike(groupHike: GroupHike){
     this.selected = groupHike;
+
+  }
+
+  addUserToGroupHike(groupHike: GroupHike) {
+    this.ghServ.addUser(groupHike).subscribe({
+      next: (gh) => {
+        this.selected = groupHike;
+      },
+      error: (fail) => {
+        console.error('GroupHikeComponent.tServ.addUser(): error on adding user');
+        console.error(fail);
+      }
+    })
+  }
+
+  populateUsers() {
 
   }
 

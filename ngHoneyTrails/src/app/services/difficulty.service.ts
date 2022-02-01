@@ -1,13 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, throwError } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { Difficulty } from '../models/difficulty';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DifficultyService {
-  private baseUrl ='http://localhost:8086/';
+  private baseUrl = environment.baseUrl;
   private url = this.baseUrl + 'api/trails/difficulties';
 
   constructor(
