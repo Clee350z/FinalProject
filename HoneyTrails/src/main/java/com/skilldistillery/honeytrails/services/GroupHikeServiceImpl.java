@@ -29,6 +29,11 @@ public class GroupHikeServiceImpl implements GroupHikeService {
 	public List<GroupHike> getAllGroupHikes() {
 		return ghRepo.findAll();
 	}
+	
+//	@Override
+//	public List<User> getUsersByGroupHikeId(int groupHikeId) {
+//		return ghRepo.findByGroupHike_Id(groupHikeId);
+//	}
 
 	@Override
 	public GroupHike getGroupHikeById(int groupHikeId) {
@@ -49,6 +54,7 @@ public class GroupHikeServiceImpl implements GroupHikeService {
 		User user = uRepo.findByUsername(username);
 		groupHike.setCreatedByUser(user);
 		groupHike.setHidden(false);
+		groupHike.addUser(user);
 		Optional<Trail> trail = tRepo.findById(trailId);
 		if (trail.isPresent()) {
 			groupHike.setTrail(trail.get());
@@ -56,6 +62,19 @@ public class GroupHikeServiceImpl implements GroupHikeService {
 		}
 		return null;
 	}
+	
+	@Override
+	public GroupHike addUsersToGroupHike(GroupHike groupHike, String username, int trailId) {
+		User user = uRepo.findByUsername(username);
+		groupHike.addUser(user);
+		Optional<Trail> trail = tRepo.findById(trailId);
+		if(trail.isPresent()) {
+			groupHike.setTrail(trail.get());
+			return ghRepo.saveAndFlush(groupHike);
+		}
+		return null;
+	}
+	
 
 	@Override
 	public GroupHike updateGroupHikeById(GroupHike groupHike, int groupHikeId, String username) {
@@ -113,5 +132,7 @@ public class GroupHikeServiceImpl implements GroupHikeService {
 			ghRepo.deleteById(groupHikeId);
 		}
 	}
+
+	
 
 }

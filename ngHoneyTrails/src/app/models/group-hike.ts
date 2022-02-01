@@ -8,6 +8,7 @@ export class GroupHike {
   eventName: string;
   meetupDate: string;
   user: User | undefined;
+  users: User[] | undefined;
   trail: Trail;
   meetupTime: string;
   description: string;
@@ -15,11 +16,12 @@ export class GroupHike {
   hidden: boolean;
   comments: GroupHikeComment [] | undefined;
 
-  constructor(id: number = 0, eventName: string = "", meetupDate: string ="", trail?: Trail, user?: User,
+  constructor(id: number = 0, eventName: string = "", meetupDate: string ="", users?: User[], trail?: Trail, user?: User,
      meetupTime: string = "", description: string = "", imageUrl: string = "", hidden: boolean = false, comments?: GroupHikeComment []) {
       this.id = id;
       this.eventName = eventName;
       this.meetupDate = meetupDate;
+      this.users = users;
       this.user = user;
       this.trail = trail? trail: new Trail();
       this.meetupTime = meetupTime;
