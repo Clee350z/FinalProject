@@ -2,6 +2,7 @@ package com.skilldistillery.honeytrails.controllers;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -98,6 +99,11 @@ public class GroupHikeController {
 	@DeleteMapping("grouphikes/{groupHikeId}")
 	public void deletedGroupHike(@PathVariable int groupHikeId, Principal principal) {
 		ghServ.deleteGroupHikeById(groupHikeId, principal.getName());
+	}
+	
+	@GetMapping("trails/{trailId}/grouphikes")
+	public Set<GroupHike> getGroupHikesByTrailId(@PathVariable int trailId){
+		return ghServ.findGroupHikeByTrailId(trailId);
 	}
 
 }

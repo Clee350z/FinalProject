@@ -1,6 +1,7 @@
 package com.skilldistillery.honeytrails.services;
 
 import java.util.List;
+import java.util.Set;
 
 import com.skilldistillery.honeytrails.entities.GroupHike;
 
@@ -19,5 +20,7 @@ public interface GroupHikeService {
 	GroupHike hideGroupHikeById(GroupHike groupHike, int groupHikeId, String username);
 	
 	void deleteGroupHikeById(int groupHikeId, String username);
+
+	Set<GroupHike> findGroupHikeByTrailId(int trailId);
 
 }
