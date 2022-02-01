@@ -1,6 +1,7 @@
 package com.skilldistillery.honeytrails.repositories;
 
-import java.util.List;
+
+import java.util.Set;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -11,7 +12,9 @@ public interface GroupHikeRepository extends JpaRepository<GroupHike, Integer> {
 	
 	GroupHike findByEventName(String eventName);
 	
-//	List<User> findByGroupHike_Id(int groupHikeId);
+
+	Set<GroupHike> findByTrail_id(int id);
+
 	
 	
 

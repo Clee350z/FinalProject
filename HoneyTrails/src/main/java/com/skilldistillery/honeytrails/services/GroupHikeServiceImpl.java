@@ -2,6 +2,7 @@ package com.skilldistillery.honeytrails.services;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -131,6 +132,11 @@ public class GroupHikeServiceImpl implements GroupHikeService {
 		if (user == ghRepo.findById(groupHikeId).get().getCreatedByUser()) {
 			ghRepo.deleteById(groupHikeId);
 		}
+	}
+	
+	@Override
+	public Set<GroupHike> findGroupHikeByTrailId(int trailId){
+		return ghRepo.findByTrail_id(trailId);
 	}
 
 	
