@@ -5,6 +5,7 @@ import { Trail } from 'src/app/models/trail';
 import { User } from 'src/app/models/user';
 import { GroupHikeService } from 'src/app/services/group-hike.service';
 import { TrailService } from 'src/app/services/trail.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-group-hike',
@@ -27,6 +28,7 @@ export class GroupHikeComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private tServ: TrailService,
+    private uServ: UserService
   ) { }
 
   ngOnInit(): void {
@@ -47,6 +49,7 @@ export class GroupHikeComponent implements OnInit {
         this.router.navigateByUrl('invalidGroupHike');
       }
     }
+    // this.populateUsers();
     this.populateTrails();
     this.reload();
   }
@@ -84,7 +87,15 @@ export class GroupHikeComponent implements OnInit {
   }
 
   populateUsers() {
-
+    this.uServ.index().subscribe({
+      next: (t) => {
+        this.users = t;
+      },
+      error: (fail) => {
+        console.error('GroupHikeComponent.uServ.index(): error on populate users');
+        console.error(fail);
+      }
+    })
   }
 
   populateTrails() {

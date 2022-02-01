@@ -57,7 +57,7 @@ public class GroupHike {
 	@JoinTable(name="group_hike_has_user", 
 	joinColumns=@JoinColumn(name="group_hike_id"),
 	inverseJoinColumns=@JoinColumn(name="user_id"))
-//	@JsonIgnore
+//	@JsonIgnoreProperties({"groupHikes"})
 	private List<User> users;
 	
 	private boolean hidden;
