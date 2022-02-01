@@ -85,9 +85,10 @@ public class GroupHikeController {
 		return newGroupHike;
 	}
 	
-	@PutMapping("trails/{trailId}/grouphikes/adduser")
-	public GroupHike addUsersToGroupHike(@PathVariable int trailId, @RequestBody GroupHike groupHike, HttpServletResponse res, Principal principal) {
-		GroupHike userAddedToGroupHike = ghServ.addUsersToGroupHike(groupHike, principal.getName(), trailId);
+//	@PutMapping("trails/{trailId}/grouphikes/adduser")
+	@PostMapping("trails/{trailId}/grouphikes/{groupHikeId}/users")
+	public GroupHike addUsersToGroupHike(@PathVariable int trailId, @PathVariable int groupHikeId, HttpServletResponse res, Principal principal) {
+		GroupHike userAddedToGroupHike = ghServ.addUsersToGroupHike(groupHikeId, principal.getName(), trailId);
 		if(userAddedToGroupHike == null) {
 			res.setStatus(400);
 		} else {

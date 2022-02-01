@@ -65,13 +65,13 @@ public class GroupHikeServiceImpl implements GroupHikeService {
 	}
 	
 	@Override
-	public GroupHike addUsersToGroupHike(GroupHike groupHike, String username, int trailId) {
+	public GroupHike addUsersToGroupHike(int groupHikeId, String username, int trailId) {
 		User user = uRepo.findByUsername(username);
-		groupHike.addUser(user);
-		Optional<Trail> trail = tRepo.findById(trailId);
-		if(trail.isPresent()) {
-			groupHike.setTrail(trail.get());
-			return ghRepo.saveAndFlush(groupHike);
+//		Optional<Trail> trail = tRepo.findById(trailId);
+		Optional<GroupHike> groupHike = ghRepo.findById(groupHikeId);
+		if(groupHike.isPresent()) {
+			groupHike.get().addUser(user);
+			return ghRepo.saveAndFlush(groupHike.get());
 		}
 		return null;
 	}
