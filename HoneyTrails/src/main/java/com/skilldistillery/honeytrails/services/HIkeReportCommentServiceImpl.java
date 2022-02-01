@@ -79,7 +79,7 @@ public class HIkeReportCommentServiceImpl implements HikeReportCommentService {
 
 	@Override
 	public List<HikeReportComment> getAllHikeReportCommentsByHikeReport(int hikeReportId) {
-		return comRepo.findByHikeReportId(hikeReportId);
+		return comRepo.findByHikeReportId_Id(hikeReportId);
 	}
 
 }
