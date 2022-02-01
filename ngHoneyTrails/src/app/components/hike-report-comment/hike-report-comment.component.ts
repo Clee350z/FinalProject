@@ -54,7 +54,7 @@ export class HikeReportCommentComponent implements OnInit {
           this.reportComments = hikeReportComments;
         },
         error: (err) => {
-          console.error('GroupHikeComp.reload(): error getting reports');
+          console.error('HikeReportComment.reload(): error getting reports');
           console.error(err);
         }
       }//end of object

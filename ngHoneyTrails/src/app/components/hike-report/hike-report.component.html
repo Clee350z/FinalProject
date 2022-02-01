@@ -20,13 +20,38 @@
 </div>
 
 <div *ngIf="selected && !editReport">
-<p>ID: {{selected.id}}</p>
+
+  <table class="table table-dark table-striped">
+    <thead>
+      <tr>
+        <th>Hike Id</th>
+        <th>Hike Title</th>
+        <th>Creation Date</th>
+        <th>Hike Trail Condition</th>
+        <th>Date Hiked</th>
+        <th>Report Details</th>
+        <th>Rating</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{selected.id}}</td>
+        <td>{{selected.hikeTitle}}</td>
+        <td>{{selected.dateCreated}}</td>
+        <td>{{selected.condition.name}}</td>
+        <td>{{selected.hikedDate}}</td>
+        <td>{{selected.report}}</td>
+        <td>{{selected.rating}}</td>
+      </tr>
+    </tbody>
+  </table>
+<!-- <p>ID: {{selected.id}}</p>
 <p>{{selected.hikeTitle}}</p>
 <p>{{selected.dateCreated}}</p>
 <p>{{selected.condition.name}}</p>
 <p>{{selected.hikedDate}}</p>
 <p>{{selected.report}}</p>
-<p>{{selected.rating}}</p>
+<p>{{selected.rating}}</p> -->
 <p><button (click)="addFormPhotoSelected = true">Add New Photo</button></p>
 <button (click)="displayTable()">Back</button>
 <button (click)="setEditReport()">Update Report</button>
