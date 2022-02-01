@@ -1,6 +1,7 @@
 <!-- List of all Trails -->
 <div *ngIf="!selected && !addTrailFormSelected">
-  <button (click)="addTrailFormSelected = true">Add a Trail</button>
+  <br>
+  <button class="addTrailFormButton" (click)="addTrailFormSelected = true">Add a Trail</button>
       <table class="trail-table">
         <thead>
         </thead>
@@ -9,9 +10,9 @@
             <div class="table-responsive">
               <div class="div-hover ">
                 <div class="table-body">
-                  <td>{{ trail.name }}</td>
                   <td><img class="trailImage-sm" src={{trail.pictureUrl}}></td>
-                  <td>{{ trail.lengthMiles }}</td>
+                  <td>{{ trail.name }}</td>
+                  <td>{{ trail.lengthMiles }} Miles</td>
                   <td>{{trail.location}}</td>
                   <td *ngIf="trail.difficulty != null">{{ trail.difficulty.name }}</td>
 
