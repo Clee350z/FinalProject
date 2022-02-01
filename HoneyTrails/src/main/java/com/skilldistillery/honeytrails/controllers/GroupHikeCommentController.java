@@ -40,6 +40,12 @@ public class GroupHikeCommentController {
 		return comments;
 	}
 	
+	@GetMapping("grouphikes/{groupHikeId}/comments")
+	public List<GroupHikeComment> getAllCommentsByGroupHike(@PathVariable int groupHikeId) {
+		List<GroupHikeComment> comments = ghcServ.getAllGroupHikeCommentsByGroupHike(groupHikeId);
+		return comments;
+	}
+	
 	@GetMapping("grouphikes/{groupHikeId}/comments/{commentId}")
 	public GroupHikeComment getGHCById(@PathVariable int commentId, HttpServletResponse res) {
 		GroupHikeComment ghc = ghcServ.getGroupHikeCommentById(commentId);

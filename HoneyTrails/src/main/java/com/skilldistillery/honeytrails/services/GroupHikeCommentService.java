@@ -18,6 +18,7 @@ public interface GroupHikeCommentService {
 	
 	void deleteGroupHikeCommentById(int groupHikeCommentId, String username);
 
+	List<GroupHikeComment> getAllGroupHikeCommentsByGroupHike(int groupHikeId);
 	
 
 }
