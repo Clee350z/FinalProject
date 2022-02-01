@@ -82,7 +82,7 @@ public class GroupHikeController {
 		} else {
 			res.setStatus(201);
 		}
-		return newGroupHike;
+		return newGroupHike; 
 	}
 	
 //	@PutMapping("trails/{trailId}/grouphikes/adduser")
