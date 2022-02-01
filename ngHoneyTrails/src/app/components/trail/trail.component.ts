@@ -26,6 +26,7 @@ export class TrailComponent implements OnInit {
   trails: Trail[] = [];
   selected : Trail | null = null;
   newTrail : Trail = new Trail();
+  trailMap : Trail = new Trail();
   addTrailFormSelected : boolean = false;
   difficulties : Difficulty[] = [];
   trailDetailsDropDown : boolean = false;
@@ -78,6 +79,7 @@ export class TrailComponent implements OnInit {
     this.trailSvc.viewTrailDetails(trailId).subscribe(
       trail => {
         this.selected = trail;
+        this.trailMap = trail;
 
         let loader = new Loader({
           apiKey: 'AIzaSyDHOH7qwK5gZYBdbYoWLS3PbPjVU3-pH4Q'
@@ -86,19 +88,15 @@ export class TrailComponent implements OnInit {
         loader.load().then(() => {
           let map = new google.maps.Map(document.getElementById("map") as HTMLElement,
           {
-            center: { lat: trail.latitude, lng: trail.longitude},
+            center: { lat: this.trailMap.latitude, lng: this.trailMap.longitude},
             zoom: 10
           })
 
-          const marker = new google.maps.Marker({
+           new google.maps.Marker({
             position: { lat: trail.latitude, lng: trail.longitude},
             map: map,
           });
         })
-
-
-
-
 
       },
 
