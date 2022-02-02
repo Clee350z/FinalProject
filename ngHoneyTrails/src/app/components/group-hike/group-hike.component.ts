@@ -77,7 +77,8 @@ export class GroupHikeComponent implements OnInit {
     console.log(groupHike);
     this.ghServ.addUser(groupHike).subscribe({
       next: (gh) => {
-        this.selected = groupHike;
+        this.selected = gh;
+
       },
       error: (fail) => {
         console.error('GroupHikeComponent.tServ.addUser(): error on adding user');
