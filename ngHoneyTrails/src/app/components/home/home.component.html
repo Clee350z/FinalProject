@@ -14,7 +14,14 @@
       <img src="assets/images/treeline-foreground.png" class="foreground">
       <h1 class="title">Honey Trails</h1>
     </header>
-    <section>Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio recusandae debitis sit hic architecto mollitia quisquam fugit laboriosam ipsam molestiae, doloremque commodi non necessitatibus iste accusantium. Voluptate adipisci enim numquam!</section>
+    <section style="display: flex; justify-content: space-evenly;">
+      <div class="card" *ngFor="let trail of trails" (click)="navigateToTrail(trail.id)">
+        <div class="trailCardContainer">
+          <img src="{{trail.pictureUrl}}" class="trailPic">
+          <h4 class="trailname"><b>{{trail.name}}</b></h4>
+        </div>
+      </div>
+    </section>
   </div>
 </body>
 </html>

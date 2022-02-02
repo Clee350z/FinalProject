@@ -1,1 +1,13 @@
+#nav-container{
+  overflow: hidden;
+  position: sticky;
+  z-index: 1;
+  top: 0;
+  box-shadow: 0, 0, 50px, rgba(0, 0, 0, .4);
+  padding: 0;
+}
 
+.container-fluid {
+  background-color: rgb(28, 83, 46);
+  top: 0;
+}

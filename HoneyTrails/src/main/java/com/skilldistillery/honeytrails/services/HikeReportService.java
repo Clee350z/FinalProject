@@ -1,6 +1,7 @@
 package com.skilldistillery.honeytrails.services;
 
 import java.util.List;
+import java.util.Set;
 
 import com.skilldistillery.honeytrails.entities.HikeReport;
 
@@ -15,5 +16,7 @@ public interface HikeReportService {
 	HikeReport updateReport(String username, int reportId, HikeReport report, int trailId);
 	
 	boolean delete(String username, int reportId);
+
+	Set<HikeReport> getHikeReportByTrailId(int trailId);
 
 }

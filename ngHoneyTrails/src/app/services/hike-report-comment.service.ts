@@ -29,7 +29,18 @@ export class HikeReportCommentService {
       catchError((err: any) => {
         console.log(err);
         return throwError(
-          () => new Error('GroupHikeCommentService.index(): error retrieving reports' + err)
+          () => new Error('HikeReportCommentService.index(): error retrieving reports' + err)
+        );
+      })
+    );
+  }
+
+  showComments(hikeReportId: number): Observable<HikeReportComment[]> {
+    return  this.http.get<HikeReportComment[]>(this.url + "/" + hikeReportId + "/comments").pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(
+          () => new Error('HikeReportCommentService.index(): error retrieving reports' + err)
         );
       })
     );
@@ -42,7 +53,7 @@ export class HikeReportCommentService {
         console.error(error);
         return throwError(
           () => new Error(
-            "HikeReportService.show(): error finding GroupHike: " + error
+            "HikeReportService.show(): error finding HikeReport: " + error
           )
         );
       })
@@ -55,7 +66,7 @@ export class HikeReportCommentService {
         console.error(error);
         return throwError(
           () => new Error(
-            "HikeReportService.update(): error finding GroupHike: " + error
+            "HikeReportService.update(): error finding HikeReport: " + error
           )
         );
       })
@@ -69,7 +80,7 @@ export class HikeReportCommentService {
         console.error(error);
         return throwError(
           () => new Error(
-            "HikeReportService.update(): error finding GroupHike: " + error
+            "HikeReportService.update(): error updating HikeReport comment: " + error
           )
         );
       })
@@ -83,7 +94,7 @@ export class HikeReportCommentService {
         console.error(error);
         return throwError(
           () => new Error(
-            "HikeReportService.destroy(): error finding GroupHike: " + error
+            "HikeReportService.destroy(): error deleting HikeReport: " + error
           )
         );
       })

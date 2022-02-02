@@ -69,4 +69,10 @@ public class GroupHikeCommentServiceImpl implements GroupHikeCommentService {
 		}
 	}
 
+	@Override
+	public List<GroupHikeComment> getAllGroupHikeCommentsByGroupHike(int groupHikeId) {
+		return ghcRepo.findByGroupHikeId(groupHikeId);
+		
+	}
+
 }

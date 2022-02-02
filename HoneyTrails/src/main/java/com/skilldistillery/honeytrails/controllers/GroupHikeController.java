@@ -2,6 +2,7 @@ package com.skilldistillery.honeytrails.controllers;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.honeytrails.entities.GroupHike;
+import com.skilldistillery.honeytrails.entities.User;
 import com.skilldistillery.honeytrails.services.GroupHikeService;
 
 @RestController
@@ -60,7 +62,17 @@ public class GroupHikeController {
 		return groupHikeByName;
 	}
 	
-	// TODO: add get groups by trail id
+	
+//	@GetMapping("grouphikes/{groupHikeId}/users")
+//	public List<User> getUsersForGroupHike(@PathVariable int groupHikeId, HttpServletResponse res) {
+//		List<User> users = ghServ.getUsersByGroupHikeId(groupHikeId);
+//		if(users.size() <= 0) {
+//			res.setStatus(404);
+//		} else {
+//			res.setStatus(200);
+//		}
+//		return users;
+//	}
 	
 	@PostMapping("trails/{trailId}/grouphikes")
 	public GroupHike createGroupHike(@PathVariable int trailId, @RequestBody GroupHike groupHike, HttpServletResponse res, Principal principal) {
@@ -70,7 +82,19 @@ public class GroupHikeController {
 		} else {
 			res.setStatus(201);
 		}
-		return newGroupHike;
+		return newGroupHike; 
+	}
+	
+//	@PutMapping("trails/{trailId}/grouphikes/adduser")
+	@PostMapping("trails/{trailId}/grouphikes/{groupHikeId}/users")
+	public GroupHike addUsersToGroupHike(@PathVariable int trailId, @PathVariable int groupHikeId, HttpServletResponse res, Principal principal) {
+		GroupHike userAddedToGroupHike = ghServ.addUsersToGroupHike(groupHikeId, principal.getName(), trailId);
+		if(userAddedToGroupHike == null) {
+			res.setStatus(400);
+		} else {
+			res.setStatus(201);
+		}
+		return userAddedToGroupHike;
 	}
 	
 	@PutMapping("grouphikes/{groupHikeId}")
@@ -98,6 +122,11 @@ public class GroupHikeController {
 	@DeleteMapping("grouphikes/{groupHikeId}")
 	public void deletedGroupHike(@PathVariable int groupHikeId, Principal principal) {
 		ghServ.deleteGroupHikeById(groupHikeId, principal.getName());
+	}
+	
+	@GetMapping("trails/{trailId}/grouphikes")
+	public Set<GroupHike> getGroupHikesByTrailId(@PathVariable int trailId){
+		return ghServ.findGroupHikeByTrailId(trailId);
 	}
 
 }

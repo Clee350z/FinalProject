@@ -49,6 +49,15 @@ export class GroupHikeService {
     );
   }
 
+  addUser(groupHike: GroupHike): Observable<GroupHike> {
+    return this.http.post<GroupHike>(this.url2 + "/" + groupHike.trail.id + "/grouphikes/" + groupHike.id + "/users", groupHike, this.getHttpOptions()).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('Error adding user to groupHike');
+      })
+    )
+  }
+
   create(groupHike: GroupHike):Observable<GroupHike>{
     return this.http.post<GroupHike>(this.url2 + "/" + groupHike.trail.id + "/grouphikes", groupHike, this.getHttpOptions()).pipe(
       catchError((err: any) => {
@@ -83,5 +92,18 @@ export class GroupHikeService {
         return throwError('Error deleting groupHike');
       })
     )
+  }
+
+  getGroupHikesByTrailId(trailId : number): Observable <GroupHike[]> {
+    return this.http.get<GroupHike[]>(this.url2 + '/' + trailId + '/hikereports').pipe(
+      catchError((err: any) => {
+        console.error('HikeReportService.show(): error retrieving report');
+        console.error(err);
+        return throwError(
+          () =>
+            new Error('HikeReportService.show(): err retrieving report' + err)
+        );
+      })
+    );
   }
 }

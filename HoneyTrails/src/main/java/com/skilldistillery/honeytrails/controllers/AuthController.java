@@ -41,7 +41,6 @@ public class AuthController {
 
 	    return user;
 	}
-
 	@GetMapping("/authenticate")
 	public User authenticate(Principal principal) {
 	    return authSer.findUserByName(principal.getName());

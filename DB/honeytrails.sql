@@ -394,11 +394,16 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `honeytrailsdb`;
-INSERT INTO `trail` (`id`, `name`, `location`, `length_miles`, `picture_url`, `trail_open`, `latitude`, `longitude`, `difficulty_id`) VALUES (1, 'Bear Peak Summit Hike', 'Colorado', 8.4, 'https://files.slack.com/files-pri/T052X7BAZ-F03091Q81HA/bearcreekpic1.jpeg', 1, 38.191, -105.327, 4);
-INSERT INTO `trail` (`id`, `name`, `location`, `length_miles`, `picture_url`, `trail_open`, `latitude`, `longitude`, `difficulty_id`) VALUES (2, 'Eldorado Canyon State Park Trails', 'Colorado', 7, 'https://files.slack.com/files-pri/T052X7BAZ-F02V64BMQS3/eldoradocanyonpic1.jpeg', 1, 39.929, -105.331, 4);
-INSERT INTO `trail` (`id`, `name`, `location`, `length_miles`, `picture_url`, `trail_open`, `latitude`, `longitude`, `difficulty_id`) VALUES (3, 'Lost Lake via Hessie Trail', 'Colorado', 4.0, 'https://files.slack.com/files-pri/T052X7BAZ-F030KC56NSV/pxl_20210617_185051495.jpg', 1, 39.955, -105.608, 2);
-INSERT INTO `trail` (`id`, `name`, `location`, `length_miles`, `picture_url`, `trail_open`, `latitude`, `longitude`, `difficulty_id`) VALUES (4, 'Iwakuni Castle Trail', 'Japan', 4.2, 'https://files.slack.com/files-pri/T052X7BAZ-F030WF21U80/d90195e8-18b8-455e-ad27-fd47db1ff912.jpeg', 1, 34.103, 132.102, 2);
+INSERT INTO `trail` (`id`, `name`, `location`, `length_miles`, `picture_url`, `trail_open`, `latitude`, `longitude`, `difficulty_id`) VALUES (1, 'Bear Peak Summit Hike', 'Colorado', 8.4, 'https://i.imgur.com/Poi8O4y.jpeg', 1, 38.191, -105.327, 4);
+INSERT INTO `trail` (`id`, `name`, `location`, `length_miles`, `picture_url`, `trail_open`, `latitude`, `longitude`, `difficulty_id`) VALUES (2, 'Eldorado Canyon State Park Trails', 'Colorado', 7, 'https://i.imgur.com/ie48I7u.jpeg', 1, 39.929, -105.331, 4);
+INSERT INTO `trail` (`id`, `name`, `location`, `length_miles`, `picture_url`, `trail_open`, `latitude`, `longitude`, `difficulty_id`) VALUES (3, 'Lost Lake via Hessie Trail', 'Colorado', 4.0, 'https://i.imgur.com/11CjyuT.jpeg', 1, 39.955, -105.608, 2);
+INSERT INTO `trail` (`id`, `name`, `location`, `length_miles`, `picture_url`, `trail_open`, `latitude`, `longitude`, `difficulty_id`) VALUES (4, 'Iwakuni Castle Trail', 'Japan', 4.2, 'https://i.imgur.com/03E8yof.jpeg', 1, 34.103, 132.102, 2);
 INSERT INTO `trail` (`id`, `name`, `location`, `length_miles`, `picture_url`, `trail_open`, `latitude`, `longitude`, `difficulty_id`) VALUES (5, 'Redwood Creek Trail', 'Caalifornia', 15.6, 'https://i0.wp.com/www.thehikinglife.com/the-hiking-life-2/wp-content/uploads/2021/09/PHOTO-2021-09-14-15-10-36.jpg?ssl=1', 1, 41.299, 124.033, 5);
+INSERT INTO `trail` (`id`, `name`, `location`, `length_miles`, `picture_url`, `trail_open`, `latitude`, `longitude`, `difficulty_id`) VALUES (6, 'Taquari', 'Brazil', 20.5, 'https://i.imgur.com/LbpABdP.png', 1, 19.242, 57.225, 5);
+INSERT INTO `trail` (`id`, `name`, `location`, `length_miles`, `picture_url`, `trail_open`, `latitude`, `longitude`, `difficulty_id`) VALUES (7, 'Angels Landing', 'Utah', 4.4, 'https://photos.alltrails.com/eyJidWNrZXQiOiJhc3NldHMuYWxsdHJhaWxzLmNvbSIsImtleSI6InVwbG9hZHMvcGhvdG8vaW1hZ2UvMTEwNzgxMDYvMWI5Mzk5YjNhMWU4NWI2MjNhNWNiMDhmNTk0MWM1MTcuanBnIiwiZWRpdHMiOnsidG9Gb3JtYXQiOiJqcGVnIiwicmVzaXplIjp7IndpZHRoIjoyMDQ4LCJoZWlnaHQiOjIwNDgsImZpdCI6Imluc2lkZSJ9LCJyb3RhdGUiOm51bGwsImpwZWciOnsidHJlbGxpc1F1YW50aXNhdGlvbiI6dHJ1ZSwib3ZlcnNob290RGVyaW5naW5nIjp0cnVlLCJvcHRpbWlzZVNjYW5zIjp0cnVlLCJxdWFudGlzYXRpb25UYWJsZSI6M319fQ==', 1, 37.259, -112.951, 2);
+INSERT INTO `trail` (`id`, `name`, `location`, `length_miles`, `picture_url`, `trail_open`, `latitude`, `longitude`, `difficulty_id`) VALUES (8, 'Four Pass Loop', 'Colorado', 25.7, 'https://photos.alltrails.com/eyJidWNrZXQiOiJhc3NldHMuYWxsdHJhaWxzLmNvbSIsImtleSI6InVwbG9hZHMvcGhvdG8vaW1hZ2UvMjExOTQyODQvYmQyYWJiNDE2YTQ4Nzk1YTJkMmY1MmY0YzU1ZWZmZGQuanBnIiwiZWRpdHMiOnsidG9Gb3JtYXQiOiJqcGVnIiwicmVzaXplIjp7IndpZHRoIjoyMDQ4LCJoZWlnaHQiOjIwNDgsImZpdCI6Imluc2lkZSJ9LCJyb3RhdGUiOm51bGwsImpwZWciOnsidHJlbGxpc1F1YW50aXNhdGlvbiI6dHJ1ZSwib3ZlcnNob290RGVyaW5naW5nIjp0cnVlLCJvcHRpbWlzZVNjYW5zIjp0cnVlLCJxdWFudGlzYXRpb25UYWJsZSI6M319fQ==', 2, 39.564, -112.058, 5);
+INSERT INTO `trail` (`id`, `name`, `location`, `length_miles`, `picture_url`, `trail_open`, `latitude`, `longitude`, `difficulty_id`) VALUES (9, 'Avalanche Lake via the Trail of the Cedars', 'Montana', 5.9, 'https://photos.alltrails.com/eyJidWNrZXQiOiJhc3NldHMuYWxsdHJhaWxzLmNvbSIsImtleSI6InVwbG9hZHMvcGhvdG8vaW1hZ2UvMjMxNTU3MDUvYTc3MzY5ZDFhMDI2NDJiOTA0Yjg4NGIyMmY5NzdmYjguanBnIiwiZWRpdHMiOnsidG9Gb3JtYXQiOiJqcGVnIiwicmVzaXplIjp7IndpZHRoIjoyMDQ4LCJoZWlnaHQiOjIwNDgsImZpdCI6Imluc2lkZSJ9LCJyb3RhdGUiOm51bGwsImpwZWciOnsidHJlbGxpc1F1YW50aXNhdGlvbiI6dHJ1ZSwib3ZlcnNob290RGVyaW5naW5nIjp0cnVlLCJvcHRpbWlzZVNjYW5zIjp0cnVlLCJxdWFudGlzYXRpb25UYWJsZSI6M319fQ==', 2, 48.679, -113.819, 3);
+INSERT INTO `trail` (`id`, `name`, `location`, `length_miles`, `picture_url`, `trail_open`, `latitude`, `longitude`, `difficulty_id`) VALUES (10, 'Skyline Trail Loop', 'Washington', 6.2, 'https://photos.alltrails.com/eyJidWNrZXQiOiJhc3NldHMuYWxsdHJhaWxzLmNvbSIsImtleSI6InVwbG9hZHMvcGhvdG8vaW1hZ2UvMjg3MjgxOTkvMTY2ZDY5MTBhN2Q1MjIwMjk2NzFlY2EwODQ2MTJjZTYuanBnIiwiZWRpdHMiOnsidG9Gb3JtYXQiOiJqcGVnIiwicmVzaXplIjp7IndpZHRoIjoyMDQ4LCJoZWlnaHQiOjIwNDgsImZpdCI6Imluc2lkZSJ9LCJyb3RhdGUiOm51bGwsImpwZWciOnsidHJlbGxpc1F1YW50aXNhdGlvbiI6dHJ1ZSwib3ZlcnNob290RGVyaW5naW5nIjp0cnVlLCJvcHRpbWlzZVNjYW5zIjp0cnVlLCJxdWFudGlzYXRpb25UYWJsZSI6M319fQ==', 1, 46.786, -121.736, 3);
 
 COMMIT;
 
@@ -419,8 +424,9 @@ COMMIT;
 START TRANSACTION;
 USE `honeytrailsdb`;
 INSERT INTO `user` (`id`, `username`, `password`, `profile_picture`, `role`, `enabled`, `first_name`, `last_name`, `address_id`, `biography`) VALUES (1, 'admin', '$2a$10$KJh/cJ4YO.f8zwcjN7HLHOzRC/Rn/Xf3BJwGjdqLlVR7ZYNdoWV/y', NULL, 'ROLE_ADMIN', 1, 'Honeycomb', 'Hearts', 1, 'We are ze creators of Honey Trails!');
-INSERT INTO `user` (`id`, `username`, `password`, `profile_picture`, `role`, `enabled`, `first_name`, `last_name`, `address_id`, `biography`) VALUES (2, 'tester', '$2a$10$t0JMDym48MB5hZSMVfk74eMYxUOa/VTb2/ULVpZxUZOHiT0YNk4nm', NULL, 'ROLE_TEST', 1, 'test', 'test', NULL, NULL);
+INSERT INTO `user` (`id`, `username`, `password`, `profile_picture`, `role`, `enabled`, `first_name`, `last_name`, `address_id`, `biography`) VALUES (2, 'burgerBob', '$2a$10$t0JMDym48MB5hZSMVfk74eMYxUOa/VTb2/ULVpZxUZOHiT0YNk4nm', NULL, 'ROLE_TEST', 1, 'Bob', 'Belcher', NULL, NULL);
 INSERT INTO `user` (`id`, `username`, `password`, `profile_picture`, `role`, `enabled`, `first_name`, `last_name`, `address_id`, `biography`) VALUES (3, 'jenny12', '$2a$10$pim7BCTCtoZ1yOVFHuCSXerXhfjfYUOFQJjbpcoDEJAeslUHNg1qu', NULL, 'ROLE_TEST', 1, 'Jenny', 'Zimmersum', NULL, 'BOOM');
+INSERT INTO `user` (`id`, `username`, `password`, `profile_picture`, `role`, `enabled`, `first_name`, `last_name`, `address_id`, `biography`) VALUES (4, 'unfairDictator', '$2a$10$t0JMDym48MB5hZSMVfk74eMYxUOa/VTb2/ULVpZxUZOHiT0YNk4nm', NULL, 'ROLE_TEST', 1, 'Tina', 'Belcher', NULL, 'Burn the World DOWN! One hike at a time...');
 
 COMMIT;
 
@@ -430,9 +436,9 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `honeytrailsdb`;
-INSERT INTO `trail_comment` (`id`, `comment_body`, `time_posted`, `user_id`, `trail_id`) VALUES (1, 'The trail was so beautiful!', '2021-01-09 13:15:15', 2, 2);
-INSERT INTO `trail_comment` (`id`, `comment_body`, `time_posted`, `user_id`, `trail_id`) VALUES (2, 'I love Colorado trails!', '2022-01-02 23:23:25', 3, 2);
-INSERT INTO `trail_comment` (`id`, `comment_body`, `time_posted`, `user_id`, `trail_id`) VALUES (3, 'I hiked this trail when I visited Japan in 2012!', '2022-01-15 15:19:24', 3, 4);
+INSERT INTO `trail_comment` (`id`, `comment_body`, `time_posted`, `user_id`, `trail_id`) VALUES (1, 'The trail was so beautiful!', '2021-01-09 13:15:15', 2, 1);
+INSERT INTO `trail_comment` (`id`, `comment_body`, `time_posted`, `user_id`, `trail_id`) VALUES (2, 'I love Colorado trails!', '2022-01-02 23:23:25', 3, 1);
+INSERT INTO `trail_comment` (`id`, `comment_body`, `time_posted`, `user_id`, `trail_id`) VALUES (3, 'I hiked this trail when I visited Colorado in 2012!', '2022-01-15 15:19:24', 3, 1);
 
 COMMIT;
 
@@ -445,6 +451,11 @@ USE `honeytrailsdb`;
 INSERT INTO `group_hike` (`id`, `event_name`, `meetup_date`, `user_id`, `trail_id`, `meetup_time`, `description`, `image_url`, `hidden`) VALUES (1, 'Trail Fun Time', '2021-02-28', 2, 4, '15:04:04', 'Let\'s All Hike Together & Enjoy Nature While Being Healthy!!', 'https://files.slack.com/files-pri/T052X7BAZ-F02V6GUQ00N/image_from_ios.jpg', 0);
 INSERT INTO `group_hike` (`id`, `event_name`, `meetup_date`, `user_id`, `trail_id`, `meetup_time`, `description`, `image_url`, `hidden`) VALUES (2, 'Hike Forever', '2022-01-01', 2, 3, '13:15:15', 'Hike this trail again', NULL, 0);
 INSERT INTO `group_hike` (`id`, `event_name`, `meetup_date`, `user_id`, `trail_id`, `meetup_time`, `description`, `image_url`, `hidden`) VALUES (3, 'Tiffany\'s Birthday hike', '2022-01-05', 3, 2, '12:12:12', 'Hiking for Tiffany\'s 18th birthday!', NULL, 0);
+INSERT INTO `group_hike` (`id`, `event_name`, `meetup_date`, `user_id`, `trail_id`, `meetup_time`, `description`, `image_url`, `hidden`) VALUES (4, 'Hiking For Cardio', '2022-03-05', 4, 5, '06:00:00', 'Let\'s get those heart rates up & pumping!', NULL, 0);
+INSERT INTO `group_hike` (`id`, `event_name`, `meetup_date`, `user_id`, `trail_id`, `meetup_time`, `description`, `image_url`, `hidden`) VALUES (5, 'Snowy Hike', '2022-01-31', 3, 1, '10:15:00', 'Time to enjoy the snow while it last!', NULL, 0);
+INSERT INTO `group_hike` (`id`, `event_name`, `meetup_date`, `user_id`, `trail_id`, `meetup_time`, `description`, `image_url`, `hidden`) VALUES (6, 'Hiking For Cancer', '2022-05-06', 4, 6, '11:00:00', 'Let\'s hike to raise money for cancer research', NULL, 0);
+INSERT INTO `group_hike` (`id`, `event_name`, `meetup_date`, `user_id`, `trail_id`, `meetup_time`, `description`, `image_url`, `hidden`) VALUES (7, 'Jones\'s Anniversary', '2022-05-01', 2, 8, '12:15:00', 'Taking the wife out for a group hik with friends', NULL, 0);
+INSERT INTO `group_hike` (`id`, `event_name`, `meetup_date`, `user_id`, `trail_id`, `meetup_time`, `description`, `image_url`, `hidden`) VALUES (8, 'Skill Distillery Team Building', '2022-02-04', 2, 2, '15:00:00', 'SD 31 graduates! Let\'s Celebrate with a Hike!!', NULL, 0);
 
 COMMIT;
 
@@ -471,6 +482,9 @@ USE `honeytrailsdb`;
 INSERT INTO `hike_report` (`id`, `hike_title`, `trail_id`, `condition_type_id`, `report`, `date_created`, `hiked_date`, `user_id`, `rating`) VALUES (1, 'Slightly damp trail', 2, 2, 'The ground was slightly wet, a bit slippery. Exercise ccaution during hikes within the next 24 hours withstanding no more rain.', '2021-01-01', '2021-12-15', 2, 3);
 INSERT INTO `hike_report` (`id`, `hike_title`, `trail_id`, `condition_type_id`, `report`, `date_created`, `hiked_date`, `user_id`, `rating`) VALUES (2, 'All clear', 2, 1, 'No issues', '2022-01-01', '2021-12-30', 2, 3);
 INSERT INTO `hike_report` (`id`, `hike_title`, `trail_id`, `condition_type_id`, `report`, `date_created`, `hiked_date`, `user_id`, `rating`) VALUES (3, 'All clear', 3, 1, 'No issues', '2022-01-10', '2022-01-01', 2, 3);
+INSERT INTO `hike_report` (`id`, `hike_title`, `trail_id`, `condition_type_id`, `report`, `date_created`, `hiked_date`, `user_id`, `rating`) VALUES (4, 'Snowy', 10, 4, 'Snowed in', '2021-12-15', '2021-12-10', 3, 5);
+INSERT INTO `hike_report` (`id`, `hike_title`, `trail_id`, `condition_type_id`, `report`, `date_created`, `hiked_date`, `user_id`, `rating`) VALUES (5, 'Great Day for SD cohort 31', 1, 1, 'The Hike was Beautiful!', '2022-02-04', '2022-02-04', 4, 5);
+INSERT INTO `hike_report` (`id`, `hike_title`, `trail_id`, `condition_type_id`, `report`, `date_created`, `hiked_date`, `user_id`, `rating`) VALUES (6, 'What was that?', 5, 2, 'That trail was soooo long!', '2022-02-09', '2022-01-31', 4, 4);
 
 COMMIT;
 
@@ -480,8 +494,9 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `honeytrailsdb`;
-INSERT INTO `hike_photo` (`id`, `hike_report_id`, `image_url`, `title`, `description`) VALUES (1, 1, 'https://files.slack.com/files-pri/T052X7BAZ-F02V6H7H5ML/image_from_ios.jpg', 'Small Waterfall', 'Small waterfall about 10 mins to the east of the trail.');
-INSERT INTO `hike_photo` (`id`, `hike_report_id`, `image_url`, `title`, `description`) VALUES (2, 1, 'https://i0.wp.com/backpackingroutes.com/wp-content/uploads/2021/01/Colorado-Trail-2.png?resize=750%2C438', 'This View', 'This view is crazy! Having the best day!');
+INSERT INTO `hike_photo` (`id`, `hike_report_id`, `image_url`, `title`, `description`) VALUES (1, 1, 'https://i.imgur.com/LQN6YhG.jpeg', 'Small Waterfall', 'Small waterfall about 10 mins to the east of the trail.');
+INSERT INTO `hike_photo` (`id`, `hike_report_id`, `image_url`, `title`, `description`) VALUES (2, 1, 'https://i.imgur.com/ncSYhS1.jpeg', 'This View', 'This view is crazy! Having the best day!');
+INSERT INTO `hike_photo` (`id`, `hike_report_id`, `image_url`, `title`, `description`) VALUES (3, 4, 'https://photos.alltrails.com/eyJidWNrZXQiOiJhc3NldHMuYWxsdHJhaWxzLmNvbSIsImtleSI6InVwbG9hZHMvcGhvdG8vaW1hZ2UvNDQyMjA5NTEvZmQyMDcwYWUwN2Y4YWQ2OWE1NDMzNGYzYTJhOTBhMTEuanBnIiwiZWRpdHMiOnsidG9Gb3JtYXQiOiJqcGVnIiwicmVzaXplIjp7IndpZHRoIjoyMDQ4LCJoZWlnaHQiOjIwNDgsImZpdCI6Imluc2lkZSJ9LCJyb3RhdGUiOm51bGwsImpwZWciOnsidHJlbGxpc1F1YW50aXNhdGlvbiI6dHJ1ZSwib3ZlcnNob290RGVyaW5naW5nIjp0cnVlLCJvcHRpbWlzZVNjYW5zIjp0cnVlLCJxdWFudGlzYXRpb25UYWJsZSI6M319fQ==', 'Snowy!', 'This hike was so cold, but the view was amazing!');
 
 COMMIT;
 
@@ -492,6 +507,10 @@ COMMIT;
 START TRANSACTION;
 USE `honeytrailsdb`;
 INSERT INTO `group_hike_has_user` (`group_hike_id`, `user_id`) VALUES (1, 1);
+INSERT INTO `group_hike_has_user` (`group_hike_id`, `user_id`) VALUES (2, 1);
+INSERT INTO `group_hike_has_user` (`group_hike_id`, `user_id`) VALUES (1, 2);
+INSERT INTO `group_hike_has_user` (`group_hike_id`, `user_id`) VALUES (2, 2);
+INSERT INTO `group_hike_has_user` (`group_hike_id`, `user_id`) VALUES (1, 3);
 
 COMMIT;
 
@@ -504,6 +523,7 @@ USE `honeytrailsdb`;
 INSERT INTO `hike_report_comment` (`id`, `comment_box`, `hike_report_id`, `user_id`, `create_date`, `reply_to_id`) VALUES (1, 'This was such a great group hike!', 1, 2, '2021-01-15 15:15:15', NULL);
 INSERT INTO `hike_report_comment` (`id`, `comment_box`, `hike_report_id`, `user_id`, `create_date`, `reply_to_id`) VALUES (2, 'I love hiking', 2, 3, '2022-01-15 12:12:12', NULL);
 INSERT INTO `hike_report_comment` (`id`, `comment_box`, `hike_report_id`, `user_id`, `create_date`, `reply_to_id`) VALUES (3, 'When can I go hiking again?!?!?', 2, 3, '2022-01-16 13:15:28', NULL);
+INSERT INTO `hike_report_comment` (`id`, `comment_box`, `hike_report_id`, `user_id`, `create_date`, `reply_to_id`) VALUES (4, 'I\'m so tired', 3, 4, '2022-01-15 15:15:15', NULL);
 
 COMMIT;
 
@@ -536,6 +556,15 @@ USE `honeytrailsdb`;
 INSERT INTO `group_hike_comment` (`id`, `comment_box`, `user_id`, `create_date`, `reply_to_id`, `group_hike_id`, `hidden`) VALUES (1, 'This was a beautiful hike!', 2, '2021-01-01 15:15:15', NULL, 1, 0);
 INSERT INTO `group_hike_comment` (`id`, `comment_box`, `user_id`, `create_date`, `reply_to_id`, `group_hike_id`, `hidden`) VALUES (2, 'I love hiking', 3, '2022-01-10 13:13:13', NULL, 2, 0);
 INSERT INTO `group_hike_comment` (`id`, `comment_box`, `user_id`, `create_date`, `reply_to_id`, `group_hike_id`, `hidden`) VALUES (3, 'Hiking FOREVER!!', 2, '2021-01-15 15:15:15', NULL, 2, 0);
+INSERT INTO `group_hike_comment` (`id`, `comment_box`, `user_id`, `create_date`, `reply_to_id`, `group_hike_id`, `hidden`) VALUES (4, 'I missed hiking so much & for such a great cause!', 3, '2022-04-05 21:21:04', NULL, 4, 0);
+INSERT INTO `group_hike_comment` (`id`, `comment_box`, `user_id`, `create_date`, `reply_to_id`, `group_hike_id`, `hidden`) VALUES (5, 'What a great cause to take a stroll around the mountain! ', 4, '2022-05-07 16:15:15', NULL, 6, 0);
+INSERT INTO `group_hike_comment` (`id`, `comment_box`, `user_id`, `create_date`, `reply_to_id`, `group_hike_id`, `hidden`) VALUES (6, 'I love hiking so much!', 3, '2021-01-25 16:15:30', NULL, 1, 0);
+INSERT INTO `group_hike_comment` (`id`, `comment_box`, `user_id`, `create_date`, `reply_to_id`, `group_hike_id`, `hidden`) VALUES (7, 'Ugh. This was such a rough hike. :(', 4, '2021-01-01 16:30:15', NULL, 1, 0);
+INSERT INTO `group_hike_comment` (`id`, `comment_box`, `user_id`, `create_date`, `reply_to_id`, `group_hike_id`, `hidden`) VALUES (8, 'I can\'t wait to go again!', 2, '2021-01-01 16:45:45', NULL, 1, 0);
+INSERT INTO `group_hike_comment` (`id`, `comment_box`, `user_id`, `create_date`, `reply_to_id`, `group_hike_id`, `hidden`) VALUES (9, 'Why is hiking so fun?!?!', 2, '2022-01-11 16:15:45', NULL, 2, 0);
+INSERT INTO `group_hike_comment` (`id`, `comment_box`, `user_id`, `create_date`, `reply_to_id`, `group_hike_id`, `hidden`) VALUES (10, 'I can\'t believe that I survived that hike. It was so exhausting!', 3, '2022-01-12 22:15:45', NULL, 2, 0);
+INSERT INTO `group_hike_comment` (`id`, `comment_box`, `user_id`, `create_date`, `reply_to_id`, `group_hike_id`, `hidden`) VALUES (11, 'Hey, did anyone see Bob', 4, '2022-01-13 15:15:45', NULL, 2, 0);
+INSERT INTO `group_hike_comment` (`id`, `comment_box`, `user_id`, `create_date`, `reply_to_id`, `group_hike_id`, `hidden`) VALUES (12, 'Where am I even at? I can barely think after that hike', 2, '2022-01-05 20:25:15', NULL, 3, 0);
 
 COMMIT;
 

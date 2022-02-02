@@ -1,9 +1,9 @@
 package com.skilldistillery.honeytrails.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -71,10 +71,11 @@ public class User {
 	@JsonIgnore
 	private List<TrailComment> comments;
 	
-	@ManyToMany(fetch=FetchType.LAZY)
-	@JoinTable(name="group_hike_has_user", 
-	joinColumns=@JoinColumn(name="user_id"),
-	inverseJoinColumns=@JoinColumn(name="group_hike_id"))
+//	@ManyToMany(fetch=FetchType.LAZY)
+//	@JoinTable(name="group_hike_has_user", 
+//	joinColumns=@JoinColumn(name="user_id"),
+//	inverseJoinColumns=@JoinColumn(name="group_hike_id"))
+	@ManyToMany(mappedBy="users")
 	@JsonIgnore
 	private List<GroupHike> groupHikes;
 	
@@ -247,6 +248,22 @@ public class User {
 
 	public void setAddress(Address address) {
 		this.address = address;
+	}
+	
+	public void addGroupHike(GroupHike groupHike) {
+		if(groupHikes == null) groupHikes = new ArrayList<>();
+		
+		if(!groupHikes.contains(groupHike)) {
+			groupHikes.add(groupHike);
+			groupHike.addUser(this);
+		}
+	}
+	
+	public void removeGroupHike(GroupHike grouphike) {
+		if(groupHikes != null && groupHikes.contains(grouphike)) {
+			groupHikes.remove(grouphike);
+			grouphike.removeUser(null);
+		}
 	}
 
 	/*-----------------------------------------------------------------------------------------------------

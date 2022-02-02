@@ -1,1 +1,50 @@
-<p>hike-photo works!</p>
+<div id="hikeReportPhoto" *ngIf="!selected">
+<table>
+  <thead>
+    <tr>
+      <th>Report Title</th>
+      <th> Scenic View</th>
+      <!-- <th>Hike Report</th> -->
+      <!-- <th>Description</th> -->
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let photo of photoCollection" (click)="selected = photo ">
+      <td class="HikePhotoDataTable">{{photo.title}}</td>
+      <td class="HikePhotoDataTable"><img class="photoImage-sm" src="{{photo.imageUrl}}"></td>
+      <!-- <button (click)="deletePhoto(photo)">Delete</button> -->
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div id="SinglePhoto" *ngIf="selected && !addPhoto && !editPhoto">
+<ul>
+  <!-- <li>Hike Report Id: {{selected.hikeReport.id}}</li> -->
+  <li>Photo Id: {{selected.id}}</li>
+  <li>Title: {{selected.title}}</li>
+  <li> <img class="photoImage-sm" [src]="selected.imageUrl"></li>
+  <li>Description: {{selected.description}}</li>
+</ul>
+<button class="formButtons" (click)="selected = null">Back</button>
+<button class="formButtons" (click)="setEditPhoto()">Update Photo</button>
+<button class="formButtons" (click)="deletePhoto(selected)" (click)="selected = null">Delete Photo</button>
+
+
+
+</div>
+
+<div class="updatePhotoForm" *ngIf="editPhoto">
+  <h4>Update Photo Form: </h4>
+  <form>
+      <div>
+        <label name="title"> Title: </label>
+        <input type="text" name="title" [(ngModel)]="editPhoto.title"/>
+        <label name="image">Image: </label>
+        <input type="text" name="image" [(ngModel)]="editPhoto.imageUrl"/>
+        <label name="description">Description: </label>
+        <input type="text" name="description" [(ngModel)]="editPhoto.description">
+        <input (click)="updatePhoto(editPhoto)" type="submit" />
+      </div>
+  </form>
+</div>

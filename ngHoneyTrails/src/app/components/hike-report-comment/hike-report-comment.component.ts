@@ -2,7 +2,9 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HikeReport } from 'src/app/models/hike-report';
 import { HikeReportComment } from 'src/app/models/hike-report-comment';
+import { User } from 'src/app/models/user';
 import { HikeReportCommentService } from 'src/app/services/hike-report-comment.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-hike-report-comment',
@@ -18,12 +20,13 @@ export class HikeReportCommentComponent implements OnInit {
   addReportComment: boolean = false;
   updateReportCommentSelected: boolean = false;
   @Input() hikeReport: HikeReport = new HikeReport() ;
+  users: User[] = [];
 
   constructor(
     private hRComServ: HikeReportCommentService,
     private router: Router,
-    private route: ActivatedRoute
-    // private hikeRpt: HikeReport
+    private route: ActivatedRoute,
+    private uServ: UserService
   ) { }
 
   ngOnInit(): void {
@@ -44,14 +47,15 @@ export class HikeReportCommentComponent implements OnInit {
         this.router.navigateByUrl('invalidHikeReport');
       }
     }
+    // this.populateUsers();
     this.reload();
   }
 
   reload(){
-    this.hRComServ.index().subscribe(
+    this.hRComServ.showComments(this.hikeReport.id).subscribe(
       {
-        next: (reportComments) => {
-          this.reportComments = reportComments;
+        next: (hikeReportComments) => {
+          this.reportComments = hikeReportComments;
         },
         error: (err) => {
           console.error('HikeReportComment.reload(): error getting reports');
@@ -60,14 +64,36 @@ export class HikeReportCommentComponent implements OnInit {
       }//end of object
     );
   }
+  populateUsers() {
+    this.uServ.index().subscribe({
+      next: (t) => {
+        this.users = t;
+      },
+      error: (fail) => {
+        console.error('HikeReportComment.uServ.index(): error on populate users');
+        console.error(fail);
+      }
+    })
+  }
 
-  displayReportComment(reportComment: HikeReportComment) {
-    this.selected = reportComment;
+  displayHikeReportComment(hikeReportComment: HikeReportComment) {
+    this.hRComServ.showComments(this.hikeReport.id).subscribe(
+      {
+        next: (hikeReportComments) => {
+          this.reportComments = hikeReportComments;
+        },
+        error: (err) => {
+          console.error('GroupHikeComp.reload(): error getting reports');
+          console.error(err);
+        }
+      }//end of object
+    );
+    this.selected = hikeReportComment;
   }
 
   createReportComment(reportComment: HikeReportComment) {
     reportComment.hikeReport = this.hikeReport;
-    console.log(reportComment);
+    // console.log(reportComment);
     this.hRComServ.create(reportComment).subscribe({
       next: (comment) => {
         this.newReportComment = new HikeReportComment();

@@ -25,12 +25,13 @@ export class RegisterComponent implements OnInit {
   register(user: User){
     this.authSvc.register(user).subscribe(
       user => {
-
-
-//
-        this.router.navigateByUrl('/user/' + user.id);
+        this.isSuccessful = true;
+        this.isRegisterFailed = false;
+        this.router.navigateByUrl('/home');
       },
       fail => {
+        this.isSuccessful = false;
+        this.isRegisterFailed = true;
         console.error(fail);
       }
     );

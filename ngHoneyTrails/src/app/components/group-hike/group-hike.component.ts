@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { GroupHike } from 'src/app/models/group-hike';
 import { Trail } from 'src/app/models/trail';
+import { User } from 'src/app/models/user';
 import { GroupHikeService } from 'src/app/services/group-hike.service';
 import { TrailService } from 'src/app/services/trail.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-group-hike',
@@ -19,12 +21,14 @@ export class GroupHikeComponent implements OnInit {
   addGroupHikeFormSelected: boolean = false;
   updateGroupHikeFormSelected: boolean  = false;
   trails: Trail [] = [];
+  users: User [] = [];
 
   constructor(
     private ghServ: GroupHikeService,
     private router: Router,
     private route: ActivatedRoute,
-    private tServ: TrailService
+    private tServ: TrailService,
+    private uServ: UserService
   ) { }
 
   ngOnInit(): void {
@@ -45,6 +49,7 @@ export class GroupHikeComponent implements OnInit {
         this.router.navigateByUrl('invalidGroupHike');
       }
     }
+    // this.populateUsers();
     this.populateTrails();
     this.reload();
   }
@@ -66,6 +71,32 @@ export class GroupHikeComponent implements OnInit {
   displayGroupHike(groupHike: GroupHike){
     this.selected = groupHike;
 
+  }
+
+  addUserToGroupHike(groupHike: GroupHike) {
+    console.log(groupHike);
+    this.ghServ.addUser(groupHike).subscribe({
+      next: (gh) => {
+        this.selected = gh;
+
+      },
+      error: (fail) => {
+        console.error('GroupHikeComponent.tServ.addUser(): error on adding user');
+        console.error(fail);
+      }
+    })
+  }
+
+  populateUsers() {
+    this.uServ.index().subscribe({
+      next: (t) => {
+        this.users = t;
+      },
+      error: (fail) => {
+        console.error('GroupHikeComponent.uServ.index(): error on populate users');
+        console.error(fail);
+      }
+    })
   }
 
   populateTrails() {

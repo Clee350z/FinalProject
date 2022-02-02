@@ -14,4 +14,6 @@ public interface TrailService {
 	public Trail updateTrail(int trailId, Trail trail);
 	
 	public boolean deleteTrail(int trailId);
+
+	List<Trail> getRandomTrail(int howMany);
 }

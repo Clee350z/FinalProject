@@ -20,6 +20,8 @@ const routes: Routes = [
   { path: 'trails', component: TrailComponent },
   { path: 'hikereports', component: HikeReportComponent },
   { path: 'hikereports/:id', component: HikeReportComponent },
+  { path: 'hikephotos', component: HikePhotoComponent },
+  { path: 'hikephotos/:id', component: HikePhotoComponent },
   { path: 'trails/:id/grouphikes', component: GroupHikeComponent },
   { path: 'grouphikes', component: GroupHikeComponent },
   { path: 'grouphikes/:id', component: GroupHikeComponent },

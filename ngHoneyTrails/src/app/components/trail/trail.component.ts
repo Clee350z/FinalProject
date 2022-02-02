@@ -10,6 +10,10 @@ import { HikeReportService } from 'src/app/services/hike-report.service';
 import { HikeReport } from 'src/app/models/hike-report';
 import { ConditionService } from 'src/app/services/condition.service';
 import { Condition } from 'src/app/models/condition';
+import { GroupHikeService } from 'src/app/services/group-hike.service';
+import { GroupHike } from 'src/app/models/group-hike';
+import { Loader } from '@googlemaps/js-api-loader';
+import { map } from 'rxjs';
 
 
 @Component({
@@ -22,6 +26,7 @@ export class TrailComponent implements OnInit {
   trails: Trail[] = [];
   selected : Trail | null = null;
   newTrail : Trail = new Trail();
+  trailMap : Trail = new Trail();
   addTrailFormSelected : boolean = false;
   difficulties : Difficulty[] = [];
   trailDetailsDropDown : boolean = false;
@@ -30,6 +35,8 @@ export class TrailComponent implements OnInit {
   addFormReportSelected: boolean = false;
   newReport: HikeReport = new HikeReport();
   condition: Condition[] =[];
+  selectedTrailHikeReports: HikeReport[] = [];
+  selectedTrailGroupHikes: GroupHike [] = [];
 
 
   constructor(
@@ -38,7 +45,8 @@ export class TrailComponent implements OnInit {
     private difSvc : DifficultyService,
     private trlCmntSvc : TrailCommentService,
     private hRptServ: HikeReportService,
-    private cServ: ConditionService
+    private cServ: ConditionService,
+    private grpHkSvc : GroupHikeService
   ) { }
 
   ngOnInit(): void {
@@ -46,6 +54,9 @@ export class TrailComponent implements OnInit {
     this.getDifficultyList();
     this.populateCondition();
   }
+/*----------------------------------------------------------------------------------------------------
+    Gets a list of all Trails
+-----------------------------------------------------------------------------------------------------*/
 
   reload(){
     this.trailSvc.index().subscribe(
@@ -60,10 +71,17 @@ export class TrailComponent implements OnInit {
     );
   }
 
+/*----------------------------------------------------------------------------------------------------
+    View Trail Details
+-----------------------------------------------------------------------------------------------------*/
+
   viewTrailDetails(trailId : number){
     this.trailSvc.viewTrailDetails(trailId).subscribe(
       trail => {
         this.selected = trail;
+        this.trailMap = trail;
+          this.map();
+
 
       },
 
@@ -71,9 +89,15 @@ export class TrailComponent implements OnInit {
         console.error('TrailComponent.reload(): Error retreiving trail');
         console.error(fail);
       }
-    );
+
+      );
 
   }
+
+/*----------------------------------------------------------------------------------------------------
+    Populates list of conditions for create Hike Report form
+-----------------------------------------------------------------------------------------------------*/
+
   populateCondition(){
     this.cServ.index().subscribe({
       next: (c) => {
@@ -83,6 +107,9 @@ export class TrailComponent implements OnInit {
         console.error('Error on retrieval of conditions');}
     });
   }
+/*----------------------------------------------------------------------------------------------------
+    Creates a trail
+-----------------------------------------------------------------------------------------------------*/
 
   addTrail(newTrail : Trail) {
     this.trailSvc.createNewTrail(newTrail).subscribe(
@@ -102,6 +129,10 @@ export class TrailComponent implements OnInit {
     this.reload();
   }
 
+/*----------------------------------------------------------------------------------------------------
+    Creates Hike Report for Trail
+-----------------------------------------------------------------------------------------------------*/
+
   addReport(report: HikeReport){
     if(this.selected){
       report.trail.id = this.selected.id;
@@ -117,6 +148,10 @@ export class TrailComponent implements OnInit {
     });
   }
 
+/*----------------------------------------------------------------------------------------------------
+    Deletes Trail
+-----------------------------------------------------------------------------------------------------*/
+
   deleteTrail(trailId : number){
     this.trailSvc.delete(trailId).subscribe(
       success => {
@@ -129,6 +164,10 @@ export class TrailComponent implements OnInit {
       }
     )
   }
+
+/*----------------------------------------------------------------------------------------------------
+    Updates Trail
+-----------------------------------------------------------------------------------------------------*/
 
   updateTrail(trail : Trail){
     this.trailSvc.update(trail).subscribe(
@@ -143,6 +182,10 @@ export class TrailComponent implements OnInit {
     )
   }
 
+/*----------------------------------------------------------------------------------------------------
+    Populates a list of difficulties for create Trail form
+-----------------------------------------------------------------------------------------------------*/
+
   getDifficultyList(){
     this.difSvc.index().subscribe(
       difficulties => {
@@ -155,6 +198,10 @@ export class TrailComponent implements OnInit {
       }
     );
   }
+
+/*----------------------------------------------------------------------------------------------------
+    Create a Trail Comment
+-----------------------------------------------------------------------------------------------------*/
 
   createTrailComment(newComment : Trailcomment, trail : Trail){
     this.trlCmntSvc.createNewTrailComment(newComment, trail.id).subscribe(
@@ -171,4 +218,58 @@ export class TrailComponent implements OnInit {
       }
       )
   }
+
+/*----------------------------------------------------------------------------------------------------
+    Set of Hike Reports for a specific Trail id
+-----------------------------------------------------------------------------------------------------*/
+
+  getHikeReportsForTrail(trailId : number){
+    this.hRptServ.getHikeReportsByTrailId(trailId).subscribe(
+      hikeReports => {
+        this.selectedTrailHikeReports = hikeReports
+      },
+
+      fail => {
+        console.error('TrailComponent.reload(): Error getting hike report for trail');
+        console.error(fail);
+      }
+      )
+  }
+
+/*----------------------------------------------------------------------------------------------------
+    Set of Group Hikes for a specific Trail id
+-----------------------------------------------------------------------------------------------------*/
+
+getGroupHikesForTrail(trailId : number){
+  this.grpHkSvc.getGroupHikesByTrailId(trailId).subscribe(
+    groupHikes => {
+      this.selectedTrailGroupHikes = groupHikes;
+    },
+
+    fail => {
+      console.error('TrailComponent.reload(): Error getting hike report for trail');
+      console.error(fail);
+    }
+    )
+}
+
+map(){
+
+  let loader = new Loader({
+    apiKey: 'AIzaSyDHOH7qwK5gZYBdbYoWLS3PbPjVU3-pH4Q'
+  })
+
+  loader.load().then(() => {
+     var map = new google.maps.Map(document.getElementById("map")!,
+    {
+      center: { lat: this.trailMap.latitude, lng: this.trailMap.longitude},
+      zoom: 10
+    })
+
+     new google.maps.Marker({
+      position: { lat: this.trailMap.latitude, lng: this.trailMap.longitude},
+      map: map,
+    });
+  })
+}
 }

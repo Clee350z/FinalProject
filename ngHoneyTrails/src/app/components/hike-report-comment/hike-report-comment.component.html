@@ -3,21 +3,19 @@
   <br />
   <button (click)="addReportComment = true">Add Comment</button>
   <div class="reportCommentsTable">
-    <table class="content-table" >
+    <table class="table table-dark table-striped" >
       <thead>
         <tr>
           <th>Comment:</th>
           <th>User:</th>
           <th>Posted on:</th>
-          <!-- <th>Hike Report:</th> -->
         </tr>
       </thead>
       <tbody>
-        <tr class="table-secondary" *ngFor="let comment of reportComments" (click)="selected = comment " (click)="displayReportComment(comment)">
+        <tr class="table-secondary" *ngFor="let comment of reportComments" (click)="selected = comment " (click)="displayHikeReportComment(comment)">
           <td class="HikeReportCommentTableData">{{ comment.commentBox }}</td>
           <td class="HikeReportCommentTableData">{{ comment.user?.username }}</td>
           <td class="HikeReportCommentTableData">{{ comment.createDate }}</td>
-          <!-- <td class="HikeReportCommentTableData">{{ comment.hikeReport }}</td> -->
         </tr>
       </tbody>
     </table>
@@ -25,7 +23,9 @@
   </div>
 </div>
 
-<div class="groupHikeCommentDisplay" *ngIf="selected && !addReportComment && !editReportComment">
+<div class="HikeReportCommentDisplay" *ngIf="selected && !addReportComment && !editReportComment">
+
+
   <ul>
     <br>
     <li class="HikeReportCommentDetails">Text: {{ selected.commentBox }}</li>
