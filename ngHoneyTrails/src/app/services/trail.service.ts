@@ -90,7 +90,7 @@ export class TrailService {
     return this.selected;
   }
 
-  setSelected(trail : Trail | null){
+  setSelected(trail : Trail){
     this.selected = trail;
   }
 

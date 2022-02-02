@@ -47,9 +47,9 @@
       <h2 class="card_title">{{ selected.name }}</h2>
       <div class="card_right_details">
         <ul>
-          <li>{{ selected.location }}</li>
+          <li>Location: {{ selected.location }}</li>
           <li>{{ selected.lengthMiles }} Miles</li>
-          <li *ngIf="selected.difficulty">{{ selected.difficulty.name }}</li>
+          <li *ngIf="selected.difficulty">{{ selected.difficulty.name }} Difficulty</li>
           <li *ngIf="selected.trailOpen">Trail is open</li>
           <li *ngIf="!selected.trailOpen">Trail is closed</li>
         </ul>
@@ -57,6 +57,7 @@
       <div class="full" id="map"></div>
     </div>
   </div>
+  <br>
   <button (click)="addFormReportSelected = true">Create Hike Report</button>
   <br>
   <br>

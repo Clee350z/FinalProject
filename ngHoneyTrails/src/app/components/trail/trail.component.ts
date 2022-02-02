@@ -37,6 +37,9 @@ export class TrailComponent implements OnInit {
   condition: Condition[] =[];
   selectedTrailHikeReports: HikeReport[] = [];
   selectedTrailGroupHikes: GroupHike [] = [];
+  loader = new Loader({
+    apiKey: 'AIzaSyDHOH7qwK5gZYBdbYoWLS3PbPjVU3-pH4Q'
+  })
 
 
   constructor(
@@ -53,6 +56,7 @@ export class TrailComponent implements OnInit {
     this.reload();
     this.getDifficultyList();
     this.populateCondition();
+
   }
 /*----------------------------------------------------------------------------------------------------
     Gets a list of all Trails
@@ -80,7 +84,7 @@ export class TrailComponent implements OnInit {
       trail => {
         this.selected = trail;
         this.trailMap = trail;
-          this.map();
+        this.populateMap();
 
 
       },
@@ -253,13 +257,9 @@ getGroupHikesForTrail(trailId : number){
     )
 }
 
-map(){
+populateMap(){
 
-  let loader = new Loader({
-    apiKey: 'AIzaSyDHOH7qwK5gZYBdbYoWLS3PbPjVU3-pH4Q'
-  })
-
-  loader.load().then(() => {
+  this.loader.load().then(() => {
      var map = new google.maps.Map(document.getElementById("map")!,
     {
       center: { lat: this.trailMap.latitude, lng: this.trailMap.longitude},
@@ -270,6 +270,9 @@ map(){
       position: { lat: this.trailMap.latitude, lng: this.trailMap.longitude},
       map: map,
     });
-  })
+  })}
+
 }
-}
+
+
+
