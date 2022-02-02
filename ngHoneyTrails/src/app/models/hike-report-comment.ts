@@ -6,7 +6,7 @@ export class HikeReportComment {
 id: number;
 commentBox: string ;
 hikeReport: HikeReport ;
-user: User | undefined;
+user: User ;
 createDate: string ;
 // replyTo: number | undefined;
 
@@ -15,14 +15,12 @@ id: number = 0,
 commentBox: string = '',
 hikeReport?: HikeReport,
 user?: User,
-createDate: string = '',
-// replyTo?: number
+createDate: string = ''
 ){
 this.id = id;
 this.commentBox = commentBox;
 this.hikeReport = hikeReport? hikeReport : new HikeReport();
-this.user = user;
+this.user = user? user : new User();
 this.createDate = createDate;
-// this.replyTo = replyTo;
 }
 }

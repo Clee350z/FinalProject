@@ -4,10 +4,12 @@ import { Condition } from 'src/app/models/condition';
 import { HikePhoto } from 'src/app/models/hike-photo';
 import { HikeReport } from 'src/app/models/hike-report';
 import { Trail } from 'src/app/models/trail';
+import { User } from 'src/app/models/user';
 import { ConditionService } from 'src/app/services/condition.service';
 import { HikePhotoService } from 'src/app/services/hike-photo.service';
 import { HikeReportService } from 'src/app/services/hike-report.service';
 import { TrailService } from 'src/app/services/trail.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-hike-report',
@@ -24,13 +26,15 @@ export class HikeReportComponent implements OnInit {
   editReport: HikeReport | null = null;
   addFormPhotoSelected: boolean =false;
   newPhoto: HikePhoto = new HikePhoto();
+  users: User[] = [];
 
   constructor(private HRptSvc: HikeReportService,
     private route: ActivatedRoute,
     private router: Router,
     private tServ: TrailService,
     private cServ: ConditionService,
-    private photoSer: HikePhotoService
+    private photoSer: HikePhotoService,
+    private uServ: UserService
     ) {}
 
   ngOnInit(): void {
@@ -55,6 +59,7 @@ export class HikeReportComponent implements OnInit {
 
       }
     }
+    // this.populateUsers();
     this.populateTrails();
     this.populateCondition();
   }
@@ -89,6 +94,18 @@ export class HikeReportComponent implements OnInit {
       error: (fail) => {
         console.error('Error on retrieval of conditions');}
     });
+  }
+
+  populateUsers() {
+    this.uServ.index().subscribe({
+      next: (t) => {
+        this.users = t;
+      },
+      error: (fail) => {
+        console.error('GroupHikeComponent.uServ.index(): error on populate users');
+        console.error(fail);
+      }
+    })
   }
 
 
