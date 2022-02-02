@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Trail } from 'src/app/models/trail';
 import { TrailFiltersPipe } from 'src/app/pipes/trail-filters.pipe';
 import { TrailService } from 'src/app/services/trail.service';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-home',
@@ -14,7 +16,8 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private trailSvc : TrailService,
-    private trailfilter : TrailFiltersPipe
+    private router : Router
+
   ) { }
 
   ngOnInit(): void {
@@ -27,6 +30,19 @@ export class HomeComponent implements OnInit {
         this.trails = trails;
       },
 
+      fail =>{
+        console.error('TrailComponent.reload(): Error retreiving trails');
+        console.error(fail);
+      }
+    );
+  }
+
+  navigateToTrail(trailId : number){
+    this.trailSvc.viewTrailDetails(trailId).subscribe(
+      trail => {
+        this.router.navigateByUrl('trails');
+
+      },
       fail =>{
         console.error('TrailComponent.reload(): Error retreiving trails');
         console.error(fail);
