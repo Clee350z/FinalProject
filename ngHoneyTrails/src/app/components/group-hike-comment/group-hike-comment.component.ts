@@ -68,6 +68,7 @@ export class GroupHikeCommentComponent implements OnInit {
       {
         next: (groupHikeComments) => {
           this.groupHikeComments = groupHikeComments;
+          this.reload();
         },
         error: (err) => {
           console.error('GroupHikeComp.reload(): error getting reports');
