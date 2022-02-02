@@ -80,23 +80,8 @@ export class TrailComponent implements OnInit {
       trail => {
         this.selected = trail;
         this.trailMap = trail;
+          this.map();
 
-        let loader = new Loader({
-          apiKey: 'AIzaSyDHOH7qwK5gZYBdbYoWLS3PbPjVU3-pH4Q'
-        })
-
-        loader.load().then(() => {
-          let map = new google.maps.Map(document.getElementById("map") as HTMLElement,
-          {
-            center: { lat: this.trailMap.latitude, lng: this.trailMap.longitude},
-            zoom: 10
-          })
-
-           new google.maps.Marker({
-            position: { lat: trail.latitude, lng: trail.longitude},
-            map: map,
-          });
-        })
 
       },
 
@@ -104,6 +89,7 @@ export class TrailComponent implements OnInit {
         console.error('TrailComponent.reload(): Error retreiving trail');
         console.error(fail);
       }
+
       );
 
   }
@@ -265,5 +251,25 @@ getGroupHikesForTrail(trailId : number){
       console.error(fail);
     }
     )
+}
+
+map(){
+
+  let loader = new Loader({
+    apiKey: 'AIzaSyDHOH7qwK5gZYBdbYoWLS3PbPjVU3-pH4Q'
+  })
+
+  loader.load().then(() => {
+     var map = new google.maps.Map(document.getElementById("map")!,
+    {
+      center: { lat: this.trailMap.latitude, lng: this.trailMap.longitude},
+      zoom: 10
+    })
+
+     new google.maps.Marker({
+      position: { lat: this.trailMap.latitude, lng: this.trailMap.longitude},
+      map: map,
+    });
+  })
 }
 }

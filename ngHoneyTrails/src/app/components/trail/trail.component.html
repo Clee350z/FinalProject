@@ -44,11 +44,11 @@
       <img src="{{ selected.pictureUrl }}" class="card_img" />
     </div>
     <div class="card_right">
-      <h1 class="card_title">{{ selected.name }}</h1>
+      <h2 class="card_title">{{ selected.name }}</h2>
       <div class="card_right_details">
         <ul>
           <li>{{ selected.location }}</li>
-          <li>{{ selected.lengthMiles }}</li>
+          <li>{{ selected.lengthMiles }} Miles</li>
           <li *ngIf="selected.difficulty">{{ selected.difficulty.name }}</li>
           <li *ngIf="selected.trailOpen">Trail is open</li>
           <li *ngIf="!selected.trailOpen">Trail is closed</li>
@@ -58,20 +58,30 @@
     </div>
   </div>
   <button (click)="addFormReportSelected = true">Create Hike Report</button>
-  <br/>
+  <br>
+  <br>
 
   <!-- Comments of Trail -->
-  <div>
+  <div class="table-responsive">
+    <div class="table-title">
+      <div class="row">
+        <h2>Comments</h2>
+      </div>
+    </div>
     <table class="trail-table">
-      <thead></thead>
+      <thead>
+      </thead>
       <tbody>
         <div class="table-body">
+          <tr>
+            <th>User</th>
+            <th>Comment</th>
+            <th>Posted on</th>
+          </tr>
           <tr *ngFor="let comment of selected.comments">
-            <td *ngIf="comment.user && comment.user.profilePicture">
-              <img src="{{ comment.user.profilePicture }}" />
-            </td>
             <td *ngIf="comment.user">{{ comment.user.username }}</td>
             <td>{{ comment.commentBody }}</td>
+            <td>{{ comment.timePosted }}</td>
           </tr>
         </div>
       </tbody>
