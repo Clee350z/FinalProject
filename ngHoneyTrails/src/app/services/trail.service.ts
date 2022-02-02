@@ -11,6 +11,7 @@ import { environment } from 'src/environments/environment';
 })
 export class TrailService {
   private url = environment.baseUrl + 'api/trails';
+  private selected : Trail | null = null;
 
   constructor(
     private http: HttpClient,
@@ -85,5 +86,12 @@ export class TrailService {
     );
   };
 
+  getSelected(){
+    return this.selected;
+  }
+
+  setSelected(trail : Trail | null){
+    this.selected = trail;
+  }
 
 }

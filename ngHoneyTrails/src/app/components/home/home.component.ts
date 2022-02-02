@@ -40,8 +40,8 @@ export class HomeComponent implements OnInit {
   navigateToTrail(trailId : number){
     this.trailSvc.viewTrailDetails(trailId).subscribe(
       trail => {
+        this.trailSvc.setSelected(trail);
         this.router.navigateByUrl('trails');
-
       },
       fail =>{
         console.error('TrailComponent.reload(): Error retreiving trails');

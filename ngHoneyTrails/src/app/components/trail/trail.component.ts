@@ -24,7 +24,7 @@ import { map } from 'rxjs';
 export class TrailComponent implements OnInit {
 
   trails: Trail[] = [];
-  selected : Trail | null = null;
+  selected : Trail | null = this.trailSvc.getSelected();
   newTrail : Trail = new Trail();
   trailMap : Trail = new Trail();
   addTrailFormSelected : boolean = false;
