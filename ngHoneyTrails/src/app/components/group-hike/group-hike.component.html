@@ -5,13 +5,12 @@
   <br />
   <h1 name="groupHikesTitle">Group Hikes</h1>
   <div class="groupHikesTable">
-    <table class="table table-dark table-striped">
+    <table class="table table-dark table-striped table-hover">
       <thead>
         <tr>
           <th>Id</th>
           <th>Name</th>
           <th>Date</th>
-          <th>User</th>
         </tr>
       </thead>
       <tbody>
@@ -30,9 +29,6 @@
           <td *ngIf="!groupHike.hidden" class="groupHikeTableData">
             {{ groupHike.meetupDate }}
           </td>
-          <td *ngIf="!groupHike.hidden" class="groupHikeTableData">
-            {{ groupHike.user }}
-          </td>
         </tr>
       </tbody>
     </table>
@@ -46,7 +42,7 @@
   class="groupHikeDisplay"
   *ngIf="selected && !addGroupHikeFormSelected && !editGroupHike"
 >
-  <h4>{{ selected.eventName }}</h4>
+  <!-- <h4>{{ selected.eventName }}</h4> -->
   <table id="groupHikeTableDisplay" class="table table-dark table-striped">
     <thead>
       <tr>
@@ -60,7 +56,7 @@
     <tbody>
       <tr>
         <td>{{ selected.eventName }}</td>
-        <td>{{ selected.trail }}</td>
+        <td>{{ selected.trail.name }}</td>
         <td>{{ selected.meetupDate }}</td>
         <td>{{ selected.meetupTime }}</td>
         <td>
