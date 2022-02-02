@@ -55,7 +55,7 @@
     <div>
       <label for="newCommentBox"></label>
       <input type="text" name="newCommentBox" [(ngModel)]="newGroupHikeComment.commentBox" />
-      <input type="submit" name="addCommentButton" (click)="createGroupHikeComment(newGroupHikeComment)">
+      <input type="submit" name="addCommentButton" (click)="[createGroupHikeComment(newGroupHikeComment), addGroupHikeComment=false ]">
     </div>
   </form>
 </div>
