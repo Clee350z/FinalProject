@@ -71,10 +71,11 @@ public class User {
 	@JsonIgnore
 	private List<TrailComment> comments;
 	
-	@ManyToMany(fetch=FetchType.LAZY)
-	@JoinTable(name="group_hike_has_user", 
-	joinColumns=@JoinColumn(name="user_id"),
-	inverseJoinColumns=@JoinColumn(name="group_hike_id"))
+//	@ManyToMany(fetch=FetchType.LAZY)
+//	@JoinTable(name="group_hike_has_user", 
+//	joinColumns=@JoinColumn(name="user_id"),
+//	inverseJoinColumns=@JoinColumn(name="group_hike_id"))
+	@ManyToMany(mappedBy="users")
 	@JsonIgnore
 	private List<GroupHike> groupHikes;
 	

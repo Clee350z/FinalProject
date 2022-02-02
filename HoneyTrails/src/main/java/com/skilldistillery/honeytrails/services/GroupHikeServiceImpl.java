@@ -55,10 +55,11 @@ public class GroupHikeServiceImpl implements GroupHikeService {
 		User user = uRepo.findByUsername(username);
 		groupHike.setCreatedByUser(user);
 		groupHike.setHidden(false);
-		groupHike.addUser(user);
 		Optional<Trail> trail = tRepo.findById(trailId);
 		if (trail.isPresent()) {
 			groupHike.setTrail(trail.get());
+			ghRepo.saveAndFlush(groupHike);
+			groupHike.addUser(user);
 			return ghRepo.saveAndFlush(groupHike);
 		}
 		return null;
